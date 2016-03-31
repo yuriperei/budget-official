@@ -2,8 +2,8 @@
 //  Despesa.swift
 //  Budget
 //
-//  Created by md10 on 3/18/16.
-//  Copyright © 2016 Budget. All rights reserved.
+//  Created by Calebe Santos on 3/31/16.
+//  Copyright © 2016 Budget Company. All rights reserved.
 //
 
 import Foundation
@@ -19,4 +19,5 @@ class Despesa: NSManagedObject {
     static func getReceitasController(firstSort:String, secondSort:String = "", sectionName:String) -> NSFetchedResultsController {
         return ContextFactory.getFetchedResultsController("Despesa", firstSort: firstSort, secondSort: secondSort, sectionName: sectionName)
     }
+
 }

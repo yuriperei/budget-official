@@ -16,7 +16,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     var erros: String = ""
     var conta: Conta?
     let contaDAO:ContaDAO = ContaDAO()
-    var tipoConta: TipoConta? = nil
+    var tipoConta: TipoConta?
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var navegacao: UINavigationItem!
@@ -36,7 +36,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
                 txtSaldo.text = saldo.convertToMoedaBr()
             }
             
-            tipoConta = conta.tipoconta as? TipoConta
+            tipoConta = conta.tipoconta // as? TipoConta
             
             navegacao.title = "Alterar"
             txtSaldo.enabled = false

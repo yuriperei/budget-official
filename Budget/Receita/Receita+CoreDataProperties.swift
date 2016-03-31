@@ -2,8 +2,8 @@
 //  Receita+CoreDataProperties.swift
 //  Budget
 //
-//  Created by Yuri Pereira on 3/16/16.
-//  Copyright © 2016 Budget. All rights reserved.
+//  Created by Calebe Santos on 3/31/16.
+//  Copyright © 2016 Budget Company. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -14,14 +14,14 @@ import CoreData
 
 extension Receita {
 
-    @NSManaged var nome: String?
-    @NSManaged var descricao: String?
-    @NSManaged var valor: NSNumber?
     @NSManaged var data: NSDate?
+    @NSManaged var descricao: String?
     @NSManaged var endereco: String?
     @NSManaged var latitude: NSNumber?
     @NSManaged var longitude: NSNumber?
-    @NSManaged var conta: NSManagedObject?
-    @NSManaged var categoria: NSManagedObject?
+    @NSManaged var nome: String?
+    @NSManaged var valor: NSNumber?
+    @NSManaged var categoria: Categoria?
+    @NSManaged var conta: Conta?
 
 }

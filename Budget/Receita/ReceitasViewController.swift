@@ -42,8 +42,8 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             txtEndereco.text = receita.endereco!
             txtDescricao.text = receita.descricao!
             txtData.text = Data.formatDateToString(receita.data!)
-            conta = receita.conta as? Conta
-            categoria = receita.categoria as? Categoria
+            conta = receita.conta //as? Conta
+            categoria = receita.categoria //as? Categoria
             
             navegacao.title = "Alterar"
             txtValor.enabled = false

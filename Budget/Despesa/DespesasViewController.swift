@@ -41,9 +41,9 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             txtValor.text = String(despesa.valor!)
             txtEndereco.text = despesa.endereco!
             txtDescricao.text = despesa.descricao!
-            conta = despesa.conta as? Conta
+            conta = despesa.conta //as? Conta
             txtData.text = Data.formatDateToString(despesa.data!)
-            categoria = despesa.categoria as? Categoria
+            categoria = despesa.categoria //as? Categoria
             sgFglTipo.selectedSegmentIndex = Int(despesa.flgTipo!)!
             
             navegacao.title = "Alterar"

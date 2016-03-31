@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NiY-6i-w6d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sHD-ut-Gys">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -576,27 +576,26 @@
             <point key="canvasLocation" x="789" y="1860"/>
         </scene>
         <!--Reveal View Controller-->
-        <scene sceneID="d9w-F7-xXW">
+        <scene sceneID="9AL-TM-p7N">
             <objects>
-                <viewController id="NiY-6i-w6d" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController id="sHD-ut-Gys" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="05j-qv-VZG"/>
-                        <viewControllerLayoutGuide type="bottom" id="Gcw-89-eX8"/>
+                        <viewControllerLayoutGuide type="top" id="B7F-og-gbp"/>
+                        <viewControllerLayoutGuide type="bottom" id="N0i-eR-Qre"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KLG-3o-zfn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="view" contentMode="scaleToFill" id="gq1-r1-pdL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <segue destination="6En-Fc-d8i" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="ePF-pH-8ue"/>
-                        <segue destination="ZUw-Yd-eC4" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="mM3-0G-ut7"/>
+                        <segue destination="ZUw-Yd-eC4" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="pYy-u8-GdY"/>
+                        <segue destination="6En-Fc-d8i" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="Sap-wl-2HR"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JQA-uh-8yy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JKD-xA-Iou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="276" y="1036"/>
+            <point key="canvasLocation" x="200" y="1036"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Up9-gM-KSU">
@@ -792,7 +791,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EI2-br-LiK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="251" y="1733"/>
+            <point key="canvasLocation" x="200" y="1755"/>
         </scene>
         <!--Receitas-->
         <scene sceneID="VTj-KN-yOx">
@@ -1109,7 +1108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VoS-B5-38m" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-49" y="2419"/>
+            <point key="canvasLocation" x="-47" y="2441"/>
         </scene>
         <!--Porcentagem Controller-->
         <scene sceneID="xxE-ZM-Tdx">
@@ -1286,7 +1285,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pUt-f2-rhN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="323" y="2419"/>
+            <point key="canvasLocation" x="325" y="2441"/>
         </scene>
         <!--Porcentagem Controller-->
         <scene sceneID="dz5-CQ-Ond">
