@@ -13,10 +13,26 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var tabBar: UIViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // TabBar - Rodape - Personalizacao
+        UITabBar.appearance().tintColor = Color.uicolorFromHex(0x274561)
+        UITabBar.appearance().barTintColor = Color.uicolorFromHex(0xffffff)
+        //        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : Color.uicolorFromHex(0xffffff)], forState: UIControlState.Normal)
+        
+        
+        // NavigationBar - Topo - Personalizacao
+        let navigationBarAppearace = UINavigationBar.appearance()
+        
+        navigationBarAppearace.tintColor = Color.uicolorFromHex(0xffffff)
+        navigationBarAppearace.barTintColor = Color.uicolorFromHex(0x274561)
+        
+        // 44a499
+        // change navigation item title color
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        
         return true
     }
 

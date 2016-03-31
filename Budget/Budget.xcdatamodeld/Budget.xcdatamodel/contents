@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15A284" minimumToolsVersion="Automatic">
+    <entity name="Categoria" syncable="YES">
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="despesa" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Despesa" inverseName="categoria" inverseEntity="Despesa" syncable="YES"/>
+        <relationship name="receita" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Receita" inverseName="categoria" inverseEntity="Receita" syncable="YES"/>
+    </entity>
+    <entity name="Conta" syncable="YES">
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="saldo" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="despesa" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Despesa" inverseName="conta" inverseEntity="Despesa" syncable="YES"/>
+        <relationship name="receita" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Receita" inverseName="conta" inverseEntity="Receita" syncable="YES"/>
+        <relationship name="tipoconta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TipoConta" inverseName="conta" inverseEntity="TipoConta" syncable="YES"/>
+    </entity>
+    <entity name="Despesa" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endereco" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="flgTipo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="valor" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="categoria" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="despesa" inverseEntity="Categoria" syncable="YES"/>
+        <relationship name="conta" maxCount="1" deletionRule="Nullify" destinationEntity="Conta" inverseName="despesa" inverseEntity="Conta" syncable="YES"/>
+    </entity>
+    <entity name="Receita" syncable="YES">
+        <attribute name="data" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endereco" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="valor" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="categoria" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="receita" inverseEntity="Categoria" syncable="YES"/>
+        <relationship name="conta" maxCount="1" deletionRule="Nullify" destinationEntity="Conta" inverseName="receita" inverseEntity="Conta" syncable="YES"/>
+    </entity>
+    <entity name="TipoConta" syncable="YES">
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conta" toMany="YES" deletionRule="Nullify" destinationEntity="Conta" inverseName="tipoconta" inverseEntity="Conta" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Categoria" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Conta" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="Despesa" positionX="-36" positionY="9" width="128" height="195"/>
+        <element name="Receita" positionX="-18" positionY="27" width="128" height="180"/>
+        <element name="TipoConta" positionX="0" positionY="45" width="128" height="75"/>
+    </elements>
 </model>
