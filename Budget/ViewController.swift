@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     //Added comment
+    //Added other comentary
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
