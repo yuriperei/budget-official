@@ -74,7 +74,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EXw-QU-DH2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3110" y="1918"/>
+            <point key="canvasLocation" x="3922" y="1918"/>
         </scene>
         <!--Tipos de Conta-->
         <scene sceneID="Pg6-CN-xdK">
@@ -119,7 +119,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iY5-Xc-ATK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3586" y="1900"/>
+            <point key="canvasLocation" x="4397.5" y="1899.5"/>
         </scene>
         <!--Inserir conta-->
         <scene sceneID="xzf-0H-Umg">
@@ -319,9 +319,9 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2z1-nL-kdp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2674" y="1923"/>
+            <point key="canvasLocation" x="3486" y="1923"/>
         </scene>
-        <!--Dashboard View Controller-->
+        <!--Budget-->
         <scene sceneID="WVk-AJ-feH">
             <objects>
                 <viewController id="Ub3-ny-xK3" customClass="DashboardViewController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
@@ -338,7 +338,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uYr-KR-XPX">
                                         <rect key="frame" x="20" y="95" width="128" height="85"/>
-                                        <color key="backgroundColor" red="0.070419529557944935" green="0.4773553438" blue="0.37649230493721558" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.17254901960784313" green="0.30588235294117649" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="85" id="CTy-8B-eUE"/>
                                             <constraint firstAttribute="width" constant="128" id="sf1-QO-Ucf"/>
@@ -349,14 +349,14 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUJ-as-qKD">
                                         <rect key="frame" x="172" y="95" width="128" height="85"/>
-                                        <color key="backgroundColor" red="0.93502535994764402" green="0.0" blue="0.019198835239176149" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.11372549019607843" green="0.20000000000000001" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJC-KF-xqM">
                                         <rect key="frame" x="20" y="20" width="280" height="67"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="67" id="dBi-Fz-E0R"/>
                                         </constraints>
@@ -366,21 +366,21 @@
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXC-F2-O5M" customClass="BarChartView" customModule="Charts">
                                         <rect key="frame" x="20" y="224" width="280" height="245"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="245" id="OPh-HZ-2gR"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ia-mD-BT0" customClass="PieChartView" customModule="Charts">
                                         <rect key="frame" x="20" y="499" width="280" height="245"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="245" id="T2w-Mo-d1h"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G6T-jx-mBr" customClass="PieChartView" customModule="Charts">
                                         <rect key="frame" x="20" y="774" width="280" height="245"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="245" id="nDg-nk-rxx"/>
                                         </constraints>
@@ -410,7 +410,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.94810073080279234" green="0.94810073080279234" blue="0.94810073080279234" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="XWA-Bn-Atw" secondAttribute="trailing" id="DJj-Ec-jSy"/>
                             <constraint firstItem="XWA-Bn-Atw" firstAttribute="leading" secondItem="1rh-MH-Zbs" secondAttribute="leading" id="KEh-1E-Z3k"/>
@@ -419,8 +419,8 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="aGZ-d6-5cS">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="iCz-bG-pce"/>
+                    <navigationItem key="navigationItem" title="Budget" id="aGZ-d6-5cS">
+                        <barButtonItem key="leftBarButtonItem" image="interface" id="iCz-bG-pce"/>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1154"/>
@@ -573,7 +573,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CfP-N3-pZ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="1860"/>
+            <point key="canvasLocation" x="1601" y="1860"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="9AL-TM-p7N">
@@ -584,12 +584,13 @@
                         <viewControllerLayoutGuide type="bottom" id="N0i-eR-Qre"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gq1-r1-pdL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <segue destination="ZUw-Yd-eC4" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="pYy-u8-GdY"/>
+                        <segue destination="sEx-n0-SyB" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="pYy-u8-GdY"/>
                         <segue destination="6En-Fc-d8i" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="Sap-wl-2HR"/>
                     </connections>
                 </viewController>
@@ -695,88 +696,84 @@
         <scene sceneID="hs4-FX-ml2">
             <objects>
                 <tableViewController id="ZUw-Yd-eC4" customClass="MenuTableViewController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="60" sectionHeaderHeight="50" sectionFooterHeight="18" id="2rx-bS-uUQ">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="60" sectionHeaderHeight="50" sectionFooterHeight="28" id="2rx-bS-uUQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="separatorColor" red="0.32156862745098036" green="0.63921568627450975" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <sections>
                             <tableViewSection headerTitle="Ferramentas" id="m3d-8y-siJ">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" focusStyle="custom" textLabel="Hh9-oO-2it" imageView="huc-wX-VWM" rowHeight="50" style="IBUITableViewCellStyleDefault" id="frk-Gg-cml">
-                                        <rect key="frame" x="0.0" y="50" width="320" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="frk-Gg-cml" id="Y12-yp-tw0">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Avaliar compra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hh9-oO-2it">
-                                                    <rect key="frame" x="51" y="0.0" width="234" height="49"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="huc-wX-VWM">
-                                                    <rect key="frame" x="15" y="14" width="21" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.36862745099999999" green="0.68627450980000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="5bM-sm-1eS" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="380-7V-p88"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" focusStyle="custom" textLabel="7WH-kA-q7N" imageView="k2M-78-WjZ" rowHeight="50" style="IBUITableViewCellStyleDefault" id="jdm-yg-bOe">
-                                        <rect key="frame" x="0.0" y="100" width="320" height="50"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" focusStyle="custom" textLabel="7WH-kA-q7N" imageView="k2M-78-WjZ" rowHeight="40" style="IBUITableViewCellStyleDefault" id="jdm-yg-bOe">
+                                        <rect key="frame" x="0.0" y="114" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jdm-yg-bOe" id="3U3-ap-LXn">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Calculadora" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7WH-kA-q7N">
-                                                    <rect key="frame" x="51" y="0.0" width="234" height="49"/>
+                                                    <rect key="frame" x="51" y="0.0" width="234" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="k2M-78-WjZ">
-                                                    <rect key="frame" x="15" y="14" width="21" height="21"/>
+                                                    <rect key="frame" x="15" y="9" width="21" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.28627450980000002" green="0.66274509800000003" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <connections>
                                             <segue destination="Txj-QW-yi0" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="XTh-Mu-iYF"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" focusStyle="custom" textLabel="dgW-Vk-2x6" imageView="Q8p-Lu-2KX" rowHeight="50" style="IBUITableViewCellStyleDefault" id="ig1-dl-P2n">
-                                        <rect key="frame" x="0.0" y="150" width="320" height="50"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" focusStyle="custom" textLabel="dgW-Vk-2x6" imageView="Q8p-Lu-2KX" rowHeight="40" style="IBUITableViewCellStyleDefault" id="ig1-dl-P2n">
+                                        <rect key="frame" x="0.0" y="154" width="320" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ig1-dl-P2n" id="L4G-mC-T6U">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Porcentagens" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dgW-Vk-2x6">
-                                                    <rect key="frame" x="51" y="0.0" width="234" height="49"/>
+                                                    <rect key="frame" x="51" y="0.0" width="234" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="Q8p-Lu-2KX">
-                                                    <rect key="frame" x="15" y="14" width="21" height="21"/>
+                                                    <rect key="frame" x="15" y="9" width="21" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.36862745099999999" green="0.68627450980000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <connections>
                                             <segue destination="CJd-98-XXr" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Odo-af-NZo"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" focusStyle="custom" textLabel="Hh9-oO-2it" imageView="huc-wX-VWM" rowHeight="40" style="IBUITableViewCellStyleDefault" id="frk-Gg-cml">
+                                        <rect key="frame" x="0.0" y="194" width="320" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="frk-Gg-cml" id="Y12-yp-tw0">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="39"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Avaliar compra" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hh9-oO-2it">
+                                                    <rect key="frame" x="51" y="0.0" width="234" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="huc-wX-VWM">
+                                                    <rect key="frame" x="15" y="9" width="21" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                        <connections>
+                                            <segue destination="5bM-sm-1eS" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="380-7V-p88"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -787,11 +784,12 @@
                             <outlet property="delegate" destination="ZUw-Yd-eC4" id="Vf0-Zq-6gU"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="UKt-J7-Qfp"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EI2-br-LiK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="200" y="1755"/>
+            <point key="canvasLocation" x="584" y="1772"/>
         </scene>
         <!--Receitas-->
         <scene sceneID="VTj-KN-yOx">
@@ -840,7 +838,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ucp-B7-EQY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2095" y="1860"/>
+            <point key="canvasLocation" x="2907" y="1860"/>
         </scene>
         <!--Receitas-->
         <scene sceneID="KDO-zu-MBQ">
@@ -859,7 +857,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="523-oe-Ngw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1622" y="1851"/>
+            <point key="canvasLocation" x="2434" y="1851"/>
         </scene>
         <!--Calculadora ViewController-->
         <scene sceneID="wgx-y5-aIT">
@@ -1908,7 +1906,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5De-WV-lzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4012.5" y="1899.5"/>
+            <point key="canvasLocation" x="4824.5" y="1899.5"/>
         </scene>
         <!--Inserir receita-->
         <scene sceneID="oKC-HQ-dL0">
@@ -2741,11 +2739,31 @@
             </objects>
             <point key="canvasLocation" x="1531.5" y="4297.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UTU-y1-p8t">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sEx-n0-SyB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mpA-T3-anZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZUw-Yd-eC4" kind="relationship" relationship="rootViewController" id="2JE-9c-Lsj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ecY-za-NID" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="200" y="1772"/>
+        </scene>
     </scenes>
     <resources>
         <image name="card-wallet" width="21" height="21"/>
         <image name="despesas" width="21" height="21"/>
         <image name="finances" width="21" height="21"/>
+        <image name="interface" width="21" height="21"/>
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
