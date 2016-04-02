@@ -19,6 +19,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet var pieChartDespesas: PieChartView!
     @IBOutlet var pieChartReceitas: PieChartView!
     let dashboard:Dashboard = Dashboard()
+    var drawChartLoaded:Bool = false
 //    var zoom:CGFloat = 0.0
     func initDashboard(){
         lblBalancoTotal.text = dashboard.getTotalBalanco().convertToMoedaBr()
@@ -31,9 +32,21 @@ class DashboardViewController: UIViewController {
 //        print(Dashboard.getDespesasPorCategoria())
 //        print(Dashboard.getReceitasPorCategoria())
         
-        setChartBalanco(months, values: balanco)
-        setPieChart(despesas, values: valorDespesas, pieChart: pieChartDespesas)
-        setPieChart(receitas, values: valorReceitas, pieChart: pieChartReceitas)
+        if(balanco.count > 0){
+            setChartBalanco(months, values: balanco)
+            barChart.opaque = true
+        }
+        
+        if(valorDespesas.count > 0){
+            setPieChart(despesas, values: valorDespesas, pieChart: pieChartDespesas)
+            pieChartDespesas.opaque = true
+        }
+        
+        if(valorReceitas.count > 0) {
+            setPieChart(receitas, values: valorReceitas, pieChart: pieChartReceitas)
+            pieChartReceitas.opaque = true
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -42,8 +55,6 @@ class DashboardViewController: UIViewController {
         btnMenuSidebar.target = self.revealViewController()
         btnMenuSidebar.action = Selector("revealToggle:")
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        
-        drawBarChartBalanco()
     }
     
     private func drawBarChartBalanco() {
@@ -81,13 +92,18 @@ class DashboardViewController: UIViewController {
         }
         
         let dataSet = BarChartDataSet(yVals: dataEntries, label: "Balanço")
-        dataSet.barSpace = 0.35
-        dataSet.valueFormatter = NSNumberFormatter()
-        dataSet.valueFormatter?.minimumFractionDigits = 2
 //        dataSet.valueFormatter?.positivePrefix = "R$ "
         let data = BarChartData(xVals: months, dataSet: dataSet)
-        data.setValueFont(UIFont(name: "Futura", size: 10.0))
         barChart.data = data
+        
+        if(!drawChartLoaded){
+            drawBarChartBalanco()
+            dataSet.barSpace = 0.35
+            dataSet.valueFormatter = NSNumberFormatter()
+            dataSet.valueFormatter?.minimumFractionDigits = 2
+            data.setValueFont(UIFont(name: "Futura", size: 10.0))
+            drawChartLoaded = true
+        }
     }
     
     private func setPieChart(months: [String], values: [Double], pieChart:PieChartView) {
