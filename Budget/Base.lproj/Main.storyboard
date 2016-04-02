@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sHD-ut-Gys">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sHD-ut-Gys">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -436,7 +436,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9fd-hH-Ezk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1744" y="782"/>
+            <point key="canvasLocation" x="1622" y="743"/>
         </scene>
         <!--Categorias-->
         <scene sceneID="mP7-sB-w5K">
@@ -616,7 +616,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSw-s7-Vbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="741" y="1036"/>
+            <point key="canvasLocation" x="789" y="1042"/>
         </scene>
         <!--Compra Prazo Vista View Controller-->
         <scene sceneID="4o6-8w-R6g">
@@ -1648,7 +1648,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LTd-hN-EW4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2078.5" y="2651.5"/>
+            <point key="canvasLocation" x="2067.5" y="2643.5"/>
         </scene>
         <!--Balanço-->
         <scene sceneID="vNN-f3-F78">
@@ -1874,7 +1874,7 @@
                     </cells>
                 </tableViewSection>
             </objects>
-            <point key="canvasLocation" x="1228" y="1036"/>
+            <point key="canvasLocation" x="1192" y="1042"/>
         </scene>
         <!--Inserir conta-->
         <scene sceneID="DAh-PY-peh">

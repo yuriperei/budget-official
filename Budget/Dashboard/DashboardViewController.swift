@@ -9,35 +9,6 @@
 import UIKit
 import Charts
 
-extension NSDate {
-    
-    func startOfMonth() -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        let currentDateComponents = calendar.components([.Month, .Year], fromDate: self)
-        let startOfMonth = calendar.dateFromComponents(currentDateComponents)
-        
-        return startOfMonth
-    }
-    
-    func dateByAddingMonths(monthsToAdd: Int) -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        let months = NSDateComponents()
-        months.month = monthsToAdd
-        
-        return calendar.dateByAddingComponents(months, toDate: self, options: [])
-    }
-    
-    func endOfMonth() -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        return calendar.dateByAddingUnit(.Day, value: -1, toDate: self.dateByAddingMonths(1)!, options: [])
-        
-//        return nil
-    }
-}
-
 class DashboardViewController: UIViewController {
 
     @IBOutlet weak var lblBalancoTotal: UILabel!
@@ -47,17 +18,16 @@ class DashboardViewController: UIViewController {
     @IBOutlet var barChart: BarChartView!
     @IBOutlet var pieChartDespesas: PieChartView!
     @IBOutlet var pieChartReceitas: PieChartView!
+    let dashboard:Dashboard = Dashboard()
 //    var zoom:CGFloat = 0.0
     func initDashboard(){
-        Dashboard.getTotalBalanco()
+        lblBalancoTotal.text = dashboard.getTotalBalanco().convertToMoedaBr()
+        lblTotalReceitas.text = dashboard.getTotalReceitas().convertToMoedaBr()
+        lblTotalDespesas.text = dashboard.getTotalDespesas().convertToMoedaBr()
         
-        lblBalancoTotal.text = Dashboard.getTotalBalanco().convertToMoedaBr()
-        lblTotalReceitas.text = Dashboard.getTotalReceitas().convertToMoedaBr()
-        lblTotalDespesas.text = Dashboard.getTotalDespesas().convertToMoedaBr()
-        
-        let (months, balanco) = Dashboard.getBalancoAnual()
-        let (despesas, valorDespesas) = Dashboard.getDespesasPorCategoria()
-        let (receitas, valorReceitas) = Dashboard.getReceitasPorCategoria()
+        let (months, balanco) = dashboard.getBalancoAnual()
+        let (despesas, valorDespesas) = dashboard.getDespesasPorCategoria()
+        let (receitas, valorReceitas) = dashboard.getReceitasPorCategoria()
 //        print(Dashboard.getDespesasPorCategoria())
 //        print(Dashboard.getReceitasPorCategoria())
         

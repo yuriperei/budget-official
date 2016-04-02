@@ -57,3 +57,31 @@ extension Float {
     }
 }
 
+extension NSDate {
+    
+    func startOfMonth() -> NSDate? {
+        
+        let calendar = NSCalendar.currentCalendar()
+        let currentDateComponents = calendar.components([.Month, .Year], fromDate: self)
+        let startOfMonth = calendar.dateFromComponents(currentDateComponents)
+        
+        return startOfMonth
+    }
+    
+    func dateByAddingMonths(monthsToAdd: Int) -> NSDate? {
+        
+        let calendar = NSCalendar.currentCalendar()
+        let months = NSDateComponents()
+        months.month = monthsToAdd
+        
+        return calendar.dateByAddingComponents(months, toDate: self, options: [])
+    }
+    
+    func endOfMonth() -> NSDate? {
+        
+        let calendar = NSCalendar.currentCalendar()
+        return calendar.dateByAddingUnit(.Day, value: -1, toDate: self.dateByAddingMonths(1)!, options: [])
+        
+        //        return nil
+    }
+}
