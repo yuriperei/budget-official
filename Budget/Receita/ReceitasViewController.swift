@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 
-class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate  {
+class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate  {
 
     var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var receita: Receita?
+    var local: Local? = nil
     let receitaDAO:ReceitaDAO = ReceitaDAO()
     var pickerView: UIDatePicker!
     
@@ -35,15 +36,14 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         pickerView.datePickerMode = UIDatePickerMode.Date
         pickerView.addTarget(self, action: "updateTextField:", forControlEvents: .ValueChanged)
         
-        
         if let receita = receita {
             txtNome.text = receita.nome!
             txtValor.text = String(receita.valor!)
-            txtEndereco.text = receita.endereco!
             txtDescricao.text = receita.descricao!
             txtData.text = Data.formatDateToString(receita.data!)
             conta = receita.conta //as? Conta
             categoria = receita.categoria //as? Categoria
+            local = receita.local
             
             navegacao.title = "Alterar"
             txtValor.enabled = false
@@ -56,11 +56,14 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
         txtConta.text = self.conta?.nome!
         txtCategoria.text = self.categoria?.nome!
+        txtEndereco.text = self.local?.nome! // Local
         
         txtData.inputView = pickerView
         
         // Alinhar as labels
         updateWidthsForLabels(labels)
+        
+
 
     }
     
@@ -105,11 +108,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         }
         
         if Validador.vazio(txtEndereco.text!){
-            erros.appendContentsOf("Preencha o campo Endereço!\n")
-        }
-        
-        if Validador.vazio(txtDescricao.text!){
-            erros.appendContentsOf("Preencha o campo Descrição!\n")
+            erros.appendContentsOf("Selecione o Local!\n")
         }
         
         if Validador.vazio(txtConta.text!){
@@ -130,9 +129,9 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             receita?.nome = txtNome.text
             receita?.descricao = txtDescricao.text
             receita?.valor = Float(txtValor.text!)
-            receita?.endereco = txtEndereco.text
             receita?.conta = conta
             receita?.categoria = categoria
+            receita?.local = local
             receita?.data = Data.removerTime(txtData.text!)
             
             // Atualizar o saldo da conta referente
@@ -160,11 +159,14 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
         if(erros.isEmpty){
             receita?.nome = txtNome.text
-            receita?.endereco = txtEndereco.text
             receita?.descricao = txtDescricao.text
             
             if let categoria = categoria{
                 receita?.categoria = categoria
+            }
+            
+            if let local = local{
+                receita?.local = local
             }
             
             do{
@@ -202,6 +204,10 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             return true
         }
         
+        if identifier == "alterarLocalReceita"{
+            return true
+        }
+        
         return false
     }
     
@@ -214,6 +220,11 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     func categoriaViewControllerResponse(categoria:Categoria){
         self.categoria = categoria
         txtCategoria.text = categoria.nome
+    }
+    
+    func localViewControllerResponse(local:Local){
+        self.local = local
+        txtEndereco.text = local.nome
     }
 
     // MARK: - Table view data source
@@ -307,6 +318,11 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         }else if segue.identifier == "alterarCategoriaReceita"{
             let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
             categoriasController.delegate = self
+            
+        }else if segue.identifier == "alterarLocalReceita"{
+            let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController
+            locaisController.delegate = self
+            locaisController.tela = true
             
         }
         

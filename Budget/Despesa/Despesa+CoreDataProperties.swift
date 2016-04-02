@@ -16,13 +16,11 @@ extension Despesa {
 
     @NSManaged var data: NSDate?
     @NSManaged var descricao: String?
-    @NSManaged var endereco: String?
     @NSManaged var flgTipo: String?
-    @NSManaged var latitude: String?
-    @NSManaged var longitude: String?
     @NSManaged var nome: String?
     @NSManaged var valor: NSNumber?
     @NSManaged var categoria: Categoria?
     @NSManaged var conta: Conta?
+    @NSManaged var local: Local?
 
 }

@@ -12,7 +12,7 @@ import CoreData
 class ReceitasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate{
 
 
-    var tabBar: UITabBar?
+//    var tabBar: UITabBar?
     var frc = NSFetchedResultsController()
     let receitaDAO = ReceitaDAO()
     
