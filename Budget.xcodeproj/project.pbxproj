@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D0A851D1CB03AC800A0B023 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */; };
+		4E937E251CAEEC3B007806B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E937E241CAEEC3B007806B5 /* MapKit.framework */; };
+		4E937E2C1CAEF0C1007806B5 /* MapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */; };
+		4E937E2F1CAF015D007806B5 /* Local+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E2D1CAF015D007806B5 /* Local+CoreDataProperties.swift */; };
+		4E937E301CAF015D007806B5 /* Local.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E2E1CAF015D007806B5 /* Local.swift */; };
+		4E937E321CAF1C50007806B5 /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E311CAF1C50007806B5 /* LocalViewController.swift */; };
+		4E937E361CAF22CF007806B5 /* LocalDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E351CAF22CF007806B5 /* LocalDAO.swift */; };
+		4E937E381CAF2474007806B5 /* LocalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E371CAF2474007806B5 /* LocalTableViewController.swift */; };
+		4E937E3A1CAF24CA007806B5 /* PlaceLocalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E391CAF24CA007806B5 /* PlaceLocalTableViewCell.swift */; };
 		A8074B461CACDF9E007865F5 /* finance.js in Resources */ = {isa = PBXBuildFile; fileRef = A8074B441CACDF9E007865F5 /* finance.js */; };
 		A8074B471CACDF9E007865F5 /* FinanceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B451CACDF9E007865F5 /* FinanceFactory.swift */; };
 		A8074B4B1CACDFD4007865F5 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B481CACDFD4007865F5 /* Dashboard.swift */; };
@@ -133,6 +142,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4E937E241CAEEC3B007806B5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapaViewController.swift; path = local/MapaViewController.swift; sourceTree = "<group>"; };
+		4E937E2D1CAF015D007806B5 /* Local+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Local+CoreDataProperties.swift"; path = "local/Local+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4E937E2E1CAF015D007806B5 /* Local.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Local.swift; path = local/Local.swift; sourceTree = "<group>"; };
+		4E937E311CAF1C50007806B5 /* LocalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalViewController.swift; path = local/LocalViewController.swift; sourceTree = "<group>"; };
+		4E937E351CAF22CF007806B5 /* LocalDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalDAO.swift; path = local/LocalDAO.swift; sourceTree = "<group>"; };
+		4E937E371CAF2474007806B5 /* LocalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalTableViewController.swift; path = local/LocalTableViewController.swift; sourceTree = "<group>"; };
+		4E937E391CAF24CA007806B5 /* PlaceLocalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceLocalTableViewCell.swift; path = local/PlaceLocalTableViewCell.swift; sourceTree = "<group>"; };
 		A8074B441CACDF9E007865F5 /* finance.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = finance.js; path = "Supporting Files/FinanceJS/finance.js"; sourceTree = "<group>"; };
 		A8074B451CACDF9E007865F5 /* FinanceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinanceFactory.swift; path = "Supporting Files/FinanceJS/FinanceFactory.swift"; sourceTree = "<group>"; };
 		A8074B481CACDFD4007865F5 /* Dashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dashboard.swift; path = Dashboard/Dashboard.swift; sourceTree = "<group>"; };
@@ -204,6 +222,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D0A851D1CB03AC800A0B023 /* CoreLocation.framework in Frameworks */,
+				4E937E251CAEEC3B007806B5 /* MapKit.framework in Frameworks */,
 				A8F8123C1CADBA32008854A0 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +245,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E937E1F1CAEEBE2007806B5 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */,
+				4E937E2D1CAF015D007806B5 /* Local+CoreDataProperties.swift */,
+				4E937E2E1CAF015D007806B5 /* Local.swift */,
+				4E937E311CAF1C50007806B5 /* LocalViewController.swift */,
+				4E937E351CAF22CF007806B5 /* LocalDAO.swift */,
+				4E937E371CAF2474007806B5 /* LocalTableViewController.swift */,
+				4E937E391CAF24CA007806B5 /* PlaceLocalTableViewCell.swift */,
+			);
+			name = Local;
+			sourceTree = "<group>";
+		};
 		A8074AAF1CACD0B9007865F5 /* Despesa */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +406,8 @@
 		A88242A71CACBE6F009C5F43 = {
 			isa = PBXGroup;
 			children = (
+				0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */,
+				4E937E241CAEEC3B007806B5 /* MapKit.framework */,
 				A88242B21CACBE6F009C5F43 /* Budget */,
 				A88242CA1CACBE6F009C5F43 /* BudgetTests */,
 				A88242D51CACBE6F009C5F43 /* BudgetUITests */,
@@ -392,6 +428,7 @@
 		A88242B21CACBE6F009C5F43 /* Budget */ = {
 			isa = PBXGroup;
 			children = (
+				4E937E1F1CAEEBE2007806B5 /* Local */,
 				A8074ABE1CACD167007865F5 /* Suporting Files */,
 				A8074ABF1CACD1A7007865F5 /* Dashboard */,
 				A8074ABD1CACD14C007865F5 /* Categoria */,
@@ -633,6 +670,7 @@
 				A88BDA781CACE1170014E3AF /* TextoMascara.swift in Sources */,
 				A8074B821CACE029007865F5 /* ContasViewController.swift in Sources */,
 				A8074B6C1CACE00F007865F5 /* DespesaDAO.swift in Sources */,
+				4E937E3A1CAF24CA007806B5 /* PlaceLocalTableViewCell.swift in Sources */,
 				A88BDA741CACE1170014E3AF /* ContextFactory.swift in Sources */,
 				A88242B61CACBE6F009C5F43 /* ViewController.swift in Sources */,
 				A8F812461CADBFBC008854A0 /* Conta+CoreDataProperties.swift in Sources */,
@@ -649,6 +687,7 @@
 				A8074B471CACDF9E007865F5 /* FinanceFactory.swift in Sources */,
 				A8F8124B1CADBFD7008854A0 /* TipoConta.swift in Sources */,
 				A88BDA791CACE1170014E3AF /* Validador.swift in Sources */,
+				4E937E381CAF2474007806B5 /* LocalTableViewController.swift in Sources */,
 				A88BDA761CACE1170014E3AF /* Data.swift in Sources */,
 				A8074B811CACE029007865F5 /* ContasTableViewController.swift in Sources */,
 				A8074B871CACE03A007865F5 /* CompraPrazoVistaViewController.swift in Sources */,
@@ -657,6 +696,8 @@
 				A8F812471CADBFBC008854A0 /* Conta.swift in Sources */,
 				A8074B761CACE01F007865F5 /* TipoContasTableViewController.swift in Sources */,
 				A8F8124A1CADBFD7008854A0 /* TipoConta+CoreDataProperties.swift in Sources */,
+				4E937E2C1CAEF0C1007806B5 /* MapaViewController.swift in Sources */,
+				4E937E321CAF1C50007806B5 /* LocalViewController.swift in Sources */,
 				A8074B621CACE001007865F5 /* ReceitasTableViewController.swift in Sources */,
 				A8074B8F1CACE060007865F5 /* CalculadoraController.swift in Sources */,
 				A8074B631CACE001007865F5 /* ReceitasViewController.swift in Sources */,
@@ -668,12 +709,15 @@
 				A8074B611CACE001007865F5 /* ReceitaDAO.swift in Sources */,
 				A8074B771CACE01F007865F5 /* TipoContasViewController.swift in Sources */,
 				A8F812531CADC010008854A0 /* Receita.swift in Sources */,
+				4E937E361CAF22CF007806B5 /* LocalDAO.swift in Sources */,
 				A8074B4D1CACDFD4007865F5 /* MenuTableViewController.swift in Sources */,
 				A8F8124F1CADBFF4008854A0 /* Despesa.swift in Sources */,
+				4E937E301CAF015D007806B5 /* Local.swift in Sources */,
 				A8074B551CACDFE8007865F5 /* CategoriaDAO.swift in Sources */,
 				A8074B8E1CACE060007865F5 /* Calculadora.swift in Sources */,
 				A88BDA751CACE1170014E3AF /* CustomTabBar.swift in Sources */,
 				A8074B831CACE029007865F5 /* PlaceContaTableViewCell.swift in Sources */,
+				4E937E2F1CAF015D007806B5 /* Local+CoreDataProperties.swift in Sources */,
 				A8074B861CACE03A007865F5 /* CompraPrazoVista.swift in Sources */,
 				A8074B6F1CACE00F007865F5 /* PlaceDespesaTableViewCell.swift in Sources */,
 				A88242BC1CACBE6F009C5F43 /* Budget.xcdatamodeld in Sources */,

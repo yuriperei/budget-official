@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 
-class DespesasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate  {
+class DespesasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate  {
     
     var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var despesa: Despesa?
+    var local: Local? = nil
     var despesaDAO: DespesaDAO = DespesaDAO()
     var pickerView: UIDatePicker!
     
@@ -39,11 +40,12 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         if let despesa = despesa {
             txtNome.text = despesa.nome!
             txtValor.text = String(despesa.valor!)
-            txtEndereco.text = despesa.endereco!
             txtDescricao.text = despesa.descricao!
             conta = despesa.conta //as? Conta
             txtData.text = Data.formatDateToString(despesa.data!)
             categoria = despesa.categoria //as? Categoria
+            local = despesa.local
+            
             sgFglTipo.selectedSegmentIndex = Int(despesa.flgTipo!)!
             
             navegacao.title = "Alterar"
@@ -56,6 +58,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         txtConta.text = self.conta?.nome!
         txtCategoria.text = self.categoria?.nome!
+        txtEndereco.text = self.local?.nome
         txtData.inputView = pickerView
         
         // Alinhar as labels
@@ -117,11 +120,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         }
         
         if Validador.vazio(txtEndereco.text!){
-            erros.appendContentsOf("Preencha o campo Endereço!\n")
-        }
-        
-        if Validador.vazio(txtDescricao.text!){
-            erros.appendContentsOf("Preencha o campo Descrição!\n")
+            erros.appendContentsOf("Selecione o Local!\n")
         }
         
         if Validador.vazio(txtConta.text!){
@@ -142,9 +141,9 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             despesa?.nome = txtNome.text
             despesa?.descricao = txtDescricao.text
             despesa?.valor = Float(txtValor.text!)
-            despesa?.endereco = txtEndereco.text
             despesa?.conta = conta
             despesa?.categoria = categoria
+            despesa?.local = local
             despesa?.data = Data.removerTime(txtData.text!)
             indexChanged(sgFglTipo)
             
@@ -172,12 +171,15 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         if(erros.isEmpty){
             despesa?.nome = txtNome.text
-            despesa?.endereco = txtEndereco.text
             despesa?.descricao = txtDescricao.text
             indexChanged(sgFglTipo)
             
             if let categoria = categoria{
                 despesa?.categoria = categoria
+            }
+            
+            if let local = local{
+                despesa?.local = local
             }
             
             do{
@@ -205,6 +207,10 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             return true
         }
         
+        if identifier == "alterarLocalDespesa"{
+            return true
+        }
+        
         return false
     }
     
@@ -218,7 +224,11 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         self.categoria = categoria
         txtCategoria.text = categoria.nome
     }
-
+    
+    func localViewControllerResponse(local:Local){
+        self.local = local
+        txtEndereco.text = local.nome
+    }
 
     // MARK: - Table view data source
 
@@ -322,6 +332,10 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
             categoriasController.delegate = self
             
+        }else if segue.identifier == "alterarLocalDespesa"{
+            let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController
+            locaisController.delegate = self
+            locaisController.tela = true
         }
         
     }

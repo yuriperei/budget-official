@@ -15,25 +15,29 @@
     <entity name="Despesa" representedClassName=".Despesa" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="endereco" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="flgTipo" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="valor" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="categoria" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="despesa" inverseEntity="Categoria" syncable="YES"/>
         <relationship name="conta" maxCount="1" deletionRule="Nullify" destinationEntity="Conta" inverseName="despesa" inverseEntity="Conta" syncable="YES"/>
+        <relationship name="local" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Local" inverseName="despesa" inverseEntity="Local" syncable="YES"/>
+    </entity>
+    <entity name="Local" representedClassName=".Local" syncable="YES">
+        <attribute name="cidade" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="estado" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rua" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="despesa" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Despesa" inverseName="local" inverseEntity="Despesa" syncable="YES"/>
+        <relationship name="receita" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Receita" inverseName="local" inverseEntity="Receita" syncable="YES"/>
     </entity>
     <entity name="Receita" representedClassName=".Receita" syncable="YES">
         <attribute name="data" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="endereco" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="valor" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="categoria" maxCount="1" deletionRule="Nullify" destinationEntity="Categoria" inverseName="receita" inverseEntity="Categoria" syncable="YES"/>
         <relationship name="conta" maxCount="1" deletionRule="Nullify" destinationEntity="Conta" inverseName="receita" inverseEntity="Conta" syncable="YES"/>
+        <relationship name="local" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Local" inverseName="receita" inverseEntity="Local" syncable="YES"/>
     </entity>
     <entity name="TipoConta" representedClassName=".TipoConta" syncable="YES">
         <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,8 +46,9 @@
     <elements>
         <element name="Categoria" positionX="-63" positionY="-18" width="128" height="90"/>
         <element name="Conta" positionX="-54" positionY="-9" width="128" height="120"/>
-        <element name="Despesa" positionX="-36" positionY="9" width="128" height="195"/>
-        <element name="Receita" positionX="-18" positionY="27" width="128" height="180"/>
+        <element name="Despesa" positionX="-36" positionY="9" width="128" height="165"/>
+        <element name="Local" positionX="-27" positionY="81" width="128" height="135"/>
+        <element name="Receita" positionX="-18" positionY="27" width="128" height="150"/>
         <element name="TipoConta" positionX="0" positionY="45" width="128" height="75"/>
     </elements>
 </model>

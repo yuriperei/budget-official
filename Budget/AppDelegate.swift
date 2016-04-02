@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var tabBar: UIViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         // TabBar - Rodape - Personalizacao
         UITabBar.appearance().tintColor = Color.uicolorFromHex(0x274561)
         UITabBar.appearance().barTintColor = Color.uicolorFromHex(0xffffff)
@@ -27,13 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationBarAppearace.tintColor = Color.uicolorFromHex(0xffffff)
         navigationBarAppearace.barTintColor = Color.uicolorFromHex(0x274561)
+        navigationBarAppearace.translucent = false;
         
         // 44a499
         // change navigation item title color
 //        navigationBarAppearace.titleTextAttributes = NSForegroundColorAttributeName(UIColor.whiteColor())
-//        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
+        // Cor dos Status (Ícone bateria, rede, hora...)
         UIApplication.sharedApplication().statusBarStyle = .LightContent
+        
         
         return true
     }
