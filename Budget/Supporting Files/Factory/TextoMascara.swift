@@ -10,10 +10,16 @@ import Foundation
 
 extension String {
     var lastChar:String {
-        return self.substringFromIndex((self.endIndex.predecessor()))
+        if self != "" {
+            return self.substringFromIndex((self.endIndex.predecessor()))
+        } else {
+            return ""
+        }
     }
     mutating func removeLastChar() {
-        self.removeAtIndex(self.endIndex.predecessor())
+        if self != "" {
+            self.removeAtIndex(self.endIndex.predecessor())
+        }
     }
 }
 

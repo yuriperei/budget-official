@@ -50,5 +50,10 @@ extension Float {
         formatter.locale = NSLocale(localeIdentifier: "pt_BR")
         return (formatter.stringFromNumber(self))!
     }
+    
+    func removeLastNumber() -> Float {
+//        return (self - (self % 10))/10
+        return Float(Int(self/10))
+    }
 }
 

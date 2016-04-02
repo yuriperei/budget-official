@@ -141,26 +141,50 @@ class CalculadoraController: UIViewController {
     }
     
     @IBAction func realizarOperacao(sender: UIButton) {
-//        calculadora?.numeroFinal = calculadora!.numeroAtual
-//        calculadora?.numeroFinal = lblResultado.text!.floatValue
-        lblVisor.text = calculadora!.calcularOperacao().stringValue
-        
-        calculadora?.numeroFinal = 0
-        lblResultado.text = ""
-        
-        numberInText = ""
-        calculadora?.numeroAtual = 0
-        resultado = true
-//        lblResultado.text = ""
-//        lblOperador.text = ""
+        if(calculadora?.numeroAtual != 0){
+            lblVisor.text = calculadora!.calcularOperacao().stringValue
+            lblResultado.text = ""
+            numberInText = ""
+            calculadora?.numeroAtual = 0
+            resultado = true
+        }
+//      calculadora?.numeroFinal = calculadora!.numeroAtual
+//      calculadora?.numeroFinal = lblResultado.text!.floatValue
+//      calculadora?.numeroFinal = 0
+//      lblResultado.text = ""
+//      lblOperador.text = ""
     }
     
     @IBAction func limparVisor(sender: UIButton) {
-        calculadora?.numeroAtual = 0
-        calculadora?.numeroFinal = 0
-        lblResultado.text = ""
-        lblVisor.text = "0"
-        numberInText = ""
+//        calculadora?.numeroAtual = 0
+//        calculadora?.numeroFinal = 0
+//        lblResultado.text = ""
+//        lblVisor.text = "0"
+//        numberInText = ""
+        if let lastChar = lblVisor.text?.lastChar {
+            switch(lastChar){
+            case "-","+","/","x":
+                calculadora?.opcao = 0
+                break;
+            case ".":
+                break;
+            case "":
+                break;
+            default:
+                if(!resultado){
+                    numberInText.removeLastChar()
+                    calculadora?.numeroAtual = (calculadora?.numeroAtual)!.removeLastNumber()
+                } else {
+                    calculadora?.numeroFinal = (calculadora?.numeroFinal)!.removeLastNumber()
+                }
+                break;
+            }
+        }
+        lblVisor.text?.removeLastChar()
+        if(lblVisor.text == ""){
+            lblVisor.text = "0"
+            lblResultado.text = ""
+        }
     }
     
     /*
