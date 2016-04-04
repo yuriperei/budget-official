@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sHD-ut-Gys">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -60,7 +60,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contas" id="az7-3E-8CN">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="bxd-W6-0Ue"/>
+                        <barButtonItem key="leftBarButtonItem" image="interface" id="bxd-W6-0Ue"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="AOp-f6-irT">
                             <connections>
                                 <segue destination="HA3-PR-S5m" kind="show" id="mR5-hr-KhO"/>
@@ -607,7 +607,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Despesas" id="f0Y-Md-hTu">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="vYa-X4-6bT"/>
+                        <barButtonItem key="leftBarButtonItem" image="interface" id="vYa-X4-6bT"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zmf-AC-rSk">
                             <connections>
                                 <segue destination="wDd-Yv-xqI" kind="show" id="JIN-lV-fUk"/>
@@ -1006,7 +1006,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Receitas" id="BSJ-r0-FLO">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="pqx-HN-fEu"/>
+                        <barButtonItem key="leftBarButtonItem" image="interface" id="pqx-HN-fEu"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ypY-mz-Cgo">
                             <connections>
                                 <segue destination="sdN-cM-l7G" kind="show" id="lPz-Xc-tJT"/>
@@ -3454,13 +3454,13 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RnH-uC-IaA"/>
-        <segue reference="Jf3-7w-7j9"/>
+        <segue reference="S4g-Dy-h4z"/>
+        <segue reference="7uR-rT-rJ6"/>
         <segue reference="wxT-DJ-QcZ"/>
+        <segue reference="RnH-uC-IaA"/>
+        <segue reference="rl0-5N-4Z6"/>
+        <segue reference="Jf3-7w-7j9"/>
         <segue reference="KF9-Rj-9X1"/>
         <segue reference="LrU-3t-XTb"/>
-        <segue reference="7uR-rT-rJ6"/>
-        <segue reference="S4g-Dy-h4z"/>
-        <segue reference="mR5-hr-KhO"/>
     </inferredMetricsTieBreakers>
 </document>
