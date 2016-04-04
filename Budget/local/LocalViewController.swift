@@ -112,7 +112,7 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
     }
     
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func btnCancel(sender: AnyObject) {

@@ -15,7 +15,7 @@ protocol ContasViewControllerDelegate: class {
 
 class ContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-
+    @IBOutlet var btnSidebar:UIBarButtonItem!
     weak var delegate: ContasViewControllerDelegate?
     
     // Variável de escape para verificar se está vindo da tela ReceitaViewController
@@ -26,12 +26,13 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
         
         frc.delegate = self
         

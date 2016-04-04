@@ -24,7 +24,7 @@ class TipoContasViewController: UITableViewController {
             txtNome.text = tipoConta.nome!
         }
         
-        updateWidthsForLabels(labels)
+        FormCustomization.updateWidthsForLabels(labels)
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,7 +46,7 @@ class TipoContasViewController: UITableViewController {
     }
     
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     func validarCampos(){
@@ -87,31 +87,6 @@ class TipoContasViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 1
-    }
-    
-    private func calculateLabelWidth(label: UILabel) -> CGFloat {
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-        
-        return labelSize.width
-    }
-    
-    private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-        //        return reduce(map(labels, calculateLabelWidth), 0, max)
-        return labels.map(calculateLabelWidth).reduce(0, combine: max)
-    }
-    
-    private func updateWidthsForLabels(labels: [UILabel]) {
-        let maxLabelWidth = calculateMaxLabelWidth(labels)
-        for label in labels {
-            let constraint = NSLayoutConstraint(item: label,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .NotAnAttribute,
-                multiplier: 1,
-                constant: maxLabelWidth)
-            label.addConstraint(constraint)
-        }
     }
 
     /*

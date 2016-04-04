@@ -19,6 +19,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet var pieChartDespesas: PieChartView!
     @IBOutlet var pieChartReceitas: PieChartView!
     let dashboard:Dashboard = Dashboard()
+    var drawChartLoaded:Bool = false
 //    var zoom:CGFloat = 0.0
     func initDashboard(){
         lblBalancoTotal.text = dashboard.getTotalBalanco().convertToMoedaBr()
@@ -32,17 +33,25 @@ class DashboardViewController: UIViewController {
 //        print(Dashboard.getReceitasPorCategoria())
         
         setChartBalanco(months, values: balanco)
-        setPieChart(despesas, values: valorDespesas, pieChart: pieChartDespesas)
-        setPieChart(receitas, values: valorReceitas, pieChart: pieChartReceitas)
+        
+        
+        if(valorDespesas.count > 0){
+            setPieChart(despesas, values: valorDespesas, pieChart: pieChartDespesas)
+        } else {
+            pieChartDespesas.noDataText = "Não existem despesas\nregistradas esse mês"
+        }
+        
+        if(valorReceitas.count > 0) {
+            setPieChart(receitas, values: valorReceitas, pieChart: pieChartReceitas)
+        } else {
+            pieChartReceitas.noDataText = "Não existem receitas\nregistradas esse mês"
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        btnMenuSidebar.target = self.revealViewController()
-        btnMenuSidebar.action = Selector("revealToggle:")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        
+        SidebarMenu.configMenu(self, sideBarMenu: btnMenuSidebar)
         drawBarChartBalanco()
     }
     
@@ -73,7 +82,8 @@ class DashboardViewController: UIViewController {
     }
     
     private func setChartBalanco(months: [String], values: [Double]) {
-        barChart.noDataText = "You need to provide data for the chart."
+
+        barChart.noDataText = "Não foi possível carregar os dados."
         
         var dataEntries:[BarChartDataEntry] = []
         for i in 0..<values.count {
@@ -81,13 +91,18 @@ class DashboardViewController: UIViewController {
         }
         
         let dataSet = BarChartDataSet(yVals: dataEntries, label: "Balanço")
-        dataSet.barSpace = 0.35
-        dataSet.valueFormatter = NSNumberFormatter()
-        dataSet.valueFormatter?.minimumFractionDigits = 2
 //        dataSet.valueFormatter?.positivePrefix = "R$ "
         let data = BarChartData(xVals: months, dataSet: dataSet)
-        data.setValueFont(UIFont(name: "Futura", size: 10.0))
         barChart.data = data
+        
+        if(!drawChartLoaded){
+            dataSet.barSpace = 0.35
+            dataSet.valueFormatter = NSNumberFormatter()
+            dataSet.valueFormatter?.minimumFractionDigits = 2
+            data.setValueFont(UIFont(name: "Futura", size: 10.0))
+            
+            drawChartLoaded = true
+        }
     }
     
     private func setPieChart(months: [String], values: [Double], pieChart:PieChartView) {
@@ -95,8 +110,8 @@ class DashboardViewController: UIViewController {
         pieChart.noDataText = "You need to provide data for the chart."
         
         var dataEntries:[ChartDataEntry] = []
-        for i in 0..<values.count {
-            dataEntries.append(ChartDataEntry(value: values[i], xIndex: i))
+        for (i,value) in values.enumerate() {
+            dataEntries.append(ChartDataEntry(value: value, xIndex: i))
         }
         
         let dataSet = PieChartDataSet(yVals: dataEntries, label: "Balanço")

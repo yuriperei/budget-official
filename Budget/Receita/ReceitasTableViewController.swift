@@ -11,13 +11,16 @@ import CoreData
 
 class ReceitasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate{
 
-
+    @IBOutlet var btnSidebar:UIBarButtonItem!
 //    var tabBar: UITabBar?
     var frc = NSFetchedResultsController()
     let receitaDAO = ReceitaDAO()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
+        
         frc = Receita.getReceitasController("nome", secondSort: "data", sectionName: "data")
         frc.delegate = self
         

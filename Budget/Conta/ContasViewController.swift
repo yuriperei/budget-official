@@ -44,7 +44,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         
         txtTipo.text = tipoConta?.nome
         
-        updateWidthsForLabels(labels)
+        FormCustomization.updateWidthsForLabels(labels)
         
     }
 
@@ -53,21 +53,8 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let currentCharacterCount = textField.text?.characters.count
-        //        let currentCharacterCount = textField.text?.characters.count ?? 0
-        //        if (range.length + range.location > currentCharacterCount){
-        //            return false
-        //        }
-        
-        if (range.length > 0){
-            return true
-        }
-        return currentCharacterCount < 12
-    }
-    
     @IBAction func maskTextField(sender: UITextField) {
-        TextoMascara.aplicarMascara(&sender.text!)
+        FormCustomization.aplicarMascara(&sender.text!)
     }
     
     
@@ -90,7 +77,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     }
     
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     func validarCampos(){
@@ -218,38 +205,12 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         return true
     }
     */
-
-    private func calculateLabelWidth(label: UILabel) -> CGFloat {
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-        
-        return labelSize.width
-    }
-    
-    private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-//        return reduce(map(labels, calculateLabelWidth), 0, max)
-        return labels.map(calculateLabelWidth).reduce(0, combine: max)
-    }
-    
-    private func updateWidthsForLabels(labels: [UILabel]) {
-        let maxLabelWidth = calculateMaxLabelWidth(labels)
-        for label in labels {
-            let constraint = NSLayoutConstraint(item: label,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .NotAnAttribute,
-                multiplier: 1,
-                constant: maxLabelWidth)
-            label.addConstraint(constraint)
-        }
-    }
-    
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        FormCustomization.dismissInputView([txtNome, txtSaldo])
         if segue.identifier == "alterarTipoConta"{
             let tipoContasController : TipoContasTableViewController = segue.destinationViewController as! TipoContasTableViewController
             tipoContasController.delegate = self

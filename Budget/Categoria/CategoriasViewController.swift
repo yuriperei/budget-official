@@ -45,7 +45,7 @@ class CategoriasViewController: UITableViewController {
     }
     
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     func validarCampos(){
