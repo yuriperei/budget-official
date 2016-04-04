@@ -80,10 +80,10 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         
         if conta != nil {
             updateConta()
-            navigationController?.popViewControllerAnimated(true)
+            //navigationController?.popViewControllerAnimated(true)
         }else{
             addConta()
-            dissmissViewController()
+            //dissmissViewController()
         }
         
         
@@ -108,18 +108,22 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     }
     
     func addConta(){
-        conta = Conta.getConta()
-        conta?.nome = txtNome.text
-        conta?.saldo = txtSaldo.text?.floatConverterMoeda()
-        conta?.tipoconta = tipoConta
         
-        salvarConta()
+        validarCampos()
         
-//        if let saldo = txtSaldo.text?.floatConverterMoeda(){
-//            conta?.saldo = saldo
-//        } else {
-//            Notification.mostrarErro()
-//        }
+        if (erros.isEmpty == true){
+            
+            conta = Conta.getConta()
+            conta?.nome = txtNome.text
+            conta?.saldo = txtSaldo.text?.floatConverterMoeda()
+            conta?.tipoconta = tipoConta
+            
+            salvarConta()
+        }else{
+            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
+            presentViewController(alert, animated: true, completion: nil)
+            erros = ""
+        }
     }
     
     func updateConta(){
@@ -136,21 +140,14 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     private func salvarConta(){
         
-        validarCampos()
-        
-        if (erros.isEmpty){
-            do{
-                try contaDAO.salvar(conta!)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
-        }else{
-            let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
+        do{
+            try contaDAO.salvar(conta!)
+        }catch{
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
         }
         
+        dissmissViewController()
         
     }
     
