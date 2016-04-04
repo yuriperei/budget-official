@@ -15,7 +15,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var lblTotalDespesas: UILabel!
     @IBOutlet weak var lblTotalReceitas: UILabel!
     @IBOutlet var btnMenuSidebar: UIBarButtonItem!
-    @IBOutlet var barChart: BarChartView!
+    @IBOutlet var barChart: LineChartView!
     @IBOutlet var pieChartDespesas: PieChartView!
     @IBOutlet var pieChartReceitas: PieChartView!
     let dashboard:Dashboard = Dashboard()
@@ -26,13 +26,13 @@ class DashboardViewController: UIViewController {
         lblTotalReceitas.text = dashboard.getTotalReceitas().convertToMoedaBr()
         lblTotalDespesas.text = dashboard.getTotalDespesas().convertToMoedaBr()
         
-        let (months, balanco) = dashboard.getBalancoAnual()
+        let (months, receitasMensal, despesasMensal) = dashboard.getBalancoAnual()
         let (despesas, valorDespesas) = dashboard.getDespesasPorCategoria()
         let (receitas, valorReceitas) = dashboard.getReceitasPorCategoria()
 //        print(Dashboard.getDespesasPorCategoria())
 //        print(Dashboard.getReceitasPorCategoria())
         
-        setChartBalanco(months, values: balanco)
+        setChartBalanco(months, values: [receitasMensal, despesasMensal])
         
         
         if(valorDespesas.count > 0){
@@ -81,24 +81,41 @@ class DashboardViewController: UIViewController {
         barChart.descriptionText = ""
     }
     
-    private func setChartBalanco(months: [String], values: [Double]) {
-
+    private func setChartBalanco(months: [String], values: [[Double]]) {
+        print("\(values)\n\n\n\n")
         barChart.noDataText = "Não foi possível carregar os dados."
         
-        var dataEntries:[BarChartDataEntry] = []
-        for i in 0..<values.count {
-            dataEntries.append(BarChartDataEntry(value: values[i], xIndex: i))
+        var yValsReceitas:[ChartDataEntry] = []
+        for (index, value) in values[0].enumerate() {
+            yValsReceitas.append(ChartDataEntry(value: value, xIndex: index))
         }
         
-        let dataSet = BarChartDataSet(yVals: dataEntries, label: "Balanço")
-//        dataSet.valueFormatter?.positivePrefix = "R$ "
-        let data = BarChartData(xVals: months, dataSet: dataSet)
-        barChart.data = data
+        let setReceitas = LineChartDataSet(yVals: yValsReceitas, label: "Receitas")
+        
+        var yValsDespesas:[ChartDataEntry] = []
+        for (index, value) in values[1].enumerate() {
+            yValsDespesas.append(ChartDataEntry(value: value, xIndex: index))
+        }
+        
+        let setDespesas = LineChartDataSet(yVals: yValsReceitas, label: "Receitas")
+        
+        let data = LineChartData(xVals: months, dataSets: [setReceitas, setDespesas])
         
         if(!drawChartLoaded){
-            dataSet.barSpace = 0.35
-            dataSet.valueFormatter = NSNumberFormatter()
-            dataSet.valueFormatter?.minimumFractionDigits = 2
+            setReceitas.axisDependency = .Left;
+            setReceitas.setColor(Color.uicolorFromHex(0x202020))
+            setReceitas.lineWidth = 2.0
+            setReceitas.circleRadius = 3.0
+            setReceitas.fillAlpha = 65/255.0
+            setReceitas.drawCircleHoleEnabled = false
+            
+            setDespesas.axisDependency = .Left;
+            setDespesas.setColor(Color.uicolorFromHex(0xCCCCCC))
+            setDespesas.lineWidth = 2.0
+            setDespesas.circleRadius = 3.0
+            setDespesas.fillAlpha = 65/255.0
+            setDespesas.drawCircleHoleEnabled = false
+            
             data.setValueFont(UIFont(name: "Futura", size: 10.0))
             
             drawChartLoaded = true
