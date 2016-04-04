@@ -28,6 +28,7 @@ class CalculadoraController: UIViewController {
     @IBOutlet weak var lblResultado: UILabel!
     @IBOutlet weak var lblOperador: UILabel!
     @IBOutlet weak var lblVisor: UILabel!
+    @IBOutlet weak var btnSidebar: UIBarButtonItem!
     
     var numberInText:String = ""
     var operatorInText:String = ""
@@ -39,6 +40,8 @@ class CalculadoraController: UIViewController {
         super.viewDidLoad()
         calculadora = Calculadora()
         // Do any additional setup after loading the view.
+        SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
+        
     }
 
     override func didReceiveMemoryWarning() {

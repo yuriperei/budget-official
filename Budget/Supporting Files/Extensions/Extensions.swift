@@ -41,6 +41,19 @@ extension String {
         
         return result.floatConverter
     }
+    
+    var lastChar:String {
+        if self != "" {
+            return self.substringFromIndex((self.endIndex.predecessor()))
+        } else {
+            return ""
+        }
+    }
+    mutating func removeLastChar() {
+        if self != "" {
+            self.removeAtIndex(self.endIndex.predecessor())
+        }
+    }
 }
 
 extension Float {

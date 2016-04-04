@@ -41,9 +41,9 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             txtNome.text = despesa.nome!
             txtValor.text = String(despesa.valor!)
             txtDescricao.text = despesa.descricao!
-            conta = despesa.conta //as? Conta
+            conta = despesa.conta
             txtData.text = Data.formatDateToString(despesa.data!)
-            categoria = despesa.categoria //as? Categoria
+            categoria = despesa.categoria
             local = despesa.local
             
             sgFglTipo.selectedSegmentIndex = Int(despesa.flgTipo!)!
@@ -62,7 +62,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         txtData.inputView = pickerView
         
         // Alinhar as labels
-        updateWidthsForLabels(labels)
+        FormCustomization.updateWidthsForLabels(labels)
         
         // Do any additional setup after loading the view.
     }
@@ -73,7 +73,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     }
     
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -110,6 +110,10 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
     }
     
+    @IBAction func maskTextField(sender: UITextField) {
+        FormCustomization.aplicarMascara(&sender.text!)
+    }
+    
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("Preencha o campo nome!\n")
@@ -140,7 +144,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             despesa = Despesa.getDespesa()
             despesa?.nome = txtNome.text
             despesa?.descricao = txtDescricao.text
-            despesa?.valor = Float(txtValor.text!)
+            despesa?.valor = txtValor.text!.floatConverterMoeda()
             despesa?.conta = conta
             despesa?.categoria = categoria
             despesa?.local = local
@@ -161,8 +165,6 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             presentViewController(alert, animated: true, completion: nil)
             erros.removeAll()
         }
-        
-
     }
     
     func updateConta(){
@@ -292,37 +294,20 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         return true
     }
     */
-
-    
-    private func calculateLabelWidth(label: UILabel) -> CGFloat {
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-        
-        return labelSize.width
-    }
-    
-    private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-        //        return reduce(map(labels, calculateLabelWidth), 0, max)
-        return labels.map(calculateLabelWidth).reduce(0, combine: max)
-    }
-    
-    private func updateWidthsForLabels(labels: [UILabel]) {
-        let maxLabelWidth = calculateMaxLabelWidth(labels)
-        for label in labels {
-            let constraint = NSLayoutConstraint(item: label,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .NotAnAttribute,
-                multiplier: 1,
-                constant: maxLabelWidth)
-            label.addConstraint(constraint)
-        }
-    }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+//        txtNome.resignFirstResponder()
+//        txtValor.resignFirstResponder()
+//        txtDescricao.resignFirstResponder()
+//        txtData.resignFirstResponder()
+        
+        FormCustomization.dismissInputView([txtNome, txtValor, txtDescricao, txtData])
         
         if segue.identifier == "alterarConta"{
             let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController

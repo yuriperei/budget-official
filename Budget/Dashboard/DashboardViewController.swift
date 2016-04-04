@@ -32,29 +32,27 @@ class DashboardViewController: UIViewController {
 //        print(Dashboard.getDespesasPorCategoria())
 //        print(Dashboard.getReceitasPorCategoria())
         
-        if(balanco.count > 0){
-            setChartBalanco(months, values: balanco)
-            barChart.opaque = true
-        }
+        setChartBalanco(months, values: balanco)
+        
         
         if(valorDespesas.count > 0){
             setPieChart(despesas, values: valorDespesas, pieChart: pieChartDespesas)
-            pieChartDespesas.opaque = true
+        } else {
+            pieChartDespesas.noDataText = "Não existem despesas\nregistradas esse mês"
         }
         
         if(valorReceitas.count > 0) {
             setPieChart(receitas, values: valorReceitas, pieChart: pieChartReceitas)
-            pieChartReceitas.opaque = true
+        } else {
+            pieChartReceitas.noDataText = "Não existem receitas\nregistradas esse mês"
         }
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        btnMenuSidebar.target = self.revealViewController()
-        btnMenuSidebar.action = Selector("revealToggle:")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        SidebarMenu.configMenu(self, sideBarMenu: btnMenuSidebar)
+        drawBarChartBalanco()
     }
     
     private func drawBarChartBalanco() {
@@ -84,7 +82,8 @@ class DashboardViewController: UIViewController {
     }
     
     private func setChartBalanco(months: [String], values: [Double]) {
-        barChart.noDataText = "You need to provide data for the chart."
+
+        barChart.noDataText = "Não foi possível carregar os dados."
         
         var dataEntries:[BarChartDataEntry] = []
         for i in 0..<values.count {
@@ -97,11 +96,11 @@ class DashboardViewController: UIViewController {
         barChart.data = data
         
         if(!drawChartLoaded){
-            drawBarChartBalanco()
             dataSet.barSpace = 0.35
             dataSet.valueFormatter = NSNumberFormatter()
             dataSet.valueFormatter?.minimumFractionDigits = 2
             data.setValueFont(UIFont(name: "Futura", size: 10.0))
+            
             drawChartLoaded = true
         }
     }
@@ -111,8 +110,8 @@ class DashboardViewController: UIViewController {
         pieChart.noDataText = "You need to provide data for the chart."
         
         var dataEntries:[ChartDataEntry] = []
-        for i in 0..<values.count {
-            dataEntries.append(ChartDataEntry(value: values[i], xIndex: i))
+        for (i,value) in values.enumerate() {
+            dataEntries.append(ChartDataEntry(value: value, xIndex: i))
         }
         
         let dataSet = PieChartDataSet(yVals: dataEntries, label: "Balanço")

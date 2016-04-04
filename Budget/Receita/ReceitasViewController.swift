@@ -61,7 +61,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         txtData.inputView = pickerView
         
         // Alinhar as labels
-        updateWidthsForLabels(labels)
+        FormCustomization.updateWidthsForLabels(labels)
         
 
 
@@ -76,9 +76,8 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         // Dispose of any resources that can be recreated.
     }
     
-    
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func btnCancel(sender: AnyObject) {
@@ -94,8 +93,10 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             addConta()
             
         }
-        
-        
+    }
+    
+    @IBAction func maskTextField(sender: UITextField) {
+        FormCustomization.aplicarMascara(&sender.text!)
     }
     
     func validarCampos(){
@@ -128,7 +129,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             receita = Receita.getReceita()
             receita?.nome = txtNome.text
             receita?.descricao = txtDescricao.text
-            receita?.valor = Float(txtValor.text!)
+            receita?.valor = txtValor.text!.floatConverterMoeda()
             receita?.conta = conta
             receita?.categoria = categoria
             receita?.local = local
@@ -281,35 +282,10 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     }
     */
     
-    private func calculateLabelWidth(label: UILabel) -> CGFloat {
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-        
-        return labelSize.width
-    }
-    
-    private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-        //        return reduce(map(labels, calculateLabelWidth), 0, max)
-        return labels.map(calculateLabelWidth).reduce(0, combine: max)
-    }
-    
-    private func updateWidthsForLabels(labels: [UILabel]) {
-        let maxLabelWidth = calculateMaxLabelWidth(labels)
-        for label in labels {
-            let constraint = NSLayoutConstraint(item: label,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .NotAnAttribute,
-                multiplier: 1,
-                constant: maxLabelWidth)
-            label.addConstraint(constraint)
-        }
-    }
-
-    
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        FormCustomization.dismissInputView([txtNome, txtDescricao, txtValor, txtData])
         
         if segue.identifier == "alterarConta"{
             let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
