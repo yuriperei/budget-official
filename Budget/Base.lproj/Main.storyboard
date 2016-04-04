@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sHD-ut-Gys">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sHD-ut-Gys">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -60,7 +60,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contas" id="az7-3E-8CN">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="bxd-W6-0Ue"/>
+                        <barButtonItem key="leftBarButtonItem" image="interface" id="bxd-W6-0Ue"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="AOp-f6-irT">
                             <connections>
                                 <segue destination="HA3-PR-S5m" kind="show" id="mR5-hr-KhO"/>
@@ -607,7 +607,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Despesas" id="f0Y-Md-hTu">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="vYa-X4-6bT"/>
+                        <barButtonItem key="leftBarButtonItem" image="interface" id="vYa-X4-6bT"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zmf-AC-rSk">
                             <connections>
                                 <segue destination="wDd-Yv-xqI" kind="show" id="JIN-lV-fUk"/>
@@ -852,6 +852,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="axa-5j-FJi" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="CdY-YW-hmA"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" focusStyle="custom" textLabel="OhJ-Hx-Kti" imageView="8mj-hL-AbA" rowHeight="40" style="IBUITableViewCellStyleDefault" id="5GB-5a-Zsf">
                                         <rect key="frame" x="0.0" y="194" width="320" height="40"/>
@@ -1003,7 +1006,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Receitas" id="BSJ-r0-FLO">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="pqx-HN-fEu"/>
+                        <barButtonItem key="leftBarButtonItem" image="interface" id="pqx-HN-fEu"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ypY-mz-Cgo">
                             <connections>
                                 <segue destination="sdN-cM-l7G" kind="show" id="lPz-Xc-tJT"/>
@@ -3336,7 +3339,7 @@
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellLocal" rowHeight="90" id="3WO-1o-1Qi" customClass="PlaceLocalTableViewCell" customModule="Budget" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3WO-1o-1Qi" id="62s-Hz-gDC">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
@@ -3373,7 +3376,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLc-RA-Pag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1150.5" y="-472.5"/>
+            <point key="canvasLocation" x="1962.5" y="-472.5"/>
         </scene>
         <!--Local-->
         <scene sceneID="gLt-hQ-mmW">
@@ -3424,6 +3427,24 @@
             </objects>
             <point key="canvasLocation" x="2174.5" y="3541.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EtP-hR-vfJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="axa-5j-FJi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vjz-0b-Amk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RGY-fM-5ce" kind="relationship" relationship="rootViewController" id="T7H-Hf-6mO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="owN-qO-bJv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1150" y="-473"/>
+        </scene>
     </scenes>
     <resources>
         <image name="card-wallet" width="21" height="21"/>
@@ -3433,13 +3454,13 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RnH-uC-IaA"/>
-        <segue reference="Jf3-7w-7j9"/>
+        <segue reference="S4g-Dy-h4z"/>
+        <segue reference="7uR-rT-rJ6"/>
         <segue reference="wxT-DJ-QcZ"/>
+        <segue reference="RnH-uC-IaA"/>
+        <segue reference="rl0-5N-4Z6"/>
+        <segue reference="Jf3-7w-7j9"/>
         <segue reference="KF9-Rj-9X1"/>
         <segue reference="LrU-3t-XTb"/>
-        <segue reference="7uR-rT-rJ6"/>
-        <segue reference="S4g-Dy-h4z"/>
-        <segue reference="mR5-hr-KhO"/>
     </inferredMetricsTieBreakers>
 </document>
