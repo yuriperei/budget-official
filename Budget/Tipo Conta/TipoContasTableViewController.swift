@@ -27,20 +27,22 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        frc.delegate = self
+        
         if tela == false{
             let btnSidebar = UIBarButtonItem(image: UIImage(named: "interface.png"), style: .Done, target: self, action: nil)
             
             self.navigationItem.setLeftBarButtonItem(btnSidebar, animated: false)
             SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
-            
-            frc.delegate = self
+        
         }
 
         
         do{
             try frc.performFetch()
         }catch{
-            print(error)
+            let alerta = Notification.mostrarErro()
+            presentViewController(alerta, animated: true, completion: nil)
         }
     }
     

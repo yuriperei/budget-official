@@ -90,6 +90,7 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
         // Configure the cell...
         let local = frc.objectAtIndexPath(indexPath) as! Local
         cell.lblNome.text = local.nome
+        cell.lblEndereco.text = local.rua! + " - " + local.cidade! + " - " + local.estado!
         
         return cell
     }

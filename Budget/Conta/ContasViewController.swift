@@ -19,7 +19,6 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     var tipoConta: TipoConta?
     
     @IBOutlet var labels: [UILabel]!
-    @IBOutlet weak var navegacao: UINavigationItem!
     @IBOutlet weak var txtNome: UITextField!
     @IBOutlet weak var txtSaldo: UITextField!
     @IBOutlet weak var txtTipo: UITextField!
@@ -38,7 +37,6 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
             
             tipoConta = conta.tipoconta // as? TipoConta
             
-            navegacao.title = "Alterar"
             txtSaldo.enabled = false
         }
         
@@ -82,15 +80,15 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
-            erros.appendContentsOf("Preencha o campo nome!\n")
+            erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
         if Validador.vazio(txtSaldo.text!){
-            erros.appendContentsOf("Preencha o campo Saldo!\n")
+            erros.appendContentsOf("\nPreencha o campo Saldo!")
         }
         
         if Validador.vazio(txtTipo.text!){
-            erros.appendContentsOf("Selecione a Conta!\n")
+            erros.appendContentsOf("\nSelecione a Conta!")
         }
     }
     

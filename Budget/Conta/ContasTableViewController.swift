@@ -20,7 +20,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     
     // Variável de escape para verificar se está vindo da tela ReceitaViewController
     let contaDAO:ContaDAO = ContaDAO()
-    var telaReceita: Bool = false
+    var tela: Bool = false
     let context = ContextFactory.getContext()
     var frc = Conta.getContasController("nome", secondSort: "tipoconta.nome", sectionName: "tipoconta.nome")
     
@@ -154,7 +154,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         let conta = frc.objectAtIndexPath(indexPath) as! Conta
         delegate?.contasViewControllerResponse(conta)
         
-        if telaReceita == true{
+        if tela == true{
             navigationController?.popViewControllerAnimated(true)
         }
         

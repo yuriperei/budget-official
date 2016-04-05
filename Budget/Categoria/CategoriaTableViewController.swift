@@ -16,9 +16,9 @@ protocol CategoriaViewControllerDelegate: class {
 class CategoriaTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     weak var delegate: CategoriaViewControllerDelegate?
+    var tela:Bool = false
     
     let categoriaDAO:CategoriaDAO = CategoriaDAO()
-//    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var frc = Categoria.getCategoriasController("nome")
     
@@ -27,10 +27,19 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
         
         frc.delegate = self
         
+        if tela == false{
+            let btnSidebar = UIBarButtonItem(image: UIImage(named: "interface.png"), style: .Done, target: self, action: nil)
+            
+            self.navigationItem.setLeftBarButtonItem(btnSidebar, animated: false)
+            SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
+            
+        }
+        
         do{
             try frc.performFetch()
         }catch{
-            print(error)
+            let alerta = Notification.mostrarErro()
+            presentViewController(alerta, animated: true, completion: nil)
         }
     }
 
