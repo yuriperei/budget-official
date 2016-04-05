@@ -15,7 +15,7 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var lblTotalDespesas: UILabel!
     @IBOutlet weak var lblTotalReceitas: UILabel!
     @IBOutlet var btnMenuSidebar: UIBarButtonItem!
-    @IBOutlet var barChart: LineChartView!
+    @IBOutlet var lineChart: LineChartView!
     @IBOutlet var pieChartDespesas: PieChartView!
     @IBOutlet var pieChartReceitas: PieChartView!
     let dashboard:Dashboard = Dashboard()
@@ -32,7 +32,7 @@ class DashboardViewController: UIViewController {
 //        print(Dashboard.getDespesasPorCategoria())
 //        print(Dashboard.getReceitasPorCategoria())
         
-        setChartBalanco(months, values: [receitasMensal, despesasMensal])
+        setLineBalanco(months, values: [receitasMensal, despesasMensal])
         
         
         if(valorDespesas.count > 0){
@@ -56,75 +56,70 @@ class DashboardViewController: UIViewController {
     }
     
     private func drawBarChartBalanco() {
-        let xAxis = barChart.xAxis
+        let xAxis = lineChart.xAxis
         xAxis.labelPosition = .Bottom
         xAxis.drawGridLinesEnabled = false
         xAxis.spaceBetweenLabels = 2
         
-        let leftAxis = barChart.leftAxis
+        let leftAxis = lineChart.leftAxis
         leftAxis.labelPosition = .OutsideChart
         leftAxis.spaceTop = 0.15
         leftAxis.customAxisMin = 0
         leftAxis.labelFont = UIFont(name: "Futura", size: 10.0)!
         
-        let rightAxis = barChart.rightAxis
+        let rightAxis = lineChart.rightAxis
         rightAxis.enabled = true
         rightAxis.drawGridLinesEnabled = false
         rightAxis.spaceTop = 0.15
         rightAxis.customAxisMin = 0
         rightAxis.labelFont = leftAxis.labelFont
         
-        barChart.legend.position = .BelowChartLeft
-        barChart.legend.form = .Square
-        barChart.legend.formSize = 9.0
-        barChart.legend.xEntrySpace = 4.0
-        barChart.descriptionText = ""
+        lineChart.legend.position = .BelowChartLeft
+        lineChart.legend.form = .Square
+        lineChart.legend.formSize = 9.0
+        lineChart.legend.xEntrySpace = 4.0
+        lineChart.descriptionText = ""
     }
     
-    private func setChartBalanco(months: [String], values: [[Double]]) {
-        print("\(values)\n\n\n\n")
-        barChart.noDataText = "Não foi possível carregar os dados."
+    private func setLineBalanco(months: [String], values: [[Double]]) {
+        lineChart.noDataText = "Não foi possível carregar os dados."
         
-        var yValsReceitas:[ChartDataEntry] = []
-        for (index, value) in values[0].enumerate() {
-            yValsReceitas.append(ChartDataEntry(value: value, xIndex: index))
+        var dataEntries: [ChartDataEntry] = []
+        var dataEntries2: [ChartDataEntry] = []
+        
+        for i in 0..<months.count {
+            dataEntries.append(ChartDataEntry(value: values[0][i], xIndex: i))
+            dataEntries2.append(ChartDataEntry(value: values[1][i], xIndex: i))
         }
         
-        let setReceitas = LineChartDataSet(yVals: yValsReceitas, label: "Receitas")
+        let setReceitas = LineChartDataSet(yVals: dataEntries, label: "Receitas")
+        let setDespesas = LineChartDataSet(yVals: dataEntries2, label: "Despesas")
+        let lineChartData = LineChartData(xVals: months, dataSets: [setReceitas, setDespesas])
+        lineChart.data = lineChartData
         
-        var yValsDespesas:[ChartDataEntry] = []
-        for (index, value) in values[1].enumerate() {
-            yValsDespesas.append(ChartDataEntry(value: value, xIndex: index))
-        }
+        setReceitas.axisDependency = .Left;
+        setReceitas.setColor(Color.uicolorFromHex(0x2C4E6E))
+        setReceitas.lineWidth = 2.0
+        setReceitas.circleRadius = 3.0
+        setReceitas.fillAlpha = 65/255.0
+        setReceitas.drawCircleHoleEnabled = false
         
-        let setDespesas = LineChartDataSet(yVals: yValsReceitas, label: "Receitas")
+        setDespesas.axisDependency = .Left;
+        setDespesas.setColor(Color.uicolorFromHex(0x1D3347))
+        setDespesas.lineWidth = 2.0
+        setDespesas.circleRadius = 3.0
+        setDespesas.fillAlpha = 65/255.0
+        setDespesas.drawCircleHoleEnabled = false
         
-        let data = LineChartData(xVals: months, dataSets: [setReceitas, setDespesas])
         
         if(!drawChartLoaded){
-            setReceitas.axisDependency = .Left;
-            setReceitas.setColor(Color.uicolorFromHex(0x202020))
-            setReceitas.lineWidth = 2.0
-            setReceitas.circleRadius = 3.0
-            setReceitas.fillAlpha = 65/255.0
-            setReceitas.drawCircleHoleEnabled = false
-            
-            setDespesas.axisDependency = .Left;
-            setDespesas.setColor(Color.uicolorFromHex(0xCCCCCC))
-            setDespesas.lineWidth = 2.0
-            setDespesas.circleRadius = 3.0
-            setDespesas.fillAlpha = 65/255.0
-            setDespesas.drawCircleHoleEnabled = false
-            
-            data.setValueFont(UIFont(name: "Futura", size: 10.0))
+            lineChartData.setValueFont(UIFont(name: "Futura", size: 10.0))
             
             drawChartLoaded = true
         }
     }
     
     private func setPieChart(months: [String], values: [Double], pieChart:PieChartView) {
-        
-        pieChart.noDataText = "You need to provide data for the chart."
         
         var dataEntries:[ChartDataEntry] = []
         for (i,value) in values.enumerate() {
@@ -147,6 +142,9 @@ class DashboardViewController: UIViewController {
         dataSet.colors = colors
         
         data.setValueFont(UIFont(name: "Futura", size: 10.0))
+        
+        pieChart.descriptionText = ""
+        pieChart.legend.enabled = false
         pieChart.data = data
     }
 

@@ -15,6 +15,10 @@ class Dashboard {
         return NSCalendar.currentCalendar().components([.Day, .Month, .Year], fromDate: NSDate())
     }
     
+    private func getListMonth() -> [String] {
+        return ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+    }
+    
     func getTotalBalanco() -> Float {
         let contaDAO:ContaDAO = ContaDAO()
         
@@ -43,7 +47,7 @@ class Dashboard {
     
     func getBalancoAnual() -> (Array<String>,[Double], [Double]) {
         
-        let months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+        let months = getListMonth()
         
         var receitasMensal:[Double] = []
         var despesasMensal:[Double] = []
@@ -84,7 +88,7 @@ class Dashboard {
     }
     
     func getReceitasPorCategoria() -> ([String],[Double]) {
-        let receitas = ReceitaDAO().getListaReceitas()
+        let receitas = ReceitaDAO().getReceitasFromMonth(getCurrentDate().month, year: getCurrentDate().year)
         let categorias = CategoriaDAO().getListaCategorias()
         
         var categoriasReceitas:[String] = []

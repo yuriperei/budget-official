@@ -410,7 +410,7 @@
                                             </mask>
                                         </variation>
                                     </stackView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXC-F2-O5M" customClass="BarChartView" customModule="Charts">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXC-F2-O5M" customClass="LineChartView" customModule="Charts">
                                         <rect key="frame" x="20" y="200" width="280" height="245"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -489,11 +489,11 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="1200"/>
                     <connections>
-                        <outlet property="barChart" destination="DXC-F2-O5M" id="Aoi-Ex-IYS"/>
                         <outlet property="btnMenuSidebar" destination="iCz-bG-pce" id="SSa-Dj-Ptg"/>
                         <outlet property="lblBalancoTotal" destination="uJC-KF-xqM" id="VAo-L9-OOx"/>
                         <outlet property="lblTotalDespesas" destination="iUJ-as-qKD" id="ZBn-al-oWp"/>
                         <outlet property="lblTotalReceitas" destination="uYr-KR-XPX" id="x8z-3b-eKL"/>
+                        <outlet property="lineChart" destination="DXC-F2-O5M" id="wjA-zS-xGx"/>
                         <outlet property="pieChartDespesas" destination="7ia-mD-BT0" id="bgC-cb-XTZ"/>
                         <outlet property="pieChartReceitas" destination="G6T-jx-mBr" id="TDe-4e-1uo"/>
                     </connections>

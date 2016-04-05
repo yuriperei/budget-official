@@ -78,7 +78,6 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         return 0
     }
 
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell: PlaceContaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PlaceContaTableViewCell
@@ -86,7 +85,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         let conta = frc.objectAtIndexPath(indexPath) as! Conta
 
         cell.lblConta?.text = conta.nome
-        cell.lblTipConta.text = String(conta.tipoconta?.nome)
+        cell.lblTipConta.text = String((conta.tipoconta?.nome)!)
         cell.lblSaldo.text = conta.moeda(Float(conta.saldo!))
         
         return cell
