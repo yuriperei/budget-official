@@ -15,6 +15,10 @@ class Dashboard {
         return NSCalendar.currentCalendar().components([.Day, .Month, .Year], fromDate: NSDate())
     }
     
+    private func getListMonth() -> [String] {
+        return ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+    }
+    
     func getTotalBalanco() -> Float {
         let contaDAO:ContaDAO = ContaDAO()
         
@@ -41,27 +45,26 @@ class Dashboard {
         return saldo.reduce(0.0, combine: +)
     }
     
-    func getBalancoAnual() -> (Array<String>,[Double]) {
+    func getBalancoAnual() -> (Array<String>,[Double], [Double]) {
         
-        let months = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
-        var total:Double = 0
-        var balancoMensal:[Double] = []
+        let months = getListMonth()
+        
+        var receitasMensal:[Double] = []
+        var despesasMensal:[Double] = []
+        
         let receitaDAO:ReceitaDAO = ReceitaDAO()
         let despesaDAO:DespesaDAO = DespesaDAO()
         
         for i in 1...getCurrentDate().month {
             let receitas = receitaDAO.getReceitasFromMonth(i, year:getCurrentDate().year)
-            let valorReceitas:[Double] = receitas.map({result in result.valueForKey("valor") as! Double})
-            total = valorReceitas.reduce(0.0, combine: +)
+            let totalReceitas:Double = receitas.map({result in result.valueForKey("valor") as! Double}).reduce(0.0, combine: +)
+            receitasMensal.append(totalReceitas)
             
             let despesas = despesaDAO.getDespesasFromMonth(i, year:getCurrentDate().year)
-            let valorDespesas:[Double] = despesas.map({result in result.valueForKey("valor") as! Double})
-            total -= valorDespesas.reduce(0.0, combine: +)
-            
-            balancoMensal.append(total)
-                
+            let totalDespesas:Double = despesas.map({result in result.valueForKey("valor") as! Double}).reduce(0.0, combine: +)
+            despesasMensal.append(totalDespesas)
         }
-        return (Array(months[0..<getCurrentDate().month]),balancoMensal)
+        return (Array(months[0..<getCurrentDate().month]), receitasMensal, despesasMensal)
     }
     
     func getDespesasPorCategoria() -> ([String],[Double]) {
@@ -85,7 +88,7 @@ class Dashboard {
     }
     
     func getReceitasPorCategoria() -> ([String],[Double]) {
-        let receitas = ReceitaDAO().getListaReceitas()
+        let receitas = ReceitaDAO().getReceitasFromMonth(getCurrentDate().month, year: getCurrentDate().year)
         let categorias = CategoriaDAO().getListaCategorias()
         
         var categoriasReceitas:[String] = []

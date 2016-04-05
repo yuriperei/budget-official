@@ -136,9 +136,6 @@ class CalculadoraController: UIViewController {
 //                lblVisor.text?.appendContentsOf(sender.currentTitle!)
             
 //                lblOperador.text = sender.currentTitle
-            
-            
-            
 //            }
         }
     }
