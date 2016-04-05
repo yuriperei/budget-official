@@ -34,12 +34,16 @@ class MenuTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
+        switch(section) {
+        case 0: return 4    // section 0 has 4 rows
+        case 1: return 7    // section 1 has 7 row
+        case 2: return 1    // section 2 has 1 row
+        default: fatalError("Unknown number of sections")
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)

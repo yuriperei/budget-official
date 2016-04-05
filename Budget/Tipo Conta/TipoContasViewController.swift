@@ -12,6 +12,7 @@ import CoreData
 class TipoContasViewController: UITableViewController {
     
     var tipoConta: TipoConta?
+    var tipoContaDAO: TipoContaDAO = TipoContaDAO()
     var erros: String = ""
     
     @IBOutlet var labels: [UILabel]!
@@ -55,26 +56,33 @@ class TipoContasViewController: UITableViewController {
         }
     }
     
+    
     func addConta(){
 
         if (erros.isEmpty){
             tipoConta = TipoConta.getTipoConta()
             tipoConta?.nome = txtNome.text
             
-            do{
-                try tipoConta?.managedObjectContext?.save()
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            salvarConta()
+
         }else{
             let alert = Notification.mostrarErro("Campo vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
 
     }
     
+    private func salvarConta(){
+        
+        do{
+            try tipoContaDAO.salvar(tipoConta!)
+        }catch{
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+            presentViewController(alert, animated: true, completion: nil)
+        }
+        
+    }
     
 
     // MARK: - Table view data source

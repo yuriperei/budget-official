@@ -15,6 +15,7 @@ class CompraPrazoVistaViewController: UIViewController {
     @IBOutlet weak var txtValorParcela: UITextField!
     @IBOutlet weak var txtValorFinanciado: UITextField!
     @IBOutlet weak var lblResultadoJuros: UILabel!
+    @IBOutlet weak var btnSideBar: UIBarButtonItem!
     
     var finance: Finance!
     
@@ -22,7 +23,9 @@ class CompraPrazoVistaViewController: UIViewController {
         super.viewDidLoad()
         finance = Finance()
 //        print(finance.cagr(704.28, 30000, 3))
-        print(finance.calculateCompoundInterest(720, 12, 62.5))
+//        print(finance.calculateCompoundInterest(720, 12, 62.5))
+        
+        SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
     }
 
     override func didReceiveMemoryWarning() {
