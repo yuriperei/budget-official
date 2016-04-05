@@ -16,10 +16,11 @@ class PorcentagemController: UIViewController {
     @IBOutlet weak var txtSegundoValor: UITextField!
     @IBOutlet weak var lblResultado: UILabel!
     @IBOutlet weak var sgmTipo: UISegmentedControl!
+    @IBOutlet weak var btnSideBar: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
         calculadora = Porcentagem()
     }
     

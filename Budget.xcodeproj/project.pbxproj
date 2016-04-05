@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0D0A851D1CB03AC800A0B023 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */; };
+		4E6EEA4B1CB31275007928B0 /* TipoContaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */; };
+		4E6EEA501CB3215D007928B0 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88667061CB202DB00EC778D /* Charts.framework */; };
+		4E6EEA511CB3215D007928B0 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A88667061CB202DB00EC778D /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E937E251CAEEC3B007806B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E937E241CAEEC3B007806B5 /* MapKit.framework */; };
 		4E937E2C1CAEF0C1007806B5 /* MapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */; };
 		4E937E2F1CAF015D007806B5 /* Local+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E2D1CAF015D007806B5 /* Local+CoreDataProperties.swift */; };
@@ -75,6 +78,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4E6EEA521CB3215D007928B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A83581571CB1B1DC00A77C05 /* Charts.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5BA8EC3F1A9D14DC00CE82E1;
+			remoteInfo = "Charts-iOS";
+		};
 		A88242C81CACBE6F009C5F43 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A88242A81CACBE6F009C5F43 /* Project object */;
@@ -126,6 +136,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4E6EEA511CB3215D007928B0 /* Charts.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +145,7 @@
 
 /* Begin PBXFileReference section */
 		0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipoContaDAO.swift; path = "Tipo Conta/TipoContaDAO.swift"; sourceTree = "<group>"; };
 		4E937E241CAEEC3B007806B5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapaViewController.swift; path = local/MapaViewController.swift; sourceTree = "<group>"; };
 		4E937E2D1CAF015D007806B5 /* Local+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Local+CoreDataProperties.swift"; path = "local/Local+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -214,6 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E6EEA501CB3215D007928B0 /* Charts.framework in Frameworks */,
 				0D0A851D1CB03AC800A0B023 /* CoreLocation.framework in Frameworks */,
 				4E937E251CAEEC3B007806B5 /* MapKit.framework in Frameworks */,
 			);
@@ -332,6 +345,7 @@
 				A8F812491CADBFD7008854A0 /* TipoConta.swift */,
 				A8074B721CACE01F007865F5 /* TipoContasTableViewController.swift */,
 				A8074B731CACE01F007865F5 /* TipoContasViewController.swift */,
+				4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */,
 			);
 			name = "Tipo Conta";
 			sourceTree = "<group>";
@@ -503,6 +517,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4E6EEA531CB3215D007928B0 /* PBXTargetDependency */,
 			);
 			name = Budget;
 			productName = Budget;
@@ -682,6 +697,7 @@
 				4E937E381CAF2474007806B5 /* LocalTableViewController.swift in Sources */,
 				A88BDA761CACE1170014E3AF /* Data.swift in Sources */,
 				A8074B811CACE029007865F5 /* ContasTableViewController.swift in Sources */,
+				4E6EEA4B1CB31275007928B0 /* TipoContaDAO.swift in Sources */,
 				A8074B871CACE03A007865F5 /* CompraPrazoVistaViewController.swift in Sources */,
 				A8F812421CADBF8D008854A0 /* Categoria+CoreDataProperties.swift in Sources */,
 				A88242B41CACBE6F009C5F43 /* AppDelegate.swift in Sources */,
@@ -737,6 +753,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4E6EEA531CB3215D007928B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Charts-iOS";
+			targetProxy = 4E6EEA521CB3215D007928B0 /* PBXContainerItemProxy */;
+		};
 		A88242C91CACBE6F009C5F43 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A88242AF1CACBE6F009C5F43 /* Budget */;

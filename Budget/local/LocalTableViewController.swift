@@ -15,6 +15,8 @@ protocol LocalViewControllerDelegate: class {
 
 class LocalTableViewController: UITableViewController, NSFetchedResultsControllerDelegate{
     
+    @IBOutlet var btnSideBar:UIBarButtonItem!
+    
     weak var delegate: LocalViewControllerDelegate?
     var tela:Bool = false
     
@@ -27,6 +29,10 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
 
         frc = Local.getLocaisController("nome")
         frc.delegate = self
+        
+        if let sidebar = btnSideBar {
+            SidebarMenu.configMenu(self, sideBarMenu: sidebar)
+        }
         
         do{
             try frc.performFetch()
@@ -91,18 +97,32 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             
-            let detalhes = Notification.solicitarConfirmacao("Excluir", mensagem: "Tem certeza que deseja excluir?", completion:{
-                (action:UIAlertAction) in
-                do{
-                    let local:Local = self.frc.objectAtIndexPath(indexPath) as! Local
-                    try self.localDAO.remover(local)
-                } catch {
-                    let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-            })
+            let local = frc.objectAtIndexPath(indexPath) as! Local
             
-            presentViewController(detalhes, animated: true, completion: nil)
+            // Método para ser chamado ao deletar item
+            func removerSelecionado(action:UIAlertAction){
+                do{
+                    try localDAO.remover(local)
+                }catch{
+                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
+                }
+            }
+            
+            // Verifica se tem alguma despesa ou receita associada, se não tiver permite deletar
+            if (local.despesa?.count > 0){
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais despesas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
+            }else if (local.receita?.count > 0){
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
+            }else{
+                
+                let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
+                presentViewController(detalhes, animated: true, completion: nil)
+                
+            }
+            
+            
             
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

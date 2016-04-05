@@ -91,7 +91,6 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             updateConta()
         }else{
             addConta()
-            
         }
     }
     
@@ -138,18 +137,12 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             // Atualizar o saldo da conta referente
             conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
             
-            do{
-                try receitaDAO.salvar(receita!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            salvarConta()
             
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
 
     }
@@ -170,30 +163,28 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
                 receita?.local = local
             }
             
-            do{
-                try receitaDAO.salvar(receita!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            salvarConta()
             
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
         
-        
-//        receita?.valor = Float(txtValor.text!)
 
-//        receita?.data = Data.removerTime(txtData.text!)
+    }
+    
+    private func salvarConta(){
         
-//        if let conta = conta {
-//            receita?.conta? = conta
-//        }
+        do{
+            try receitaDAO.salvar(receita!)
+        }catch{
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+            presentViewController(alert, animated: true, completion: nil)
+        }
         
-
+        dissmissViewController()
+        
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {

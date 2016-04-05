@@ -15,7 +15,11 @@ protocol TipoContasViewControllerDelegate: class {
 
 class TipoContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
+//    @IBOutlet var btnSidebar:UIBarButtonItem!
+    var tela:Bool = false
+    
     weak var delegate: TipoContasViewControllerDelegate?
+    var tipoContaDAO: TipoContaDAO = TipoContaDAO()
     
 //    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var frc = TipoConta.getTipoContasController("nome")
@@ -23,8 +27,15 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let frc = getFetchedResultsController()
-        frc.delegate = self
+        if tela == false{
+            let btnSidebar = UIBarButtonItem(image: UIImage(named: "interface.png"), style: .Done, target: self, action: nil)
+            
+            self.navigationItem.setLeftBarButtonItem(btnSidebar, animated: false)
+            SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
+            
+            frc.delegate = self
+        }
+
         
         do{
             try frc.performFetch()
@@ -101,21 +112,16 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            
-//            let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
-            
+           
             let tipoConta = frc.objectAtIndexPath(indexPath) as! TipoConta
             
             // Método para ser chamado ao deletar item
             func removerSelecionado(action:UIAlertAction){
-//                do{
-//                    context.deleteObject(tipoConta)
-//                    try context.save()
-//                }catch{
-//                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
-//                }
+                do{
+                    try tipoContaDAO.remover(tipoConta)
+                }catch{
+                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
+                }
             }
             
             // Verifica se tem alguma conta associada, se não tiver permite deletarß
@@ -124,14 +130,7 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
                 presentViewController(alerta, animated: true, completion: nil)
             }else{
                 
-                let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
-                
-                let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-                detalhes.addAction(cancelar)
-                
-                let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
-                detalhes.addAction(deletar)
-                
+                let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
                 presentViewController(detalhes, animated: true, completion: nil)
                 
             }
@@ -141,17 +140,7 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
-    
-//    func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
-//        
-//        let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
-//        
-//        let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
-//        detalhes.addAction(cancelar)
-//        
-//        
-//        
-//    }
+
 
     /*
     // Override to support rearranging the table view.

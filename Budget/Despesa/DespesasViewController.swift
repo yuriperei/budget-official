@@ -92,7 +92,6 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             updateConta()
         }else{
             addConta()
-            
         }
     }
     
@@ -153,17 +152,13 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             
             // Atualizar o saldo da conta referente
             conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
-            do{
-                try despesaDAO.salvar(despesa!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            
+            salvarConta()
+            
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
     }
     
@@ -184,20 +179,28 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
                 despesa?.local = local
             }
             
-            do{
-                try despesaDAO.salvar(despesa!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            salvarConta()
+            
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
         
 
+    }
+    
+    private func salvarConta(){
+        
+        do{
+            try despesaDAO.salvar(despesa!)
+        }catch{
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+            presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        dissmissViewController()
+        
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {

@@ -109,7 +109,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros = ""
+            self.erros = ""
         }
     }
     
@@ -214,6 +214,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         if segue.identifier == "alterarTipoConta"{
             let tipoContasController : TipoContasTableViewController = segue.destinationViewController as! TipoContasTableViewController
             tipoContasController.delegate = self
+            tipoContasController.tela = true
         }
         
     }

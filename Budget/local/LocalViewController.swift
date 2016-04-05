@@ -161,19 +161,12 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             local?.estado = txtCidade.text
             local?.rua = txtRua.text
             
-            
-            do{
-                try localDAO.salvar(local!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            salvarConta()
             
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
         
     }
@@ -188,20 +181,27 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             local?.estado = txtCidade.text
             local?.rua = txtRua.text
             
-            do{
-                try localDAO.salvar(local!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            salvarConta()
             
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
                
+        
+    }
+    
+    private func salvarConta(){
+        
+        do{
+            try localDAO.salvar(local!)
+        }catch{
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+            presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        dissmissViewController()
         
     }
 
