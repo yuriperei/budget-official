@@ -47,6 +47,8 @@
 		A8074B8B1CACE049007865F5 /* PorcentagemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B891CACE049007865F5 /* PorcentagemController.swift */; };
 		A8074B8E1CACE060007865F5 /* Calculadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B8C1CACE060007865F5 /* Calculadora.swift */; };
 		A8074B8F1CACE060007865F5 /* CalculadoraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B8D1CACE060007865F5 /* CalculadoraController.swift */; };
+		A8274BAA1CB5A5F500EEF9C8 /* ValorFuturo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8274BA91CB5A5F500EEF9C8 /* ValorFuturo.swift */; };
+		A8274BB01CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8274BAF1CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift */; };
 		A88242B41CACBE6F009C5F43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88242B31CACBE6F009C5F43 /* AppDelegate.swift */; };
 		A88242B61CACBE6F009C5F43 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88242B51CACBE6F009C5F43 /* ViewController.swift */; };
 		A88242B91CACBE6F009C5F43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A88242B71CACBE6F009C5F43 /* Main.storyboard */; };
@@ -182,6 +184,8 @@
 		A8074B891CACE049007865F5 /* PorcentagemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PorcentagemController.swift; path = Ferramentas/Porcentagem/PorcentagemController.swift; sourceTree = "<group>"; };
 		A8074B8C1CACE060007865F5 /* Calculadora.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Calculadora.swift; path = Ferramentas/Calculadora/Calculadora.swift; sourceTree = "<group>"; };
 		A8074B8D1CACE060007865F5 /* CalculadoraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculadoraController.swift; path = Ferramentas/Calculadora/CalculadoraController.swift; sourceTree = "<group>"; };
+		A8274BA91CB5A5F500EEF9C8 /* ValorFuturo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValorFuturo.swift; path = "Ferramentas/Valor futuro/ValorFuturo.swift"; sourceTree = "<group>"; };
+		A8274BAF1CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValorFuturoTableViewController.swift; path = "Ferramentas/Valor futuro/ValorFuturoTableViewController.swift"; sourceTree = "<group>"; };
 		A83581571CB1B1DC00A77C05 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "Supporting Files/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		A88242B01CACBE6F009C5F43 /* Budget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Budget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88242B31CACBE6F009C5F43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -366,9 +370,10 @@
 		A8074AC31CACD234007865F5 /* Ferramentas */ = {
 			isa = PBXGroup;
 			children = (
+				A8074AC41CACD239007865F5 /* Calculadora */,
 				A8074AC61CACD243007865F5 /* Compra Prazo Vista */,
 				A8074AC51CACD23E007865F5 /* Porcentagem */,
-				A8074AC41CACD239007865F5 /* Calculadora */,
+				A8274BAE1CB5A60700EEF9C8 /* Valor futuro */,
 			);
 			name = Ferramentas;
 			sourceTree = "<group>";
@@ -407,6 +412,15 @@
 				A8074B451CACDF9E007865F5 /* FinanceFactory.swift */,
 			);
 			name = FinanceJS;
+			sourceTree = "<group>";
+		};
+		A8274BAE1CB5A60700EEF9C8 /* Valor futuro */ = {
+			isa = PBXGroup;
+			children = (
+				A8274BA91CB5A5F500EEF9C8 /* ValorFuturo.swift */,
+				A8274BAF1CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift */,
+			);
+			name = "Valor futuro";
 			sourceTree = "<group>";
 		};
 		A88242A71CACBE6F009C5F43 = {
@@ -712,9 +726,11 @@
 				A88BDA731CACE1170014E3AF /* Color.swift in Sources */,
 				A88BDA771CACE1170014E3AF /* Notification.swift in Sources */,
 				A8074B6D1CACE00F007865F5 /* DespesasTableViewController.swift in Sources */,
+				A8274BB01CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift in Sources */,
 				A8074B801CACE029007865F5 /* ContaDAO.swift in Sources */,
 				A8074B6E1CACE00F007865F5 /* DespesasViewController.swift in Sources */,
 				A8074B611CACE001007865F5 /* ReceitaDAO.swift in Sources */,
+				A8274BAA1CB5A5F500EEF9C8 /* ValorFuturo.swift in Sources */,
 				A8074B771CACE01F007865F5 /* TipoContasViewController.swift in Sources */,
 				A8F812531CADC010008854A0 /* Receita.swift in Sources */,
 				4E937E361CAF22CF007806B5 /* LocalDAO.swift in Sources */,

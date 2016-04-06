@@ -24,15 +24,15 @@ class CompraPrazoVistaViewController: UITableViewController {
         finance = Finance()
 //        print(finance.cagr(704.28, 30000, 3))
 //        print(finance.calculateCompoundInterest(720, 12, 62.5))
-        
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
-        finance.calculateFutureValue(0.5, valorParcela: 1000, numeroDeParcelas: 12)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     @IBAction func maskTextField(sender: UITextField) {
         FormCustomization.aplicarMascara(&sender.text!)
@@ -45,6 +45,25 @@ class CompraPrazoVistaViewController: UITableViewController {
         
         lblResultadoJuros.text = String.init(format: "%.2f", finance.calculateCompoundInterest(valorFinanciado, parcelas, valorParcela))+"%"
 //        print(finance.cagr(704.28, 30000, 3))
+    }
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 3
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        switch(section) {
+            case 0: return 3    // section 0 has 2 rows
+            case 1: return 1    // section 1 has 1 row
+            case 2: return 1    // section 2 has 1 row
+            default: fatalError("Unknown number of sections")
+        }
+        
+        
     }
     
     /*

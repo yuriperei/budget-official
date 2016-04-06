@@ -24,7 +24,6 @@ class Finance {
             let jscript = try String.init(contentsOfURL: url)
     
             context?.evaluateScript(jscript)
-            context?.evaluateScript("var finance = new Finance();")
             
         } catch {
             print(error)
@@ -55,9 +54,10 @@ class Finance {
         return Double(round(10000*taxaDeJuros)/100)
     }
     
-    func calculateFutureValue(taxaJuros:Float, valorParcela:Double, numeroDeParcelas:Int) {
-        let script = "finance.FV(\(taxaJuros),\(valorParcela),\(numeroDeParcelas))"
-        print(context!.evaluateScript(script).toString())
+    func calculateFutureValue(taxaJuros:Float, valorDepositado:Double, numeroDeParcelas:Int) -> Double{
+        context?.evaluateScript("var finance = new Finance();")
+        let script = "finance.FV(\(taxaJuros),\(valorDepositado),\(numeroDeParcelas));"
+        return context!.evaluateScript(script).toDouble()
     }
     
 //    var valorAVista = 1499.99;
