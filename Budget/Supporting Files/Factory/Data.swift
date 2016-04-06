@@ -18,8 +18,6 @@ class Data{
         dateFormat.dateFormat = "yyyy-MM-dd"
         let ddd = dateFormat.dateFromString(string)
         
-        
-        
         dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
         dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
         dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
@@ -27,7 +25,6 @@ class Data{
         let dateString = dateFormat.stringFromDate(ddd!)
         
         return dateString
-        
     }
     
     static func removerTime(data:String) -> NSDate {

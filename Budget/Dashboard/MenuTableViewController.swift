@@ -10,10 +10,13 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
+        self.tableView.backgroundColor = Color.uicolorFromHex(0xffffff)
         
-        self.tableView.backgroundColor = Color.uicolorFromHex(0x49A99E)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -31,31 +34,36 @@ class MenuTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
+        switch(section) {
+        case 0: return 4    // section 0 has 4 rows
+        case 1: return 7    // section 1 has 7 row
+        case 2: return 1    // section 2 has 1 row
+        default: fatalError("Unknown number of sections")
+        }
     }
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "Futura", size: 14)!
-        header.textLabel?.textColor = Color.uicolorFromHex(0xffffff)
+        header.textLabel?.font = UIFont(name: "Futura", size: 13)!
+        header.textLabel?.textColor = Color.uicolorFromHex(0x274561)
+        header.tintColor = Color.uicolorFromHex(0xf2f2f2f2)
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        cell.imageView?.tintColor = Color.uicolorFromHex(0xffffff)
-        
-        if (indexPath.row % 2 == 0){
-            cell.backgroundColor = Color.uicolorFromHex(0x5EAFA6)
-        }else{
-            cell.backgroundColor = Color.uicolorFromHex(0x49A99E)
-        }
-    }
+//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//        
+//        cell.imageView?.tintColor = Color.uicolorFromHex(0xffffff)
+//        
+//        if (indexPath.row % 2 == 0){
+//            cell.backgroundColor = Color.uicolorFromHex(0xf2f2f2)
+//        }else{
+//            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
+//        }
+//    }
     
     
 

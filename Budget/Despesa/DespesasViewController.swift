@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 
-class DespesasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate  {
+class DespesasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate  {
     
     var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var despesa: Despesa?
+    var local: Local? = nil
     var despesaDAO: DespesaDAO = DespesaDAO()
     var pickerView: UIDatePicker!
     
@@ -39,14 +40,14 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         if let despesa = despesa {
             txtNome.text = despesa.nome!
             txtValor.text = String(despesa.valor!)
-            txtEndereco.text = despesa.endereco!
             txtDescricao.text = despesa.descricao!
-            conta = despesa.conta //as? Conta
+            conta = despesa.conta
             txtData.text = Data.formatDateToString(despesa.data!)
-            categoria = despesa.categoria //as? Categoria
+            categoria = despesa.categoria
+            local = despesa.local
+            
             sgFglTipo.selectedSegmentIndex = Int(despesa.flgTipo!)!
             
-            navegacao.title = "Alterar"
             txtValor.enabled = false
             txtData.enabled = false
             txtConta.enabled = false
@@ -56,10 +57,11 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         txtConta.text = self.conta?.nome!
         txtCategoria.text = self.categoria?.nome!
+        txtEndereco.text = self.local?.nome
         txtData.inputView = pickerView
         
         // Alinhar as labels
-        updateWidthsForLabels(labels)
+        FormCustomization.updateWidthsForLabels(labels)
         
         // Do any additional setup after loading the view.
     }
@@ -70,7 +72,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     }
     
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,7 +91,6 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             updateConta()
         }else{
             addConta()
-            
         }
     }
     
@@ -107,29 +108,29 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
     }
     
+    @IBAction func maskTextField(sender: UITextField) {
+        FormCustomization.aplicarMascara(&sender.text!)
+    }
+    
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
-            erros.appendContentsOf("Preencha o campo nome!\n")
+            erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
         if Validador.vazio(txtValor.text!){
-            erros.appendContentsOf("Preencha o campo Valor!\n")
+            erros.appendContentsOf("\nPreencha o campo Valor!")
         }
         
         if Validador.vazio(txtEndereco.text!){
-            erros.appendContentsOf("Preencha o campo Endereço!\n")
-        }
-        
-        if Validador.vazio(txtDescricao.text!){
-            erros.appendContentsOf("Preencha o campo Descrição!\n")
+            erros.appendContentsOf("\nSelecione o Local!")
         }
         
         if Validador.vazio(txtConta.text!){
-            erros.appendContentsOf("Selecione a Conta!\n")
+            erros.appendContentsOf("\nSelecione a Conta!")
         }
         
         if Validador.vazio(txtCategoria.text!){
-            erros.appendContentsOf("Selecione a Categoria!")
+            erros.appendContentsOf("\nSelecione a Categoria!")
         }
     }
     
@@ -141,29 +142,23 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             despesa = Despesa.getDespesa()
             despesa?.nome = txtNome.text
             despesa?.descricao = txtDescricao.text
-            despesa?.valor = Float(txtValor.text!)
-            despesa?.endereco = txtEndereco.text
+            despesa?.valor = txtValor.text!.floatConverterMoeda()
             despesa?.conta = conta
             despesa?.categoria = categoria
+            despesa?.local = local
             despesa?.data = Data.removerTime(txtData.text!)
             indexChanged(sgFglTipo)
             
             // Atualizar o saldo da conta referente
             conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
-            do{
-                try despesaDAO.salvar(despesa!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            
+            salvarConta()
+            
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
-        
-
     }
     
     func updateConta(){
@@ -172,7 +167,6 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         if(erros.isEmpty){
             despesa?.nome = txtNome.text
-            despesa?.endereco = txtEndereco.text
             despesa?.descricao = txtDescricao.text
             indexChanged(sgFglTipo)
             
@@ -180,20 +174,32 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
                 despesa?.categoria = categoria
             }
             
-            do{
-                try despesaDAO.salvar(despesa!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
-                presentViewController(alert, animated: true, completion: nil)
+            if let local = local{
+                despesa?.local = local
             }
+            
+            salvarConta()
+            
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
         
 
+    }
+    
+    private func salvarConta(){
+        
+        do{
+            try despesaDAO.salvar(despesa!)
+        }catch{
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+            presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        dissmissViewController()
+        
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
@@ -202,6 +208,10 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         }
         
         if identifier == "alterarCategoriaDespesa"{
+            return true
+        }
+        
+        if identifier == "alterarLocalDespesa"{
             return true
         }
         
@@ -218,7 +228,11 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         self.categoria = categoria
         txtCategoria.text = categoria.nome
     }
-
+    
+    func localViewControllerResponse(local:Local){
+        self.local = local
+        txtEndereco.text = local.nome
+    }
 
     // MARK: - Table view data source
 
@@ -282,46 +296,34 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         return true
     }
     */
-
-    
-    private func calculateLabelWidth(label: UILabel) -> CGFloat {
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-        
-        return labelSize.width
-    }
-    
-    private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-        //        return reduce(map(labels, calculateLabelWidth), 0, max)
-        return labels.map(calculateLabelWidth).reduce(0, combine: max)
-    }
-    
-    private func updateWidthsForLabels(labels: [UILabel]) {
-        let maxLabelWidth = calculateMaxLabelWidth(labels)
-        for label in labels {
-            let constraint = NSLayoutConstraint(item: label,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .NotAnAttribute,
-                multiplier: 1,
-                constant: maxLabelWidth)
-            label.addConstraint(constraint)
-        }
-    }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+//        txtNome.resignFirstResponder()
+//        txtValor.resignFirstResponder()
+//        txtDescricao.resignFirstResponder()
+//        txtData.resignFirstResponder()
+        
+        FormCustomization.dismissInputView([txtNome, txtValor, txtDescricao, txtData])
         
         if segue.identifier == "alterarConta"{
             let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
             contasController.delegate = self
-            contasController.telaReceita = true
+            contasController.tela = true
         }else if segue.identifier == "alterarCategoriaDespesa"{
             let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
             categoriasController.delegate = self
+            categoriasController.tela = true
             
+        }else if segue.identifier == "alterarLocalDespesa"{
+            let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController
+            locaisController.delegate = self
+            locaisController.tela = true
         }
         
     }

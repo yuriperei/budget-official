@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class DespesasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    
+    @IBOutlet var btnSidebar:UIBarButtonItem!
     var frc = NSFetchedResultsController()
     var despesaDAO:DespesaDAO = DespesaDAO()
     var categoria: Categoria?
@@ -18,6 +18,7 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
         
         frc = Despesa.getReceitasController("nome", secondSort: "data", sectionName: "data")
         frc.delegate = self

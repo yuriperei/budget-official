@@ -9,124 +9,121 @@
 import UIKit
 import Charts
 
-extension NSDate {
-    
-    func startOfMonth() -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        let currentDateComponents = calendar.components([.Month, .Year], fromDate: self)
-        let startOfMonth = calendar.dateFromComponents(currentDateComponents)
-        
-        return startOfMonth
-    }
-    
-    func dateByAddingMonths(monthsToAdd: Int) -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        let months = NSDateComponents()
-        months.month = monthsToAdd
-        
-        return calendar.dateByAddingComponents(months, toDate: self, options: [])
-    }
-    
-    func endOfMonth() -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        return calendar.dateByAddingUnit(.Day, value: -1, toDate: self.dateByAddingMonths(1)!, options: [])
-        
-//        return nil
-    }
-}
-
 class DashboardViewController: UIViewController {
 
     @IBOutlet weak var lblBalancoTotal: UILabel!
     @IBOutlet weak var lblTotalDespesas: UILabel!
     @IBOutlet weak var lblTotalReceitas: UILabel!
     @IBOutlet var btnMenuSidebar: UIBarButtonItem!
-    @IBOutlet var barChart: BarChartView!
+    @IBOutlet var lineChart: LineChartView!
     @IBOutlet var pieChartDespesas: PieChartView!
     @IBOutlet var pieChartReceitas: PieChartView!
+    let dashboard:Dashboard = Dashboard()
+    var drawChartLoaded:Bool = false
 //    var zoom:CGFloat = 0.0
     func initDashboard(){
-        Dashboard.getTotalBalanco()
+        lblBalancoTotal.text = dashboard.getTotalBalanco().convertToMoedaBr()
+        lblTotalReceitas.text = dashboard.getTotalReceitas().convertToMoedaBr()
+        lblTotalDespesas.text = dashboard.getTotalDespesas().convertToMoedaBr()
         
-        lblBalancoTotal.text = Dashboard.getTotalBalanco().convertToMoedaBr()
-        lblTotalReceitas.text = Dashboard.getTotalReceitas().convertToMoedaBr()
-        lblTotalDespesas.text = Dashboard.getTotalDespesas().convertToMoedaBr()
-        
-        let (months, balanco) = Dashboard.getBalancoAnual()
-        let (despesas, valorDespesas) = Dashboard.getDespesasPorCategoria()
-        let (receitas, valorReceitas) = Dashboard.getReceitasPorCategoria()
+        let (months, receitasMensal, despesasMensal) = dashboard.getBalancoAnual()
+        let (despesas, valorDespesas) = dashboard.getDespesasPorCategoria()
+        let (receitas, valorReceitas) = dashboard.getReceitasPorCategoria()
 //        print(Dashboard.getDespesasPorCategoria())
 //        print(Dashboard.getReceitasPorCategoria())
         
-        setChartBalanco(months, values: balanco)
-        setPieChart(despesas, values: valorDespesas, pieChart: pieChartDespesas)
-        setPieChart(receitas, values: valorReceitas, pieChart: pieChartReceitas)
+        setLineBalanco(months, values: [receitasMensal, despesasMensal])
+        
+        
+        if(valorDespesas.count > 0){
+            setPieChart(despesas, values: valorDespesas, pieChart: pieChartDespesas)
+        } else {
+            pieChartDespesas.noDataText = "Não existem despesas\nregistradas esse mês"
+        }
+        
+        if(valorReceitas.count > 0) {
+            setPieChart(receitas, values: valorReceitas, pieChart: pieChartReceitas)
+        } else {
+            pieChartReceitas.noDataText = "Não existem receitas\nregistradas esse mês"
+        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        btnMenuSidebar.target = self.revealViewController()
-        btnMenuSidebar.action = Selector("revealToggle:")
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        
+        SidebarMenu.configMenu(self, sideBarMenu: btnMenuSidebar)
         drawBarChartBalanco()
     }
     
     private func drawBarChartBalanco() {
-        let xAxis = barChart.xAxis
+        let xAxis = lineChart.xAxis
         xAxis.labelPosition = .Bottom
         xAxis.drawGridLinesEnabled = false
         xAxis.spaceBetweenLabels = 2
         
-        let leftAxis = barChart.leftAxis
+        let leftAxis = lineChart.leftAxis
         leftAxis.labelPosition = .OutsideChart
         leftAxis.spaceTop = 0.15
         leftAxis.customAxisMin = 0
         leftAxis.labelFont = UIFont(name: "Futura", size: 10.0)!
         
-        let rightAxis = barChart.rightAxis
+        let rightAxis = lineChart.rightAxis
         rightAxis.enabled = true
         rightAxis.drawGridLinesEnabled = false
         rightAxis.spaceTop = 0.15
         rightAxis.customAxisMin = 0
         rightAxis.labelFont = leftAxis.labelFont
         
-        barChart.legend.position = .BelowChartLeft
-        barChart.legend.form = .Square
-        barChart.legend.formSize = 9.0
-        barChart.legend.xEntrySpace = 4.0
-        barChart.descriptionText = ""
+        lineChart.legend.position = .BelowChartLeft
+        lineChart.legend.form = .Square
+        lineChart.legend.formSize = 9.0
+        lineChart.legend.xEntrySpace = 4.0
+        lineChart.descriptionText = ""
     }
     
-    private func setChartBalanco(months: [String], values: [Double]) {
-        barChart.noDataText = "You need to provide data for the chart."
+    private func setLineBalanco(months: [String], values: [[Double]]) {
+        lineChart.noDataText = "Não foi possível carregar os dados."
         
-        var dataEntries:[BarChartDataEntry] = []
-        for i in 0..<values.count {
-            dataEntries.append(BarChartDataEntry(value: values[i], xIndex: i))
+        var dataEntries: [ChartDataEntry] = []
+        var dataEntries2: [ChartDataEntry] = []
+        
+        for i in 0..<months.count {
+            dataEntries.append(ChartDataEntry(value: values[0][i], xIndex: i))
+            dataEntries2.append(ChartDataEntry(value: values[1][i], xIndex: i))
         }
         
-        let dataSet = BarChartDataSet(yVals: dataEntries, label: "Balanço")
-        dataSet.barSpace = 0.35
-        dataSet.valueFormatter = NSNumberFormatter()
-        dataSet.valueFormatter?.minimumFractionDigits = 2
-//        dataSet.valueFormatter?.positivePrefix = "R$ "
-        let data = BarChartData(xVals: months, dataSet: dataSet)
-        data.setValueFont(UIFont(name: "Futura", size: 10.0))
-        barChart.data = data
+        let setReceitas = LineChartDataSet(yVals: dataEntries, label: "Receitas")
+        let setDespesas = LineChartDataSet(yVals: dataEntries2, label: "Despesas")
+        let lineChartData = LineChartData(xVals: months, dataSets: [setReceitas, setDespesas])
+        lineChart.data = lineChartData
+        
+        setReceitas.axisDependency = .Left;
+        setReceitas.setColor(Color.uicolorFromHex(0x2C4E6E))
+        setReceitas.lineWidth = 2.0
+        setReceitas.circleRadius = 3.0
+        setReceitas.fillAlpha = 65/255.0
+        setReceitas.drawCircleHoleEnabled = false
+        
+        setDespesas.axisDependency = .Left;
+        setDespesas.setColor(Color.uicolorFromHex(0x1D3347))
+        setDespesas.lineWidth = 2.0
+        setDespesas.circleRadius = 3.0
+        setDespesas.fillAlpha = 65/255.0
+        setDespesas.drawCircleHoleEnabled = false
+        
+        
+        if(!drawChartLoaded){
+            lineChartData.setValueFont(UIFont(name: "Futura", size: 10.0))
+            
+            drawChartLoaded = true
+        }
     }
     
     private func setPieChart(months: [String], values: [Double], pieChart:PieChartView) {
         
-        pieChart.noDataText = "You need to provide data for the chart."
-        
         var dataEntries:[ChartDataEntry] = []
-        for i in 0..<values.count {
-            dataEntries.append(ChartDataEntry(value: values[i], xIndex: i))
+        for (i,value) in values.enumerate() {
+            dataEntries.append(ChartDataEntry(value: value, xIndex: i))
         }
         
         let dataSet = PieChartDataSet(yVals: dataEntries, label: "Balanço")
@@ -145,6 +142,9 @@ class DashboardViewController: UIViewController {
         dataSet.colors = colors
         
         data.setValueFont(UIFont(name: "Futura", size: 10.0))
+        
+        pieChart.descriptionText = ""
+        pieChart.legend.enabled = false
         pieChart.data = data
     }
 

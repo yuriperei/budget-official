@@ -41,37 +41,44 @@ class CategoriasViewController: UITableViewController {
     @IBAction func btnSave(sender: AnyObject) {
         addConta()
         navigationController?.popViewControllerAnimated(true)
-
     }
     
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
-            erros.appendContentsOf("Preencha o campo nome!\n")
+            erros.appendContentsOf("\nPreencha o campo nome!")
         }
     }
     
     func addConta(){
         
+        validarCampos()
         
         if (erros.isEmpty){
             categoria = Categoria.getCategoria()
             
             categoria?.nome = txtNome.text
-            do{
-                try categoriaDAO.salvar(categoria!)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
 
+            salvarConta()
+            
         }else{
             let alert = Notification.mostrarErro("Campo vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
+        }
+        
+    }
+    
+    private func salvarConta(){
+        
+        do{
+            try categoriaDAO.salvar(categoria!)
+        }catch{
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+            presentViewController(alert, animated: true, completion: nil)
         }
         
     }

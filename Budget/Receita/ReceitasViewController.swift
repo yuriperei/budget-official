@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 
-class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate  {
+class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate  {
 
     var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var receita: Receita?
+    var local: Local? = nil
     let receitaDAO:ReceitaDAO = ReceitaDAO()
     var pickerView: UIDatePicker!
     
@@ -35,17 +36,16 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         pickerView.datePickerMode = UIDatePickerMode.Date
         pickerView.addTarget(self, action: "updateTextField:", forControlEvents: .ValueChanged)
         
-        
         if let receita = receita {
             txtNome.text = receita.nome!
             txtValor.text = String(receita.valor!)
-            txtEndereco.text = receita.endereco!
             txtDescricao.text = receita.descricao!
             txtData.text = Data.formatDateToString(receita.data!)
             conta = receita.conta //as? Conta
             categoria = receita.categoria //as? Categoria
+            local = receita.local
             
-            navegacao.title = "Alterar"
+
             txtValor.enabled = false
             txtData.enabled = false
             txtConta.enabled = false
@@ -56,11 +56,14 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
         txtConta.text = self.conta?.nome!
         txtCategoria.text = self.categoria?.nome!
+        txtEndereco.text = self.local?.nome! // Local
         
         txtData.inputView = pickerView
         
         // Alinhar as labels
-        updateWidthsForLabels(labels)
+        FormCustomization.updateWidthsForLabels(labels)
+        
+
 
     }
     
@@ -73,9 +76,8 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         // Dispose of any resources that can be recreated.
     }
     
-    
     func dissmissViewController(){
-        navigationController?.popToRootViewControllerAnimated(true)
+        navigationController?.popViewControllerAnimated(true)
     }
     
     @IBAction func btnCancel(sender: AnyObject) {
@@ -89,35 +91,32 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             updateConta()
         }else{
             addConta()
-            
         }
-        
-        
+    }
+    
+    @IBAction func maskTextField(sender: UITextField) {
+        FormCustomization.aplicarMascara(&sender.text!)
     }
     
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
-            erros.appendContentsOf("Preencha o campo nome!\n")
+            erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
         if Validador.vazio(txtValor.text!){
-            erros.appendContentsOf("Preencha o campo Valor!\n")
+            erros.appendContentsOf("\nPreencha o campo Valor!")
         }
         
         if Validador.vazio(txtEndereco.text!){
-            erros.appendContentsOf("Preencha o campo Endereço!\n")
-        }
-        
-        if Validador.vazio(txtDescricao.text!){
-            erros.appendContentsOf("Preencha o campo Descrição!\n")
+            erros.appendContentsOf("\nSelecione o Local!")
         }
         
         if Validador.vazio(txtConta.text!){
-            erros.appendContentsOf("Selecione a Conta!\n")
+            erros.appendContentsOf("\nSelecione a Conta!")
         }
         
         if Validador.vazio(txtCategoria.text!){
-            erros.appendContentsOf("Selecione a Categoria!")
+            erros.appendContentsOf("\nSelecione a Categoria!")
         }
     }
     
@@ -129,27 +128,21 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             receita = Receita.getReceita()
             receita?.nome = txtNome.text
             receita?.descricao = txtDescricao.text
-            receita?.valor = Float(txtValor.text!)
-            receita?.endereco = txtEndereco.text
+            receita?.valor = txtValor.text!.floatConverterMoeda()
             receita?.conta = conta
             receita?.categoria = categoria
+            receita?.local = local
             receita?.data = Data.removerTime(txtData.text!)
             
             // Atualizar o saldo da conta referente
             conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
             
-            do{
-                try receitaDAO.salvar(receita!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível registrar")
-                presentViewController(alert, animated: true, completion: nil)
-            }
+            salvarConta()
             
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
 
     }
@@ -160,37 +153,38 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
         if(erros.isEmpty){
             receita?.nome = txtNome.text
-            receita?.endereco = txtEndereco.text
             receita?.descricao = txtDescricao.text
             
             if let categoria = categoria{
                 receita?.categoria = categoria
             }
             
-            do{
-                try receitaDAO.salvar(receita!)
-                navigationController?.popViewControllerAnimated(true)
-            }catch{
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível atualizar")
-                presentViewController(alert, animated: true, completion: nil)
+            if let local = local{
+                receita?.local = local
             }
+            
+            salvarConta()
             
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
-            erros.removeAll()
+            self.erros = ""
         }
         
-        
-//        receita?.valor = Float(txtValor.text!)
 
-//        receita?.data = Data.removerTime(txtData.text!)
+    }
+    
+    private func salvarConta(){
         
-//        if let conta = conta {
-//            receita?.conta? = conta
-//        }
+        do{
+            try receitaDAO.salvar(receita!)
+        }catch{
+            let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
+            presentViewController(alert, animated: true, completion: nil)
+        }
         
-
+        dissmissViewController()
+        
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
@@ -199,6 +193,10 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         }
         
         if identifier == "alterarCategoriaReceita"{
+            return true
+        }
+        
+        if identifier == "alterarLocalReceita"{
             return true
         }
         
@@ -214,6 +212,11 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     func categoriaViewControllerResponse(categoria:Categoria){
         self.categoria = categoria
         txtCategoria.text = categoria.nome
+    }
+    
+    func localViewControllerResponse(local:Local){
+        self.local = local
+        txtEndereco.text = local.nome
     }
 
     // MARK: - Table view data source
@@ -270,43 +273,24 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     }
     */
     
-    private func calculateLabelWidth(label: UILabel) -> CGFloat {
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-        
-        return labelSize.width
-    }
-    
-    private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-        //        return reduce(map(labels, calculateLabelWidth), 0, max)
-        return labels.map(calculateLabelWidth).reduce(0, combine: max)
-    }
-    
-    private func updateWidthsForLabels(labels: [UILabel]) {
-        let maxLabelWidth = calculateMaxLabelWidth(labels)
-        for label in labels {
-            let constraint = NSLayoutConstraint(item: label,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .NotAnAttribute,
-                multiplier: 1,
-                constant: maxLabelWidth)
-            label.addConstraint(constraint)
-        }
-    }
-
-    
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        FormCustomization.dismissInputView([txtNome, txtDescricao, txtValor, txtData])
         
         if segue.identifier == "alterarConta"{
             let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
             contasController.delegate = self
-            contasController.telaReceita = true
+            contasController.tela = true
         }else if segue.identifier == "alterarCategoriaReceita"{
             let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
             categoriasController.delegate = self
+            categoriasController.tela = true
+            
+        }else if segue.identifier == "alterarLocalReceita"{
+            let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController
+            locaisController.delegate = self
+            locaisController.tela = true
             
         }
         

@@ -16,9 +16,9 @@ protocol CategoriaViewControllerDelegate: class {
 class CategoriaTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     weak var delegate: CategoriaViewControllerDelegate?
+    var tela:Bool = false
     
     let categoriaDAO:CategoriaDAO = CategoriaDAO()
-//    let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var frc = Categoria.getCategoriasController("nome")
     
@@ -27,10 +27,19 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
         
         frc.delegate = self
         
+        if tela == false{
+            let btnSidebar = UIBarButtonItem(image: UIImage(named: "interface.png"), style: .Done, target: self, action: nil)
+            
+            self.navigationItem.setLeftBarButtonItem(btnSidebar, animated: false)
+            SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
+            
+        }
+        
         do{
             try frc.performFetch()
         }catch{
-            print(error)
+            let alerta = Notification.mostrarErro()
+            presentViewController(alerta, animated: true, completion: nil)
         }
     }
 
@@ -87,18 +96,32 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            let detalhes = Notification.solicitarConfirmacao("Excluir", mensagem: "Tem certeza que deseja excluir?", completion:{
-                (action:UIAlertAction) in
-                do{
-                    let categoria:Categoria = self.frc.objectAtIndexPath(indexPath) as! Categoria
-                    try self.categoriaDAO.remover(categoria)
-                } catch {
-                    let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-            })
+  
+            let categoria = frc.objectAtIndexPath(indexPath) as! Categoria
             
-            presentViewController(detalhes, animated: true, completion: nil)
+            // Método para ser chamado ao deletar item
+            func removerSelecionado(action:UIAlertAction){
+                do{
+                    try categoriaDAO.remover(categoria)
+                }catch{
+                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
+                }
+            }
+            
+            // Verifica se tem alguma despesa ou receita associada, se não tiver permite deletar
+            if (categoria.despesa?.count > 0){
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais despesas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
+            }else if (categoria.receita?.count > 0){
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
+            }else{
+                
+                let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
+                presentViewController(detalhes, animated: true, completion: nil)
+                
+            }
+            
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }

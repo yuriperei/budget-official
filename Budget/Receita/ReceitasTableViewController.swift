@@ -11,13 +11,16 @@ import CoreData
 
 class ReceitasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate{
 
-
-    var tabBar: UITabBar?
+    @IBOutlet var btnSidebar:UIBarButtonItem!
+//    var tabBar: UITabBar?
     var frc = NSFetchedResultsController()
     let receitaDAO = ReceitaDAO()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
+        
         frc = Receita.getReceitasController("nome", secondSort: "data", sectionName: "data")
         frc.delegate = self
         
@@ -89,11 +92,12 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         return cell
     }
     
-    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "Futura", size: 14)!
-        header.textLabel?.textColor = Color.uicolorFromHex(0x44a499)
+        header.textLabel?.font = UIFont(name: "Futura", size: 13)!
+        header.textLabel?.textColor = Color.uicolorFromHex(0x1D3347)
+        header.tintColor = Color.uicolorFromHex(0xF2F2F2)
+        //64cdfc
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {

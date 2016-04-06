@@ -11,11 +11,15 @@ import CoreData
 
 class Dashboard {
     
-    private static func getCurrentDate() -> NSDateComponents {
+    private func getCurrentDate() -> NSDateComponents {
         return NSCalendar.currentCalendar().components([.Day, .Month, .Year], fromDate: NSDate())
     }
     
-    static func getTotalBalanco() -> Float {
+    private func getListMonth() -> [String] {
+        return ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]
+    }
+    
+    func getTotalBalanco() -> Float {
         let contaDAO:ContaDAO = ContaDAO()
         
         let saldo:[Float] = contaDAO.getListaContas().map({conta in conta.valueForKey("saldo") as! Float})
@@ -23,7 +27,7 @@ class Dashboard {
         return saldo.reduce(0.0, combine:+)
     }
     
-    static func getTotalReceitas() -> Float {
+    func getTotalReceitas() -> Float {
 
         let receitaDAO:ReceitaDAO = ReceitaDAO()
         let receitasDoMes = receitaDAO.getReceitasFromMonth(getCurrentDate().month, year:getCurrentDate().year)
@@ -32,7 +36,7 @@ class Dashboard {
         return saldo.reduce(0.0, combine: +)
     }
     
-    static func getTotalDespesas() -> Float {
+    func getTotalDespesas() -> Float {
 
         let despesaDAO:DespesaDAO = DespesaDAO()
         let despesasDoMes = despesaDAO.getDespesasFromMonth(getCurrentDate().month, year: getCurrentDate().year)
@@ -41,87 +45,67 @@ class Dashboard {
         return saldo.reduce(0.0, combine: +)
     }
     
-    static func getBalancoAnual() -> (Array<String>,[Double]) {
+    func getBalancoAnual() -> (Array<String>,[Double], [Double]) {
         
-        let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-        var total:Double = 0
-        var balancoMensal:[Double] = []
+        let months = getListMonth()
+        
+        var receitasMensal:[Double] = []
+        var despesasMensal:[Double] = []
+        
         let receitaDAO:ReceitaDAO = ReceitaDAO()
         let despesaDAO:DespesaDAO = DespesaDAO()
         
         for i in 1...getCurrentDate().month {
             let receitas = receitaDAO.getReceitasFromMonth(i, year:getCurrentDate().year)
-            let valorReceitas:[Double] = receitas.map({result in result.valueForKey("valor") as! Double})
-            total = valorReceitas.reduce(0.0, combine: +)
+            let totalReceitas:Double = receitas.map({result in result.valueForKey("valor") as! Double}).reduce(0.0, combine: +)
+            receitasMensal.append(totalReceitas)
             
             let despesas = despesaDAO.getDespesasFromMonth(i, year:getCurrentDate().year)
-            let valorDespesas:[Double] = despesas.map({result in result.valueForKey("valor") as! Double})
-            total -= valorDespesas.reduce(0.0, combine: +)
-            
-            balancoMensal.append(total)
-                
+            let totalDespesas:Double = despesas.map({result in result.valueForKey("valor") as! Double}).reduce(0.0, combine: +)
+            despesasMensal.append(totalDespesas)
         }
-        return (Array(months[0..<getCurrentDate().month]),balancoMensal)
+        return (Array(months[0..<getCurrentDate().month]), receitasMensal, despesasMensal)
     }
     
-    static func getDespesasPorCategoria() -> ([String],[Double]) {
+    func getDespesasPorCategoria() -> ([String],[Double]) {
+        let listaDespesas = DespesaDAO().getDespesasFromMonth(getCurrentDate().month, year: getCurrentDate().year)
+        let categorias = CategoriaDAO().getListaCategorias()
         
-        var fetchRequest = NSFetchRequest(entityName: "Categoria")
-        var total:Double = 0
-        var despesasPorCategoria:[Double] = []
-        var categorias:[String]?
-        do {
-            let cats = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-            categorias = cats.map({cat in cat.valueForKey("nome") as! String})
-            fetchRequest = NSFetchRequest(entityName: "Despesa")
+        var categoriasDespesas:[String] = []
+        var totalDespesasCategoria:[Double] = []
+        for categoria in categorias {
             
-            for categoria in categorias! {
-                let predicate = NSPredicate(format:"categoria.nome = %@", categoria)
-                fetchRequest.predicate = predicate
-                
-                let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-                
-                let valores = results.map({result in result.valueForKey("valor") as! Double})
-                
-                total = round(100*valores.reduce(0.0,combine: +))/100
-                
-                despesasPorCategoria.append(total)
+            let despesas = listaDespesas.filter({ $0.categoria?.nome == categoria.nome })
+            
+            let valor = despesas.map({$0.valor as! Double}).reduce(0, combine: +)
+            
+            if(valor > 0){
+                totalDespesasCategoria.append(valor)
+                categoriasDespesas.append(categoria.nome!)
             }
-        } catch {
-            print(error)
         }
-        
-        return (categorias!, despesasPorCategoria)
+        return (categoriasDespesas,totalDespesasCategoria)
     }
     
-    static func getReceitasPorCategoria() -> ([String],[Double]) {
+    func getReceitasPorCategoria() -> ([String],[Double]) {
+        let receitas = ReceitaDAO().getReceitasFromMonth(getCurrentDate().month, year: getCurrentDate().year)
+        let categorias = CategoriaDAO().getListaCategorias()
         
-        var fetchRequest = NSFetchRequest(entityName: "Categoria")
-        var total:Double = 0
-        var receitasPorCategoria:[Double] = []
-        var categorias:[String]?
-        do {
-            let cats = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-            categorias = cats.map({cat in cat.valueForKey("nome") as! String})
-            fetchRequest = NSFetchRequest(entityName: "Receita")
+        var categoriasReceitas:[String] = []
+        var totalReceitasCategoria:[Double] = []
+        
+        for categoria in categorias {
+            let receitas = receitas.filter({ $0.categoria?.nome == categoria.nome })
             
-            for categoria in categorias! {
-                let predicate = NSPredicate(format:"categoria.nome = %@", categoria)
-                fetchRequest.predicate = predicate
-                
-                let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
-                
-                let valores = results.map({result in result.valueForKey("valor") as! Double})
-                
-                total = round(100*valores.reduce(0.0,combine: +))/100
-                
-                receitasPorCategoria.append(total)
+            let valor = receitas.map({$0.valor as! Double}).reduce(0, combine: +)
+            
+            if(valor > 0){
+                totalReceitasCategoria.append(valor)
+                categoriasReceitas.append(categoria.nome!)
             }
-        } catch {
-            print(error)
         }
         
-        return (categorias!, receitasPorCategoria)
+        return (categoriasReceitas,totalReceitasCategoria)
     }
     
 }
@@ -193,8 +177,65 @@ do{
     print(error)
 }
 
+var fetchRequest = NSFetchRequest(entityName: "Categoria")
+var total:Double = 0
+var despesasPorCategoria:[Double] = []
+var categorias:[String]?
+do {
+    let cats = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+    categorias = cats.map({cat in cat.valueForKey("nome") as! String})
+    fetchRequest = NSFetchRequest(entityName: "Despesa")
+
+    for categoria in categorias! {
+        let predicate = NSPredicate(format:"categoria.nome = %@", categoria)
+        fetchRequest.predicate = predicate
+
+        let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+
+        let valores = results.map({result in result.valueForKey("valor") as! Double})
+
+        total = round(100*valores.reduce(0.0,combine: +))/100
+
+        despesasPorCategoria.append(total)
+    }
+} catch {
+    print(error)
+}
+
+return (categorias!, despesasPorCategoria)
+
+var fetchRequest = NSFetchRequest(entityName: "Categoria")
+var total:Double = 0
+var receitasPorCategoria:[Double] = []
+var categorias:[String]?
+do {
+let cats = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+categorias = cats.map({cat in cat.valueForKey("nome") as! String})
+fetchRequest = NSFetchRequest(entityName: "Receita")
+
+for categoria in categorias! {
+let predicate = NSPredicate(format:"categoria.nome = %@", categoria)
+fetchRequest.predicate = predicate
+
+let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
+
+let valores = results.map({result in result.valueForKey("valor") as! Double})
+
+total = round(100*valores.reduce(0.0,combine: +))/100
+
+receitasPorCategoria.append(total)
+}
+} catch {
+print(error)
+}
+
+return (categorias!, receitasPorCategoria)
+
 //Map() - cria um novo array com valores vindos do array de receitas do mês
 //Round() - usado para arrendondar o valor para duas casas decimais
 //Reduce() - usado para somar os valores dentro do novo array vindo do map()
+
+
+
 
 ==========================================================================*/

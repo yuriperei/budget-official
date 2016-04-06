@@ -8,26 +8,12 @@
 
 import UIKit
 
-extension String {
-    var floatValue: Float {
-        return (self as NSString).floatValue
-    }
-    var intValue: Int {
-        return (self as NSString).integerValue
-    }
-}
-
-extension Float {
-    var stringValue: String {
-        return String(format: "%g", self)
-    }
-}
-
 class CalculadoraController: UIViewController {
 
     @IBOutlet weak var lblResultado: UILabel!
     @IBOutlet weak var lblOperador: UILabel!
     @IBOutlet weak var lblVisor: UILabel!
+    @IBOutlet weak var btnSidebar: UIBarButtonItem!
     
     var numberInText:String = ""
     var operatorInText:String = ""
@@ -39,6 +25,8 @@ class CalculadoraController: UIViewController {
         super.viewDidLoad()
         calculadora = Calculadora()
         // Do any additional setup after loading the view.
+        SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -133,34 +121,55 @@ class CalculadoraController: UIViewController {
 //                lblVisor.text?.appendContentsOf(sender.currentTitle!)
             
 //                lblOperador.text = sender.currentTitle
-            
-            
-            
 //            }
         }
     }
     
     @IBAction func realizarOperacao(sender: UIButton) {
-//        calculadora?.numeroFinal = calculadora!.numeroAtual
-//        calculadora?.numeroFinal = lblResultado.text!.floatValue
-        lblVisor.text = calculadora!.calcularOperacao().stringValue
-        
-        calculadora?.numeroFinal = 0
-        lblResultado.text = ""
-        
-        numberInText = ""
-        calculadora?.numeroAtual = 0
-        resultado = true
-//        lblResultado.text = ""
-//        lblOperador.text = ""
+        if(calculadora?.numeroAtual != 0){
+            lblVisor.text = calculadora!.calcularOperacao().stringValue
+            lblResultado.text = ""
+            numberInText = ""
+            calculadora?.numeroAtual = 0
+            resultado = true
+        }
+//      calculadora?.numeroFinal = calculadora!.numeroAtual
+//      calculadora?.numeroFinal = lblResultado.text!.floatValue
+//      calculadora?.numeroFinal = 0
+//      lblResultado.text = ""
+//      lblOperador.text = ""
     }
     
     @IBAction func limparVisor(sender: UIButton) {
-        calculadora?.numeroAtual = 0
-        calculadora?.numeroFinal = 0
-        lblResultado.text = ""
-        lblVisor.text = "0"
-        numberInText = ""
+//        calculadora?.numeroAtual = 0
+//        calculadora?.numeroFinal = 0
+//        lblResultado.text = ""
+//        lblVisor.text = "0"
+//        numberInText = ""
+        if let lastChar = lblVisor.text?.lastChar {
+            switch(lastChar){
+            case "-","+","/","x":
+                calculadora?.opcao = 0
+                break;
+            case ".":
+                break;
+            case "":
+                break;
+            default:
+                if(!resultado){
+                    numberInText.removeLastChar()
+                    calculadora?.numeroAtual = (calculadora?.numeroAtual)!.removeLastNumber()
+                } else {
+                    calculadora?.numeroFinal = (calculadora?.numeroFinal)!.removeLastNumber()
+                }
+                break;
+            }
+        }
+        lblVisor.text?.removeLastChar()
+        if(lblVisor.text == ""){
+            lblVisor.text = "0"
+            lblResultado.text = ""
+        }
     }
     
     /*
