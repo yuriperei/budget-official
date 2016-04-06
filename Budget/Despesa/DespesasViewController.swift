@@ -48,7 +48,6 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             
             sgFglTipo.selectedSegmentIndex = Int(despesa.flgTipo!)!
             
-            navegacao.title = "Alterar"
             txtValor.enabled = false
             txtData.enabled = false
             txtConta.enabled = false
@@ -115,23 +114,23 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
-            erros.appendContentsOf("Preencha o campo nome!\n")
+            erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
         if Validador.vazio(txtValor.text!){
-            erros.appendContentsOf("Preencha o campo Valor!\n")
+            erros.appendContentsOf("\nPreencha o campo Valor!")
         }
         
         if Validador.vazio(txtEndereco.text!){
-            erros.appendContentsOf("Selecione o Local!\n")
+            erros.appendContentsOf("\nSelecione o Local!")
         }
         
         if Validador.vazio(txtConta.text!){
-            erros.appendContentsOf("Selecione a Conta!\n")
+            erros.appendContentsOf("\nSelecione a Conta!")
         }
         
         if Validador.vazio(txtCategoria.text!){
-            erros.appendContentsOf("Selecione a Categoria!")
+            erros.appendContentsOf("\nSelecione a Categoria!")
         }
     }
     
@@ -315,10 +314,11 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         if segue.identifier == "alterarConta"{
             let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
             contasController.delegate = self
-            contasController.telaReceita = true
+            contasController.tela = true
         }else if segue.identifier == "alterarCategoriaDespesa"{
             let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
             categoriasController.delegate = self
+            categoriasController.tela = true
             
         }else if segue.identifier == "alterarLocalDespesa"{
             let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController

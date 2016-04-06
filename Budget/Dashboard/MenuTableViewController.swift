@@ -49,7 +49,7 @@ class MenuTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "Futura", size: 16)!
+        header.textLabel?.font = UIFont(name: "Futura", size: 13)!
         header.textLabel?.textColor = Color.uicolorFromHex(0x274561)
         header.tintColor = Color.uicolorFromHex(0xf2f2f2f2)
     }

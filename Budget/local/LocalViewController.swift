@@ -43,7 +43,6 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             self.estado = self.txtEstado.text!
             self.rua = self.txtRua.text!
             
-            navegacao.title = "Alterar"
         }
         
         switchEnderecoAtual.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
@@ -71,7 +70,8 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
             
             if (error != nil) {
-                print("Reverse geocoder failed with error" + error!.localizedDescription)
+                let alerta = Notification.mostrarErro("Erro", mensagem: "Não foi possível obter a localização")
+                self.presentViewController(alerta, animated: true, completion: nil)
                 return
             }
             
@@ -80,7 +80,8 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
                 self.displayLocationInfo(pm)
                 pm.location?.coordinate
             } else {
-                print("Problem with the data received from geocoder")
+                let alerta = Notification.mostrarErro("Erro", mensagem: "Não foi possível obter a localização")
+                self.presentViewController(alerta, animated: true, completion: nil)
             }
         })
     }
@@ -99,9 +100,6 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             self.txtCidade.text = locality
             self.txtEstado.text = administrativeArea
             self.txtRua.text = name
-//            print(locality)
-//            print(administrativeArea)
-//            print(name)
         }
         
     }
@@ -132,21 +130,33 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         
     }
     
+    @IBAction func endCidade(sender: UITextField) {
+        self.cidade = self.txtCidade.text!
+    }
+    
+    @IBAction func endEstado(sender: UITextField) {
+        self.estado = self.txtEstado.text!
+    }
+    
+    @IBAction func endRua(sender: UITextField) {
+        self.rua = self.txtRua.text!
+    }
+    
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
-            erros.appendContentsOf("Preencha o campo Nome!\n")
+            erros.appendContentsOf("\nPreencha o campo Nome!")
         }
         
         if Validador.vazio(txtCidade.text!){
-            erros.appendContentsOf("Preencha o campo Cidade!\n")
+            erros.appendContentsOf("\nPreencha o campo Cidade!")
         }
         
         if Validador.vazio(txtEstado.text!){
-            erros.appendContentsOf("Preencha o campo Estado!\n")
+            erros.appendContentsOf("\nPreencha o campo Estado!")
         }
         
         if Validador.vazio(txtRua.text!){
-            erros.appendContentsOf("Preencha o campo Rua e Número!\n")
+            erros.appendContentsOf("\nPreencha o campo Rua e Número!")
         }
     }
     
@@ -158,7 +168,7 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             local = Local.getLocal()
             local?.nome = txtNome.text
             local?.cidade = txtCidade.text
-            local?.estado = txtCidade.text
+            local?.estado = txtEstado.text
             local?.rua = txtRua.text
             
             salvarConta()
@@ -178,7 +188,7 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         if(erros.isEmpty){
             local?.nome = txtNome.text
             local?.cidade = txtCidade.text
-            local?.estado = txtCidade.text
+            local?.estado = txtEstado.text
             local?.rua = txtRua.text
             
             salvarConta()
@@ -305,6 +315,8 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         if segue.identifier == "mapa"{
             let contaController : MapaViewController = segue.destinationViewController as! MapaViewController
             if self.switchEnderecoAtual.on{
+                contaController.endereco = self.txtRua.text! + " - " + self.txtCidade.text! + " - " + self.txtEstado.text!
+            }else if (self.cidade != self.local?.cidade! || self.estado != self.local?.estado! || self.rua != self.local?.rua){
                 contaController.endereco = self.txtRua.text! + " - " + self.txtCidade.text! + " - " + self.txtEstado.text!
             }else{
                contaController.local = self.local!

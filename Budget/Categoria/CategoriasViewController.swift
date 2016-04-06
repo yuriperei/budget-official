@@ -49,12 +49,13 @@ class CategoriasViewController: UITableViewController {
     
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
-            erros.appendContentsOf("Preencha o campo nome!\n")
+            erros.appendContentsOf("\nPreencha o campo nome!")
         }
     }
     
     func addConta(){
         
+        validarCampos()
         
         if (erros.isEmpty){
             categoria = Categoria.getCategoria()
