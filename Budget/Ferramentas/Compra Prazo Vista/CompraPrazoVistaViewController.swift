@@ -9,7 +9,7 @@
 import UIKit
 import JavaScriptCore
 
-class CompraPrazoVistaViewController: UIViewController {
+class CompraPrazoVistaViewController: UITableViewController {
 
     @IBOutlet weak var txtParcelas: UITextField!
     @IBOutlet weak var txtValorParcela: UITextField!
@@ -26,6 +26,7 @@ class CompraPrazoVistaViewController: UIViewController {
 //        print(finance.calculateCompoundInterest(720, 12, 62.5))
         
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
+        finance.calculateFutureValue(0.5, valorParcela: 1000, numeroDeParcelas: 12)
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,12 +34,14 @@ class CompraPrazoVistaViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBOutlet weak var calcularJuros: UIButton!
+    @IBAction func maskTextField(sender: UITextField) {
+        FormCustomization.aplicarMascara(&sender.text!)
+    }
 
     @IBAction func calcularJuros(sender: AnyObject) {
         let parcelas: Int = Int(txtParcelas.text!)!
-        let valorParcela: Double = Double(txtValorParcela.text!)!
-        let valorFinanciado: Double = Double(txtValorFinanciado.text!)!
+        let valorParcela: Double = txtValorParcela.text!.doubleConverterMoeda()
+        let valorFinanciado: Double = txtValorFinanciado.text!.doubleConverterMoeda()
         
         lblResultadoJuros.text = String.init(format: "%.2f", finance.calculateCompoundInterest(valorFinanciado, parcelas, valorParcela))+"%"
 //        print(finance.cagr(704.28, 30000, 3))

@@ -55,6 +55,11 @@ class Finance {
         return Double(round(10000*taxaDeJuros)/100)
     }
     
+    func calculateFutureValue(taxaJuros:Float, valorParcela:Double, numeroDeParcelas:Int) {
+        let script = "finance.FV(\(taxaJuros),\(valorParcela),\(numeroDeParcelas))"
+        print(context!.evaluateScript(script).toString())
+    }
+    
 //    var valorAVista = 1499.99;
 //    var numeroParcelas = 10;
 //    var valorDaParcela = 159.99;

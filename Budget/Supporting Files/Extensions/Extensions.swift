@@ -9,6 +9,18 @@
 import Foundation
 
 extension String {
+    var floatValue: Float {
+        return (self as NSString).floatValue
+    }
+    
+    var doubleValue: Double {
+        return (self as NSString).doubleValue
+    }
+    
+    var intValue: Int {
+        return (self as NSString).integerValue
+    }
+    
     var floatConverter: Float {
         let converter = NSNumberFormatter()
         converter.decimalSeparator = "."
@@ -32,6 +44,29 @@ extension String {
         return 0
     }
     
+    var doubleConverter: Double {
+        let converter = NSNumberFormatter()
+        converter.decimalSeparator = "."
+        
+        var decimal:NSNumber?
+        
+        if let result = converter.numberFromString(self) {
+            decimal = result
+        } else {
+            converter.decimalSeparator = ","
+            if let result = converter.numberFromString(self) {
+                decimal = result
+            }
+        }
+        
+        if let decimalConverter = decimal?.doubleValue {
+            return decimalConverter
+        }
+        
+        print("Erro floatConverter")
+        return 0
+    }
+    
     func floatConverterMoeda() -> Float {
         var result = self
         
@@ -40,6 +75,16 @@ extension String {
         result = result.stringByReplacingOccurrencesOfString(",",withString:".")
         
         return result.floatConverter
+    }
+    
+    func doubleConverterMoeda() -> Double {
+        var result = self
+        
+        result = result.stringByReplacingOccurrencesOfString("R$",withString:"")
+        result = result.stringByReplacingOccurrencesOfString(".",withString:"")
+        result = result.stringByReplacingOccurrencesOfString(",",withString:".")
+        
+        return result.doubleConverter
     }
     
     var lastChar:String {
@@ -57,6 +102,10 @@ extension String {
 }
 
 extension Float {
+    var stringValue: String {
+        return String(format: "%g", self)
+    }
+    
     func convertToMoedaBr() -> String {
         let formatter = NSNumberFormatter()
         formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
@@ -67,6 +116,15 @@ extension Float {
     func removeLastNumber() -> Float {
 //        return (self - (self % 10))/10
         return Float(Int(self/10))
+    }
+}
+
+extension Double {
+    func convertToMoedaBr() -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
+        return (formatter.stringFromNumber(self))!
     }
 }
 

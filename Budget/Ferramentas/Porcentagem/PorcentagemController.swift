@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PorcentagemController: UIViewController {
+class PorcentagemController: UITableViewController {
 
     var calculadora: Calculadora?
     
@@ -29,21 +29,25 @@ class PorcentagemController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func maskTextField(sender: UITextField) {
+        FormCustomization.aplicarMascara(&sender.text!)
+    }
+    
     @IBAction func calcularValorPorcentagem(sender: UIButton) {
         //Porcentagem do valor
         
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
+        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatConverterMoeda()
         
         if let calculadora = calculadora as? Porcentagem {
-            calculadora.porcentagem = txtSegundoValor.text!.floatValue
-            lblResultado.text = calculadora.calcularPorcentagemDoValor().stringValue
+            calculadora.porcentagem = txtSegundoValor.text!.floatConverter
+            lblResultado.text = calculadora.calcularPorcentagemDoValor().convertToMoedaBr()
         }
     }
     
     @IBAction func calcularPercentualValor(sender: UIButton) {
         //Valor porcentagem
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
-        calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
+        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatConverterMoeda()
+        calculadora?.numeroFinal = txtSegundoValor.text!.floatConverterMoeda()
         
         if let calculadora = calculadora as? Porcentagem {
             lblResultado.text = String(format: "%.4g", calculadora.calcularValorPorcentagem()) + "%"
@@ -60,11 +64,11 @@ class PorcentagemController: UIViewController {
     
     @IBAction func calcularVariacao(sender: UIButton) {
         //Aumento percentual
-        calculadora?.numeroAtual = txtSegundoValor.text!.floatValue
-        calculadora?.numeroFinal = txtPrimeiroValor.text!.floatValue
+        calculadora?.numeroAtual = txtSegundoValor.text!.floatConverterMoeda()
+        calculadora?.numeroFinal = txtPrimeiroValor.text!.floatConverterMoeda()
         
         if let calculadora = calculadora as? Porcentagem {
-            if (sgmTipo.selectedSegmentIndex == 0) {
+            if (calculadora.numeroFinal<=calculadora.numeroAtual) {
                 lblResultado.text = String(format: "%.4g", calculadora.calcularAumentoPercentual()) + "%"
             } else {
                 lblResultado.text = String(format: "%.4g", calculadora.calcularDiminuicaoPercentual()) + "%"
@@ -81,30 +85,30 @@ class PorcentagemController: UIViewController {
     
     @IBAction func calcularValorInicial(sender: UIButton) {
         //Valor inicial com aumento
-        calculadora?.numeroFinal = txtPrimeiroValor.text!.floatValue
+        calculadora?.numeroFinal = txtPrimeiroValor.text!.floatConverterMoeda()
         
         if let calculadora = calculadora as? Porcentagem {
             calculadora.porcentagem = txtSegundoValor.text!.floatValue
             
             if (sgmTipo.selectedSegmentIndex == 0) {
-                lblResultado.text = calculadora.calcularValorInicialAumentado().stringValue
+                lblResultado.text = calculadora.calcularValorInicialAumentado().convertToMoedaBr()
             } else {
-                lblResultado.text = calculadora.calcularValorInicialDiminuido().stringValue
+                lblResultado.text = calculadora.calcularValorInicialDiminuido().convertToMoedaBr()
             }
         }
     }
     
     @IBAction func calcularJurosDescontos(sender: UIButton) {
         //Juros
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
+        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatConverterMoeda()
         
         if let calculadora = calculadora as? Porcentagem {
             calculadora.porcentagem = txtSegundoValor.text!.floatValue
             
             if (sgmTipo.selectedSegmentIndex == 0) {
-                lblResultado.text = calculadora.calcularValorComJuros().stringValue
+                lblResultado.text = calculadora.calcularValorComJuros().convertToMoedaBr()
             } else {
-                lblResultado.text = calculadora.calcularValorComDesconto().stringValue
+                lblResultado.text = calculadora.calcularValorComDesconto().convertToMoedaBr()
             }
         }
         

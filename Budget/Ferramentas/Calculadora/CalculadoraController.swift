@@ -8,21 +8,6 @@
 
 import UIKit
 
-extension String {
-    var floatValue: Float {
-        return (self as NSString).floatValue
-    }
-    var intValue: Int {
-        return (self as NSString).integerValue
-    }
-}
-
-extension Float {
-    var stringValue: String {
-        return String(format: "%g", self)
-    }
-}
-
 class CalculadoraController: UIViewController {
 
     @IBOutlet weak var lblResultado: UILabel!
