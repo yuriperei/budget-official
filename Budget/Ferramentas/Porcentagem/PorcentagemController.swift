@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PorcentagemController: UITableViewController, UITextFieldDelegate {
+class PorcentagemController: UITableViewController {
 
     var calculadora: Calculadora?
     
@@ -25,7 +25,6 @@ class PorcentagemController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
-        txtPrimeiroValor.delegate = self
         calculadora = Porcentagem()
         FormCustomization.updateWidthsForLabels(labels)
     }
@@ -52,7 +51,7 @@ class PorcentagemController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func calcularPercentualValor(sender: UIButton) {
+    private func calcularPercentualValor(sender: UIButton) {
         //Valor porcentagem
         calculadora?.numeroAtual = txtPrimeiroValor.text!.doubleConverterMoeda()
         calculadora?.numeroFinal = txtSegundoValor.text!.doubleConverterMoeda()
@@ -73,74 +72,6 @@ class PorcentagemController: UITableViewController, UITextFieldDelegate {
             txtPrimeiroValor.addTarget(self, action: "maskTextField:", forControlEvents: .EditingChanged)
         }
     }
-    
-    @IBAction func changePlaceholderVariacao(sender: UISegmentedControl) {
-        if (sgmTipo.selectedSegmentIndex == 0) {
-            txtSegundoValor.placeholder = "Valor aumentado"
-        } else {
-            txtSegundoValor.placeholder = "Valor reduzido"
-        }
-    }
-    
-    @IBAction func calcularVariacao(sender: UIButton) {
-        //Aumento percentual
-        calculadora?.numeroAtual = txtSegundoValor.text!.doubleConverterMoeda()
-        calculadora?.numeroFinal = txtPrimeiroValor.text!.doubleConverterMoeda()
-        
-        if let calculadora = calculadora as? Porcentagem {
-            if (calculadora.numeroFinal<=calculadora.numeroAtual) {
-                lblResultado.text = String(format: "%.4g", calculadora.calcularAumentoPercentual()) + "%"
-            } else {
-                lblResultado.text = String(format: "%.4g", calculadora.calcularDiminuicaoPercentual()) + "%"
-            }
-        }
-//        
-//        //Diminuição percentual
-//        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
-//        calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
-//        if let calculadora = calculadora as? Porcentagem {
-//            print(calculadora.calcularDiminuicaoPercentual())
-//        }
-    }
-    
-    @IBAction func calcularValorInicial(sender: UIButton) {
-        //Valor inicial com aumento
-        calculadora?.numeroFinal = txtPrimeiroValor.text!.doubleConverterMoeda()
-        
-        if let calculadora = calculadora as? Porcentagem {
-            calculadora.porcentagem = txtSegundoValor.text!.doubleValue
-            
-            if (sgmTipo.selectedSegmentIndex == 0) {
-                lblResultado.text = calculadora.calcularValorInicialAumentado().convertToMoedaBr()
-            } else {
-                lblResultado.text = calculadora.calcularValorInicialDiminuido().convertToMoedaBr()
-            }
-        }
-    }
-    
-    @IBAction func calcularJurosDescontos(sender: UIButton) {
-        //Juros
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.doubleConverterMoeda()
-        
-        if let calculadora = calculadora as? Porcentagem {
-            calculadora.porcentagem = txtSegundoValor.text!.doubleValue
-            
-            if (sgmTipo.selectedSegmentIndex == 0) {
-                lblResultado.text = calculadora.calcularValorComJuros().convertToMoedaBr()
-            } else {
-                lblResultado.text = calculadora.calcularValorComDesconto().convertToMoedaBr()
-            }
-        }
-        
-        //Desconto
-//        calculadora?.numeroAtual = 1000
-//        
-//        if let calculadora = calculadora as? Porcentagem {
-//            calculadora.porcentagem = 15
-//            print(calculadora.calcularValorComDesconto())
-//        }
-    }
-    
     
 
     /*

@@ -774,7 +774,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="zek-Qr-jiW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Dados para cálculo" id="UpW-Hc-6WS">
@@ -949,7 +949,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7PJ-1P-aOg">
                                                     <rect key="frame" x="16" y="18" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1745,11 +1745,11 @@
         <!--Porcentagem do valor-->
         <scene sceneID="yEX-1A-EfY">
             <objects>
-                <tableViewController id="dzs-6M-b9Z" customClass="PorcentagemController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="dzs-6M-b9Z" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="gTa-uD-Vcp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Dados para cálculo" id="Qc2-Bc-J4e">
@@ -1817,9 +1817,6 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    <connections>
-                                                        <action selector="maskTextField:" destination="dzs-6M-b9Z" eventType="editingChanged" id="R5A-cB-2Rb"/>
-                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtl-Oh-SWT">
                                                     <rect key="frame" x="16" y="0.0" width="35" height="43"/>
@@ -1856,9 +1853,6 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTm-3g-qvQ">
                                                     <rect key="frame" x="8" y="2" width="304" height="39"/>
                                                     <state key="normal" title="Calcular"/>
-                                                    <connections>
-                                                        <action selector="calcularValorPorcentagem:" destination="dzs-6M-b9Z" eventType="touchDown" id="9x9-77-Uhw"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1883,7 +1877,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bP-V4-Y71">
                                                     <rect key="frame" x="16" y="18" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1898,10 +1892,6 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="dzs-6M-b9Z" id="Ts5-Uz-akv"/>
-                            <outlet property="delegate" destination="dzs-6M-b9Z" id="Lme-bq-glC"/>
-                        </connections>
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Porcentagem do valor" id="Ipc-6U-6EL">
@@ -1909,12 +1899,6 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="btnSideBar" destination="jRT-Tz-vU8" id="08r-Xg-7qf"/>
-                        <outlet property="lblResultado" destination="6bP-V4-Y71" id="SN6-bd-uQu"/>
-                        <outlet property="txtPrimeiroValor" destination="Hs9-Jq-Zhb" id="WV8-jt-ejV"/>
-                        <outlet property="txtSegundoValor" destination="KUp-y9-Gc9" id="Orh-qM-5fS"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lvP-ri-Lz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1923,11 +1907,11 @@
         <!--Variação percentual-->
         <scene sceneID="AEl-YF-YXX">
             <objects>
-                <tableViewController id="SN6-WO-lga" customClass="PorcentagemController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="SN6-WO-lga" customClass="VariacaoPercentualController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="LDC-l9-3sq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Dados para cálculo" id="B3F-jE-2WZ">
@@ -1952,7 +1936,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="maskTextField:" destination="SN6-WO-lga" eventType="editingChanged" id="rPS-BV-VD0"/>
+                                                        <action selector="maskTextField:" destination="SN6-WO-lga" eventType="editingChanged" id="6Wa-bY-Tn4"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor inicial:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uS-JQ-fG0">
@@ -1996,7 +1980,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="maskTextField:" destination="SN6-WO-lga" eventType="editingChanged" id="4zs-MN-aj8"/>
+                                                        <action selector="maskTextField:" destination="SN6-WO-lga" eventType="editingChanged" id="q8j-Vd-OOK"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor final:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rui-NJ-C2D">
@@ -2035,7 +2019,7 @@
                                                     <rect key="frame" x="8" y="2" width="304" height="39"/>
                                                     <state key="normal" title="Calcular"/>
                                                     <connections>
-                                                        <action selector="calcularVariacao:" destination="SN6-WO-lga" eventType="touchDown" id="HEP-2O-s2Z"/>
+                                                        <action selector="calcularVariacao:" destination="SN6-WO-lga" eventType="touchDown" id="Bls-Ii-9wT"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2061,7 +2045,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ow5-ZO-cQU">
                                                     <rect key="frame" x="16" y="18" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -2076,25 +2060,29 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="SN6-WO-lga" id="wfr-ee-QG3"/>
-                            <outlet property="delegate" destination="SN6-WO-lga" id="V15-C0-pB7"/>
-                        </connections>
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Variação percentual" id="kiR-pn-xW7">
                         <barButtonItem key="leftBarButtonItem" image="interface" id="mQs-CH-rhG"/>
-                        <barButtonItem key="rightBarButtonItem" title="Help" id="GPv-kx-5nl"/>
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="GPv-kx-5nl">
+                            <connections>
+                                <segue destination="Jet-9v-SuT" kind="popoverPresentation" identifier="myPopover" popoverAnchorBarButtonItem="GPv-kx-5nl" id="b5D-ZK-lRO">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="btnSideBar" destination="mQs-CH-rhG" id="22N-Wv-sPM"/>
-                        <outlet property="lblResultado" destination="Ow5-ZO-cQU" id="iYo-IZ-1Th"/>
-                        <outlet property="txtPrimeiroValor" destination="zVa-wu-72z" id="t2l-TN-tUR"/>
-                        <outlet property="txtSegundoValor" destination="SDa-6Y-rf1" id="C3s-iq-dTK"/>
-                        <outletCollection property="labels" destination="5uS-JQ-fG0" collectionClass="NSMutableArray" id="RBy-oJ-Lha"/>
-                        <outletCollection property="labels" destination="rui-NJ-C2D" collectionClass="NSMutableArray" id="nUG-Xt-3D8"/>
+                        <outlet property="btnSideBar" destination="mQs-CH-rhG" id="eEl-iu-ITU"/>
+                        <outlet property="lblPrimeiroValor" destination="5uS-JQ-fG0" id="KXH-ml-0Un"/>
+                        <outlet property="lblResultado" destination="Ow5-ZO-cQU" id="ADU-8F-H9d"/>
+                        <outlet property="lblSegundoValor" destination="rui-NJ-C2D" id="D3W-PM-bgo"/>
+                        <outlet property="txtPrimeiroValor" destination="zVa-wu-72z" id="TSb-Ly-1r7"/>
+                        <outlet property="txtSegundoValor" destination="SDa-6Y-rf1" id="R1u-l9-kKc"/>
+                        <outletCollection property="labels" destination="5uS-JQ-fG0" collectionClass="NSMutableArray" id="lxh-60-nEf"/>
+                        <outletCollection property="labels" destination="rui-NJ-C2D" collectionClass="NSMutableArray" id="hW7-jE-Sv9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rC5-eu-arj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2104,11 +2092,11 @@
         <!--Valor inicial-->
         <scene sceneID="Mtl-cM-j7T">
             <objects>
-                <tableViewController id="RZt-Uz-5fV" customClass="PorcentagemController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="RZt-Uz-5fV" customClass="ValorInicialController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="VC5-QN-5FS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Dados para cálculo" id="V0J-ch-I0C">
@@ -2167,9 +2155,6 @@
                                                         <segment title="Acréscimo"/>
                                                         <segment title="Redução"/>
                                                     </segments>
-                                                    <connections>
-                                                        <action selector="changePlaceholderVariacao:" destination="RZt-Uz-5fV" eventType="valueChanged" id="kEg-RN-I66"/>
-                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -2200,7 +2185,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="maskTextField:" destination="RZt-Uz-5fV" eventType="editingChanged" id="cB3-bK-Ubq"/>
+                                                        <action selector="maskTextField:" destination="RZt-Uz-5fV" eventType="editingChanged" id="DAu-Km-dnJ"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor total:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LQ-21-fu9">
@@ -2239,7 +2224,7 @@
                                                     <rect key="frame" x="8" y="2" width="304" height="39"/>
                                                     <state key="normal" title="Calcular"/>
                                                     <connections>
-                                                        <action selector="calcularValorInicial:" destination="RZt-Uz-5fV" eventType="touchDown" id="mSJ-ws-8rT"/>
+                                                        <action selector="calcularValorInicial:" destination="RZt-Uz-5fV" eventType="touchDown" id="DiF-Wk-ND1"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2265,7 +2250,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWw-Tf-n2D">
                                                     <rect key="frame" x="16" y="18" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -2280,10 +2265,6 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="RZt-Uz-5fV" id="EvK-ik-yi4"/>
-                            <outlet property="delegate" destination="RZt-Uz-5fV" id="5qU-cD-xf1"/>
-                        </connections>
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Valor inicial" id="0SY-5X-oQV">
@@ -2292,27 +2273,65 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="btnSideBar" destination="4PK-Hn-1fi" id="ChX-rc-KmN"/>
-                        <outlet property="lblResultado" destination="uWw-Tf-n2D" id="wge-hR-Ph9"/>
-                        <outlet property="sgmTipo" destination="8UK-os-aeq" id="7sw-gh-6qA"/>
-                        <outlet property="txtPrimeiroValor" destination="17z-w7-cju" id="nXQ-7m-Oe2"/>
-                        <outlet property="txtSegundoValor" destination="Jas-G5-Ajj" id="3lK-tO-dTH"/>
-                        <outletCollection property="labels" destination="LfM-La-EJq" collectionClass="NSMutableArray" id="jCk-Zi-WgN"/>
-                        <outletCollection property="labels" destination="8LQ-21-fu9" collectionClass="NSMutableArray" id="rQI-ww-zA6"/>
+                        <outlet property="btnSideBar" destination="4PK-Hn-1fi" id="eCF-fa-wei"/>
+                        <outlet property="lblPrimeiroValor" destination="LfM-La-EJq" id="nQN-A2-3dP"/>
+                        <outlet property="lblResultado" destination="uWw-Tf-n2D" id="NQ1-sq-rkF"/>
+                        <outlet property="lblSegundoValor" destination="8LQ-21-fu9" id="ZdR-X0-Fdk"/>
+                        <outlet property="sgmTipo" destination="8UK-os-aeq" id="b8n-vv-LgY"/>
+                        <outlet property="txtPrimeiroValor" destination="Jas-G5-Ajj" id="yia-j8-jdi"/>
+                        <outlet property="txtSegundoValor" destination="17z-w7-cju" id="fbh-Sd-M17"/>
+                        <outletCollection property="labels" destination="LfM-La-EJq" collectionClass="NSMutableArray" id="2Qe-bF-0nK"/>
+                        <outletCollection property="labels" destination="8LQ-21-fu9" collectionClass="NSMutableArray" id="bcE-eA-pDB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q9z-RQ-laP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1121" y="2597"/>
         </scene>
-        <!--Valor em porcentagem-->
+        <!--View Controller-->
+        <scene sceneID="JpJ-IJ-hIG">
+            <objects>
+                <viewController id="Jet-9v-SuT" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wpH-S9-vm6"/>
+                        <viewControllerLayoutGuide type="bottom" id="5QW-EB-6cl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Uue-Zi-nNq">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ha1-oF-s7u">
+                                <rect key="frame" x="30" y="36" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ha1-oF-s7u" firstAttribute="centerY" secondItem="Uue-Zi-nNq" secondAttribute="centerY" id="2XF-ev-Qbu"/>
+                            <constraint firstItem="Ha1-oF-s7u" firstAttribute="leading" secondItem="Uue-Zi-nNq" secondAttribute="leadingMargin" constant="14" id="8Pa-AD-Qcl"/>
+                            <constraint firstItem="Ha1-oF-s7u" firstAttribute="top" secondItem="wpH-S9-vm6" secondAttribute="bottom" constant="16" id="MKD-Dq-4HC"/>
+                            <constraint firstItem="Ha1-oF-s7u" firstAttribute="centerX" secondItem="Uue-Zi-nNq" secondAttribute="centerX" id="dyA-a2-gph"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="200"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="300" height="200"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vf7-hv-pVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-621" y="3046"/>
+        </scene>
+        <!--Cálculo de porcentagem-->
         <scene sceneID="cJO-aQ-pfB">
             <objects>
                 <tableViewController id="8LS-SS-PiD" customClass="PorcentagemController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="fiw-ff-Xr3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Calcular" id="sUA-On-eHz">
@@ -2331,7 +2350,7 @@
                                                         <segment title="Porcentagem"/>
                                                     </segments>
                                                     <connections>
-                                                        <action selector="changeLabelPorcentagem:" destination="8LS-SS-PiD" eventType="valueChanged" id="ufV-ui-U8P"/>
+                                                        <action selector="changeLabelPorcentagem:" destination="8LS-SS-PiD" eventType="valueChanged" id="a6i-Zx-YJl"/>
                                                     </connections>
                                                 </segmentedControl>
                                             </subviews>
@@ -2408,7 +2427,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="maskTextField:" destination="8LS-SS-PiD" eventType="editingChanged" id="MLj-Pz-DCl"/>
+                                                        <action selector="maskTextField:" destination="8LS-SS-PiD" eventType="editingChanged" id="LES-48-z3G"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor total:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GDJ-5b-haO">
@@ -2447,7 +2466,7 @@
                                                     <rect key="frame" x="8" y="2" width="304" height="39"/>
                                                     <state key="normal" title="Calcular"/>
                                                     <connections>
-                                                        <action selector="calcularValorPorcentagem:" destination="8LS-SS-PiD" eventType="touchDown" id="vqa-bX-Ih1"/>
+                                                        <action selector="calcularValorPorcentagem:" destination="8LS-SS-PiD" eventType="touchDown" id="519-5a-Zr7"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2473,7 +2492,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RxV-FI-cKU">
                                                     <rect key="frame" x="16" y="18" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -2488,27 +2507,23 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="8LS-SS-PiD" id="tXi-cO-fns"/>
-                            <outlet property="delegate" destination="8LS-SS-PiD" id="Wyb-8e-xIz"/>
-                        </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Valor em porcentagem" id="Xse-rX-LfJ">
+                    <navigationItem key="navigationItem" title="Cálculo de porcentagem" id="Xse-rX-LfJ">
                         <barButtonItem key="leftBarButtonItem" image="interface" id="bQR-cj-ckh"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="btnSideBar" destination="bQR-cj-ckh" id="qIr-uN-fT2"/>
-                        <outlet property="lblPrimeiroValor" destination="38c-BR-1yY" id="8Ia-Y7-X2m"/>
-                        <outlet property="lblResultado" destination="RxV-FI-cKU" id="aEt-7h-Nmw"/>
-                        <outlet property="lblSegundoValor" destination="GDJ-5b-haO" id="C8k-ij-WcW"/>
-                        <outlet property="sgmTipo" destination="Tfc-S3-djC" id="9Jj-KT-dr7"/>
-                        <outlet property="txtPrimeiroValor" destination="ags-NB-SMI" id="YfL-70-a7G"/>
-                        <outlet property="txtSegundoValor" destination="Ygl-4s-hLl" id="8ZM-lU-rLD"/>
-                        <outletCollection property="labels" destination="38c-BR-1yY" collectionClass="NSMutableArray" id="0ee-PO-AEY"/>
-                        <outletCollection property="labels" destination="GDJ-5b-haO" collectionClass="NSMutableArray" id="qHy-in-6eW"/>
+                        <outlet property="btnSideBar" destination="bQR-cj-ckh" id="te0-M9-HYN"/>
+                        <outlet property="lblPrimeiroValor" destination="38c-BR-1yY" id="gOK-4s-NyS"/>
+                        <outlet property="lblResultado" destination="RxV-FI-cKU" id="00k-DC-8GP"/>
+                        <outlet property="lblSegundoValor" destination="GDJ-5b-haO" id="wfQ-nc-eFR"/>
+                        <outlet property="sgmTipo" destination="Tfc-S3-djC" id="J3X-tC-5Hs"/>
+                        <outlet property="txtPrimeiroValor" destination="ags-NB-SMI" id="WW6-3e-39M"/>
+                        <outlet property="txtSegundoValor" destination="Ygl-4s-hLl" id="EC1-6I-wVt"/>
+                        <outletCollection property="labels" destination="38c-BR-1yY" collectionClass="NSMutableArray" id="dua-1m-lWr"/>
+                        <outletCollection property="labels" destination="GDJ-5b-haO" collectionClass="NSMutableArray" id="QEb-kc-1i4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tq0-r5-RMC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2518,11 +2533,11 @@
         <!--Juros e desconto-->
         <scene sceneID="HYl-6Z-Abz">
             <objects>
-                <tableViewController id="VpI-mp-hlf" customClass="PorcentagemController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="VpI-mp-hlf" customClass="JurosDescontosController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="SJ0-D4-0FG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Dados para cálculo" id="l31-Pc-rdH">
@@ -2614,7 +2629,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="maskTextField:" destination="VpI-mp-hlf" eventType="editingChanged" id="HWG-4X-0LO"/>
+                                                        <action selector="maskTextField:" destination="VpI-mp-hlf" eventType="editingChanged" id="2vr-Jw-cWU"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zby-NI-0ye">
@@ -2653,7 +2668,7 @@
                                                     <rect key="frame" x="8" y="2" width="304" height="39"/>
                                                     <state key="normal" title="Calcular"/>
                                                     <connections>
-                                                        <action selector="calcularJurosDescontos:" destination="VpI-mp-hlf" eventType="touchDown" id="6vb-ub-fm7"/>
+                                                        <action selector="calcularJurosDescontos:" destination="VpI-mp-hlf" eventType="touchDown" id="bIK-Xz-Snr"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2679,7 +2694,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1o-7U-h8o">
                                                     <rect key="frame" x="16" y="18" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -2694,10 +2709,6 @@
                                 </cells>
                             </tableViewSection>
                         </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="VpI-mp-hlf" id="g2w-gU-AMJ"/>
-                            <outlet property="delegate" destination="VpI-mp-hlf" id="y6D-rG-4qI"/>
-                        </connections>
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Juros e desconto" id="UWK-uL-zRX">
@@ -2706,13 +2717,15 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="btnSideBar" destination="ubl-91-ezG" id="1p3-9Q-ofu"/>
-                        <outlet property="lblResultado" destination="b1o-7U-h8o" id="wwB-S4-WPx"/>
-                        <outlet property="sgmTipo" destination="PfP-SS-mfp" id="bB2-9W-DRC"/>
-                        <outlet property="txtPrimeiroValor" destination="la5-ug-8tp" id="8nC-BY-How"/>
-                        <outlet property="txtSegundoValor" destination="Q1Z-Lp-Zz9" id="kGN-0p-5H3"/>
-                        <outletCollection property="labels" destination="hm9-tk-fXq" collectionClass="NSMutableArray" id="lwG-Yh-tC8"/>
-                        <outletCollection property="labels" destination="zby-NI-0ye" collectionClass="NSMutableArray" id="V1i-eW-fMa"/>
+                        <outlet property="btnSideBar" destination="ubl-91-ezG" id="ThE-6T-3dE"/>
+                        <outlet property="lblPrimeiroValor" destination="hm9-tk-fXq" id="BC2-sJ-J1c"/>
+                        <outlet property="lblResultado" destination="b1o-7U-h8o" id="NgC-Qy-u4b"/>
+                        <outlet property="lblSegundoValor" destination="zby-NI-0ye" id="OxH-o9-aXO"/>
+                        <outlet property="sgmTipo" destination="PfP-SS-mfp" id="tmG-0l-XbB"/>
+                        <outlet property="txtPrimeiroValor" destination="Q1Z-Lp-Zz9" id="reS-uT-D7T"/>
+                        <outlet property="txtSegundoValor" destination="la5-ug-8tp" id="Hyb-mW-fm8"/>
+                        <outletCollection property="labels" destination="hm9-tk-fXq" collectionClass="NSMutableArray" id="J75-5B-N3t"/>
+                        <outletCollection property="labels" destination="zby-NI-0ye" collectionClass="NSMutableArray" id="vJT-Cu-4nE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFa-07-2SJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4479,7 +4492,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="I34-Pq-S6u">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Dados para cálculo" id="Px2-wR-DEh">
@@ -4651,7 +4664,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdz-iL-eo2">
                                                     <rect key="frame" x="16" y="18" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -4832,7 +4845,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="9V6-6X-FJG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="Dados para cálculo" id="hWo-FY-EJk">
@@ -4966,7 +4979,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6r-Go-BXh">
                                                     <rect key="frame" x="16" y="18" width="288" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -5036,7 +5049,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZA-VD-eol">
                                         <rect key="frame" x="16" y="18" width="288" height="43"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>

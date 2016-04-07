@@ -53,6 +53,7 @@ class Porcentagem : Calculadora {
         //porcentagem = 20
         self.porcentagem += 100
         self.numeroFinal /= self.porcentagem
+        self.numeroFinal.toFixed(2)
         self.numeroAtual = 100
         return self.calcularOperacao()
     }

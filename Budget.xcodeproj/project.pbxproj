@@ -65,6 +65,9 @@
 		A88BDA771CACE1170014E3AF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA701CACE1170014E3AF /* Notification.swift */; };
 		A88BDA781CACE1170014E3AF /* FormCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA711CACE1170014E3AF /* FormCustomization.swift */; };
 		A88BDA791CACE1170014E3AF /* Validador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA721CACE1170014E3AF /* Validador.swift */; };
+		A8E4A95B1CB6F4A4008F214E /* VariacaoPercentualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */; };
+		A8E4A9601CB6F8EE008F214E /* ValorInicialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */; };
+		A8E4A9621CB6F945008F214E /* JurosDescontos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A9611CB6F945008F214E /* JurosDescontos.swift */; };
 		A8F8122C1CADB998008854A0 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F8122B1CADB998008854A0 /* SWRevealViewController.m */; };
 		A8F812421CADBF8D008854A0 /* Categoria+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F812401CADBF8D008854A0 /* Categoria+CoreDataProperties.swift */; };
 		A8F812431CADBF8D008854A0 /* Categoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F812411CADBF8D008854A0 /* Categoria.swift */; };
@@ -209,6 +212,9 @@
 		A88BDA701CACE1170014E3AF /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = "Supporting Files/Factory/Notification.swift"; sourceTree = "<group>"; };
 		A88BDA711CACE1170014E3AF /* FormCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCustomization.swift; path = "Supporting Files/Factory/FormCustomization.swift"; sourceTree = "<group>"; };
 		A88BDA721CACE1170014E3AF /* Validador.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validador.swift; path = "Supporting Files/Factory/Validador.swift"; sourceTree = "<group>"; };
+		A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VariacaoPercentualController.swift; path = Ferramentas/Porcentagem/VariacaoPercentualController.swift; sourceTree = "<group>"; };
+		A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValorInicialController.swift; sourceTree = "<group>"; };
+		A8E4A9611CB6F945008F214E /* JurosDescontos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JurosDescontos.swift; sourceTree = "<group>"; };
 		A8F812291CADB998008854A0 /* Budget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Budget-Bridging-Header.h"; sourceTree = "<group>"; };
 		A8F8122A1CADB998008854A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "Supporting Files/SWReveal/SWRevealViewController.h"; sourceTree = "<group>"; };
 		A8F8122B1CADB998008854A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "Supporting Files/SWReveal/SWRevealViewController.m"; sourceTree = "<group>"; };
@@ -392,6 +398,9 @@
 			children = (
 				A8074B881CACE049007865F5 /* Porcentagem.swift */,
 				A8074B891CACE049007865F5 /* PorcentagemController.swift */,
+				A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */,
+				A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */,
+				A8E4A9611CB6F945008F214E /* JurosDescontos.swift */,
 			);
 			name = Porcentagem;
 			sourceTree = "<group>";
@@ -687,6 +696,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8E4A9621CB6F945008F214E /* JurosDescontos.swift in Sources */,
 				A88BDA781CACE1170014E3AF /* FormCustomization.swift in Sources */,
 				A8074B821CACE029007865F5 /* ContasViewController.swift in Sources */,
 				A8074B6C1CACE00F007865F5 /* DespesaDAO.swift in Sources */,
@@ -702,6 +712,8 @@
 				A8F812431CADBF8D008854A0 /* Categoria.swift in Sources */,
 				A8074B571CACDFE8007865F5 /* CategoriaTableViewController.swift in Sources */,
 				A8F812521CADC010008854A0 /* Receita+CoreDataProperties.swift in Sources */,
+				A8E4A95B1CB6F4A4008F214E /* VariacaoPercentualController.swift in Sources */,
+				A8E4A9601CB6F8EE008F214E /* ValorInicialController.swift in Sources */,
 				A886670E1CB2061400EC778D /* SidebarMenu.swift in Sources */,
 				A8F8122C1CADB998008854A0 /* SWRevealViewController.m in Sources */,
 				A8074B8A1CACE049007865F5 /* Porcentagem.swift in Sources */,
