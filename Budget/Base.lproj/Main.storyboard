@@ -918,7 +918,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="blr-zR-gp8">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="categoria" id="blr-zR-gp8">
                                                     <rect key="frame" x="15" y="9" width="21" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -942,7 +942,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="8mj-hL-AbA">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="tipoConta" id="8mj-hL-AbA">
                                                     <rect key="frame" x="15" y="9" width="21" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -970,7 +970,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="k2M-78-WjZ">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="calculadora" id="k2M-78-WjZ">
                                                     <rect key="frame" x="15" y="9" width="21" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -1114,7 +1114,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="huc-wX-VWM">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="avaliarCompra" id="huc-wX-VWM">
                                                     <rect key="frame" x="15" y="9" width="21" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -3789,13 +3789,17 @@
         </scene>
     </scenes>
     <resources>
+        <image name="avaliarCompra" width="21" height="21"/>
+        <image name="calculadora" width="21" height="21"/>
         <image name="card-wallet" width="21" height="21"/>
+        <image name="categoria" width="21" height="21"/>
         <image name="dashboard" width="21" height="21"/>
         <image name="despesas" width="21" height="21"/>
         <image name="finances" width="21" height="21"/>
         <image name="interface" width="21" height="21"/>
         <image name="locais" width="21" height="21"/>
         <image name="receita" width="21" height="21"/>
+        <image name="tipoConta" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RnH-uC-IaA"/>
