@@ -126,6 +126,13 @@ extension Double {
         formatter.locale = NSLocale(localeIdentifier: "pt_BR")
         return (formatter.stringFromNumber(self))!
     }
+    var stringValue: String {
+        return String(format: "%g", self)
+    }
+    func removeLastNumber() -> Double {
+        //        return (self - (self % 10))/10
+        return Double(Int(self/10))
+    }
 }
 
 extension NSDate {

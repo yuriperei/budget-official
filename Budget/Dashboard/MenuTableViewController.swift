@@ -40,7 +40,7 @@ class MenuTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch(section) {
         case 0: return 4    // section 0 has 4 rows
-        case 1: return 8    // section 1 has 7 row
+        case 1: return 7    // section 1 has 7 row
         case 2: return 1    // section 2 has 1 row
         default: fatalError("Unknown number of sections")
         }

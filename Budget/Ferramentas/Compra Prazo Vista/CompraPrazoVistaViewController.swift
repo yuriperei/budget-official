@@ -15,6 +15,7 @@ class CompraPrazoVistaViewController: UITableViewController {
     @IBOutlet weak var txtValorParcela: UITextField!
     @IBOutlet weak var txtValorFinanciado: UITextField!
     @IBOutlet weak var lblResultadoJuros: UILabel!
+    @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var btnSideBar: UIBarButtonItem!
     
     var finance: Finance!
@@ -25,6 +26,7 @@ class CompraPrazoVistaViewController: UITableViewController {
 //        print(finance.cagr(704.28, 30000, 3))
 //        print(finance.calculateCompoundInterest(720, 12, 62.5))
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
+        FormCustomization.updateWidthsForLabels(labels)
     }
 
     override func didReceiveMemoryWarning() {

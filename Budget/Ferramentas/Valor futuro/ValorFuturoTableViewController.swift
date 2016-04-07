@@ -15,11 +15,13 @@ class ValorFuturoTableViewController: UITableViewController {
     @IBOutlet var txtNumeroMeses: UITextField!
     @IBOutlet var txtJuros: UITextField!
     @IBOutlet var lblResultado: UILabel!
+    @IBOutlet var labels:[UILabel]!
     var finance:Finance = Finance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
+        FormCustomization.updateWidthsForLabels(labels)
     }
     
     override func didReceiveMemoryWarning() {
@@ -32,7 +34,7 @@ class ValorFuturoTableViewController: UITableViewController {
     }
     
     @IBAction func calcularValorFuturo(sender: AnyObject) {
-        let taxaJuros = (txtJuros.text?.floatConverterMoeda())!
+        let taxaJuros = (txtJuros.text?.floatConverter)!
         let valorDepositado = (txtValorDepositado.text?.doubleConverterMoeda())!
         let numeroParcelas = (txtNumeroMeses.text?.intValue)!
         

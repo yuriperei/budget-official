@@ -24,7 +24,7 @@ class Finance {
             let jscript = try String.init(contentsOfURL: url)
     
             context?.evaluateScript(jscript)
-            
+            context?.evaluateScript("var finance = new Finance();")
         } catch {
             print(error)
         }
@@ -55,7 +55,7 @@ class Finance {
     }
     
     func calculateFutureValue(taxaJuros:Float, valorDepositado:Double, numeroDeParcelas:Int) -> Double{
-        context?.evaluateScript("var finance = new Finance();")
+        
         let script = "finance.FV(\(taxaJuros),\(valorDepositado),\(numeroDeParcelas));"
         return context!.evaluateScript(script).toDouble()
     }
