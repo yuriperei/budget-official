@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0D0A851D1CB03AC800A0B023 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */; };
+		0D82FE7F1CB713D900CE8E3C /* AjudaPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D82FE7E1CB713D900CE8E3C /* AjudaPopoverController.swift */; };
+		0D82FE851CB71F6C00CE8E3C /* ManualFinanceiro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D82FE841CB71F6C00CE8E3C /* ManualFinanceiro.swift */; };
 		4E6EEA4B1CB31275007928B0 /* TipoContaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */; };
 		4E6EEA501CB3215D007928B0 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88667061CB202DB00EC778D /* Charts.framework */; };
 		4E6EEA511CB3215D007928B0 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A88667061CB202DB00EC778D /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -47,6 +49,8 @@
 		A8074B8B1CACE049007865F5 /* PorcentagemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B891CACE049007865F5 /* PorcentagemController.swift */; };
 		A8074B8E1CACE060007865F5 /* Calculadora.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B8C1CACE060007865F5 /* Calculadora.swift */; };
 		A8074B8F1CACE060007865F5 /* CalculadoraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B8D1CACE060007865F5 /* CalculadoraController.swift */; };
+		A8274BAA1CB5A5F500EEF9C8 /* ValorFuturo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8274BA91CB5A5F500EEF9C8 /* ValorFuturo.swift */; };
+		A8274BB01CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8274BAF1CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift */; };
 		A88242B41CACBE6F009C5F43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88242B31CACBE6F009C5F43 /* AppDelegate.swift */; };
 		A88242B61CACBE6F009C5F43 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88242B51CACBE6F009C5F43 /* ViewController.swift */; };
 		A88242B91CACBE6F009C5F43 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A88242B71CACBE6F009C5F43 /* Main.storyboard */; };
@@ -63,6 +67,9 @@
 		A88BDA771CACE1170014E3AF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA701CACE1170014E3AF /* Notification.swift */; };
 		A88BDA781CACE1170014E3AF /* FormCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA711CACE1170014E3AF /* FormCustomization.swift */; };
 		A88BDA791CACE1170014E3AF /* Validador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA721CACE1170014E3AF /* Validador.swift */; };
+		A8E4A95B1CB6F4A4008F214E /* VariacaoPercentualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */; };
+		A8E4A9601CB6F8EE008F214E /* ValorInicialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */; };
+		A8E4A9621CB6F945008F214E /* JurosDescontos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A9611CB6F945008F214E /* JurosDescontos.swift */; };
 		A8F8122C1CADB998008854A0 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8F8122B1CADB998008854A0 /* SWRevealViewController.m */; };
 		A8F812421CADBF8D008854A0 /* Categoria+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F812401CADBF8D008854A0 /* Categoria+CoreDataProperties.swift */; };
 		A8F812431CADBF8D008854A0 /* Categoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F812411CADBF8D008854A0 /* Categoria.swift */; };
@@ -145,6 +152,8 @@
 
 /* Begin PBXFileReference section */
 		0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0D82FE7E1CB713D900CE8E3C /* AjudaPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AjudaPopoverController.swift; path = "Ferramentas/Porcentagem/Ajuda popover/AjudaPopoverController.swift"; sourceTree = "<group>"; };
+		0D82FE841CB71F6C00CE8E3C /* ManualFinanceiro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManualFinanceiro.swift; path = "Ferramentas/Compra Prazo Vista/ManualFinanceiro.swift"; sourceTree = "<group>"; };
 		4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipoContaDAO.swift; path = "Tipo Conta/TipoContaDAO.swift"; sourceTree = "<group>"; };
 		4E937E241CAEEC3B007806B5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapaViewController.swift; path = local/MapaViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +191,8 @@
 		A8074B891CACE049007865F5 /* PorcentagemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PorcentagemController.swift; path = Ferramentas/Porcentagem/PorcentagemController.swift; sourceTree = "<group>"; };
 		A8074B8C1CACE060007865F5 /* Calculadora.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Calculadora.swift; path = Ferramentas/Calculadora/Calculadora.swift; sourceTree = "<group>"; };
 		A8074B8D1CACE060007865F5 /* CalculadoraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculadoraController.swift; path = Ferramentas/Calculadora/CalculadoraController.swift; sourceTree = "<group>"; };
+		A8274BA91CB5A5F500EEF9C8 /* ValorFuturo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValorFuturo.swift; path = "Ferramentas/Valor futuro/ValorFuturo.swift"; sourceTree = "<group>"; };
+		A8274BAF1CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValorFuturoTableViewController.swift; path = "Ferramentas/Valor futuro/ValorFuturoTableViewController.swift"; sourceTree = "<group>"; };
 		A83581571CB1B1DC00A77C05 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "Supporting Files/Charts/Charts.xcodeproj"; sourceTree = "<group>"; };
 		A88242B01CACBE6F009C5F43 /* Budget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Budget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A88242B31CACBE6F009C5F43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -205,6 +216,9 @@
 		A88BDA701CACE1170014E3AF /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = "Supporting Files/Factory/Notification.swift"; sourceTree = "<group>"; };
 		A88BDA711CACE1170014E3AF /* FormCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCustomization.swift; path = "Supporting Files/Factory/FormCustomization.swift"; sourceTree = "<group>"; };
 		A88BDA721CACE1170014E3AF /* Validador.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validador.swift; path = "Supporting Files/Factory/Validador.swift"; sourceTree = "<group>"; };
+		A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VariacaoPercentualController.swift; path = Ferramentas/Porcentagem/VariacaoPercentualController.swift; sourceTree = "<group>"; };
+		A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValorInicialController.swift; sourceTree = "<group>"; };
+		A8E4A9611CB6F945008F214E /* JurosDescontos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JurosDescontos.swift; sourceTree = "<group>"; };
 		A8F812291CADB998008854A0 /* Budget-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Budget-Bridging-Header.h"; sourceTree = "<group>"; };
 		A8F8122A1CADB998008854A0 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "Supporting Files/SWReveal/SWRevealViewController.h"; sourceTree = "<group>"; };
 		A8F8122B1CADB998008854A0 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "Supporting Files/SWReveal/SWRevealViewController.m"; sourceTree = "<group>"; };
@@ -249,6 +263,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D82FE831CB7160D00CE8E3C /* Ajuda popover */ = {
+			isa = PBXGroup;
+			children = (
+				0D82FE7E1CB713D900CE8E3C /* AjudaPopoverController.swift */,
+			);
+			name = "Ajuda popover";
+			sourceTree = "<group>";
+		};
+		0D82FE861CB724CC00CE8E3C /* Manual financeiro */ = {
+			isa = PBXGroup;
+			children = (
+				0D82FE841CB71F6C00CE8E3C /* ManualFinanceiro.swift */,
+			);
+			name = "Manual financeiro";
+			sourceTree = "<group>";
+		};
 		4E937E1F1CAEEBE2007806B5 /* Local */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,9 +396,10 @@
 		A8074AC31CACD234007865F5 /* Ferramentas */ = {
 			isa = PBXGroup;
 			children = (
+				A8074AC41CACD239007865F5 /* Calculadora */,
 				A8074AC61CACD243007865F5 /* Compra Prazo Vista */,
 				A8074AC51CACD23E007865F5 /* Porcentagem */,
-				A8074AC41CACD239007865F5 /* Calculadora */,
+				A8274BAE1CB5A60700EEF9C8 /* Valor futuro */,
 			);
 			name = Ferramentas;
 			sourceTree = "<group>";
@@ -387,6 +418,10 @@
 			children = (
 				A8074B881CACE049007865F5 /* Porcentagem.swift */,
 				A8074B891CACE049007865F5 /* PorcentagemController.swift */,
+				A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */,
+				A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */,
+				A8E4A9611CB6F945008F214E /* JurosDescontos.swift */,
+				0D82FE831CB7160D00CE8E3C /* Ajuda popover */,
 			);
 			name = Porcentagem;
 			sourceTree = "<group>";
@@ -396,6 +431,7 @@
 			children = (
 				A8074B841CACE03A007865F5 /* CompraPrazoVista.swift */,
 				A8074B851CACE03A007865F5 /* CompraPrazoVistaViewController.swift */,
+				0D82FE861CB724CC00CE8E3C /* Manual financeiro */,
 			);
 			name = "Compra Prazo Vista";
 			sourceTree = "<group>";
@@ -407,6 +443,15 @@
 				A8074B451CACDF9E007865F5 /* FinanceFactory.swift */,
 			);
 			name = FinanceJS;
+			sourceTree = "<group>";
+		};
+		A8274BAE1CB5A60700EEF9C8 /* Valor futuro */ = {
+			isa = PBXGroup;
+			children = (
+				A8274BA91CB5A5F500EEF9C8 /* ValorFuturo.swift */,
+				A8274BAF1CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift */,
+			);
+			name = "Valor futuro";
 			sourceTree = "<group>";
 		};
 		A88242A71CACBE6F009C5F43 = {
@@ -673,6 +718,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8E4A9621CB6F945008F214E /* JurosDescontos.swift in Sources */,
 				A88BDA781CACE1170014E3AF /* FormCustomization.swift in Sources */,
 				A8074B821CACE029007865F5 /* ContasViewController.swift in Sources */,
 				A8074B6C1CACE00F007865F5 /* DespesaDAO.swift in Sources */,
@@ -688,6 +734,8 @@
 				A8F812431CADBF8D008854A0 /* Categoria.swift in Sources */,
 				A8074B571CACDFE8007865F5 /* CategoriaTableViewController.swift in Sources */,
 				A8F812521CADC010008854A0 /* Receita+CoreDataProperties.swift in Sources */,
+				A8E4A95B1CB6F4A4008F214E /* VariacaoPercentualController.swift in Sources */,
+				A8E4A9601CB6F8EE008F214E /* ValorInicialController.swift in Sources */,
 				A886670E1CB2061400EC778D /* SidebarMenu.swift in Sources */,
 				A8F8122C1CADB998008854A0 /* SWRevealViewController.m in Sources */,
 				A8074B8A1CACE049007865F5 /* Porcentagem.swift in Sources */,
@@ -706,15 +754,19 @@
 				A8F8124A1CADBFD7008854A0 /* TipoConta+CoreDataProperties.swift in Sources */,
 				4E937E2C1CAEF0C1007806B5 /* MapaViewController.swift in Sources */,
 				4E937E321CAF1C50007806B5 /* LocalViewController.swift in Sources */,
+				0D82FE851CB71F6C00CE8E3C /* ManualFinanceiro.swift in Sources */,
 				A8074B621CACE001007865F5 /* ReceitasTableViewController.swift in Sources */,
 				A8074B8F1CACE060007865F5 /* CalculadoraController.swift in Sources */,
 				A8074B631CACE001007865F5 /* ReceitasViewController.swift in Sources */,
 				A88BDA731CACE1170014E3AF /* Color.swift in Sources */,
 				A88BDA771CACE1170014E3AF /* Notification.swift in Sources */,
 				A8074B6D1CACE00F007865F5 /* DespesasTableViewController.swift in Sources */,
+				A8274BB01CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift in Sources */,
+				0D82FE7F1CB713D900CE8E3C /* AjudaPopoverController.swift in Sources */,
 				A8074B801CACE029007865F5 /* ContaDAO.swift in Sources */,
 				A8074B6E1CACE00F007865F5 /* DespesasViewController.swift in Sources */,
 				A8074B611CACE001007865F5 /* ReceitaDAO.swift in Sources */,
+				A8274BAA1CB5A5F500EEF9C8 /* ValorFuturo.swift in Sources */,
 				A8074B771CACE01F007865F5 /* TipoContasViewController.swift in Sources */,
 				A8F812531CADC010008854A0 /* Receita.swift in Sources */,
 				4E937E361CAF22CF007806B5 /* LocalDAO.swift in Sources */,

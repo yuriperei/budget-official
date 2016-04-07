@@ -51,7 +51,7 @@ class FormCustomization {
             text.removeLastChar()
         }
         
-        if (text.characters.count>8) {
+        if (text.characters.count>7) {
             text.removeLastChar()
         }
         
@@ -67,8 +67,7 @@ class FormCustomization {
     }
     
     private static func formatCurrency(string: String) -> String{
-        var numberFromField:Float?
-        numberFromField = string.floatConverter/100
-        return numberFromField!.convertToMoedaBr()
+        let numberFromField = string.floatConverter/100
+        return numberFromField.convertToMoedaBr()
     }
 }

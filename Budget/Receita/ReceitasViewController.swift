@@ -62,9 +62,6 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
         // Alinhar as labels
         FormCustomization.updateWidthsForLabels(labels)
-        
-
-
     }
     
     func updateTextField(sender:UIDatePicker){

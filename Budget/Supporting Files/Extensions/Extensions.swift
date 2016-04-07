@@ -63,7 +63,7 @@ extension String {
             return decimalConverter
         }
         
-        print("Erro floatConverter")
+        print("Erro doubleConverter")
         return 0
     }
     
@@ -125,6 +125,19 @@ extension Double {
         formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
         formatter.locale = NSLocale(localeIdentifier: "pt_BR")
         return (formatter.stringFromNumber(self))!
+    }
+    var stringValue: String {
+        return String(format: "%g", self)
+    }
+    mutating func toFixed(decimal:Int) {
+        let decimalDouble = pow(10.0,2)
+        print(round(decimalDouble*self))
+        self = round(decimalDouble*self)/decimalDouble
+    }
+    
+    func removeLastNumber() -> Double {
+        //        return (self - (self % 10))/10
+        return Double(Int(self/10))
     }
 }
 

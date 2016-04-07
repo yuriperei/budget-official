@@ -14,6 +14,7 @@ class CalculadoraController: UIViewController {
     @IBOutlet weak var lblOperador: UILabel!
     @IBOutlet weak var lblVisor: UILabel!
     @IBOutlet weak var btnSidebar: UIBarButtonItem!
+    @IBOutlet weak var btnClear: UIButton!
     
     var numberInText:String = ""
     var operatorInText:String = ""
@@ -26,7 +27,8 @@ class CalculadoraController: UIViewController {
         calculadora = Calculadora()
         // Do any additional setup after loading the view.
         SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
-        
+        let longPress = UILongPressGestureRecognizer(target: self, action: "limparTudo:")
+        self.btnClear.addGestureRecognizer(longPress)
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +50,8 @@ class CalculadoraController: UIViewController {
 //        return lblVisor.text!
     }
     
+    
+    
     @IBAction func inserirNumero(sender: UIButton) {
 //        if((calculadora?.numeroAtual == 0)){
 //            lblVisor.text = sender.currentTitle
@@ -60,7 +64,7 @@ class CalculadoraController: UIViewController {
             numberInText.appendContentsOf(sender.currentTitle!)
         }
         
-        calculadora?.numeroAtual = numberInText.floatValue
+        calculadora?.numeroAtual = numberInText.doubleValue
         
         if ((lblVisor.text == "0") || (resultado)) {
             lblVisor.text = sender.currentTitle!
@@ -99,7 +103,7 @@ class CalculadoraController: UIViewController {
                 lblVisor.text?.appendContentsOf(operatorInText)
                 break;
             }
-                calculadora?.numeroAtual = numberInText.floatValue
+                calculadora?.numeroAtual = numberInText.doubleValue
                 if(calculadora?.numeroFinal == 0){
                     calculadora?.numeroFinal = calculadora!.numeroAtual
                     
@@ -167,9 +171,19 @@ class CalculadoraController: UIViewController {
         }
         lblVisor.text?.removeLastChar()
         if(lblVisor.text == ""){
-            lblVisor.text = "0"
-            lblResultado.text = ""
+//            lblVisor.text = "0"
+//            lblResultado.text = ""
+            self.limparTudo()
         }
+        
+    }
+    
+    func limparTudo(sender: UILongPressGestureRecognizer? = nil){
+        calculadora?.limparCalculadora()
+        lblVisor.text = "0"
+        lblResultado.text = ""
+        numberInText = ""
+        operatorInText = ""
     }
     
     /*

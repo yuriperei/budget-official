@@ -168,5 +168,3 @@ if (typeof exports !== 'undefined') {
     module.exports = Finance;
   }
 }
-
-var Finance = require('financejs'); var finance = new Finance();finance.CAGR(10000, 19500, 3);

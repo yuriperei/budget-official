@@ -8,13 +8,18 @@
 
 import UIKit
 
+protocol tiposPermitidos {
+    typealias Double
+    typealias Float
+}
+
 class Calculadora {
-    var numeroAtual:Float = 0
+    var numeroAtual:Double = 0
 //    var segundoValor:Float = 0
-    var numeroFinal:Float = 0
+    var numeroFinal:Double = 0
     var opcao:Int = 0
     
-    func calcularOperacao() -> Float {
+    func calcularOperacao() -> Double {
         switch(opcao){
             case 1:
                 numeroFinal += numeroAtual
@@ -33,5 +38,11 @@ class Calculadora {
         }
         
         return numeroFinal
+    }
+    
+    func limparCalculadora() {
+        numeroAtual = 0
+        numeroFinal = 0
+        opcao = 0
     }
 }

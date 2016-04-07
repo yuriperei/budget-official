@@ -8,13 +8,17 @@
 
 import UIKit
 
-class PorcentagemController: UITableViewController {
+class PorcentagemController: UITableViewController, UIPopoverPresentationControllerDelegate {
 
     var calculadora: Calculadora?
+    
+    @IBOutlet weak var lblSegundoValor: UILabel!
+    @IBOutlet weak var lblPrimeiroValor: UILabel!
     
     @IBOutlet weak var txtPrimeiroValor: UITextField!
     @IBOutlet weak var txtSegundoValor: UITextField!
     @IBOutlet weak var lblResultado: UILabel!
+    @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var sgmTipo: UISegmentedControl!
     @IBOutlet weak var btnSideBar: UIBarButtonItem!
     
@@ -22,6 +26,7 @@ class PorcentagemController: UITableViewController {
         super.viewDidLoad()
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
         calculadora = Porcentagem()
+        FormCustomization.updateWidthsForLabels(labels)
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,102 +40,59 @@ class PorcentagemController: UITableViewController {
     
     @IBAction func calcularValorPorcentagem(sender: UIButton) {
         //Porcentagem do valor
-        
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatConverterMoeda()
-        
-        if let calculadora = calculadora as? Porcentagem {
-            calculadora.porcentagem = txtSegundoValor.text!.floatConverter
-            lblResultado.text = calculadora.calcularPorcentagemDoValor().convertToMoedaBr()
+        if (sgmTipo.selectedSegmentIndex == 0) {
+            calculadora?.numeroAtual = txtSegundoValor.text!.doubleConverterMoeda()
+            if let calculadora = calculadora as? Porcentagem {
+                calculadora.porcentagem = txtPrimeiroValor.text!.doubleConverter
+                lblResultado.text = calculadora.calcularPorcentagemDoValor().convertToMoedaBr()
+            }
+        } else {
+            calcularPercentualValor(sender)
         }
     }
     
-    @IBAction func calcularPercentualValor(sender: UIButton) {
+    private func calcularPercentualValor(sender: UIButton) {
         //Valor porcentagem
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatConverterMoeda()
-        calculadora?.numeroFinal = txtSegundoValor.text!.floatConverterMoeda()
+        calculadora?.numeroAtual = txtPrimeiroValor.text!.doubleConverterMoeda()
+        calculadora?.numeroFinal = txtSegundoValor.text!.doubleConverterMoeda()
         
         if let calculadora = calculadora as? Porcentagem {
             lblResultado.text = String(format: "%.4g", calculadora.calcularValorPorcentagem()) + "%"
         }
     }
     
-    @IBAction func changePlaceholderVariacao(sender: UISegmentedControl) {
+    @IBAction func changeLabelPorcentagem(sender: UISegmentedControl) {
         if (sgmTipo.selectedSegmentIndex == 0) {
-            txtSegundoValor.placeholder = "Valor aumentado"
+            lblPrimeiroValor.text = "Porcentagem:"
+            txtPrimeiroValor.text = ""
+            txtPrimeiroValor.removeTarget(self, action: "maskTextField:", forControlEvents: .EditingChanged)
         } else {
-            txtSegundoValor.placeholder = "Valor reduzido"
+            lblPrimeiroValor.text = "Valor parcial:"
+            txtPrimeiroValor.text = "R$0,00"
+            txtPrimeiroValor.addTarget(self, action: "maskTextField:", forControlEvents: .EditingChanged)
         }
     }
-    
-    @IBAction func calcularVariacao(sender: UIButton) {
-        //Aumento percentual
-        calculadora?.numeroAtual = txtSegundoValor.text!.floatConverterMoeda()
-        calculadora?.numeroFinal = txtPrimeiroValor.text!.floatConverterMoeda()
-        
-        if let calculadora = calculadora as? Porcentagem {
-            if (calculadora.numeroFinal<=calculadora.numeroAtual) {
-                lblResultado.text = String(format: "%.4g", calculadora.calcularAumentoPercentual()) + "%"
-            } else {
-                lblResultado.text = String(format: "%.4g", calculadora.calcularDiminuicaoPercentual()) + "%"
-            }
-        }
-//        
-//        //Diminuição percentual
-//        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
-//        calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
-//        if let calculadora = calculadora as? Porcentagem {
-//            print(calculadora.calcularDiminuicaoPercentual())
-//        }
-    }
-    
-    @IBAction func calcularValorInicial(sender: UIButton) {
-        //Valor inicial com aumento
-        calculadora?.numeroFinal = txtPrimeiroValor.text!.floatConverterMoeda()
-        
-        if let calculadora = calculadora as? Porcentagem {
-            calculadora.porcentagem = txtSegundoValor.text!.floatValue
-            
-            if (sgmTipo.selectedSegmentIndex == 0) {
-                lblResultado.text = calculadora.calcularValorInicialAumentado().convertToMoedaBr()
-            } else {
-                lblResultado.text = calculadora.calcularValorInicialDiminuido().convertToMoedaBr()
-            }
-        }
-    }
-    
-    @IBAction func calcularJurosDescontos(sender: UIButton) {
-        //Juros
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatConverterMoeda()
-        
-        if let calculadora = calculadora as? Porcentagem {
-            calculadora.porcentagem = txtSegundoValor.text!.floatValue
-            
-            if (sgmTipo.selectedSegmentIndex == 0) {
-                lblResultado.text = calculadora.calcularValorComJuros().convertToMoedaBr()
-            } else {
-                lblResultado.text = calculadora.calcularValorComDesconto().convertToMoedaBr()
-            }
-        }
-        
-        //Desconto
-//        calculadora?.numeroAtual = 1000
-//        
-//        if let calculadora = calculadora as? Porcentagem {
-//            calculadora.porcentagem = 15
-//            print(calculadora.calcularValorComDesconto())
-//        }
-    }
-    
     
 
     /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "myPopover") {
+            let popView = segue.destinationViewController as! AjudaPopoverController
+            popView.popoverPresentationController!.delegate = self
+            popView.txtLabel = "Como calcular porcentagem."
+        }
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+    
+    private func getLabel() -> UILabel {
+        let label =  UILabel(frame: CGRectMake(20, 20, 50, 100))
+        label.text = "text"
+        return label
+    }
 
 }
