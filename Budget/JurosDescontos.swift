@@ -31,4 +31,12 @@ class JurosDescontosController: PorcentagemController {
         //            print(calculadora.calcularValorComDesconto())
         //        }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        if (segue.identifier == "myPopover") {
+            let popView = segue.destinationViewController as! AjudaPopoverController
+            popView.txtLabel = "Como calcular o juros e descontos."
+        }
+    }
 }

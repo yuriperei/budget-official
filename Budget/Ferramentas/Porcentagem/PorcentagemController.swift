@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PorcentagemController: UITableViewController {
+class PorcentagemController: UITableViewController, UIPopoverPresentationControllerDelegate {
 
     var calculadora: Calculadora?
     
@@ -76,12 +76,23 @@ class PorcentagemController: UITableViewController {
 
     /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "myPopover") {
+            let popView = segue.destinationViewController as! AjudaPopoverController
+            popView.popoverPresentationController!.delegate = self
+            popView.txtLabel = "Como calcular porcentagem."
+        }
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
+    }
+    
+    private func getLabel() -> UILabel {
+        let label =  UILabel(frame: CGRectMake(20, 20, 50, 100))
+        label.text = "text"
+        return label
+    }
 
 }

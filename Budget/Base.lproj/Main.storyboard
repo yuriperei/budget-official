@@ -908,12 +908,37 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cc" id="Tba-op-IyW">
+                                        <rect key="frame" x="0.0" y="246" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tba-op-IyW" id="kSf-S3-OAn">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xs4-Hd-ZYk">
+                                                    <rect key="frame" x="8" y="2" width="304" height="39"/>
+                                                    <state key="normal" title="Saiba como avaliar sua compra"/>
+                                                    <connections>
+                                                        <segue destination="fIS-l7-Ixz" kind="popoverPresentation" popoverAnchorView="Xs4-Hd-ZYk" id="dcs-Yc-aIF">
+                                                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES"/>
+                                                        </segue>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Xs4-Hd-ZYk" firstAttribute="top" secondItem="kSf-S3-OAn" secondAttribute="top" constant="2" id="Iwm-c6-3Gp"/>
+                                                <constraint firstAttribute="bottom" secondItem="Xs4-Hd-ZYk" secondAttribute="bottom" constant="2" id="kJc-WK-0if"/>
+                                                <constraint firstItem="Xs4-Hd-ZYk" firstAttribute="leading" secondItem="kSf-S3-OAn" secondAttribute="leading" constant="8" id="ssi-nO-c8D"/>
+                                                <constraint firstAttribute="trailing" secondItem="Xs4-Hd-ZYk" secondAttribute="trailing" constant="8" id="wpm-wD-e7d"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="0zf-2f-8jo">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cc" id="jMX-TT-56L">
-                                        <rect key="frame" x="0.0" y="282" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="326" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jMX-TT-56L" id="NNp-Y4-wy5">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -940,7 +965,7 @@
                             <tableViewSection headerTitle="Resultado" id="N9Y-92-xOR">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="80" id="gPJ-XT-NjM">
-                                        <rect key="frame" x="0.0" y="377" width="320" height="80"/>
+                                        <rect key="frame" x="0.0" y="421" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gPJ-XT-NjM" id="NWT-Jd-ecl">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
@@ -974,7 +999,6 @@
                         <barButtonItem key="leftBarButtonItem" image="interface" id="jqI-QV-d1k"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnSideBar" destination="jqI-QV-d1k" id="6xS-TE-lix"/>
                         <outlet property="lblResultadoJuros" destination="7PJ-1P-aOg" id="KG0-tK-LLd"/>
@@ -1425,6 +1449,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="523-oe-Ngw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="860" y="-1097"/>
+        </scene>
+        <!--Manual Financeiro Controller-->
+        <scene sceneID="Sgw-AU-iYT">
+            <objects>
+                <viewController id="fIS-l7-Ixz" customClass="ManualFinanceiroController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="db0-Bi-DNC"/>
+                        <viewControllerLayoutGuide type="bottom" id="YxV-vd-2VZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XJd-5P-3Wp">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Como avaliar sua compra:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOG-4S-2kx">
+                                <rect key="frame" x="20" y="72" width="280" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNz-Qx-2MN">
+                                <rect key="frame" x="25" y="346" width="280" height="211"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qual opção escolher:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3n-A0-PJo">
+                                <rect key="frame" x="25" y="311" width="280" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NwR-G7-XXO">
+                                <rect key="frame" x="25" y="299" width="275" height="4"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ulh-Yp-zZv">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Manual financeiro" id="dkK-Wc-IVF">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="giT-A2-fpg">
+                                            <connections>
+                                                <action selector="dissmissView:" destination="fIS-l7-Ixz" id="Y4C-ag-zqP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="52" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FU4-Ro-k2f">
+                                <rect key="frame" x="20" y="112" width="280" height="179"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oat-wj-Bx4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2198" y="3241"/>
         </scene>
         <!--Calculadora-->
         <scene sceneID="Bmn-6b-A9W">
@@ -1896,6 +1984,13 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Porcentagem do valor" id="Ipc-6U-6EL">
                         <barButtonItem key="leftBarButtonItem" image="interface" id="jRT-Tz-vU8"/>
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="uhc-Po-gMm">
+                            <connections>
+                                <segue destination="Jet-9v-SuT" kind="popoverPresentation" identifier="myPopover" popoverAnchorBarButtonItem="uhc-Po-gMm" id="2Ep-zX-DmG">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -2269,6 +2364,13 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Valor inicial" id="0SY-5X-oQV">
                         <barButtonItem key="leftBarButtonItem" image="interface" id="4PK-Hn-1fi"/>
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="hXG-yq-cjj">
+                            <connections>
+                                <segue destination="Jet-9v-SuT" kind="popoverPresentation" identifier="myPopover" popoverAnchorBarButtonItem="hXG-yq-cjj" id="1hX-OM-g5s">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -2288,10 +2390,10 @@
             </objects>
             <point key="canvasLocation" x="-1121" y="2597"/>
         </scene>
-        <!--View Controller-->
+        <!--Ajuda Popover Controller-->
         <scene sceneID="JpJ-IJ-hIG">
             <objects>
-                <viewController id="Jet-9v-SuT" sceneMemberID="viewController">
+                <viewController id="Jet-9v-SuT" customClass="AjudaPopoverController" customModule="Budget" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wpH-S9-vm6"/>
                         <viewControllerLayoutGuide type="bottom" id="5QW-EB-6cl"/>
@@ -2300,29 +2402,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ha1-oF-s7u">
-                                <rect key="frame" x="30" y="36" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0T-Vo-QDS">
+                                <rect key="frame" x="24" y="32" width="252" height="136"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Ha1-oF-s7u" firstAttribute="centerY" secondItem="Uue-Zi-nNq" secondAttribute="centerY" id="2XF-ev-Qbu"/>
-                            <constraint firstItem="Ha1-oF-s7u" firstAttribute="leading" secondItem="Uue-Zi-nNq" secondAttribute="leadingMargin" constant="14" id="8Pa-AD-Qcl"/>
-                            <constraint firstItem="Ha1-oF-s7u" firstAttribute="top" secondItem="wpH-S9-vm6" secondAttribute="bottom" constant="16" id="MKD-Dq-4HC"/>
-                            <constraint firstItem="Ha1-oF-s7u" firstAttribute="centerX" secondItem="Uue-Zi-nNq" secondAttribute="centerX" id="dyA-a2-gph"/>
-                        </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="300" height="200"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="200"/>
+                    <connections>
+                        <outlet property="lblAjuda" destination="k0T-Vo-QDS" id="LWs-hi-Aak"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vf7-hv-pVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-621" y="3046"/>
+            <point key="canvasLocation" x="-757" y="3115"/>
         </scene>
         <!--Cálculo de porcentagem-->
         <scene sceneID="cJO-aQ-pfB">
@@ -2511,6 +2609,13 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Cálculo de porcentagem" id="Xse-rX-LfJ">
                         <barButtonItem key="leftBarButtonItem" image="interface" id="bQR-cj-ckh"/>
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="MTW-m6-dmB">
+                            <connections>
+                                <segue destination="Jet-9v-SuT" kind="popoverPresentation" identifier="myPopover" popoverAnchorBarButtonItem="MTW-m6-dmB" id="yQz-Og-ars">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -2713,6 +2818,13 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Juros e desconto" id="UWK-uL-zRX">
                         <barButtonItem key="leftBarButtonItem" image="interface" id="ubl-91-ezG"/>
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="Nmd-Z1-af7">
+                            <connections>
+                                <segue destination="Jet-9v-SuT" kind="popoverPresentation" identifier="myPopover" popoverAnchorBarButtonItem="Nmd-Z1-af7" id="WOo-i0-EjA">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -4689,7 +4801,6 @@
                         <barButtonItem key="leftBarButtonItem" image="interface" id="O5C-mq-MQd"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnSidebar" destination="O5C-mq-MQd" id="Srz-Cf-tOU"/>
                         <outlet property="lblResultado" destination="Fdz-iL-eo2" id="prg-52-lxp"/>
@@ -5166,14 +5277,15 @@
         <image name="receita" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="KF9-Rj-9X1"/>
+        <segue reference="wxT-DJ-QcZ"/>
         <segue reference="RnH-uC-IaA"/>
         <segue reference="UB7-6V-HEM"/>
         <segue reference="6DM-AZ-CQb"/>
-        <segue reference="wxT-DJ-QcZ"/>
         <segue reference="7uR-rT-rJ6"/>
-        <segue reference="KF9-Rj-9X1"/>
         <segue reference="hmd-AN-Xbd"/>
         <segue reference="fYU-Lj-GrT"/>
         <segue reference="yhw-hR-QBz"/>
+        <segue reference="2Ep-zX-DmG"/>
     </inferredMetricsTieBreakers>
 </document>

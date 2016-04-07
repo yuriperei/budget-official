@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0D0A851D1CB03AC800A0B023 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */; };
+		0D82FE7F1CB713D900CE8E3C /* AjudaPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D82FE7E1CB713D900CE8E3C /* AjudaPopoverController.swift */; };
+		0D82FE851CB71F6C00CE8E3C /* ManualFinanceiro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D82FE841CB71F6C00CE8E3C /* ManualFinanceiro.swift */; };
 		4E6EEA4B1CB31275007928B0 /* TipoContaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */; };
 		4E6EEA501CB3215D007928B0 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88667061CB202DB00EC778D /* Charts.framework */; };
 		4E6EEA511CB3215D007928B0 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A88667061CB202DB00EC778D /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -150,6 +152,8 @@
 
 /* Begin PBXFileReference section */
 		0D0A851C1CB03AC800A0B023 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		0D82FE7E1CB713D900CE8E3C /* AjudaPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AjudaPopoverController.swift; path = "Ferramentas/Porcentagem/Ajuda popover/AjudaPopoverController.swift"; sourceTree = "<group>"; };
+		0D82FE841CB71F6C00CE8E3C /* ManualFinanceiro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManualFinanceiro.swift; path = "Ferramentas/Compra Prazo Vista/ManualFinanceiro.swift"; sourceTree = "<group>"; };
 		4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipoContaDAO.swift; path = "Tipo Conta/TipoContaDAO.swift"; sourceTree = "<group>"; };
 		4E937E241CAEEC3B007806B5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapaViewController.swift; path = local/MapaViewController.swift; sourceTree = "<group>"; };
@@ -259,6 +263,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D82FE831CB7160D00CE8E3C /* Ajuda popover */ = {
+			isa = PBXGroup;
+			children = (
+				0D82FE7E1CB713D900CE8E3C /* AjudaPopoverController.swift */,
+			);
+			name = "Ajuda popover";
+			sourceTree = "<group>";
+		};
+		0D82FE861CB724CC00CE8E3C /* Manual financeiro */ = {
+			isa = PBXGroup;
+			children = (
+				0D82FE841CB71F6C00CE8E3C /* ManualFinanceiro.swift */,
+			);
+			name = "Manual financeiro";
+			sourceTree = "<group>";
+		};
 		4E937E1F1CAEEBE2007806B5 /* Local */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +421,7 @@
 				A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */,
 				A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */,
 				A8E4A9611CB6F945008F214E /* JurosDescontos.swift */,
+				0D82FE831CB7160D00CE8E3C /* Ajuda popover */,
 			);
 			name = Porcentagem;
 			sourceTree = "<group>";
@@ -410,6 +431,7 @@
 			children = (
 				A8074B841CACE03A007865F5 /* CompraPrazoVista.swift */,
 				A8074B851CACE03A007865F5 /* CompraPrazoVistaViewController.swift */,
+				0D82FE861CB724CC00CE8E3C /* Manual financeiro */,
 			);
 			name = "Compra Prazo Vista";
 			sourceTree = "<group>";
@@ -732,6 +754,7 @@
 				A8F8124A1CADBFD7008854A0 /* TipoConta+CoreDataProperties.swift in Sources */,
 				4E937E2C1CAEF0C1007806B5 /* MapaViewController.swift in Sources */,
 				4E937E321CAF1C50007806B5 /* LocalViewController.swift in Sources */,
+				0D82FE851CB71F6C00CE8E3C /* ManualFinanceiro.swift in Sources */,
 				A8074B621CACE001007865F5 /* ReceitasTableViewController.swift in Sources */,
 				A8074B8F1CACE060007865F5 /* CalculadoraController.swift in Sources */,
 				A8074B631CACE001007865F5 /* ReceitasViewController.swift in Sources */,
@@ -739,6 +762,7 @@
 				A88BDA771CACE1170014E3AF /* Notification.swift in Sources */,
 				A8074B6D1CACE00F007865F5 /* DespesasTableViewController.swift in Sources */,
 				A8274BB01CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift in Sources */,
+				0D82FE7F1CB713D900CE8E3C /* AjudaPopoverController.swift in Sources */,
 				A8074B801CACE029007865F5 /* ContaDAO.swift in Sources */,
 				A8074B6E1CACE00F007865F5 /* DespesasViewController.swift in Sources */,
 				A8074B611CACE001007865F5 /* ReceitaDAO.swift in Sources */,

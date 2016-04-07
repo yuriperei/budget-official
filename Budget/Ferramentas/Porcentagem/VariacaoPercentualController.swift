@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VariacaoPercentualController: PorcentagemController, UIPopoverPresentationControllerDelegate {
+class VariacaoPercentualController: PorcentagemController {
     @IBAction func changePlaceholderVariacao(sender: UISegmentedControl) {
         if (sgmTipo.selectedSegmentIndex == 0) {
             txtSegundoValor.placeholder = "Valor aumentado"
@@ -39,14 +39,11 @@ class VariacaoPercentualController: PorcentagemController, UIPopoverPresentation
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
         if (segue.identifier == "myPopover") {
-            let popView = segue.destinationViewController
-            popView.popoverPresentationController?.delegate = self
+            let popView = segue.destinationViewController as! AjudaPopoverController
+            popView.txtLabel = "Como calcular a variação."
         }
-    }
-    
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.None
     }
 
 }

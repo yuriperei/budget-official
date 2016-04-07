@@ -106,7 +106,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         if (indexPath.row % 2 == 0){
             cell.backgroundColor = Color.uicolorFromHex(0xffffff)
         }else{
-            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
+            cell.backgroundColor = Color.uicolorFromHex(0xf2f2f2)
         }
     }
     

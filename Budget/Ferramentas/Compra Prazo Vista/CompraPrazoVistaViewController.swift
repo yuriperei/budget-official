@@ -59,7 +59,7 @@ class CompraPrazoVistaViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch(section) {
-            case 0: return 3    // section 0 has 2 rows
+            case 0: return 4    // section 0 has 2 rows
             case 1: return 1    // section 1 has 1 row
             case 2: return 1    // section 2 has 1 row
             default: fatalError("Unknown number of sections")

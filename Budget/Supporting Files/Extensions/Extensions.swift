@@ -63,7 +63,7 @@ extension String {
             return decimalConverter
         }
         
-        print("Erro floatConverter")
+        print("Erro doubleConverter")
         return 0
     }
     
