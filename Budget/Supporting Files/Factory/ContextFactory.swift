@@ -26,11 +26,11 @@ class ContextFactory {
         return NSManagedObject(entity: contaEntity!, insertIntoManagedObjectContext: getContext())
     }
     
-    static func getFetchedResultsController(entityName:String, firstSort:String, secondSort:String = "", sectionName:String) -> NSFetchedResultsController {
+    static func getFetchedResultsController(entityName:String, firstSort:String, secondSort:String = "", ascending:Bool, sectionName:String) -> NSFetchedResultsController {
         
         let fetchRequest = NSFetchRequest(entityName: entityName)
-        let sortDescriptor = NSSortDescriptor(key: firstSort, ascending: true)
-        let sortDescriptor1 = NSSortDescriptor(key: secondSort, ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: firstSort, ascending: ascending)
+        let sortDescriptor1 = NSSortDescriptor(key: secondSort, ascending: !ascending)
         fetchRequest.sortDescriptors = [sortDescriptor, sortDescriptor1]
         
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getContext(), sectionNameKeyPath: sectionName, cacheName: nil)

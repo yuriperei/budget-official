@@ -18,11 +18,11 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     var local: Local? = nil
     let receitaDAO:ReceitaDAO = ReceitaDAO()
     var pickerView: UIDatePicker!
+    var saldoPositivo:Bool? // Se o saldo atual, antes de adicionar a receita era negativo e agora é positivo ir para TRUE
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
     @IBOutlet weak var txtDescricao: UITextField!
-    @IBOutlet weak var navegacao: UINavigationItem!
     @IBOutlet weak var txtValor: UITextField!
     @IBOutlet weak var txtEndereco: UITextField!
     @IBOutlet weak var txtConta: UITextField!
@@ -38,7 +38,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
         if let receita = receita {
             txtNome.text = receita.nome!
-            txtValor.text = String(receita.valor!)
+            txtValor.text = receita.valor!.convertToMoedaBr()
             txtDescricao.text = receita.descricao!
             txtData.text = Data.formatDateToString(receita.data!)
             conta = receita.conta //as? Conta
@@ -95,13 +95,17 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         FormCustomization.aplicarMascara(&sender.text!)
     }
     
+    @IBAction func maskTextData(sender: UITextField) {
+        FormCustomization.aplicarMascaraData(&sender.text!, data: Data.formatDateToString(self.pickerView.date))
+    }
+    
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
-        if Validador.vazio(txtValor.text!){
-            erros.appendContentsOf("\nPreencha o campo Valor!")
+        if Validador.vazio(txtValor.text!.floatConverterMoeda()){
+            erros.appendContentsOf("\nAdicione um valor!")
         }
         
         if Validador.vazio(txtEndereco.text!){
@@ -122,19 +126,36 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         validarCampos()
         
         if(erros.isEmpty){
-            receita = Receita.getReceita()
-            receita?.nome = txtNome.text
-            receita?.descricao = txtDescricao.text
-            receita?.valor = txtValor.text!.floatConverterMoeda()
-            receita?.conta = conta
-            receita?.categoria = categoria
-            receita?.local = local
-            receita?.data = Data.removerTime(txtData.text!)
             
-            // Atualizar o saldo da conta referente
-            conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
             
-            salvarConta()
+            func dados(action: UIAlertAction){
+                receita = Receita.getReceita()
+                receita?.nome = txtNome.text
+                receita?.descricao = txtDescricao.text
+                receita?.valor = txtValor.text!.floatConverterMoeda()
+                receita?.conta = conta
+                receita?.categoria = categoria
+                receita?.local = local
+                receita?.data = Data.removerTime(txtData.text!)
+                
+                
+                // Atualizar o saldo da conta referente
+                conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
+                
+                salvarConta()
+            }
+            
+            let novoSaldo = Float((conta?.saldo)!) + (txtValor.text?.floatConverterMoeda())!
+            
+            if (Float((conta?.saldo)!) <= 0 && novoSaldo > 0){
+                let alert = Notification.avisoReceita("Parabéns!", mensagem: "A sua conta ficará com saldo positivo", completion: dados)
+                presentViewController(alert, animated: true, completion: nil)
+            }
+            
+            
+            
+            
+
             
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
@@ -172,9 +193,10 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     }
     
     private func salvarConta(){
-        
+
         do{
             try receitaDAO.salvar(receita!)
+            
         }catch{
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
             presentViewController(alert, animated: true, completion: nil)

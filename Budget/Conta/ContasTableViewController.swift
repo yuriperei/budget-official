@@ -22,7 +22,7 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     let contaDAO:ContaDAO = ContaDAO()
     var tela: Bool = false
     let context = ContextFactory.getContext()
-    var frc = Conta.getContasController("nome", secondSort: "tipoconta.nome", sectionName: "tipoconta.nome")
+    var frc = Conta.getContasController("nome")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +51,10 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        atualizarTableView()
+    }
+    
+    func atualizarTableView(){
         tableView.reloadData()
     }
     
@@ -60,22 +64,15 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         
-        if let sections = frc.sections {
-            return sections.count
-        }
-        
-        return 0
+        let numbersOfSections = frc.sections?.count
+        return numbersOfSections!
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
        
-        if let sections = frc.sections {
-            let currentSection = sections[section]
-            return currentSection.numberOfObjects
-        }
-        
-        return 0
+        let numberOfRowsInSection = frc.sections?[section].numberOfObjects
+        return numberOfRowsInSection!
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -90,14 +87,14 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         
         return cell
     }
-    
+//    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         
         if (indexPath.row % 2 == 0){
             cell.backgroundColor = Color.uicolorFromHex(0xffffff)
         }else{
-            cell.backgroundColor = Color.uicolorFromHex(0xf4f4f4)
+            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
         }
     }
 
@@ -132,17 +129,9 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
                 presentViewController(alerta, animated: true, completion: nil)
             }else{
                 
-                let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
-                
-//                UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
-//                
-//                let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-//                detalhes.addAction(cancelar)
-//                
-//                let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
-//                detalhes.addAction(deletar)
-                
+                let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)               
                 presentViewController(detalhes, animated: true, completion: nil)
+                atualizarTableView()
                 
             }
         } else if editingStyle == .Insert {

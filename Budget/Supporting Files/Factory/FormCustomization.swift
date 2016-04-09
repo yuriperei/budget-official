@@ -58,7 +58,9 @@ class FormCustomization {
         text = formatCurrency(text)
     }
     
-    
+    static func aplicarMascaraData(inout text:String, data:String){
+        text = data
+    }
     
     private static func formatText(inout priceS: String) {
         priceS = priceS.stringByReplacingOccurrencesOfString("R$",withString:"")

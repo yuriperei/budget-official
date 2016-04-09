@@ -20,7 +20,7 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         super.viewDidLoad()
         SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
         
-        frc = Despesa.getReceitasController("nome", secondSort: "data", sectionName: "data")
+        frc = Despesa.getReceitasController("data", secondSort: "nome", sectionName: "data")
         frc.delegate = self
         
         do{
@@ -43,6 +43,10 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        atualizarTableView()
+    }
+    
+    func atualizarTableView(){
         tableView.reloadData()
     }
 
@@ -127,18 +131,20 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "Futura", size: 13)!
-        header.textLabel?.textColor = Color.uicolorFromHex(0x1D3347)
-        header.tintColor = Color.uicolorFromHex(0xF2F2F2)
+        header.textLabel?.textColor = Color.uicolorFromHex(0xffffff)
+        header.tintColor = Color.uicolorFromHex(0x274561)//2C4E6E / 274561
         //64cdfc
     }
     
-//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if (indexPath.row % 2 == 0){
-//            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
-//        }else{
-//            cell.backgroundColor = Color.uicolorFromHex(0xf1f4f9)
-//        }
-//    }
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if (indexPath.row % 2 == 0){
+            cell.backgroundColor = Color.uicolorFromHex(0xffffff)
+        }else{
+            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -163,8 +169,8 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
             }
             
             let detalhes = Notification.solicitarConfirmacao("Excluir", mensagem: "Tem certeza que deseja excluir? \n O saldo da sua conta será atualizado!", completion: removerDespesa)
-            
             presentViewController(detalhes, animated: true, completion: nil)
+            atualizarTableView()
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }

@@ -101,6 +101,15 @@ extension String {
     }
 }
 
+extension NSNumber {
+    func convertToMoedaBr() -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
+        return (formatter.stringFromNumber(self))!
+    }
+}
+
 extension Float {
     var stringValue: String {
         return String(format: "%g", self)

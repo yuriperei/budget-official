@@ -14,4 +14,8 @@ class Validador{
         return campo == "" || campo.characters.count == 0
     }
     
+    static func vazio(campo: Float) -> Bool{
+        return campo == 0
+    }
+    
 }

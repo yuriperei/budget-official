@@ -39,7 +39,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         if let despesa = despesa {
             txtNome.text = despesa.nome!
-            txtValor.text = String(despesa.valor!)
+            txtValor.text = despesa.valor!.convertToMoedaBr()
             txtDescricao.text = despesa.descricao!
             conta = despesa.conta
             txtData.text = Data.formatDateToString(despesa.data!)
@@ -112,13 +112,17 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         FormCustomization.aplicarMascara(&sender.text!)
     }
     
+    @IBAction func maskTextData(sender: UITextField) {
+        FormCustomization.aplicarMascaraData(&sender.text!, data: Data.formatDateToString(self.pickerView.date))
+    }
+    
     func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
-        if Validador.vazio(txtValor.text!){
-            erros.appendContentsOf("\nPreencha o campo Valor!")
+        if Validador.vazio(txtValor.text!.floatConverterMoeda()){
+            erros.appendContentsOf("\nAdicione um valor!")
         }
         
         if Validador.vazio(txtEndereco.text!){
@@ -139,20 +143,30 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         validarCampos()
         
         if(erros.isEmpty){
-            despesa = Despesa.getDespesa()
-            despesa?.nome = txtNome.text
-            despesa?.descricao = txtDescricao.text
-            despesa?.valor = txtValor.text!.floatConverterMoeda()
-            despesa?.conta = conta
-            despesa?.categoria = categoria
-            despesa?.local = local
-            despesa?.data = Data.removerTime(txtData.text!)
-            indexChanged(sgFglTipo)
             
-            // Atualizar o saldo da conta referente
-            conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
+            func dados(action: UIAlertAction){
+                despesa = Despesa.getDespesa()
+                despesa?.nome = txtNome.text
+                despesa?.descricao = txtDescricao.text
+                despesa?.valor = txtValor.text!.floatConverterMoeda()
+                despesa?.conta = conta
+                despesa?.categoria = categoria
+                despesa?.local = local
+                despesa?.data = Data.removerTime(txtData.text!)
+                indexChanged(sgFglTipo)
+                
+                // Atualizar o saldo da conta referente
+                conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
+                
+                salvarConta()
+            }
             
-            salvarConta()
+            let novoSaldo = Float((conta?.saldo)!) - (txtValor.text?.floatConverterMoeda())!
+            
+            if (novoSaldo < 0){
+                let alert = Notification.solicitarConfirmacaoDespesa("Cuidado!", mensagem: "Ao salvar essa despesa sua conta ficará negativa", completion: dados)
+                presentViewController(alert, animated: true, completion: nil)
+            }
             
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")

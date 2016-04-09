@@ -19,8 +19,12 @@ class Conta: NSManagedObject {
         return ContextFactory.getManagedObject("Conta") as! Conta
     }
     
+    static func getContasController(firstSort:String) -> NSFetchedResultsController {
+        return ContextFactory.getFetchedResultsController("Conta", firstSort: firstSort)
+    }
+    
     static func getContasController(firstSort:String, secondSort:String = "", sectionName:String) -> NSFetchedResultsController {
-        return ContextFactory.getFetchedResultsController("Conta", firstSort: firstSort, secondSort: secondSort, sectionName: sectionName)
+        return ContextFactory.getFetchedResultsController("Conta", firstSort: firstSort, secondSort: secondSort, ascending: true, sectionName: sectionName)
     }
     
     func moeda(valor: Float) -> String{

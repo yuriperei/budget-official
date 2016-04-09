@@ -49,6 +49,10 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        atualizarTableView()
+    }
+    
+    func atualizarTableView(){
         tableView.reloadData()
     }
     
@@ -82,6 +86,16 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
         
         
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if (indexPath.row % 2 == 0){
+            cell.backgroundColor = Color.uicolorFromHex(0xffffff)
+        }else{
+            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
+        }
     }
 
     /*
@@ -119,6 +133,7 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
                 
                 let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
                 presentViewController(detalhes, animated: true, completion: nil)
+                atualizarTableView()
                 
             }
             

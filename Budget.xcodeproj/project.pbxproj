@@ -21,6 +21,7 @@
 		4E937E361CAF22CF007806B5 /* LocalDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E351CAF22CF007806B5 /* LocalDAO.swift */; };
 		4E937E381CAF2474007806B5 /* LocalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E371CAF2474007806B5 /* LocalTableViewController.swift */; };
 		4E937E3A1CAF24CA007806B5 /* PlaceLocalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E391CAF24CA007806B5 /* PlaceLocalTableViewCell.swift */; };
+		4EF4EAD01CB83FF90082496F /* PorcentagemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF4EACF1CB83FF90082496F /* PorcentagemTableViewController.swift */; };
 		A8074B461CACDF9E007865F5 /* finance.js in Resources */ = {isa = PBXBuildFile; fileRef = A8074B441CACDF9E007865F5 /* finance.js */; };
 		A8074B471CACDF9E007865F5 /* FinanceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B451CACDF9E007865F5 /* FinanceFactory.swift */; };
 		A8074B4B1CACDFD4007865F5 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8074B481CACDFD4007865F5 /* Dashboard.swift */; };
@@ -163,6 +164,7 @@
 		4E937E351CAF22CF007806B5 /* LocalDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalDAO.swift; path = local/LocalDAO.swift; sourceTree = "<group>"; };
 		4E937E371CAF2474007806B5 /* LocalTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalTableViewController.swift; path = local/LocalTableViewController.swift; sourceTree = "<group>"; };
 		4E937E391CAF24CA007806B5 /* PlaceLocalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaceLocalTableViewCell.swift; path = local/PlaceLocalTableViewCell.swift; sourceTree = "<group>"; };
+		4EF4EACF1CB83FF90082496F /* PorcentagemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PorcentagemTableViewController.swift; path = Ferramentas/Porcentagem/PorcentagemTableViewController.swift; sourceTree = "<group>"; };
 		A8074B441CACDF9E007865F5 /* finance.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = finance.js; path = "Supporting Files/FinanceJS/finance.js"; sourceTree = "<group>"; };
 		A8074B451CACDF9E007865F5 /* FinanceFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinanceFactory.swift; path = "Supporting Files/FinanceJS/FinanceFactory.swift"; sourceTree = "<group>"; };
 		A8074B481CACDFD4007865F5 /* Dashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dashboard.swift; path = Dashboard/Dashboard.swift; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				A8074B891CACE049007865F5 /* PorcentagemController.swift */,
 				A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */,
 				A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */,
+				4EF4EACF1CB83FF90082496F /* PorcentagemTableViewController.swift */,
 				A8E4A9611CB6F945008F214E /* JurosDescontos.swift */,
 				0D82FE831CB7160D00CE8E3C /* Ajuda popover */,
 			);
@@ -721,6 +724,7 @@
 				A8E4A9621CB6F945008F214E /* JurosDescontos.swift in Sources */,
 				A88BDA781CACE1170014E3AF /* FormCustomization.swift in Sources */,
 				A8074B821CACE029007865F5 /* ContasViewController.swift in Sources */,
+				4EF4EAD01CB83FF90082496F /* PorcentagemTableViewController.swift in Sources */,
 				A8074B6C1CACE00F007865F5 /* DespesaDAO.swift in Sources */,
 				4E937E3A1CAF24CA007806B5 /* PlaceLocalTableViewCell.swift in Sources */,
 				A88BDA741CACE1170014E3AF /* ContextFactory.swift in Sources */,

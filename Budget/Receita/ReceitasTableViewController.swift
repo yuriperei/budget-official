@@ -13,15 +13,15 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
 
     @IBOutlet var btnSidebar:UIBarButtonItem!
 //    var tabBar: UITabBar?
-    var frc = NSFetchedResultsController()
+    var frc = Receita.getReceitasController("data", secondSort: "nome", sectionName: "data")
     let receitaDAO = ReceitaDAO()
+    var categoria: Categoria?
+    var conta: Conta?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
-        
-        frc = Receita.getReceitasController("nome", secondSort: "data", sectionName: "data")
         frc.delegate = self
         
         do{
@@ -30,13 +30,15 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             let alert = Notification.mostrarErro()
             presentViewController(alert, animated: true, completion: nil)
         }
-
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -44,6 +46,11 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        atualizarTableView()
+    }
+    
+    func atualizarTableView(){
         tableView.reloadData()
     }
 
@@ -76,6 +83,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             let currentSection = sections[section]
             return Data.sectionFormatarData(currentSection.name)
         }
+        atualizarTableView()
         
         return nil
     }
@@ -87,7 +95,14 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         
         // Configure the cell...
         let receita = frc.objectAtIndexPath(indexPath) as! Receita
+        
+        categoria = receita.categoria // as? Categoria
+        conta = receita.conta // as? Conta
+        
         cell.lblNome.text = receita.nome
+        cell.lblValor.text = receita.valor?.convertToMoedaBr()
+        cell.lblConta.text = conta?.nome
+        cell.lblCategoria.text = categoria?.nome
         
         return cell
     }
@@ -95,8 +110,8 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "Futura", size: 13)!
-        header.textLabel?.textColor = Color.uicolorFromHex(0x1D3347)
-        header.tintColor = Color.uicolorFromHex(0xF2F2F2)
+        header.textLabel?.textColor = Color.uicolorFromHex(0xffffff)
+        header.tintColor = Color.uicolorFromHex(0x274561)//2C4E6E / 274561
         //64cdfc
     }
     
@@ -106,7 +121,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         if (indexPath.row % 2 == 0){
             cell.backgroundColor = Color.uicolorFromHex(0xffffff)
         }else{
-            cell.backgroundColor = Color.uicolorFromHex(0xf2f2f2)
+            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
         }
     }
     
@@ -146,6 +161,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
             })
             
             presentViewController(detalhes, animated: true, completion: nil)
+            atualizarTableView()
             
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
