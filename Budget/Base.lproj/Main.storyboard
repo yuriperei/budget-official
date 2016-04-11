@@ -4933,11 +4933,11 @@
         <image name="tipoConta" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="KpW-af-Hgy"/>
+        <segue reference="6DM-AZ-CQb"/>
         <segue reference="RnH-uC-IaA"/>
         <segue reference="wxT-DJ-QcZ"/>
-        <segue reference="6DM-AZ-CQb"/>
         <segue reference="vGy-4W-C1M"/>
-        <segue reference="KpW-af-Hgy"/>
         <segue reference="DDu-W3-och"/>
         <segue reference="fYU-Lj-GrT"/>
         <segue reference="S4g-Dy-h4z"/>

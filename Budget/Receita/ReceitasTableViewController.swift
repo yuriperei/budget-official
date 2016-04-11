@@ -109,10 +109,9 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "Futura", size: 13)!
-        header.textLabel?.textColor = Color.uicolorFromHex(0xffffff)
-        header.tintColor = Color.uicolorFromHex(0x274561) //2C4E6E / 274561
-        //64cdfc
+        header.textLabel!.font = UIFont(name: "Futura", size: 13)!
+        header.textLabel!.textColor = Color.uicolorFromHex(0xffffff)
+        header.tintColor = Color.uicolorFromHex(0x274561)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
