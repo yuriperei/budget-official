@@ -144,7 +144,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         if(erros.isEmpty){
             
-            func dados(action: UIAlertAction){
+            func dados(){
                 despesa = Despesa.getDespesa()
                 despesa?.nome = txtNome.text
                 despesa?.descricao = txtDescricao.text
@@ -163,9 +163,21 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             
             let novoSaldo = Float((conta?.saldo)!) - (txtValor.text?.floatConverterMoeda())!
             
-            if (novoSaldo < 0){
-                let alert = Notification.solicitarConfirmacaoDespesa("Cuidado!", mensagem: "Ao salvar essa despesa sua conta ficará negativa", completion: dados)
+            if (Float((conta?.saldo)!) <= 0){
+                let alert = Notification.solicitarConfirmacaoDespesa("Cuidado!", mensagem: "A conta \(conta!.nome!) já está negativa, tem certeza?", completion: {
+                    (action:UIAlertAction) in
+                    dados()
+                })
                 presentViewController(alert, animated: true, completion: nil)
+            }
+            if (novoSaldo < 0){
+                let alert = Notification.solicitarConfirmacaoDespesa("Cuidado!", mensagem: "A conta \(conta!.nome!) ficará negativa ao salvar, tem certeza?", completion: {
+                    (action:UIAlertAction) in
+                    dados()
+                })
+                presentViewController(alert, animated: true, completion: nil)
+            }else{
+                dados()
             }
             
         }else{

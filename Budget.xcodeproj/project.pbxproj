@@ -13,6 +13,7 @@
 		4E6EEA4B1CB31275007928B0 /* TipoContaDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */; };
 		4E6EEA501CB3215D007928B0 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88667061CB202DB00EC778D /* Charts.framework */; };
 		4E6EEA511CB3215D007928B0 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A88667061CB202DB00EC778D /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4E8E9A811CBC504500058B08 /* SobreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E9A801CBC504500058B08 /* SobreViewController.swift */; };
 		4E937E251CAEEC3B007806B5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E937E241CAEEC3B007806B5 /* MapKit.framework */; };
 		4E937E2C1CAEF0C1007806B5 /* MapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */; };
 		4E937E2F1CAF015D007806B5 /* Local+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E937E2D1CAF015D007806B5 /* Local+CoreDataProperties.swift */; };
@@ -156,6 +157,7 @@
 		0D82FE7E1CB713D900CE8E3C /* AjudaPopoverController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AjudaPopoverController.swift; path = "Ferramentas/Porcentagem/Ajuda popover/AjudaPopoverController.swift"; sourceTree = "<group>"; };
 		0D82FE841CB71F6C00CE8E3C /* ManualFinanceiro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManualFinanceiro.swift; path = "Ferramentas/Compra Prazo Vista/ManualFinanceiro.swift"; sourceTree = "<group>"; };
 		4E6EEA4A1CB31275007928B0 /* TipoContaDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TipoContaDAO.swift; path = "Tipo Conta/TipoContaDAO.swift"; sourceTree = "<group>"; };
+		4E8E9A801CBC504500058B08 /* SobreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SobreViewController.swift; path = Informacoes/SobreViewController.swift; sourceTree = "<group>"; };
 		4E937E241CAEEC3B007806B5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4E937E2B1CAEF0C1007806B5 /* MapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapaViewController.swift; path = local/MapaViewController.swift; sourceTree = "<group>"; };
 		4E937E2D1CAF015D007806B5 /* Local+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Local+CoreDataProperties.swift"; path = "local/Local+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -279,6 +281,14 @@
 				0D82FE841CB71F6C00CE8E3C /* ManualFinanceiro.swift */,
 			);
 			name = "Manual financeiro";
+			sourceTree = "<group>";
+		};
+		4E8E9A7F1CBC4FCC00058B08 /* Informações */ = {
+			isa = PBXGroup;
+			children = (
+				4E8E9A801CBC504500058B08 /* SobreViewController.swift */,
+			);
+			name = "Informações";
 			sourceTree = "<group>";
 		};
 		4E937E1F1CAEEBE2007806B5 /* Local */ = {
@@ -491,8 +501,9 @@
 				A8074AC11CACD1C5007865F5 /* Tipo Conta */,
 				A8074AC21CACD1CF007865F5 /* Conta */,
 				A8074AC31CACD234007865F5 /* Ferramentas */,
-				A88242B31CACBE6F009C5F43 /* AppDelegate.swift */,
+				4E8E9A7F1CBC4FCC00058B08 /* Informações */,
 				A88242B51CACBE6F009C5F43 /* ViewController.swift */,
+				A88242B31CACBE6F009C5F43 /* AppDelegate.swift */,
 				A88242B71CACBE6F009C5F43 /* Main.storyboard */,
 				A88242BD1CACBE6F009C5F43 /* Assets.xcassets */,
 				A88242BF1CACBE6F009C5F43 /* LaunchScreen.storyboard */,
@@ -735,6 +746,7 @@
 				A8074B8B1CACE049007865F5 /* PorcentagemController.swift in Sources */,
 				A8074B561CACDFE8007865F5 /* CategoriasViewController.swift in Sources */,
 				A8F8124E1CADBFF4008854A0 /* Despesa+CoreDataProperties.swift in Sources */,
+				4E8E9A811CBC504500058B08 /* SobreViewController.swift in Sources */,
 				A8F812431CADBF8D008854A0 /* Categoria.swift in Sources */,
 				A8074B571CACDFE8007865F5 /* CategoriaTableViewController.swift in Sources */,
 				A8F812521CADC010008854A0 /* Receita+CoreDataProperties.swift in Sources */,

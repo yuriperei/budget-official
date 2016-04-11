@@ -128,7 +128,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         if(erros.isEmpty){
             
             
-            func dados(action: UIAlertAction){
+            func dados(){
                 receita = Receita.getReceita()
                 receita?.nome = txtNome.text
                 receita?.descricao = txtDescricao.text
@@ -148,15 +148,17 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             let novoSaldo = Float((conta?.saldo)!) + (txtValor.text?.floatConverterMoeda())!
             
             if (Float((conta?.saldo)!) <= 0 && novoSaldo > 0){
-                let alert = Notification.avisoReceita("Parabéns!", mensagem: "A sua conta ficará com saldo positivo", completion: dados)
-                presentViewController(alert, animated: true, completion: nil)
-            }
-            
-            
-            
-            
+                let alert = Notification.avisoReceita("Parabéns!", mensagem: "A conta \(conta!.nome!) ficará com saldo positivo", completion: {
+                    (action:UIAlertAction) in
+                    dados()
+            })
+            presentViewController(alert, animated: true, completion: nil)
+        }else{
+            dados()
+        }
 
-            
+
+        
         }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
