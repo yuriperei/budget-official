@@ -26,7 +26,7 @@ class CompraPrazoVistaViewController: UITableViewController {
 //        print(finance.cagr(704.28, 30000, 3))
 //        print(finance.calculateCompoundInterest(720, 12, 62.5))
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
-        FormCustomization.updateWidthsForLabels(labels)
+        FormCustomization.alignLabelsWidths(labels)
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,13 +37,13 @@ class CompraPrazoVistaViewController: UITableViewController {
     
     
     @IBAction func maskTextField(sender: UITextField) {
-        FormCustomization.aplicarMascara(&sender.text!)
+        FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
 
     @IBAction func calcularJuros(sender: AnyObject) {
         let parcelas: Int = Int(txtParcelas.text!)!
-        let valorParcela: Double = txtValorParcela.text!.doubleConverterMoeda()
-        let valorFinanciado: Double = txtValorFinanciado.text!.doubleConverterMoeda()
+        let valorParcela: Double = txtValorParcela.text!.currencyToDouble()
+        let valorFinanciado: Double = txtValorFinanciado.text!.currencyToDouble()
         
         lblResultadoJuros.text = String.init(format: "%.2f", finance.calculateCompoundInterest(valorFinanciado, parcelas, valorParcela))+"%"
 //        print(finance.cagr(704.28, 30000, 3))

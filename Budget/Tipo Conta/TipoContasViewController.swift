@@ -25,7 +25,7 @@ class TipoContasViewController: UITableViewController {
             txtNome.text = tipoConta.nome!
         }
         
-        FormCustomization.updateWidthsForLabels(labels)
+        FormCustomization.alignLabelsWidths(labels)
     }
 
     override func didReceiveMemoryWarning() {

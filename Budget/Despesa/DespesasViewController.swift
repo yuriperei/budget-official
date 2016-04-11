@@ -39,7 +39,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         if let despesa = despesa {
             txtNome.text = despesa.nome!
-            txtValor.text = despesa.valor!.convertToMoedaBr()
+            txtValor.text = despesa.valor!.convertToCurrency("pt_BR")
             txtDescricao.text = despesa.descricao!
             conta = despesa.conta
             txtData.text = Data.formatDateToString(despesa.data!)
@@ -61,7 +61,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         txtData.inputView = pickerView
         
         // Alinhar as labels
-        FormCustomization.updateWidthsForLabels(labels)
+        FormCustomization.alignLabelsWidths(labels)
         
         // Do any additional setup after loading the view.
     }
@@ -109,7 +109,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     }
     
     @IBAction func maskTextField(sender: UITextField) {
-        FormCustomization.aplicarMascara(&sender.text!)
+        FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
     
     @IBAction func maskTextData(sender: UITextField) {
@@ -121,7 +121,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
-        if Validador.vazio(txtValor.text!.floatConverterMoeda()){
+        if Validador.vazio(txtValor.text!.currencyToFloat()){
             erros.appendContentsOf("\nAdicione um valor!")
         }
         
@@ -148,7 +148,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
                 despesa = Despesa.getDespesa()
                 despesa?.nome = txtNome.text
                 despesa?.descricao = txtDescricao.text
-                despesa?.valor = txtValor.text!.floatConverterMoeda()
+                despesa?.valor = txtValor.text!.currencyToFloat()
                 despesa?.conta = conta
                 despesa?.categoria = categoria
                 despesa?.local = local
@@ -161,7 +161,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
                 salvarConta()
             }
             
-            let novoSaldo = Float((conta?.saldo)!) - (txtValor.text?.floatConverterMoeda())!
+            let novoSaldo = Float((conta?.saldo)!) - (txtValor.text?.currencyToFloat())!
             
             if (novoSaldo < 0){
                 let alert = Notification.solicitarConfirmacaoDespesa("Cuidado!", mensagem: "Ao salvar essa despesa sua conta ficará negativa", completion: dados)

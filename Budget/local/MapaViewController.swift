@@ -10,9 +10,10 @@ import UIKit
 import MapKit
 
 class MapaViewController: UIViewController{
-
-    var local: Local?
+    
     var endereco:String?
+    var local: Local?
+    
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -23,9 +24,9 @@ class MapaViewController: UIViewController{
         }
                 
         let geo: CLGeocoder = CLGeocoder()
-        geo.geocodeAddressString(endereco!, completionHandler: {(placemarks, error) -> Void in
+        geo.geocodeAddressString(endereco!, completionHandler: { (placemarks, error) -> Void in
             if((error) != nil){
-                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível localizar com o endereço cadastrado")
+                let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível localizar o endereço.")
                 self.presentViewController(alert, animated: true, completion: nil)
             }
             if let placemark = placemarks?.first {
@@ -52,11 +53,6 @@ class MapaViewController: UIViewController{
                  self.mapView.addAnnotation(annotation)
             }
         })
-        
-
-        
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

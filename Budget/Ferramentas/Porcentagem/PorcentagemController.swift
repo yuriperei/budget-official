@@ -26,7 +26,7 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
         super.viewDidLoad()
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
         calculadora = Porcentagem()
-        FormCustomization.updateWidthsForLabels(labels)
+        FormCustomization.alignLabelsWidths(labels)
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,16 +35,16 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
     }
     
     @IBAction func maskTextField(sender: UITextField) {
-        FormCustomization.aplicarMascara(&sender.text!)
+        FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
     
     @IBAction func calcularValorPorcentagem(sender: UIButton) {
         //Porcentagem do valor
         if (sgmTipo.selectedSegmentIndex == 0) {
-            calculadora?.numeroAtual = txtSegundoValor.text!.doubleConverterMoeda()
+            calculadora?.numeroAtual = txtSegundoValor.text!.currencyToDouble()
             if let calculadora = calculadora as? Porcentagem {
                 calculadora.porcentagem = txtPrimeiroValor.text!.doubleConverter
-                lblResultado.text = calculadora.calcularPorcentagemDoValor().convertToMoedaBr()
+                lblResultado.text = calculadora.calcularPorcentagemDoValor().convertToCurrency("pt_BR")
             }
         } else {
             calcularPercentualValor(sender)
@@ -53,8 +53,8 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
     
     private func calcularPercentualValor(sender: UIButton) {
         //Valor porcentagem
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.doubleConverterMoeda()
-        calculadora?.numeroFinal = txtSegundoValor.text!.doubleConverterMoeda()
+        calculadora?.numeroAtual = txtPrimeiroValor.text!.currencyToDouble()
+        calculadora?.numeroFinal = txtSegundoValor.text!.currencyToDouble()
         
         if let calculadora = calculadora as? Porcentagem {
             lblResultado.text = String(format: "%.4g", calculadora.calcularValorPorcentagem()) + "%"

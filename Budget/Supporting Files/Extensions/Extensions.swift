@@ -8,17 +8,114 @@
 
 import Foundation
 
+extension Double {
+    var stringValue: String {
+        return String(format: "%g", self)
+    }
+    
+    func convertToCurrency(locale:String) -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: locale)
+        return (formatter.stringFromNumber(self))!
+    }
+    
+    func removeLastNumber() -> Double {
+        return Double(Int(self/10))
+    }
+    
+    func roundDecimal(numberOfDecimals:Double) -> Double {
+        let decimalDouble = pow(10.0,numberOfDecimals)
+        
+        return round(decimalDouble * self) / decimalDouble
+    }
+}
+
+extension Float {
+    var stringValue: String {
+        return String(format: "%g", self)
+    }
+    
+    func convertToCurrency(locale:String) -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: locale)
+        return (formatter.stringFromNumber(self))!
+    }
+    
+    func removeLastNumber() -> Float {
+        return Float(Int(self/10))
+    }
+}
+
+extension NSDate {
+    
+    func startOfMonth() -> NSDate? {
+        
+        let calendar = NSCalendar.currentCalendar()
+        let dateComponents = calendar.components([.Month, .Year], fromDate: self)
+        
+        return calendar.dateFromComponents(dateComponents)
+    }
+    
+    func dateByAddingMonths(monthsToAdd: Int) -> NSDate? {
+        
+        let calendar = NSCalendar.currentCalendar()
+        let dateComponents = NSDateComponents()
+        dateComponents.month = monthsToAdd
+        
+        return calendar.dateByAddingComponents(dateComponents, toDate: self, options: [])
+    }
+    
+    func endOfMonth() -> NSDate? {
+        
+        let calendar = NSCalendar.currentCalendar()
+        
+        return calendar.dateByAddingUnit(.Day, value: -1, toDate: self.dateByAddingMonths(1)!, options: [])
+    }
+}
+
+extension NSNumber {
+    func convertToCurrency(locale:String) -> String {
+        
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale(localeIdentifier: locale)
+        
+        if let currency = formatter.stringFromNumber(self) {
+            return currency
+        }
+        return ""
+    }
+}
+
 extension String {
-    var floatValue: Float {
-        return (self as NSString).floatValue
+    
+    var doubleConverter: Double {
+        let converter = NSNumberFormatter()
+        converter.decimalSeparator = "."
+        
+        var decimal:NSNumber?
+        
+        if let result = converter.numberFromString(self) {
+            decimal = result
+        } else {
+            converter.decimalSeparator = ","
+            if let result = converter.numberFromString(self) {
+                decimal = result
+            }
+        }
+        
+        if let decimalConverter = decimal?.doubleValue {
+            return decimalConverter
+        }
+        
+        print("Erro doubleConverter")
+        return 0
     }
     
     var doubleValue: Double {
         return (self as NSString).doubleValue
-    }
-    
-    var intValue: Int {
-        return (self as NSString).integerValue
     }
     
     var floatConverter: Float {
@@ -44,47 +141,12 @@ extension String {
         return 0
     }
     
-    var doubleConverter: Double {
-        let converter = NSNumberFormatter()
-        converter.decimalSeparator = "."
-        
-        var decimal:NSNumber?
-        
-        if let result = converter.numberFromString(self) {
-            decimal = result
-        } else {
-            converter.decimalSeparator = ","
-            if let result = converter.numberFromString(self) {
-                decimal = result
-            }
-        }
-        
-        if let decimalConverter = decimal?.doubleValue {
-            return decimalConverter
-        }
-        
-        print("Erro doubleConverter")
-        return 0
+    var floatValue: Float {
+        return (self as NSString).floatValue
     }
     
-    func floatConverterMoeda() -> Float {
-        var result = self
-        
-        result = result.stringByReplacingOccurrencesOfString("R$",withString:"")
-        result = result.stringByReplacingOccurrencesOfString(".",withString:"")
-        result = result.stringByReplacingOccurrencesOfString(",",withString:".")
-        
-        return result.floatConverter
-    }
-    
-    func doubleConverterMoeda() -> Double {
-        var result = self
-        
-        result = result.stringByReplacingOccurrencesOfString("R$",withString:"")
-        result = result.stringByReplacingOccurrencesOfString(".",withString:"")
-        result = result.stringByReplacingOccurrencesOfString(",",withString:".")
-        
-        return result.doubleConverter
+    var intValue: Int {
+        return (self as NSString).integerValue
     }
     
     var lastChar:String {
@@ -94,6 +156,27 @@ extension String {
             return ""
         }
     }
+    
+    func currencyToDouble() -> Double {
+        var result = self
+        
+        result = result.stringByReplacingOccurrencesOfString("R$",withString:"")
+        result = result.stringByReplacingOccurrencesOfString(".",withString:"")
+        result = result.stringByReplacingOccurrencesOfString(",",withString:".")
+        
+        return result.doubleConverter
+    }
+    
+    func currencyToFloat() -> Float {
+        var result = self
+        
+        result = result.stringByReplacingOccurrencesOfString("R$",withString:"")
+        result = result.stringByReplacingOccurrencesOfString(".",withString:"")
+        result = result.stringByReplacingOccurrencesOfString(",",withString:".")
+        
+        return result.floatConverter
+    }
+    
     mutating func removeLastChar() {
         if self != "" {
             self.removeAtIndex(self.endIndex.predecessor())
@@ -101,80 +184,42 @@ extension String {
     }
 }
 
-extension NSNumber {
-    func convertToMoedaBr() -> String {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
-        return (formatter.stringFromNumber(self))!
+extension UIImage {
+    
+    func imageWithColor(tintColor: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        
+        let context = UIGraphicsGetCurrentContext()! as CGContextRef
+        CGContextTranslateCTM(context, 0, self.size.height)
+        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextSetBlendMode(context, CGBlendMode.Normal)
+        
+        let rect = CGRectMake(0, 0, self.size.width, self.size.height) as CGRect
+        CGContextClipToMask(context, rect, self.CGImage)
+        tintColor.setFill()
+        CGContextFillRect(context, rect)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext() as UIImage
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+    func makeImageWithColorAndSize(color: UIColor, size: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(CGRectMake(0, 0, size.width, size.height))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }
 
-extension Float {
-    var stringValue: String {
-        return String(format: "%g", self)
-    }
-    
-    func convertToMoedaBr() -> String {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
-        return (formatter.stringFromNumber(self))!
-    }
-    
-    func removeLastNumber() -> Float {
-//        return (self - (self % 10))/10
-        return Float(Int(self/10))
-    }
-}
-
-extension Double {
-    func convertToMoedaBr() -> String {
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
-        return (formatter.stringFromNumber(self))!
-    }
-    var stringValue: String {
-        return String(format: "%g", self)
-    }
-    mutating func toFixed(decimal:Int) {
-        let decimalDouble = pow(10.0,2)
-        print(round(decimalDouble*self))
-        self = round(decimalDouble*self)/decimalDouble
-    }
-    
-    func removeLastNumber() -> Double {
-        //        return (self - (self % 10))/10
-        return Double(Int(self/10))
-    }
-}
-
-extension NSDate {
-    
-    func startOfMonth() -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        let currentDateComponents = calendar.components([.Month, .Year], fromDate: self)
-        let startOfMonth = calendar.dateFromComponents(currentDateComponents)
-        
-        return startOfMonth
-    }
-    
-    func dateByAddingMonths(monthsToAdd: Int) -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        let months = NSDateComponents()
-        months.month = monthsToAdd
-        
-        return calendar.dateByAddingComponents(months, toDate: self, options: [])
-    }
-    
-    func endOfMonth() -> NSDate? {
-        
-        let calendar = NSCalendar.currentCalendar()
-        return calendar.dateByAddingUnit(.Day, value: -1, toDate: self.dateByAddingMonths(1)!, options: [])
-        
-        //        return nil
-    }
-}
+/*
+Comentários temporário
+//    mutating func toFixed(decimal:Double) {
+//        let decimalDouble = pow(10.0,decimal)
+//
+//        self = self / decimalDouble
+//    }
+*/

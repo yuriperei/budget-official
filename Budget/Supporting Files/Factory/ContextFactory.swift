@@ -17,16 +17,21 @@ class ContextFactory {
         if (context != nil) {
             return context!
         }
+        
         context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         return context!
     }
     
-    static func getManagedObject(entityName: String) -> NSManagedObject{
-        let contaEntity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: getContext())
-        return NSManagedObject(entity: contaEntity!, insertIntoManagedObjectContext: getContext())
+    static func getFetchedResultsController(entityName:String, firstSort:String) -> NSFetchedResultsController {
+        
+        let fetchRequest = NSFetchRequest(entityName: entityName)
+        let sortDescriptor = NSSortDescriptor(key: firstSort, ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getContext(), sectionNameKeyPath: nil, cacheName: nil)
     }
     
-    static func getFetchedResultsController(entityName:String, firstSort:String, secondSort:String = "", ascending:Bool, sectionName:String) -> NSFetchedResultsController {
+    static func getFetchedResultsController(entityName:String, firstSort:String, secondSort:String, ascending:Bool, sectionName:String) -> NSFetchedResultsController {
         
         let fetchRequest = NSFetchRequest(entityName: entityName)
         let sortDescriptor = NSSortDescriptor(key: firstSort, ascending: ascending)
@@ -37,27 +42,9 @@ class ContextFactory {
         
     }
     
-    static func getFetchedResultsController(entityName:String, firstSort:String) -> NSFetchedResultsController {
-
-        let fetchRequest = NSFetchRequest(entityName: entityName)
-        let sortDescriptor = NSSortDescriptor(key: firstSort, ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: getContext(), sectionNameKeyPath: nil, cacheName: nil)
+    static func getManagedObject(entityName: String) -> NSManagedObject{
+        let contaEntity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: getContext())
+        return NSManagedObject(entity: contaEntity!, insertIntoManagedObjectContext: getContext())
     }
-    
-//    // MARK: - Core Data source
-//    func tipoContasFetchRequest() -> NSFetchRequest{
-//        let fetchRequest = NSFetchRequest(entityName: "Categoria")
-//        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-//        fetchRequest.sortDescriptors = [sortDescriptor]
-//        return fetchRequest
-//    }
-//    
-//    func getFetchedResultsController() -> NSFetchedResultsController {
-//        
-//        frc = NSFetchedResultsController(fetchRequest: tipoContasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-//        return frc
-//    }
     
 }

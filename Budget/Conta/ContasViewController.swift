@@ -32,7 +32,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
             txtNome.text = conta.nome!
             
             if let saldo = conta.saldo?.floatValue{
-                txtSaldo.text = saldo.convertToMoedaBr()
+                txtSaldo.text = saldo.convertToCurrency("pt_BR")
             }
             
             tipoConta = conta.tipoconta // as? TipoConta
@@ -42,7 +42,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         
         txtTipo.text = tipoConta?.nome
         
-        FormCustomization.updateWidthsForLabels(labels)
+        FormCustomization.alignLabelsWidths(labels)
         
     }
 
@@ -52,7 +52,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     }
     
     @IBAction func maskTextField(sender: UITextField) {
-        FormCustomization.aplicarMascara(&sender.text!)
+        FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
     
     
@@ -100,7 +100,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
             
             conta = Conta.getConta()
             conta?.nome = txtNome.text
-            conta?.saldo = txtSaldo.text?.floatConverterMoeda()
+            conta?.saldo = txtSaldo.text?.currencyToFloat()
             conta?.tipoconta = tipoConta
             
             salvarConta()
@@ -114,7 +114,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     func updateConta(){
         
         conta?.nome = txtNome.text
-        conta?.saldo = txtSaldo.text!.floatConverterMoeda()
+        conta?.saldo = txtSaldo.text!.currencyToFloat()
         
         if let tipoConta = tipoConta {
             conta?.tipoconta? = tipoConta

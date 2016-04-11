@@ -111,7 +111,7 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         conta = despesa.conta // as? Conta
         
         cell.lblNome.text = despesa.nome
-        cell.lblValor.text = despesa.valor!.floatValue.convertToMoedaBr()
+        cell.lblValor.text = despesa.valor!.convertToCurrency("pt_BR")
         cell.lblCategoria.text = categoria?.nome
         cell.lblConta.text = conta?.nome
         

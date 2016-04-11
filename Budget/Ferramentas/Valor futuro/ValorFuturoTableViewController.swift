@@ -21,7 +21,7 @@ class ValorFuturoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
-        FormCustomization.updateWidthsForLabels(labels)
+        FormCustomization.alignLabelsWidths(labels)
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,14 +30,14 @@ class ValorFuturoTableViewController: UITableViewController {
     }
     
     @IBAction func maskTextfield(sender: UITextField) {
-        FormCustomization.aplicarMascara(&sender.text!)
+        FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
     
     @IBAction func calcularValorFuturo(sender: AnyObject) {
         let taxaJuros = (txtJuros.text?.floatConverter)!
-        let valorDepositado = (txtValorDepositado.text?.doubleConverterMoeda())!
+        let valorDepositado = (txtValorDepositado.text?.currencyToDouble())!
         let numeroParcelas = (txtNumeroMeses.text?.intValue)!
         
-        lblResultado.text = finance.calculateFutureValue(taxaJuros, valorDepositado: valorDepositado, numeroDeParcelas: numeroParcelas).convertToMoedaBr()
+        lblResultado.text = finance.calculateFutureValue(taxaJuros, valorDepositado: valorDepositado, numeroDeParcelas: numeroParcelas).convertToCurrency("pt_BR")
     }
 }

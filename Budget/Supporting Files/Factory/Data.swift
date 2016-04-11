@@ -11,7 +11,19 @@ import UIKit
 class Data{
     static let dateFormat = NSDateFormatter()
     
-    static func sectionFormatarData(name: String) -> String{
+    static func formatDateToString(data: NSDate) -> String{
+        
+        dateFormat.dateFormat = "dd-MM-yyyy"
+        return dateFormat.stringFromDate(data)
+    }
+    
+    static func removerTime(data:String) -> NSDate {
+        
+        dateFormat.dateFormat = "dd-MM-yyyy"
+        return dateFormat.dateFromString(data)!
+    }
+    
+    static func sectionFormatarData(name: String) -> String {
         
         let string = name.substringWithRange(Range<String.Index>(start: name.startIndex, end: name.startIndex.advancedBy(10)))
         
@@ -26,16 +38,9 @@ class Data{
         
         return dateString
     }
-    
-    static func removerTime(data:String) -> NSDate {
-        dateFormat.dateFormat = "dd-MM-yyyy"
-        
-//        return dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(data, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))!
-        return dateFormat.dateFromString(data)!
-    }
-    
-    static func formatDateToString(data: NSDate) -> String{
-        dateFormat.dateFormat = "dd-MM-yyyy"
-        return dateFormat.stringFromDate(data)
-    }
 }
+
+/*
+Comentários temporários
+//        return dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(data, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))!
+*/

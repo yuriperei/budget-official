@@ -100,7 +100,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         conta = receita.conta // as? Conta
         
         cell.lblNome.text = receita.nome
-        cell.lblValor.text = receita.valor?.convertToMoedaBr()
+        cell.lblValor.text = receita.valor?.convertToCurrency("pt_BR")
         cell.lblConta.text = conta?.nome
         cell.lblCategoria.text = categoria?.nome
         
@@ -111,7 +111,7 @@ class ReceitasTableViewController: UITableViewController, NSFetchedResultsContro
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "Futura", size: 13)!
         header.textLabel?.textColor = Color.uicolorFromHex(0xffffff)
-        header.tintColor = Color.uicolorFromHex(0x274561)//2C4E6E / 274561
+        header.tintColor = Color.uicolorFromHex(0x274561) //2C4E6E / 274561
         //64cdfc
     }
     

@@ -9,34 +9,40 @@
 import UIKit
 
 class JurosDescontosController: PorcentagemController {
+    
     @IBAction func calcularJurosDescontos(sender: UIButton) {
-        //Juros
-        calculadora?.numeroAtual = txtSegundoValor.text!.doubleConverterMoeda()
+        
+        calculadora?.numeroAtual = txtSegundoValor.text!.currencyToDouble()
         
         if let calculadora = calculadora as? Porcentagem {
             calculadora.porcentagem = txtPrimeiroValor.text!.doubleValue
             
             if (sgmTipo.selectedSegmentIndex == 0) {
-                lblResultado.text = calculadora.calcularValorComJuros().convertToMoedaBr()
+                lblResultado.text = calculadora.calcularValorComJuros().convertToCurrency("pt_BR")
             } else {
-                lblResultado.text = calculadora.calcularValorComDesconto().convertToMoedaBr()
+                lblResultado.text = calculadora.calcularValorComDesconto().convertToCurrency("pt_BR")
             }
         }
-        
-        //Desconto
-        //        calculadora?.numeroAtual = 1000
-        //
-        //        if let calculadora = calculadora as? Porcentagem {
-        //            calculadora.porcentagem = 15
-        //            print(calculadora.calcularValorComDesconto())
-        //        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         super.prepareForSegue(segue, sender: sender)
+        
         if (segue.identifier == "myPopover") {
             let popView = segue.destinationViewController as! AjudaPopoverController
             popView.txtLabel = "Como calcular o juros e descontos."
         }
     }
 }
+
+/*
+Comentários temporários
+//Desconto
+//        calculadora?.numeroAtual = 1000
+//
+//        if let calculadora = calculadora as? Porcentagem {
+//            calculadora.porcentagem = 15
+//            print(calculadora.calcularValorComDesconto())
+//        }
+*/

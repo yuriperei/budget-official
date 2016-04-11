@@ -38,22 +38,58 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             txtEstado.text = local.estado!
             txtRua.text = local.rua
             
-            // Se já houver end. cadastrado armazenar para recuperar em caso de necessidade.
+            // Armazenar endereço para recuperar, em caso de necessidade.
             self.cidade = self.txtCidade.text!
             self.estado = self.txtEstado.text!
             self.rua = self.txtRua.text!
             
         }
         
-        switchEnderecoAtual.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
-        
-
-
-        // Alinhar as labels
-        updateWidthsForLabels(labels)
+        FormCustomization.alignLabelsWidths(labels)
     }
     
-    func stateChanged(switchState: UISwitch) {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if self.local == nil{
+            return 2
+        }else{
+            return 3
+        }
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch(section) {
+        case 0: return 1    // section 0 has 1 rows
+        case 1: return 4    // section 1 has 4 row
+        case 2: return 1    // section 2 has 1 row
+        default: fatalError("Unknown number of sections")
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "mapa"{
+            let contaController : MapaViewController = segue.destinationViewController as! MapaViewController
+            if self.switchEnderecoAtual.on{
+                contaController.endereco = self.txtRua.text! + " - " + self.txtCidade.text! + " - " + self.txtEstado.text!
+            }else if (self.cidade != self.local?.cidade! || self.estado != self.local?.estado! || self.rua != self.local?.rua){
+                contaController.endereco = self.txtRua.text! + " - " + self.txtCidade.text! + " - " + self.txtEstado.text!
+            }else{
+                contaController.local = self.local!
+            }
+        }
+    }
+    
+    // MARK: - IBAction functions
+    
+    @IBAction func stateChanged(switchState: UISwitch) {
         if switchEnderecoAtual.on{
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -65,6 +101,34 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             self.txtRua.text = self.rua
         }
     }
+    
+    @IBAction func btnCancel(sender: AnyObject) {
+        dissmissViewController()
+    }
+    
+    @IBAction func btnSave(sender: AnyObject) {
+        
+        if local != nil {
+            updateConta()
+        }else{
+            addConta()
+            
+        }
+    }
+    
+    @IBAction func endCidade(sender: UITextField) {
+        self.cidade = self.txtCidade.text!
+    }
+    
+    @IBAction func endEstado(sender: UITextField) {
+        self.estado = self.txtEstado.text!
+    }
+    
+    @IBAction func endRua(sender: UITextField) {
+        self.rua = self.txtRua.text!
+    }
+    
+    // MARK: - Delegate methods
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
@@ -94,8 +158,8 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             let locality = (containsPlacemark.locality != nil) ? containsPlacemark.locality : ""
             let name = (containsPlacemark.name != nil) ? containsPlacemark.name : ""
             let administrativeArea = (containsPlacemark.administrativeArea != nil) ? containsPlacemark.administrativeArea : ""
-//            let throughfare = (containsPlacemark.thoroughfare != nil) ? containsPlacemark.thoroughfare : ""
-//            let country = (containsPlacemark.country != nil) ? containsPlacemark.country : ""
+            //            let throughfare = (containsPlacemark.thoroughfare != nil) ? containsPlacemark.thoroughfare : ""
+            //            let country = (containsPlacemark.country != nil) ? containsPlacemark.country : ""
             
             self.txtCidade.text = locality
             self.txtEstado.text = administrativeArea
@@ -104,45 +168,13 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // MARK: - Private functions
     
-    func dissmissViewController(){
+    private func dissmissViewController(){
         navigationController?.popViewControllerAnimated(true)
     }
     
-    @IBAction func btnCancel(sender: AnyObject) {
-        dissmissViewController()
-    }
-    
-    
-    @IBAction func btnSave(sender: AnyObject) {
-        
-        if local != nil {
-            updateConta()
-        }else{
-            addConta()
-            
-        }
-        
-        
-    }
-    
-    @IBAction func endCidade(sender: UITextField) {
-        self.cidade = self.txtCidade.text!
-    }
-    
-    @IBAction func endEstado(sender: UITextField) {
-        self.estado = self.txtEstado.text!
-    }
-    
-    @IBAction func endRua(sender: UITextField) {
-        self.rua = self.txtRua.text!
-    }
-    
-    func validarCampos(){
+    private func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("\nPreencha o campo Nome!")
         }
@@ -160,7 +192,7 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         }
     }
     
-    func addConta(){
+    private func addConta(){
         
         validarCampos()
         
@@ -178,10 +210,9 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             presentViewController(alert, animated: true, completion: nil)
             self.erros = ""
         }
-        
     }
     
-    func updateConta(){
+    private func updateConta(){
         
         validarCampos()
         
@@ -198,8 +229,6 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
             presentViewController(alert, animated: true, completion: nil)
             self.erros = ""
         }
-               
-        
     }
     
     private func salvarConta(){
@@ -212,32 +241,6 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         }
         
         dissmissViewController()
-        
-    }
-
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        if self.local == nil{
-            return 2
-        }else{
-            return 3
-        }
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-
-            switch(section) {
-            case 0: return 1    // section 0 has 1 rows
-            case 1: return 4    // section 1 has 4 row
-            case 2: return 1    // section 2 has 1 row
-            default: fatalError("Unknown number of sections")
-            }
-
-        
     }
 
     /*
@@ -284,48 +287,33 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         return true
     }
     */
-    
-    private func calculateLabelWidth(label: UILabel) -> CGFloat {
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-        
-        return labelSize.width
-    }
-    
-    private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-        //        return reduce(map(labels, calculateLabelWidth), 0, max)
-        return labels.map(calculateLabelWidth).reduce(0, combine: max)
-    }
-    
-    private func updateWidthsForLabels(labels: [UILabel]) {
-        let maxLabelWidth = calculateMaxLabelWidth(labels)
-        for label in labels {
-            let constraint = NSLayoutConstraint(item: label,
-                attribute: .Width,
-                relatedBy: .Equal,
-                toItem: nil,
-                attribute: .NotAnAttribute,
-                multiplier: 1,
-                constant: maxLabelWidth)
-            label.addConstraint(constraint)
-        }
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "mapa"{
-            let contaController : MapaViewController = segue.destinationViewController as! MapaViewController
-            if self.switchEnderecoAtual.on{
-                contaController.endereco = self.txtRua.text! + " - " + self.txtCidade.text! + " - " + self.txtEstado.text!
-            }else if (self.cidade != self.local?.cidade! || self.estado != self.local?.estado! || self.rua != self.local?.rua){
-                contaController.endereco = self.txtRua.text! + " - " + self.txtCidade.text! + " - " + self.txtEstado.text!
-            }else{
-               contaController.local = self.local!
-            }
-            
-        }
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-
 }
+
+/*
+Comentários temporários
+
+private func calculateLabelWidth(label: UILabel) -> CGFloat {
+let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
+
+return labelSize.width
+}
+
+private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
+return labels.map(calculateLabelWidth).reduce(0, combine: max)
+}
+
+private func updateWidthsForLabels(labels: [UILabel]) {
+let maxLabelWidth = calculateMaxLabelWidth(labels)
+for label in labels {
+let constraint = NSLayoutConstraint(item: label,
+attribute: .Width,
+relatedBy: .Equal,
+toItem: nil,
+attribute: .NotAnAttribute,
+multiplier: 1,
+constant: maxLabelWidth)
+label.addConstraint(constraint)
+}
+}
+//switchEnderecoAtual.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+*/

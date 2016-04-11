@@ -22,9 +22,9 @@ class DashboardViewController: UIViewController {
     var drawChartLoaded:Bool = false
 //    var zoom:CGFloat = 0.0
     func initDashboard(){
-        lblBalancoTotal.text = dashboard.getTotalBalanco().convertToMoedaBr()
-        lblTotalReceitas.text = dashboard.getTotalReceitas().convertToMoedaBr()
-        lblTotalDespesas.text = dashboard.getTotalDespesas().convertToMoedaBr()
+        lblBalancoTotal.text = dashboard.getTotalBalanco().convertToCurrency("pt_BR")
+        lblTotalReceitas.text = dashboard.getTotalReceitas().convertToCurrency("pt_BR")
+        lblTotalDespesas.text = dashboard.getTotalDespesas().convertToCurrency("pt_BR")
         
         let (months, receitasMensal, despesasMensal) = dashboard.getBalancoAnual()
         let (despesas, valorDespesas) = dashboard.getDespesasPorCategoria()

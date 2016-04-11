@@ -19,8 +19,8 @@ class VariacaoPercentualController: PorcentagemController {
     
     @IBAction func calcularVariacao(sender: UIButton) {
         //Aumento percentual
-        calculadora?.numeroAtual = txtSegundoValor.text!.doubleConverterMoeda()
-        calculadora?.numeroFinal = txtPrimeiroValor.text!.doubleConverterMoeda()
+        calculadora?.numeroAtual = txtSegundoValor.text!.currencyToDouble()
+        calculadora?.numeroFinal = txtPrimeiroValor.text!.currencyToDouble()
         
         if let calculadora = calculadora as? Porcentagem {
             if (calculadora.numeroFinal<=calculadora.numeroAtual) {
@@ -29,13 +29,6 @@ class VariacaoPercentualController: PorcentagemController {
                 lblResultado.text = String(format: "%.4g", calculadora.calcularDiminuicaoPercentual()) + "%"
             }
         }
-        //
-        //        //Diminuição percentual
-        //        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
-        //        calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
-        //        if let calculadora = calculadora as? Porcentagem {
-        //            print(calculadora.calcularDiminuicaoPercentual())
-        //        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -47,3 +40,14 @@ class VariacaoPercentualController: PorcentagemController {
     }
 
 }
+
+/*
+Comentários temporários
+//
+//        //Diminuição percentual
+//        calculadora?.numeroAtual = txtPrimeiroValor.text!.floatValue
+//        calculadora?.numeroFinal = txtSegundoValor.text!.floatValue
+//        if let calculadora = calculadora as? Porcentagem {
+//            print(calculadora.calcularDiminuicaoPercentual())
+//        }
+*/

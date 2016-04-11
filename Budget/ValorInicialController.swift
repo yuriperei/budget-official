@@ -10,16 +10,16 @@ import UIKit
 
 class ValorInicialController: PorcentagemController {
     @IBAction func calcularValorInicial(sender: UIButton) {
-        //Valor inicial com aumento
-        calculadora?.numeroFinal = txtSegundoValor.text!.doubleConverterMoeda()
+        
+        calculadora?.numeroFinal = txtSegundoValor.text!.currencyToDouble()
         
         if let calculadora = calculadora as? Porcentagem {
             calculadora.porcentagem = txtPrimeiroValor.text!.doubleValue
             
             if (sgmTipo.selectedSegmentIndex == 0) {
-                lblResultado.text = calculadora.calcularValorInicialAumentado().convertToMoedaBr()
+                lblResultado.text = calculadora.calcularValorInicialAumentado().convertToCurrency("pt_BR")
             } else {
-                lblResultado.text = calculadora.calcularValorInicialDiminuido().convertToMoedaBr()
+                lblResultado.text = calculadora.calcularValorInicialDiminuido().convertToCurrency("pt_BR")
             }
         }
     }

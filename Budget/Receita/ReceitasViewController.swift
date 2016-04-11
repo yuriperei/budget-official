@@ -38,7 +38,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         
         if let receita = receita {
             txtNome.text = receita.nome!
-            txtValor.text = receita.valor!.convertToMoedaBr()
+            txtValor.text = receita.valor!.convertToCurrency("pt_BR")
             txtDescricao.text = receita.descricao!
             txtData.text = Data.formatDateToString(receita.data!)
             conta = receita.conta //as? Conta
@@ -61,7 +61,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         txtData.inputView = pickerView
         
         // Alinhar as labels
-        FormCustomization.updateWidthsForLabels(labels)
+        FormCustomization.alignLabelsWidths(labels)
     }
     
     func updateTextField(sender:UIDatePicker){
@@ -92,7 +92,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     }
     
     @IBAction func maskTextField(sender: UITextField) {
-        FormCustomization.aplicarMascara(&sender.text!)
+        FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
     
     @IBAction func maskTextData(sender: UITextField) {
@@ -104,7 +104,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
-        if Validador.vazio(txtValor.text!.floatConverterMoeda()){
+        if Validador.vazio(txtValor.text!.currencyToFloat()){
             erros.appendContentsOf("\nAdicione um valor!")
         }
         
@@ -132,7 +132,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
                 receita = Receita.getReceita()
                 receita?.nome = txtNome.text
                 receita?.descricao = txtDescricao.text
-                receita?.valor = txtValor.text!.floatConverterMoeda()
+                receita?.valor = txtValor.text!.currencyToFloat()
                 receita?.conta = conta
                 receita?.categoria = categoria
                 receita?.local = local
@@ -145,7 +145,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
                 salvarConta()
             }
             
-            let novoSaldo = Float((conta?.saldo)!) + (txtValor.text?.floatConverterMoeda())!
+            let novoSaldo = Float((conta?.saldo)!) + (txtValor.text?.currencyToFloat())!
             
             if (Float((conta?.saldo)!) <= 0 && novoSaldo > 0){
                 let alert = Notification.avisoReceita("Parabéns!", mensagem: "A sua conta ficará com saldo positivo", completion: dados)
