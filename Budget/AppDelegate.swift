@@ -28,16 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         navigationBarAppearace.tintColor = Color.uicolorFromHex(0xffffff)
         navigationBarAppearace.barTintColor = Color.uicolorFromHex(0x274561)
+        navigationBarAppearace.backgroundColor = Color.uicolorFromHex(0x274561)
         navigationBarAppearace.translucent = false;
         
         // 44a499
         // change navigation item title color
-//        navigationBarAppearace.titleTextAttributes = NSForegroundColorAttributeName(UIColor.whiteColor())
         navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
         // Cor dos Status (Ícone bateria, rede, hora...)
         UIApplication.sharedApplication().statusBarStyle = .LightContent
-        
         
         return true
     }
