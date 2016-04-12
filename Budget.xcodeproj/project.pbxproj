@@ -69,6 +69,7 @@
 		A88BDA771CACE1170014E3AF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA701CACE1170014E3AF /* Notification.swift */; };
 		A88BDA781CACE1170014E3AF /* FormCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA711CACE1170014E3AF /* FormCustomization.swift */; };
 		A88BDA791CACE1170014E3AF /* Validador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA721CACE1170014E3AF /* Validador.swift */; };
+		A8E3831A1CBC714F006D0154 /* GraphReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E383191CBC714F006D0154 /* GraphReaderView.swift */; };
 		A8E4A95B1CB6F4A4008F214E /* VariacaoPercentualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */; };
 		A8E4A9601CB6F8EE008F214E /* ValorInicialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */; };
 		A8E4A9621CB6F945008F214E /* JurosDescontos.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A9611CB6F945008F214E /* JurosDescontos.swift */; };
@@ -220,6 +221,7 @@
 		A88BDA701CACE1170014E3AF /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = "Supporting Files/Factory/Notification.swift"; sourceTree = "<group>"; };
 		A88BDA711CACE1170014E3AF /* FormCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCustomization.swift; path = "Supporting Files/Factory/FormCustomization.swift"; sourceTree = "<group>"; };
 		A88BDA721CACE1170014E3AF /* Validador.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validador.swift; path = "Supporting Files/Factory/Validador.swift"; sourceTree = "<group>"; };
+		A8E383191CBC714F006D0154 /* GraphReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GraphReaderView.swift; path = Dashboard/GraphReaderView.swift; sourceTree = "<group>"; };
 		A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VariacaoPercentualController.swift; path = Ferramentas/Porcentagem/VariacaoPercentualController.swift; sourceTree = "<group>"; };
 		A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValorInicialController.swift; sourceTree = "<group>"; };
 		A8E4A9611CB6F945008F214E /* JurosDescontos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JurosDescontos.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 				A8074B481CACDFD4007865F5 /* Dashboard.swift */,
 				A8074B491CACDFD4007865F5 /* DashboardViewController.swift */,
 				A8074B4A1CACDFD4007865F5 /* MenuTableViewController.swift */,
+				A8E383191CBC714F006D0154 /* GraphReaderView.swift */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -776,6 +779,7 @@
 				A8074B631CACE001007865F5 /* ReceitasViewController.swift in Sources */,
 				A88BDA731CACE1170014E3AF /* Color.swift in Sources */,
 				A88BDA771CACE1170014E3AF /* Notification.swift in Sources */,
+				A8E3831A1CBC714F006D0154 /* GraphReaderView.swift in Sources */,
 				A8074B6D1CACE00F007865F5 /* DespesasTableViewController.swift in Sources */,
 				A8274BB01CB5A68A00EEF9C8 /* ValorFuturoTableViewController.swift in Sources */,
 				0D82FE7F1CB713D900CE8E3C /* AjudaPopoverController.swift in Sources */,

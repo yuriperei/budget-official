@@ -9,8 +9,8 @@
 import UIKit
 import Charts
 
-class DashboardViewController: UIViewController {
-
+class DashboardViewController: UIViewController, ChartViewDelegate {
+    var colors: [UIColor] = []
     @IBOutlet weak var lblBalancoTotal: UILabel!
     @IBOutlet weak var lblTotalDespesas: UILabel!
     @IBOutlet weak var lblTotalReceitas: UILabel!
@@ -18,8 +18,27 @@ class DashboardViewController: UIViewController {
     @IBOutlet var lineChart: LineChartView!
     @IBOutlet var pieChartDespesas: PieChartView!
     @IBOutlet var pieChartReceitas: PieChartView!
+    
+    @IBOutlet var graphReader: GraphReaderView!
+    //var monthsG:[String]!
     let dashboard:Dashboard = Dashboard()
     var drawChartLoaded:Bool = false
+    
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        graphReader.hidden = false
+        let markerPosition = chartView.getMarkerPosition(entry: entry,  highlight: highlight)
+        // Adding top marker
+        graphReader.valueLabel.text = "\(entry.value.roundDecimal(2))"
+        graphReader.dateLabel.text = "Abr"
+        graphReader.center = CGPointMake(markerPosition.x+30, graphReader.center.y)
+        graphReader.hidden = false
+        
+    }
+    
+    func chartValueNothingSelected(chartView: ChartViewBase) {
+        graphReader.hidden = true
+    }
+    
 //    var zoom:CGFloat = 0.0
     func initDashboard(){
         lblBalancoTotal.text = dashboard.getTotalBalanco().convertToCurrency("pt_BR")
@@ -52,23 +71,27 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         SidebarMenu.configMenu(self, sideBarMenu: btnMenuSidebar)
+
         drawBarChartBalanco()
+        lineChart.delegate = self
     }
     
     private func drawBarChartBalanco() {
+        
         let xAxis = lineChart.xAxis
         xAxis.labelPosition = .Bottom
         xAxis.drawGridLinesEnabled = false
         xAxis.spaceBetweenLabels = 2
         
         let leftAxis = lineChart.leftAxis
+        leftAxis.enabled = false
         leftAxis.labelPosition = .OutsideChart
         leftAxis.spaceTop = 0.15
         leftAxis.customAxisMin = 0
         leftAxis.labelFont = UIFont(name: "Futura", size: 10.0)!
         
         let rightAxis = lineChart.rightAxis
-        rightAxis.enabled = true
+        rightAxis.enabled = false
         rightAxis.drawGridLinesEnabled = false
         rightAxis.spaceTop = 0.15
         rightAxis.customAxisMin = 0
@@ -113,6 +136,14 @@ class DashboardViewController: UIViewController {
         
         
         if(!drawChartLoaded){
+            for _ in 0..<months.count {
+                let red = Double(arc4random_uniform(256))
+                let green = Double(arc4random_uniform(256))
+                let blue = Double(arc4random_uniform(256))
+                
+                let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
+                colors.append(color)
+            }
             lineChartData.setValueFont(UIFont(name: "Futura", size: 10.0))
             
             drawChartLoaded = true
@@ -128,16 +159,6 @@ class DashboardViewController: UIViewController {
         
         let dataSet = PieChartDataSet(yVals: dataEntries, label: "Balanço")
         let data = PieChartData(xVals: months, dataSet: dataSet)
-        
-        var colors: [UIColor] = []
-        for _ in 0..<months.count {
-            let red = Double(arc4random_uniform(256))
-            let green = Double(arc4random_uniform(256))
-            let blue = Double(arc4random_uniform(256))
-            
-            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-            colors.append(color)
-        }
         
         dataSet.colors = colors
         
