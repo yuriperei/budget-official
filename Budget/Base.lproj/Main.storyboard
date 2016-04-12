@@ -1244,7 +1244,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="card-wallet" id="W58-tw-Rtd">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="iconeBudgetSobre" id="W58-tw-Rtd">
                                                     <rect key="frame" x="15" y="9" width="21" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -4690,7 +4690,38 @@
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="Hv3-fl-zTA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.17254901959999999" green="0.30588235289999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoBudgetCom" translatesAutoresizingMaskIntoConstraints="NO" id="fl9-c7-4jR">
+                                <rect key="frame" x="0.0" y="164" width="320" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="Kzb-Js-IjC"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Versão 1.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNU-eb-F9q">
+                                <rect key="frame" x="0.0" y="341" width="320" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Todos os direitos reservados © 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCr-Gg-BMh">
+                                <rect key="frame" x="0.0" y="533" width="320" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="CNU-eb-F9q" secondAttribute="trailing" id="3sp-lY-Qab"/>
+                            <constraint firstItem="CNU-eb-F9q" firstAttribute="top" secondItem="fl9-c7-4jR" secondAttribute="bottom" constant="16" id="UWf-Jz-b3K"/>
+                            <constraint firstItem="fl9-c7-4jR" firstAttribute="top" secondItem="g1V-mw-LNc" secondAttribute="bottom" constant="100" id="VtA-9D-J2A"/>
+                            <constraint firstAttribute="trailing" secondItem="xCr-Gg-BMh" secondAttribute="trailing" id="fS1-UT-4HF"/>
+                            <constraint firstAttribute="trailing" secondItem="fl9-c7-4jR" secondAttribute="trailing" id="ijt-pp-h80"/>
+                            <constraint firstItem="fl9-c7-4jR" firstAttribute="leading" secondItem="Hv3-fl-zTA" secondAttribute="leading" id="kD1-jv-IhQ"/>
+                            <constraint firstItem="xCr-Gg-BMh" firstAttribute="leading" secondItem="Hv3-fl-zTA" secondAttribute="leading" id="nCF-0t-Avv"/>
+                            <constraint firstItem="2ky-VI-IjB" firstAttribute="top" secondItem="xCr-Gg-BMh" secondAttribute="bottom" constant="20" id="oj0-gj-X1C"/>
+                            <constraint firstItem="CNU-eb-F9q" firstAttribute="leading" secondItem="Hv3-fl-zTA" secondAttribute="leading" id="uPd-8r-3Sw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sobre" id="ZGe-q0-7Ee">
                         <barButtonItem key="leftBarButtonItem" image="interface" id="LMh-G0-Ehb"/>
@@ -4917,6 +4948,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LogoBudgetCom" width="136" height="161"/>
         <image name="avaliarCompra" width="21" height="21"/>
         <image name="calculadora" width="21" height="21"/>
         <image name="calcularValorFuturo" width="21" height="21"/>
@@ -4926,6 +4958,7 @@
         <image name="despesas" width="21" height="21"/>
         <image name="finances" width="21" height="21"/>
         <image name="help" width="21" height="21"/>
+        <image name="iconeBudgetSobre" width="21" height="21"/>
         <image name="interface" width="21" height="21"/>
         <image name="locais" width="21" height="21"/>
         <image name="porcentagem" width="21" height="21"/>

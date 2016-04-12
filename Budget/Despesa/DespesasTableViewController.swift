@@ -140,9 +140,9 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         
         
         if (indexPath.row % 2 == 0){
-            cell.backgroundColor = Color.uicolorFromHex(0xffffff)
-        }else{
             cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
+        }else{
+            cell.backgroundColor = Color.uicolorFromHex(0xffffff)
         }
     }
 
