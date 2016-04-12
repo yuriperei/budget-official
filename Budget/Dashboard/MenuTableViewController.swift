@@ -10,6 +10,7 @@ import UIKit
 
 class MenuTableViewController: UITableViewController {
 
+    // MARK: - Functions generated
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,12 +18,6 @@ class MenuTableViewController: UITableViewController {
 
         self.tableView.backgroundColor = Color.uicolorFromHex(0xffffff)
         
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,11 +28,12 @@ class MenuTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         switch(section) {
         case 0: return 4    // section 0 has 4 rows
         case 1: return 4    // section 1 has 4 row
@@ -46,25 +42,13 @@ class MenuTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-    {
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.font = UIFont(name: "Futura", size: 13)!
         header.textLabel?.textColor = Color.uicolorFromHex(0x274561)
         header.tintColor = Color.uicolorFromHex(0xf2f2f2f2)
     }
-    
-//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//        
-//        cell.imageView?.tintColor = Color.uicolorFromHex(0xffffff)
-//        
-//        if (indexPath.row % 2 == 0){
-//            cell.backgroundColor = Color.uicolorFromHex(0xf2f2f2)
-//        }else{
-//            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
-//        }
-//    }
-    
     
 
     /*
@@ -123,3 +107,24 @@ class MenuTableViewController: UITableViewController {
     */
 
 }
+/*
+Comentários temporários
+
+
+// Uncomment the following line to preserve selection between presentations
+// self.clearsSelectionOnViewWillAppear = false
+
+// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+// self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
+//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+//
+//        cell.imageView?.tintColor = Color.uicolorFromHex(0xffffff)
+//
+//        if (indexPath.row % 2 == 0){
+//            cell.backgroundColor = Color.uicolorFromHex(0xf2f2f2)
+//        }else{
+//            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
+//        }
+//    }
+*/

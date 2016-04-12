@@ -10,157 +10,148 @@ import UIKit
 import Charts
 
 class DashboardViewController: UIViewController, ChartViewDelegate {
-    var colors: [UIColor] = []
+    
+    var colors = [UIColor]()
     @IBOutlet weak var lblBalancoTotal: UILabel!
     @IBOutlet weak var lblTotalDespesas: UILabel!
     @IBOutlet weak var lblTotalReceitas: UILabel!
     @IBOutlet var btnMenuSidebar: UIBarButtonItem!
-    @IBOutlet var lineChart: LineChartView!
+    @IBOutlet var lineChartBalanco: LineChartView!
     @IBOutlet var pieChartDespesas: PieChartView!
     @IBOutlet var pieChartReceitas: PieChartView!
-    
     @IBOutlet var graphReader: GraphReaderView!
-    //var monthsG:[String]!
-    let dashboard:Dashboard = Dashboard()
-    var drawChartLoaded:Bool = false
     
-    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
-        graphReader.hidden = false
-        let markerPosition = chartView.getMarkerPosition(entry: entry,  highlight: highlight)
-        // Adding top marker
-        graphReader.valueLabel.text = "\(entry.value.roundDecimal(2))"
-        graphReader.dateLabel.text = "Abr"
-        graphReader.center = CGPointMake(markerPosition.x+30, graphReader.center.y)
-        graphReader.hidden = false
+    let dashboard:Dashboard = Dashboard()
+    //var drawChartLoaded:Bool = false
+    
+    // MARK: - Functions generated
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        lineChartBalanco.delegate = self
+        
+        drawLineChartBalanco()
+        SidebarMenu.configMenu(self, sideBarMenu: btnMenuSidebar)
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        initDashboard()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Delegate methods
+    
+    // Função utilizada para adicionar uma view flutuante apresentando os valores do lineChartBalanco
+    func chartValueSelected(chartView: ChartViewBase, entry: ChartDataEntry, dataSetIndex: Int, highlight: ChartHighlight) {
+        
+        let markerPosition = chartView.getMarkerPosition(entry: entry,  highlight: highlight)
+        
+        graphReader.valueLabel.text = "\(entry.value.roundDecimal(2))"
+        graphReader.dateLabel.text = "\(chartView.getXValue(entry.xIndex))"
+        graphReader.center = CGPointMake(markerPosition.x + 30, lineChartBalanco.frame.origin.y + 200)
+        
+        graphReader.hidden = false
     }
     
     func chartValueNothingSelected(chartView: ChartViewBase) {
         graphReader.hidden = true
     }
     
-//    var zoom:CGFloat = 0.0
-    func initDashboard(){
-        lblBalancoTotal.text = dashboard.getTotalBalanco().convertToCurrency("pt_BR")
+    // MARK: - Private functions
+    
+    private func initDashboard() {
+        
+        //Carregando as labels
+        lblBalancoTotal.text = dashboard.getSaldoTotal().convertToCurrency("pt_BR")
         lblTotalReceitas.text = dashboard.getTotalReceitas().convertToCurrency("pt_BR")
         lblTotalDespesas.text = dashboard.getTotalDespesas().convertToCurrency("pt_BR")
         
+        // Carregando os gráficos
         let (months, receitasMensal, despesasMensal) = dashboard.getBalancoAnual()
         let (despesas, valorDespesas) = dashboard.getDespesasPorCategoria()
         let (receitas, valorReceitas) = dashboard.getReceitasPorCategoria()
-//        print(Dashboard.getDespesasPorCategoria())
-//        print(Dashboard.getReceitasPorCategoria())
         
-        setLineBalanco(months, values: [receitasMensal, despesasMensal])
+        setLineBalanco(months, receitas: receitasMensal, despesas: despesasMensal)
         
-        
-        if(valorDespesas.count > 0){
+        if(valorDespesas.count > 0) {
+            pieChartDespesas.hidden = false
             setPieChart(despesas, values: valorDespesas, pieChart: pieChartDespesas)
         } else {
-            pieChartDespesas.noDataText = "Não existem despesas\nregistradas esse mês"
+            pieChartDespesas.hidden = true
         }
         
         if(valorReceitas.count > 0) {
+            pieChartReceitas.hidden = false
             setPieChart(receitas, values: valorReceitas, pieChart: pieChartReceitas)
         } else {
-            pieChartReceitas.noDataText = "Não existem receitas\nregistradas esse mês"
+            pieChartReceitas.hidden = true
         }
-        
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        SidebarMenu.configMenu(self, sideBarMenu: btnMenuSidebar)
-
-        drawBarChartBalanco()
-        lineChart.delegate = self
-    }
-    
-    private func drawBarChartBalanco() {
+    private func drawLineChartBalanco() {
         
-        let xAxis = lineChart.xAxis
+        let xAxis = lineChartBalanco.xAxis
         xAxis.labelPosition = .Bottom
         xAxis.drawGridLinesEnabled = false
-        xAxis.spaceBetweenLabels = 2
         
-        let leftAxis = lineChart.leftAxis
-        leftAxis.enabled = false
-        leftAxis.labelPosition = .OutsideChart
-        leftAxis.spaceTop = 0.15
-        leftAxis.customAxisMin = 0
-        leftAxis.labelFont = UIFont(name: "Futura", size: 10.0)!
-        
-        let rightAxis = lineChart.rightAxis
-        rightAxis.enabled = false
-        rightAxis.drawGridLinesEnabled = false
-        rightAxis.spaceTop = 0.15
-        rightAxis.customAxisMin = 0
-        rightAxis.labelFont = leftAxis.labelFont
-        
-        lineChart.legend.position = .BelowChartLeft
-        lineChart.legend.form = .Square
-        lineChart.legend.formSize = 9.0
-        lineChart.legend.xEntrySpace = 4.0
-        lineChart.descriptionText = ""
+        lineChartBalanco.leftAxis.enabled = false
+        lineChartBalanco.rightAxis.enabled = false
+        lineChartBalanco.descriptionTextPosition = CGPointMake(lineChartBalanco.frame.origin.x + 80, lineChartBalanco.frame.origin.y)
+        lineChartBalanco.descriptionText = ""
+        lineChartBalanco.legend.enabled = false
     }
     
-    private func setLineBalanco(months: [String], values: [[Double]]) {
-        lineChart.noDataText = "Não foi possível carregar os dados."
+    private func setLineBalanco(months: [String], receitas: [Double], despesas: [Double]) {
         
         var dataEntries: [ChartDataEntry] = []
         var dataEntries2: [ChartDataEntry] = []
         
         for i in 0..<months.count {
-            dataEntries.append(ChartDataEntry(value: values[0][i], xIndex: i))
-            dataEntries2.append(ChartDataEntry(value: values[1][i], xIndex: i))
+            dataEntries.append(ChartDataEntry(value: receitas[i], xIndex: i))
+            dataEntries2.append(ChartDataEntry(value: despesas[i], xIndex: i))
         }
         
         let setReceitas = LineChartDataSet(yVals: dataEntries, label: "Receitas")
         let setDespesas = LineChartDataSet(yVals: dataEntries2, label: "Despesas")
         let lineChartData = LineChartData(xVals: months, dataSets: [setReceitas, setDespesas])
-        lineChart.data = lineChartData
+        lineChartData.setValueFont(UIFont(name: "Futura", size: 10.0))
+        
+        lineChartBalanco.data = lineChartData
         
         setReceitas.axisDependency = .Left;
-        setReceitas.setColor(Color.uicolorFromHex(0x2C4E6E))
-        setReceitas.lineWidth = 2.0
-        setReceitas.circleRadius = 3.0
-        setReceitas.fillAlpha = 65/255.0
-        setReceitas.drawCircleHoleEnabled = false
+        setReceitas.circleColors = [Color.uicolorFromHex(0x467BAD)]
+        setReceitas.circleRadius = 5.0
+        setReceitas.drawValuesEnabled = false
+        setReceitas.lineWidth = 3.0
+        setReceitas.setColor(Color.uicolorFromHex(0x467BAD))
         
         setDespesas.axisDependency = .Left;
+        setDespesas.circleColors = [Color.uicolorFromHex(0x2C4E6E)]
+        setDespesas.circleRadius = 5.0
+        setDespesas.drawValuesEnabled = false
+        setDespesas.lineWidth = 3.0
         setDespesas.setColor(Color.uicolorFromHex(0x1D3347))
-        setDespesas.lineWidth = 2.0
-        setDespesas.circleRadius = 3.0
-        setDespesas.fillAlpha = 65/255.0
-        setDespesas.drawCircleHoleEnabled = false
-        
-        
-        if(!drawChartLoaded){
-            for _ in 0..<months.count {
-                let red = Double(arc4random_uniform(256))
-                let green = Double(arc4random_uniform(256))
-                let blue = Double(arc4random_uniform(256))
-                
-                let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-                colors.append(color)
-            }
-            lineChartData.setValueFont(UIFont(name: "Futura", size: 10.0))
-            
-            drawChartLoaded = true
-        }
     }
     
-    private func setPieChart(months: [String], values: [Double], pieChart:PieChartView) {
+    private func setPieChart(categorias: [String], values: [Double], pieChart:PieChartView) {
         
         var dataEntries:[ChartDataEntry] = []
+        
         for (i,value) in values.enumerate() {
             dataEntries.append(ChartDataEntry(value: value, xIndex: i))
         }
         
         let dataSet = PieChartDataSet(yVals: dataEntries, label: "Balanço")
-        let data = PieChartData(xVals: months, dataSet: dataSet)
+        let data = PieChartData(xVals: categorias, dataSet: dataSet)
         
+        loadColors(categorias.count)
         dataSet.colors = colors
+        dataSet.sliceSpace = 2.0;
         
         data.setValueFont(UIFont(name: "Futura", size: 10.0))
         
@@ -168,15 +159,16 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
         pieChart.legend.enabled = false
         pieChart.data = data
     }
-
-    override func viewWillAppear(animated: Bool) {
-//        self.viewDidLoad()
-        initDashboard()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func loadColors(numberOfColors:Int) {
+        for _ in 0..<numberOfColors {
+            let red = Double(arc4random_uniform(40))
+            let green = Double(arc4random_uniform(100))
+            let blue = Double(arc4random_uniform(250))
+            
+            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
+            colors.append(color)
+        }
     }
 
     /*
@@ -190,3 +182,28 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
     */
 
 }
+
+
+/*
+Comentários temporários
+//    var zoom:CGFloat = 0.0
+
+leftAxis.labelPosition = .OutsideChart
+leftAxis.spaceTop = 0.15
+leftAxis.customAxisMin = 0
+leftAxis.labelFont = UIFont(name: "Futura", size: 10.0)!
+
+rightAxis.drawGridLinesEnabled = false
+rightAxis.spaceTop = 0.15
+rightAxis.customAxisMin = 0
+rightAxis.labelFont = leftAxis.labelFont
+
+//pieChartDespesas.noDataText = "Não existem despesas\nregistradas esse mês"
+//pieChartReceitas.noDataText = "Não existem receitas\nregistradas esse mês"
+
+//lineChartBalanco.legend.position = .BelowChartLeft
+//lineChartBalanco.legend.form = .Square
+//lineChartBalanco.legend.formSize = 9.0
+//lineChartBalanco.legend.xEntrySpace = 4.0
+//xAxis.spaceBetweenLabels = 2
+*/

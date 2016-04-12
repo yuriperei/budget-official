@@ -8,8 +8,10 @@
 
 import UIKit
 
+// View flutuante responsável por apresentar os valores do gráfico de receitas e depesas≈
 class GraphReaderView:UIView {
     
     @IBOutlet weak var valueLabel:UILabel!
     @IBOutlet weak var dateLabel:UILabel!
+    
 }

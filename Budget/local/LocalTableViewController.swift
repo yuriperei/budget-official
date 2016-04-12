@@ -23,6 +23,7 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
     var frc = NSFetchedResultsController()
     let localDAO = LocalDAO()
     
+    // MARK: - Functions generated
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,33 +41,16 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
             let alert = Notification.mostrarErro()
             presentViewController(alert, animated: true, completion: nil)
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
-
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        atualizarTableView()
-    }
-    
-    func atualizarTableView(){
-        tableView.reloadData()
-    }
     
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         
         if let sections = frc.sections {
             return sections.count
@@ -76,7 +60,6 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         
         if let sections = frc.sections {
             let currentSection = sections[section]
@@ -85,9 +68,8 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
         
         return 0
     }
-
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
         
         if (indexPath.row % 2 == 0){
             cell.backgroundColor = Color.uicolorFromHex(0xffffff)
@@ -95,12 +77,11 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
             cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
         }
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell: PlaceLocalTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellLocal", forIndexPath: indexPath) as! PlaceLocalTableViewCell
         
-        // Configure the cell...
         let local = frc.objectAtIndexPath(indexPath) as! Local
         cell.lblNome.text = local.nome
         cell.lblEndereco.text = local.rua! + " - " + local.cidade! + " - " + local.estado!
@@ -123,24 +104,23 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
             }
             
             // Verifica se tem alguma despesa ou receita associada, se não tiver permite deletar
-            if (local.despesa?.count > 0){
+            if (local.despesa?.count > 0) {
+                
                 let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais despesas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
-            }else if (local.receita?.count > 0){
+
+            } else if (local.receita?.count > 0) {
+                
                 let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
-            }else{
+            
+            } else {
                 
                 let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
                 presentViewController(detalhes, animated: true, completion: nil)
                 atualizarTableView()
                 
             }
-            
-            
-            
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     
@@ -153,6 +133,36 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
         }
         
     }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "editar"{
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let contaController : LocalViewController = segue.destinationViewController as! LocalViewController
+            let local: Local = frc.objectAtIndexPath(indexPath!) as! Local
+            contaController.local = local
+        }
+        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+
+    // MARK: - Delegate methods
+
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        atualizarTableView()
+    }
+    
+    // MARK: - Private Functions
+    
+    private func atualizarTableView(){
+        tableView.reloadData()
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -188,19 +198,16 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
         return true
     }
     */
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "editar"{
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
-            let contaController : LocalViewController = segue.destinationViewController as! LocalViewController
-            let local: Local = frc.objectAtIndexPath(indexPath!) as! Local
-            contaController.local = local
-        }
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-
 }
+/*
+Comentários temporários
+// Uncomment the following line to preserve selection between presentations
+// self.clearsSelectionOnViewWillAppear = false
+
+// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+// self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
+else if editingStyle == .Insert {
+// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+}
+*/

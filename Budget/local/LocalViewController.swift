@@ -152,14 +152,12 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
     
     func displayLocationInfo(placemark: CLPlacemark?) {
         if let containsPlacemark = placemark {
-            //stop updating location to save battery life
+            //Para atualização de local para economia de bateria
             locationManager.stopUpdatingLocation()
             
             let locality = (containsPlacemark.locality != nil) ? containsPlacemark.locality : ""
             let name = (containsPlacemark.name != nil) ? containsPlacemark.name : ""
             let administrativeArea = (containsPlacemark.administrativeArea != nil) ? containsPlacemark.administrativeArea : ""
-            //            let throughfare = (containsPlacemark.thoroughfare != nil) ? containsPlacemark.thoroughfare : ""
-            //            let country = (containsPlacemark.country != nil) ? containsPlacemark.country : ""
             
             self.txtCidade.text = locality
             self.txtEstado.text = administrativeArea
@@ -316,4 +314,6 @@ label.addConstraint(constraint)
 }
 }
 //switchEnderecoAtual.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+//            let throughfare = (containsPlacemark.thoroughfare != nil) ? containsPlacemark.thoroughfare : ""
+//            let country = (containsPlacemark.country != nil) ? containsPlacemark.country : ""
 */
