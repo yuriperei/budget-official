@@ -15,7 +15,6 @@ class PlaceContaTableViewCell: UITableViewCell {
     @IBOutlet weak var lblSaldo: UILabel!
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         // Initialization code
     }

@@ -11,11 +11,11 @@ import CoreData
 
 class ContasViewController: UITableViewController, TipoContasViewControllerDelegate, UITextFieldDelegate {
     
+    let contaDAO:ContaDAO = ContaDAO()
     
     var currentString = ""
     var erros: String = ""
     var conta: Conta?
-    let contaDAO:ContaDAO = ContaDAO()
     var tipoConta: TipoConta?
     
     @IBOutlet var labels: [UILabel]!
@@ -35,7 +35,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
                 txtSaldo.text = saldo.convertToCurrency("pt_BR")
             }
             
-            tipoConta = conta.tipoconta // as? TipoConta
+            tipoConta = conta.tipoconta
             
             txtSaldo.enabled = false
         }
@@ -50,6 +50,48 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 2
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch(section) {
+        case 0: return 2    // section 0 has 2 rows
+        case 1: return 1    // section 1 has 1 row
+        default: fatalError("Unknown number of sections")
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        FormCustomization.dismissInputView([txtNome, txtSaldo])
+        
+        if segue.identifier == "alterarTipoConta" {
+            
+            let tipoContasController : TipoContasTableViewController = segue.destinationViewController as! TipoContasTableViewController
+            
+            tipoContasController.delegate = self
+            tipoContasController.tela = true
+        }
+        
+    }
+    
+    // MARK: - Delegate Methods
+    
+    func tipoContasViewControllerResponse(tipoConta: TipoConta) {
+        self.tipoConta = tipoConta
+        txtTipo.text = tipoConta.nome
+    }
+    
+    // MARK: - IBAction functions
     
     @IBAction func maskTextField(sender: UITextField) {
         FormCustomization.aplicarMascaraMoeda(&sender.text!)
@@ -74,11 +116,13 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         
     }
     
-    func dissmissViewController(){
+    // MARK: Private functions
+    
+    private func dissmissViewController(){
         navigationController?.popViewControllerAnimated(true)
     }
     
-    func validarCampos(){
+    private func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
@@ -92,7 +136,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         }
     }
     
-    func addConta(){
+    private func addConta(){
         
         validarCampos()
         
@@ -111,7 +155,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         }
     }
     
-    func updateConta(){
+    private func updateConta(){
         
         conta?.nome = txtNome.text
         conta?.saldo = txtSaldo.text!.currencyToFloat()
@@ -134,29 +178,6 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         
         dissmissViewController()
         
-    }
-    
-    // Define Delegate Method
-    func tipoContasViewControllerResponse(tipoConta: TipoConta) {
-        self.tipoConta = tipoConta
-        txtTipo.text = tipoConta.nome
-    }
-    
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        switch(section) {
-        case 0: return 2    // section 0 has 2 rows
-        case 1: return 1    // section 1 has 1 row
-        default: fatalError("Unknown number of sections")
-        }
     }
 
     /*
@@ -203,20 +224,6 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         return true
     }
     */
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        FormCustomization.dismissInputView([txtNome, txtSaldo])
-        if segue.identifier == "alterarTipoConta"{
-            let tipoContasController : TipoContasTableViewController = segue.destinationViewController as! TipoContasTableViewController
-            tipoContasController.delegate = self
-            tipoContasController.tela = true
-        }
-        
-    }
-
 }
 /*====================================================================================
 

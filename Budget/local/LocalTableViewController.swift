@@ -193,15 +193,3 @@ class LocalTableViewController: UITableViewController, NSFetchedResultsControlle
     }
     */
 }
-/*
-Comentários temporários
-// Uncomment the following line to preserve selection between presentations
-// self.clearsSelectionOnViewWillAppear = false
-
-// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-// self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
-else if editingStyle == .Insert {
-// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-}
-*/
