@@ -161,13 +161,22 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
     }
     
     private func loadColors(numberOfColors:Int) {
-        for _ in 0..<numberOfColors {
-            let red =  45
-            let green = 75
-            let blue = Double(arc4random_uniform(195) + 100)
+        
+        var int = UInt32(0x274561).intValue!
+        var int2 = UInt32(0x467BAD).intValue!
+        
+        for _ in 0..<numberOfColors {           
+            int += 15
+            int2 += 15
             
-            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-            colors.append(color)
+            if int % 2 == 0{
+                colors.append(Color.uicolorFromHex(UInt32(int)))
+            }else{
+                colors.append(Color.uicolorFromHex(UInt32(int2)))
+            }
+            
+            
+            
         }
     }
 

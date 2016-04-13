@@ -22,7 +22,8 @@ class MapaViewController: UIViewController{
         if let local = local {
             endereco = local.rua! + " - " + local.cidade! + " - " + local.estado!
         }
-                
+        
+        // Converte o endereço em coordenadas e dados específicos do local
         let geo: CLGeocoder = CLGeocoder()
         geo.geocodeAddressString(endereco!, completionHandler: { (placemarks, error) -> Void in
             if((error) != nil){

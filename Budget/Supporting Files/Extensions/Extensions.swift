@@ -184,6 +184,12 @@ extension String {
     }
 }
 
+extension UInt32 {
+    var intValue:Int? {
+        return Int(UnicodeScalarType(self))
+    }
+}
+
 extension UIImage {
     
     func imageWithColor(tintColor: UIColor) -> UIImage {
