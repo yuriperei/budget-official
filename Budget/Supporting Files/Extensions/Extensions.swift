@@ -214,12 +214,3 @@ extension UIImage {
         return image
     }
 }
-
-/*
-Comentários temporário
-//    mutating func toFixed(decimal:Double) {
-//        let decimalDouble = pow(10.0,decimal)
-//
-//        self = self / decimalDouble
-//    }
-*/

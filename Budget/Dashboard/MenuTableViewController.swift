@@ -107,24 +107,3 @@ class MenuTableViewController: UITableViewController {
     */
 
 }
-/*
-Comentários temporários
-
-
-// Uncomment the following line to preserve selection between presentations
-// self.clearsSelectionOnViewWillAppear = false
-
-// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-// self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
-//    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-//
-//        cell.imageView?.tintColor = Color.uicolorFromHex(0xffffff)
-//
-//        if (indexPath.row % 2 == 0){
-//            cell.backgroundColor = Color.uicolorFromHex(0xf2f2f2)
-//        }else{
-//            cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
-//        }
-//    }
-*/

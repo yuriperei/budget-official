@@ -182,28 +182,3 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
     */
 
 }
-
-
-/*
-Comentários temporários
-//    var zoom:CGFloat = 0.0
-
-leftAxis.labelPosition = .OutsideChart
-leftAxis.spaceTop = 0.15
-leftAxis.customAxisMin = 0
-leftAxis.labelFont = UIFont(name: "Futura", size: 10.0)!
-
-rightAxis.drawGridLinesEnabled = false
-rightAxis.spaceTop = 0.15
-rightAxis.customAxisMin = 0
-rightAxis.labelFont = leftAxis.labelFont
-
-//pieChartDespesas.noDataText = "Não existem despesas\nregistradas esse mês"
-//pieChartReceitas.noDataText = "Não existem receitas\nregistradas esse mês"
-
-//lineChartBalanco.legend.position = .BelowChartLeft
-//lineChartBalanco.legend.form = .Square
-//lineChartBalanco.legend.formSize = 9.0
-//lineChartBalanco.legend.xEntrySpace = 4.0
-//xAxis.spaceBetweenLabels = 2
-*/

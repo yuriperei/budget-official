@@ -72,20 +72,18 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         switch(section) {
         case 0: return 5    // section 0 has 2 rows
         case 1: return 1    // section 1 has 1 row
         case 2: return 1    // section 2 has 1 row
         default: fatalError("Unknown number of sections")
         }
-        
-        
     }
     
     // MARK: - Navigation
@@ -203,6 +201,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     private func addConta() {
         
         func dados() {
+            
             receita = Receita.getReceita()
             receita?.nome = txtNome.text
             receita?.descricao = txtDescricao.text
@@ -212,7 +211,6 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             receita?.local = local
             receita?.data = Data.removerTime(txtData.text!)
             
-            // Atualizar o saldo da conta referente
             conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
             
             salvarConta()
@@ -227,9 +225,9 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             if (Float((conta?.saldo)!) <= 0 && novoSaldo > 0){
                 
                 let alert = Notification.avisoReceita("Parabéns!", mensagem: "A conta \(conta!.nome!) ficará com saldo positivo", completion: {
-                            (action:UIAlertAction) in
-                                dados()
-                            })
+                (action:UIAlertAction) in
+                    dados()
+                })
                 presentViewController(alert, animated: true, completion: nil)
             } else {
                 
@@ -274,10 +272,11 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     
     private func salvarConta(){
 
-        do{
-            try receitaDAO.salvar(receita!)
+        do {
             
-        }catch{
+            try receitaDAO.salvar(receita!)
+        } catch {
+            
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
             presentViewController(alert, animated: true, completion: nil)
         }

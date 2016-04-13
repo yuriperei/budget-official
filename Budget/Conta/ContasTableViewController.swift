@@ -11,31 +11,31 @@ import CoreData
 
 class ContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    @IBOutlet var btnSidebar:UIBarButtonItem?
-    weak var delegate: ContasViewControllerDelegate?
-    
-    // Variável de escape para verificar se está vindo da tela ReceitaViewController
     let contaDAO:ContaDAO = ContaDAO()
-    var tela: Bool = false
     let context = ContextFactory.getContext()
+    
+    
+    var tela: Bool = false // Variável para verificar se está vindo da tela ReceitaViewController
+    var delegate: ContasViewControllerDelegate?
     var frc = Conta.getContasController("nome")
+    
+    @IBOutlet var btnSidebar:UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
         if let sidebar = btnSidebar {
+            
             SidebarMenu.configMenu(self, sideBarMenu: sidebar)
         }
         
         frc.delegate = self
         
-        do{
+        do {
+            
             try frc.performFetch()
-        }catch{
+        } catch {
+            
             let alert = Notification.mostrarErro()
             presentViewController(alert, animated: true, completion: nil)
         }
@@ -46,52 +46,112 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         // Dispose of any resources that can be recreated.
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        atualizarTableView()
-    }
-    
-    func atualizarTableView(){
-        tableView.reloadData()
-    }
-    
-    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         
         let numbersOfSections = frc.sections?.count
         return numbersOfSections!
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-       
+        
         let numberOfRowsInSection = frc.sections?[section].numberOfObjects
         return numberOfRowsInSection!
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+        
         let cell: PlaceContaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PlaceContaTableViewCell
-        // Configure the cell...
+        
         let conta = frc.objectAtIndexPath(indexPath) as! Conta
-
+        
         cell.lblConta?.text = conta.nome
         cell.lblTipConta.text = String((conta.tipoconta?.nome)!)
-        cell.lblSaldo.text = conta.moeda(Float(conta.saldo!))
+        cell.lblSaldo.text = conta.saldo!.convertToCurrency("pt_BR")
         
         return cell
     }
-//    
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
         
         if (indexPath.row % 2 == 0){
             cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
         }else{
             cell.backgroundColor = Color.uicolorFromHex(0xffffff)
         }
+    }
+    
+    // Override to support editing the table view.
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let conta = frc.objectAtIndexPath(indexPath) as! Conta
+            
+            func removerSelecionado(action:UIAlertAction){
+                do{
+                    try contaDAO.remover(conta)
+                }catch{
+                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
+                }
+            }
+            
+            // Verifica se tem alguma receita associada, se não tiver permite deletar
+            if (conta.receita?.count > 0) {
+                
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
+            } else if(conta.despesa?.count > 0) {
+                
+                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais despesas associadas.")
+                presentViewController(alerta, animated: true, completion: nil)
+            } else {
+                
+                let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
+                presentViewController(detalhes, animated: true, completion: nil)
+                atualizarTableView()
+            }
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let conta = frc.objectAtIndexPath(indexPath) as! Conta
+        delegate?.contasViewControllerResponse(conta)
+        
+        if tela == true {
+            
+            navigationController?.popViewControllerAnimated(true)
+        }
+        
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "editar" {
+            
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let contaController : ContasViewController = segue.destinationViewController as! ContasViewController
+            let conta: Conta = frc.objectAtIndexPath(indexPath!) as! Conta
+            
+            contaController.conta = conta
+        }
+    }
+    
+    // MARK: - Delegate methods
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        
+        atualizarTableView()
+    }
+    
+    // MARK: - Private functions
+    
+    func atualizarTableView() {
+        
+        tableView.reloadData()
     }
 
     /*
@@ -101,49 +161,6 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         return true
     }
     */
-
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            let conta = frc.objectAtIndexPath(indexPath) as! Conta
-            
-            // Método para ser chamado ao deletar item
-            func removerSelecionado(action:UIAlertAction){
-                do{
-                    try contaDAO.remover(conta)
-                }catch{
-                    presentViewController(Notification.mostrarErro(), animated: true, completion: nil)
-                }
-            }
-            
-            // Verifica se tem alguma receita associada, se não tiver permite deletarß
-            if (conta.receita?.count > 0){
-                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
-                presentViewController(alerta, animated: true, completion: nil)
-            }else if(conta.despesa?.count > 0){
-                let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais despesas associadas.")
-                presentViewController(alerta, animated: true, completion: nil)
-            }else{
-                
-                let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)               
-                presentViewController(detalhes, animated: true, completion: nil)
-                atualizarTableView()
-                
-            }
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let conta = frc.objectAtIndexPath(indexPath) as! Conta
-        delegate?.contasViewControllerResponse(conta)
-        
-        if tela == true{
-            navigationController?.popViewControllerAnimated(true)
-        }
-        
-    }
 
     /*
     // Override to support rearranging the table view.
@@ -159,25 +176,6 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         return true
     }
     */
-
-    // MARK: - Navigation
-    
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-        if segue.identifier == "editar"{
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
-            let contaController : ContasViewController = segue.destinationViewController as! ContasViewController
-            let conta: Conta = frc.objectAtIndexPath(indexPath!) as! Conta
-            contaController.conta = conta
-        }
-        
-    
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-
 }
 
 
@@ -244,5 +242,13 @@ func getFetchedResultsController() -> NSFetchedResultsController {
     return frc
 }
 
+// Uncomment the following line to preserve selection between presentations
+// self.clearsSelectionOnViewWillAppear = false
 
+// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+// self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
+else if editingStyle == .Insert {
+// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+}
 ==========================================================================================*/

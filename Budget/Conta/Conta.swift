@@ -10,10 +10,8 @@ import Foundation
 import CoreData
 
 class Conta: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-
-    let formatter = NSNumberFormatter()
+    
+    //let formatter = NSNumberFormatter()
     
     static func getConta() -> Conta{
         return ContextFactory.getManagedObject("Conta") as! Conta
@@ -26,10 +24,9 @@ class Conta: NSManagedObject {
     static func getContasController(firstSort:String, secondSort:String = "", sectionName:String) -> NSFetchedResultsController {
         return ContextFactory.getFetchedResultsController("Conta", firstSort: firstSort, secondSort: secondSort, ascending: true, sectionName: sectionName)
     }
-    
-    func moeda(valor: Float) -> String{
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
-        return (formatter.stringFromNumber(valor))!
-    }
+//    func moeda(valor: Float) -> String{
+//        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+//        formatter.locale = NSLocale(localeIdentifier: "pt_BR")
+//        return (formatter.stringFromNumber(valor))!
+//    }
 }

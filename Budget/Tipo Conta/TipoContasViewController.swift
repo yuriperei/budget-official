@@ -33,6 +33,20 @@ class TipoContasViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 1
+    }
+    
+    // MARK: - IBAction functions
+    
     @IBAction func btnCancel(sender: AnyObject) {
         
         dissmissViewController()
@@ -46,18 +60,19 @@ class TipoContasViewController: UITableViewController {
         
     }
     
-    func dissmissViewController(){
+    // MARK: - Private functions
+    
+    private func dissmissViewController(){
         navigationController?.popViewControllerAnimated(true)
     }
     
-    func validarCampos(){
+    private func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
     }
     
-    
-    func addConta(){
+    private func addConta(){
         
         validarCampos()
 
@@ -72,31 +87,18 @@ class TipoContasViewController: UITableViewController {
             presentViewController(alert, animated: true, completion: nil)
             self.erros = ""
         }
-
     }
     
     private func salvarConta(){
         
-        do{
+        do {
+            
             try tipoContaDAO.salvar(tipoConta!)
-        }catch{
+        } catch {
+            
             let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível salvar")
             presentViewController(alert, animated: true, completion: nil)
         }
-        
-    }
-    
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
     }
 
     /*

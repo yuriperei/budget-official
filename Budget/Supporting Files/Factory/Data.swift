@@ -39,8 +39,3 @@ class Data{
         return dateString
     }
 }
-
-/*
-Comentários temporários
-//        return dateFormat.dateFromString(NSDateFormatter.localizedStringFromDate(data, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle))!
-*/
