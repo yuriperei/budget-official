@@ -36,19 +36,19 @@ class CalculadoraController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func getLastChar(string: String) -> String{
-        
-//        let string = lblVisor.text
-        
-        return string.substringFromIndex(string.endIndex.predecessor())
-        
-//        let index2 = string!.rangeOfString(lblOperador.text!, options: .BackwardsSearch)?.startIndex
-//        if let index = index2?.advancedBy(1){
-//            
-//            return (string!.substringWithRange(Range<String.Index>(start: index, end: lblVisor.text!.endIndex)))
-//        }
-//        return lblVisor.text!
-    }
+//    func getLastChar(string: String) -> String{
+//        
+////        let string = lblVisor.text
+//        
+//        return string.substringFromIndex(string.endIndex.predecessor())
+//        
+////        let index2 = string!.rangeOfString(lblOperador.text!, options: .BackwardsSearch)?.startIndex
+////        if let index = index2?.advancedBy(1){
+////            
+////            return (string!.substringWithRange(Range<String.Index>(start: index, end: lblVisor.text!.endIndex)))
+////        }
+////        return lblVisor.text!
+//    }
     
     
     
@@ -84,20 +84,18 @@ class CalculadoraController: UIViewController {
 
     @IBAction func inserirOperacao(sender: UIButton) {
         
-        
         resultado = false
         if let operatorInText = sender.currentTitle {
             if(operatorInText == "-" && lblVisor.text == "0"){
                 lblVisor.text = operatorInText
                 numberInText = operatorInText
             } else {
-            let lastChar = getLastChar(lblVisor.text!)
-            switch(lastChar){
-                case "-":
-                    
-                    break;
-                case "+","/","x":
-                    
+            //let lastChar = getLastChar(lblVisor.text!)
+            switch(lblVisor.text!.lastChar){
+//                case "-":
+//                    
+//                    break;
+                case "+","-","/","x":
                     break;
             default:
                 lblVisor.text?.appendContentsOf(operatorInText)
@@ -130,7 +128,7 @@ class CalculadoraController: UIViewController {
     }
     
     @IBAction func realizarOperacao(sender: UIButton) {
-        if(calculadora?.numeroAtual != 0){
+        if (calculadora?.numeroAtual != 0) {
             lblVisor.text = calculadora!.calcularOperacao().stringValue
             lblResultado.text = ""
             numberInText = ""
