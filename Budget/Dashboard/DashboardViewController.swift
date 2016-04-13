@@ -165,7 +165,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
         var int = UInt32(0x274561).intValue!
         var int2 = UInt32(0x467BAD).intValue!
         
-        for _ in 0..<numberOfColors {           
+        for _ in 0..<numberOfColors {
             int += 15
             int2 += 15
             
