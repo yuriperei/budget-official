@@ -9,21 +9,15 @@
 import UIKit
 import CoreData
 
-protocol LocalViewControllerDelegate: class {
-    func localViewControllerResponse(local:Local)
-}
-
 class LocalTableViewController: UITableViewController, NSFetchedResultsControllerDelegate{
     
-    @IBOutlet var btnSideBar:UIBarButtonItem!
-    
-    weak var delegate: LocalViewControllerDelegate?
-    var tela:Bool = false
-    
-    var frc = NSFetchedResultsController()
     let localDAO = LocalDAO()
     
-    // MARK: - Functions generated
+    var delegate: LocalViewControllerDelegate?
+    var tela:Bool = false
+    var frc = Local.getLocaisController("nome")
+    
+    @IBOutlet var btnSideBar:UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()

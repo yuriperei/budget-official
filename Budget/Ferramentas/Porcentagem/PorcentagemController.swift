@@ -81,7 +81,7 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
         if (segue.identifier == "myPopover") {
             let popView = segue.destinationViewController as! AjudaPopoverController
             popView.popoverPresentationController!.delegate = self
-            popView.txtLabel = "Como calcular porcentagem."
+            popView.txtLabel = "Cálculo simples de porcentagem.\n- Escolha a opção valor (padrão) para calcular o valor da porcentagem aplicada sobre um valor total;\n- Escolha a opção porcentagem para calcular a parte de um valor total em porcentagem;"
         }
     }
     

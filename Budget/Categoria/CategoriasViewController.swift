@@ -11,8 +11,9 @@ import CoreData
 
 class CategoriasViewController: UITableViewController {
 
-    var categoria: Categoria?
     let categoriaDAO:CategoriaDAO = CategoriaDAO()
+    
+    var categoria: Categoria?
     var erros: String = ""
     
     @IBOutlet var labels: [UILabel]!
@@ -32,6 +33,20 @@ class CategoriasViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 1
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return 1
+    }
+    
+    // MARK: - IBActions functions
+    
     @IBAction func btnCancel(sender: AnyObject) {
         
         dissmissViewController()
@@ -43,17 +58,19 @@ class CategoriasViewController: UITableViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     
-    func dissmissViewController(){
+    // MARK: - Private functions
+    
+    private func dissmissViewController(){
         navigationController?.popViewControllerAnimated(true)
     }
     
-    func validarCampos(){
+    private func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
     }
     
-    func addConta(){
+    private func addConta(){
         
         validarCampos()
         
@@ -81,18 +98,6 @@ class CategoriasViewController: UITableViewController {
             presentViewController(alert, animated: true, completion: nil)
         }
         
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
     }
 
     /*

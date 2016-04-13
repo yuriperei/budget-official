@@ -28,7 +28,8 @@ class ValorInicialController: PorcentagemController {
         super.prepareForSegue(segue, sender: sender)
         if (segue.identifier == "myPopover") {
             let popView = segue.destinationViewController as! AjudaPopoverController
-            popView.txtLabel = "Como calcular o valor inicial."
+            popView.txtLabel = "Cálculo para encontrar um valor original antes de um juros ou desconto ser aplicado.\n- Primeiro: Insira o valor com o juros ou desconto aplicado;\n- Segundo: Insira a porcentagem aplicada sobre o primeiro valor;\n- Terceiro: Escolha se a porcentagem aplicada é um juros ou desconto;"
+            popView.preferredContentSize = CGSize(width: 300, height: 300)
         }
     }
 }

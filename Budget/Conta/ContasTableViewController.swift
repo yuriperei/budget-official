@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-protocol ContasViewControllerDelegate: class {
-    func contasViewControllerResponse(conta: Conta)
-}
-
 class ContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     @IBOutlet var btnSidebar:UIBarButtonItem?

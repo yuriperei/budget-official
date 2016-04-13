@@ -162,9 +162,9 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
     
     private func loadColors(numberOfColors:Int) {
         for _ in 0..<numberOfColors {
-            let red = Double(arc4random_uniform(40))
-            let green = Double(arc4random_uniform(100))
-            let blue = Double(arc4random_uniform(250))
+            let red =  45
+            let green = 75
+            let blue = Double(arc4random_uniform(195) + 100)
             
             let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
             colors.append(color)

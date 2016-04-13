@@ -69,6 +69,7 @@
 		A88BDA771CACE1170014E3AF /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA701CACE1170014E3AF /* Notification.swift */; };
 		A88BDA781CACE1170014E3AF /* FormCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA711CACE1170014E3AF /* FormCustomization.swift */; };
 		A88BDA791CACE1170014E3AF /* Validador.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88BDA721CACE1170014E3AF /* Validador.swift */; };
+		A8C3868B1CBDC51800FD0B58 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C3868A1CBDC51800FD0B58 /* Protocols.swift */; };
 		A8E3831A1CBC714F006D0154 /* GraphReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E383191CBC714F006D0154 /* GraphReaderView.swift */; };
 		A8E4A95B1CB6F4A4008F214E /* VariacaoPercentualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */; };
 		A8E4A9601CB6F8EE008F214E /* ValorInicialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */; };
@@ -221,6 +222,7 @@
 		A88BDA701CACE1170014E3AF /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notification.swift; path = "Supporting Files/Factory/Notification.swift"; sourceTree = "<group>"; };
 		A88BDA711CACE1170014E3AF /* FormCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCustomization.swift; path = "Supporting Files/Factory/FormCustomization.swift"; sourceTree = "<group>"; };
 		A88BDA721CACE1170014E3AF /* Validador.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Validador.swift; path = "Supporting Files/Factory/Validador.swift"; sourceTree = "<group>"; };
+		A8C3868A1CBDC51800FD0B58 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = "Supporting Files/Protocols/Protocols.swift"; sourceTree = "<group>"; };
 		A8E383191CBC714F006D0154 /* GraphReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GraphReaderView.swift; path = Dashboard/GraphReaderView.swift; sourceTree = "<group>"; };
 		A8E4A95A1CB6F4A4008F214E /* VariacaoPercentualController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VariacaoPercentualController.swift; path = Ferramentas/Porcentagem/VariacaoPercentualController.swift; sourceTree = "<group>"; };
 		A8E4A95F1CB6F8EE008F214E /* ValorInicialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValorInicialController.swift; sourceTree = "<group>"; };
@@ -350,9 +352,10 @@
 			children = (
 				A83581571CB1B1DC00A77C05 /* Charts.xcodeproj */,
 				A8F812551CADC11F008854A0 /* Extensions */,
-				A8D931701CACE41300EA535E /* SWReveal */,
-				A8074AC71CACD271007865F5 /* FinanceJS */,
 				A8074AC01CACD1B9007865F5 /* Factory */,
+				A8074AC71CACD271007865F5 /* FinanceJS */,
+				A8C3868F1CBDC51D00FD0B58 /* Protocols */,
+				A8D931701CACE41300EA535E /* SWReveal */,
 			);
 			name = "Suporting Files";
 			sourceTree = "<group>";
@@ -543,6 +546,14 @@
 				A886670C1CB202DB00EC778D /* ChartsTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A8C3868F1CBDC51D00FD0B58 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A8C3868A1CBDC51800FD0B58 /* Protocols.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		A8D931701CACE41300EA535E /* SWReveal */ = {
@@ -759,6 +770,7 @@
 				A8F8122C1CADB998008854A0 /* SWRevealViewController.m in Sources */,
 				A8074B8A1CACE049007865F5 /* Porcentagem.swift in Sources */,
 				A8074B471CACDF9E007865F5 /* FinanceFactory.swift in Sources */,
+				A8C3868B1CBDC51800FD0B58 /* Protocols.swift in Sources */,
 				A8F8124B1CADBFD7008854A0 /* TipoConta.swift in Sources */,
 				A88BDA791CACE1170014E3AF /* Validador.swift in Sources */,
 				4E937E381CAF2474007806B5 /* LocalTableViewController.swift in Sources */,

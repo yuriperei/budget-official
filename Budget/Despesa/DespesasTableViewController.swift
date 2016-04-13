@@ -10,31 +10,28 @@ import UIKit
 import CoreData
 
 class DespesasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    @IBOutlet var btnSidebar:UIBarButtonItem!
-    var frc = NSFetchedResultsController()
+    
+    var frc = Despesa.getReceitasController("data", secondSort: "nome", sectionName: "data")
     var despesaDAO:DespesaDAO = DespesaDAO()
     var categoria: Categoria?
     var conta: Conta?
+    
+    @IBOutlet var btnSidebar:UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
         
-        frc = Despesa.getReceitasController("data", secondSort: "nome", sectionName: "data")
         frc.delegate = self
         
         do{
+            
             try frc.performFetch()
-        }catch{
+        } catch {
+            
             let alert = Notification.mostrarErro()
             presentViewController(alert, animated: true, completion: nil)
         }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,18 +39,9 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         // Dispose of any resources that can be recreated.
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        atualizarTableView()
-    }
-    
-    func atualizarTableView(){
-        tableView.reloadData()
-    }
-
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         
         if let sections = frc.sections {
             return sections.count
@@ -63,9 +51,9 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         
         if let sections = frc.sections {
+            
             let currentSection = sections[section]
             return currentSection.numberOfObjects
         }
@@ -75,10 +63,11 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
         if let sections = frc.sections {
+            
             let currentSection = sections[section]
             sections[section]
-            
             
             let string = currentSection.name.substringWithRange(Range<String.Index>(start: currentSection.name.startIndex, end: currentSection.name.startIndex.advancedBy(10)))
             
@@ -97,72 +86,58 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         
         return nil
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell: PlaceDespesaTableViewCell = tableView.dequeueReusableCellWithIdentifier("cellDespesa", forIndexPath: indexPath) as! PlaceDespesaTableViewCell
-        // Configure the cell...
         
         let despesa = frc.objectAtIndexPath(indexPath) as! Despesa
         
-        //        cell.textLabel?.text = receita.nome
-        
-        categoria = despesa.categoria // as? Categoria
-        conta = despesa.conta // as? Conta
+        categoria = despesa.categoria
+        conta = despesa.conta
         
         cell.lblNome.text = despesa.nome
         cell.lblValor.text = despesa.valor!.convertToCurrency("pt_BR")
         cell.lblCategoria.text = categoria?.nome
         cell.lblConta.text = conta?.nome
         
-        
-        //        cell.txtConta?.text = conta.nome
-        //        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
-        //        cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
-        
-        //        cell.textLabel?.text = conta.nome
-        //        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
-        //String("R$ \(conta.saldo!)")
-        
-        
         return cell
     }
     
-    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+    override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
         let header = view as! UITableViewHeaderFooterView
+        
         header.textLabel?.font = UIFont(name: "Futura", size: 13)!
         header.textLabel?.textColor = Color.uicolorFromHex(0xffffff)
-        header.tintColor = Color.uicolorFromHex(0x274561)//2C4E6E / 274561
-        //64cdfc
+        header.tintColor = Color.uicolorFromHex(0x274561)
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        
-        if (indexPath.row % 2 == 0){
+        if (indexPath.row % 2 == 0) {
+            
             cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
-        }else{
+        } else {
+            
             cell.backgroundColor = Color.uicolorFromHex(0xffffff)
         }
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-    // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
         if editingStyle == .Delete {
+            
             func removerDespesa(action:UIAlertAction) {
+                
                 let despesa:Despesa = frc.objectAtIndexPath(indexPath) as! Despesa
-               
+                
                 do {
+                    
                     try despesaDAO.remover(despesa)
                 } catch {
+                    
                     let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
                     presentViewController(alert, animated: true, completion: nil)
                 }
@@ -170,10 +145,37 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
             
             let detalhes = Notification.solicitarConfirmacao("Excluir", mensagem: "Tem certeza que deseja excluir? \n O saldo da sua conta será atualizado!", completion: removerDespesa)
             presentViewController(detalhes, animated: true, completion: nil)
+            
             atualizarTableView()
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "editar"{
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)
+            let contaController:DespesasViewController = segue.destinationViewController as! DespesasViewController
+            let despesa: Despesa = frc.objectAtIndexPath(indexPath!) as! Despesa
+            contaController.despesa = despesa
+        }
+        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    
+    // MARK: - Delegate methods
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        atualizarTableView()
+    }
+    
+    // MARK: - Private functions
+    
+    private func atualizarTableView(){
+        tableView.reloadData()
     }
 
     /*
@@ -190,24 +192,6 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         return true
     }
     */
-
-    
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if segue.identifier == "editar"{
-            let cell = sender as! UITableViewCell
-            let indexPath = tableView.indexPathForCell(cell)
-            let contaController:DespesasViewController = segue.destinationViewController as! DespesasViewController
-            let despesa: Despesa = frc.objectAtIndexPath(indexPath!) as! Despesa
-            contaController.despesa = despesa
-        }
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-
 }
 
 /*==========================================================================================
@@ -273,5 +257,12 @@ cell.textLabel?.text = conta.nome
 cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
 String("R$ \(conta.saldo!)")
 
+//        cell.txtConta?.text = conta.nome
+//        cell.txtTipConta.text = String(conta.tipoconta!.valueForKey("nome")!)
+//        cell.txtSaldo.text = conta.moeda(Float(conta.saldo!))
+
+//        cell.textLabel?.text = conta.nome
+//        cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
+//String("R$ \(conta.saldo!)")
 ==========================================================================================*/
 

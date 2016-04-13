@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-protocol TipoContasViewControllerDelegate: class {
-    func tipoContasViewControllerResponse(tipoConta:TipoConta)
-}
-
 class TipoContasTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
 //    @IBOutlet var btnSidebar:UIBarButtonItem!

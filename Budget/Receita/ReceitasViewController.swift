@@ -11,14 +11,14 @@ import CoreData
 
 class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate  {
 
-    var erros: String = ""
-    var conta: Conta? = nil
-    var categoria: Categoria? = nil
-    var receita: Receita?
-    var local: Local? = nil
     let receitaDAO:ReceitaDAO = ReceitaDAO()
+    
+    var erros: String = ""
+    var conta: Conta?
+    var categoria: Categoria?
+    var receita: Receita?
+    var local: Local?
     var pickerView: UIDatePicker!
-    var saldoPositivo:Bool? // Se o saldo atual, antes de adicionar a receita era negativo e agora é positivo ir para TRUE
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
@@ -37,35 +37,31 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         pickerView.addTarget(self, action: "updateTextField:", forControlEvents: .ValueChanged)
         
         if let receita = receita {
+            
             txtNome.text = receita.nome!
             txtValor.text = receita.valor!.convertToCurrency("pt_BR")
             txtDescricao.text = receita.descricao!
             txtData.text = Data.formatDateToString(receita.data!)
-            conta = receita.conta //as? Conta
-            categoria = receita.categoria //as? Categoria
-            local = receita.local
             
-
             txtValor.enabled = false
             txtData.enabled = false
             txtConta.enabled = false
             
+            conta = receita.conta
+            categoria = receita.categoria
+            local = receita.local
+            
         } else {
+            
             txtData.text = Data.formatDateToString(pickerView.date)
         }
         
         txtConta.text = self.conta?.nome!
         txtCategoria.text = self.categoria?.nome!
-        txtEndereco.text = self.local?.nome! // Local
-        
+        txtEndereco.text = self.local?.nome!
         txtData.inputView = pickerView
         
-        // Alinhar as labels
         FormCustomization.alignLabelsWidths(labels)
-    }
-    
-    func updateTextField(sender:UIDatePicker){
-        txtData.text = Data.formatDateToString(sender.date)
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,9 +69,86 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         // Dispose of any resources that can be recreated.
     }
     
-    func dissmissViewController(){
-        navigationController?.popViewControllerAnimated(true)
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 3
     }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        switch(section) {
+        case 0: return 5    // section 0 has 2 rows
+        case 1: return 1    // section 1 has 1 row
+        case 2: return 1    // section 2 has 1 row
+        default: fatalError("Unknown number of sections")
+        }
+        
+        
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        FormCustomization.dismissInputView([txtNome, txtDescricao, txtValor, txtData])
+        
+        if segue.identifier == "alterarConta"{
+            let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
+            contasController.delegate = self
+            contasController.tela = true
+        }else if segue.identifier == "alterarCategoriaReceita"{
+            let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
+            categoriasController.delegate = self
+            categoriasController.tela = true
+            
+        }else if segue.identifier == "alterarLocalReceita"{
+            let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController
+            locaisController.delegate = self
+            locaisController.tela = true
+            
+        }
+        
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if receita == nil{
+            return true
+        }
+        
+        if identifier == "alterarCategoriaReceita"{
+            return true
+        }
+        
+        if identifier == "alterarLocalReceita"{
+            return true
+        }
+        
+        return false
+    }
+    
+    // MARK: - Delegate methods
+    
+    func updateTextField(sender:UIDatePicker){
+        txtData.text = Data.formatDateToString(sender.date)
+    }
+    
+    func contasViewControllerResponse(conta: Conta) {
+        self.conta = conta
+        txtConta.text = conta.nome
+    }
+    
+    func categoriaViewControllerResponse(categoria:Categoria){
+        self.categoria = categoria
+        txtCategoria.text = categoria.nome
+    }
+    
+    func localViewControllerResponse(local:Local){
+        self.local = local
+        txtEndereco.text = local.nome
+    }
+    
+    // MARK: - IBActions functions
     
     @IBAction func btnCancel(sender: AnyObject) {
         dissmissViewController()
@@ -99,7 +172,13 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         FormCustomization.aplicarMascaraData(&sender.text!, data: Data.formatDateToString(self.pickerView.date))
     }
     
-    func validarCampos(){
+    // MARK: - Private functions
+    
+    private func dissmissViewController(){
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    private func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
@@ -121,45 +200,43 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         }
     }
     
-    func addConta(){
+    private func addConta() {
+        
+        func dados() {
+            receita = Receita.getReceita()
+            receita?.nome = txtNome.text
+            receita?.descricao = txtDescricao.text
+            receita?.valor = txtValor.text!.currencyToFloat()
+            receita?.conta = conta
+            receita?.categoria = categoria
+            receita?.local = local
+            receita?.data = Data.removerTime(txtData.text!)
+            
+            // Atualizar o saldo da conta referente
+            conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
+            
+            salvarConta()
+        }
         
         validarCampos()
         
-        if(erros.isEmpty){
-            
-            
-            func dados(){
-                receita = Receita.getReceita()
-                receita?.nome = txtNome.text
-                receita?.descricao = txtDescricao.text
-                receita?.valor = txtValor.text!.currencyToFloat()
-                receita?.conta = conta
-                receita?.categoria = categoria
-                receita?.local = local
-                receita?.data = Data.removerTime(txtData.text!)
-                
-                
-                // Atualizar o saldo da conta referente
-                conta?.saldo = Float((receita?.valor)!) + Float((conta?.saldo)!)
-                
-                salvarConta()
-            }
+        if (erros.isEmpty) {
             
             let novoSaldo = Float((conta?.saldo)!) + (txtValor.text?.currencyToFloat())!
             
             if (Float((conta?.saldo)!) <= 0 && novoSaldo > 0){
+                
                 let alert = Notification.avisoReceita("Parabéns!", mensagem: "A conta \(conta!.nome!) ficará com saldo positivo", completion: {
-                    (action:UIAlertAction) in
-                    dados()
-            })
-            presentViewController(alert, animated: true, completion: nil)
-        }else{
-            dados()
-        }
-
-
-        
-        }else{
+                            (action:UIAlertAction) in
+                                dados()
+                            })
+                presentViewController(alert, animated: true, completion: nil)
+            } else {
+                
+                dados()
+            }
+        } else {
+            
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
             self.erros = ""
@@ -167,7 +244,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
 
     }
     
-    func updateConta(){
+    private func updateConta(){
         
         validarCampos()
         
@@ -186,6 +263,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
             salvarConta()
             
         }else{
+            
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
             self.erros = ""
@@ -205,58 +283,6 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         }
         
         dissmissViewController()
-        
-    }
-    
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if receita == nil{
-            return true
-        }
-        
-        if identifier == "alterarCategoriaReceita"{
-            return true
-        }
-        
-        if identifier == "alterarLocalReceita"{
-            return true
-        }
-        
-        return false
-    }
-    
-    // Define Delegate Method
-    func contasViewControllerResponse(conta: Conta) {
-        self.conta = conta
-        txtConta.text = conta.nome
-    }
-    
-    func categoriaViewControllerResponse(categoria:Categoria){
-        self.categoria = categoria
-        txtCategoria.text = categoria.nome
-    }
-    
-    func localViewControllerResponse(local:Local){
-        self.local = local
-        txtEndereco.text = local.nome
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 3
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        switch(section) {
-        case 0: return 5    // section 0 has 2 rows
-        case 1: return 1    // section 1 has 1 row
-        case 2: return 1    // section 2 has 1 row
-        default: fatalError("Unknown number of sections")
-        }
-        
-        
     }
 
     /*
@@ -293,28 +319,4 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         return true
     }
     */
-    
-    // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        FormCustomization.dismissInputView([txtNome, txtDescricao, txtValor, txtData])
-        
-        if segue.identifier == "alterarConta"{
-            let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
-            contasController.delegate = self
-            contasController.tela = true
-        }else if segue.identifier == "alterarCategoriaReceita"{
-            let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
-            categoriasController.delegate = self
-            categoriasController.tela = true
-            
-        }else if segue.identifier == "alterarLocalReceita"{
-            let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController
-            locaisController.delegate = self
-            locaisController.tela = true
-            
-        }
-        
-    }
-
 }

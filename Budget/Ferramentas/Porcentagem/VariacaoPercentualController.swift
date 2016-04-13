@@ -35,7 +35,7 @@ class VariacaoPercentualController: PorcentagemController {
         super.prepareForSegue(segue, sender: sender)
         if (segue.identifier == "myPopover") {
             let popView = segue.destinationViewController as! AjudaPopoverController
-            popView.txtLabel = "Como calcular a variação."
+            popView.txtLabel = "Cálculo para encontrar a diferença, em porcentagem, entre dois valores\n- Primeiro: Insira o valor original, ou seja, o valor antes de qualquer modificação;\n- Segundo: Insira o valor que sofreu alguma modificação;"
         }
     }
 

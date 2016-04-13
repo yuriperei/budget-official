@@ -12,11 +12,11 @@ import CoreLocation
 
 class LocalViewController: UITableViewController, CLLocationManagerDelegate {
 
-    var local: Local?
-    var erros: String = ""
     let localDAO:LocalDAO = LocalDAO()
     let locationManager = CLLocationManager()
     
+    var local: Local?
+    var erros: String = ""
     var cidade:String = ""
     var estado:String = ""
     var rua:String = ""
