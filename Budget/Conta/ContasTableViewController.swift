@@ -95,15 +95,19 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
                 }
             }
             
-            // Verifica se tem alguma receita associada, se não tiver permite deletar
+            // Verifica se tem alguma receita associada
             if (conta.receita?.count > 0) {
                 
                 let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
+                
+            // Verifica se tem alguma despesa associada
             } else if(conta.despesa?.count > 0) {
                 
                 let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais despesas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
+                
+            // Se não tiver permite deletar
             } else {
                 
                 let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
@@ -154,101 +158,4 @@ class ContasTableViewController: UITableViewController, NSFetchedResultsControll
         tableView.reloadData()
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 }
-
-
-/*==========================================================================================
-
-let context = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-
-let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-
-cell.textLabel?.text = conta.nome
-cell.detailTextLabel?.text = conta.moeda(Float(conta.saldo!))
-String("R$ \(conta.saldo!)")
-
-// Delete the row from the data source
-//tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-
-let managedObject : NSManagedObject = frc.objectAtIndexPath(indexPath) as! NSManagedObject
-
-// Método para ser chamado ao deletar item
-func removerSelecionado(action:UIAlertAction){
-    do{
-        context.deleteObject(managedObject)
-        try context.save()
-    }catch{
-        let alert = Notification.mostrarErro("Desculpe", mensagem: "Não foi possível remover")
-        presentViewController(alert, animated: true, completion: nil)
-    }
-}
-
-let detalhes = UIAlertController(title: "Deletar", message: "Tem certeza que deseja deletar?", preferredStyle: UIAlertControllerStyle.Alert)
-
-let cancelar = UIAlertAction(title: "Cancelar", style: UIAlertActionStyle.Cancel, handler: nil)
-detalhes.addAction(cancelar)
-
-let deletar = UIAlertAction(title: "Deletar", style: UIAlertActionStyle.Destructive, handler: removerSelecionado)
-detalhes.addAction(deletar)
-
-presentViewController(detalhes, animated: true, completion: nil)
-
-
-func mostrarErro(titulo: String = "Desculpe", mensagem: String = "Erro inesperado"){
-
-    let detalhes = UIAlertController(title: titulo, message: mensagem, preferredStyle: UIAlertControllerStyle.Alert)
-
-    let cancelar = UIAlertAction(title: "Entendido", style: UIAlertActionStyle.Cancel, handler: nil)
-    detalhes.addAction(cancelar)
-
-    presentViewController(detalhes, animated: true, completion: nil)
-}
-
-// MARK: - Core Data source
-func contasFetchRequest() -> NSFetchRequest{
-    let fetchRequest = NSFetchRequest(entityName: "Conta")
-    let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-    let secondarySortDescriptor = NSSortDescriptor(key: "tipoconta.nome", ascending: true)
-    fetchRequest.sortDescriptors = [sortDescriptor, secondarySortDescriptor]
-    return fetchRequest
-}
-
-func getFetchedResultsController() -> NSFetchedResultsController {
-
-    frc = NSFetchedResultsController(fetchRequest: contasFetchRequest(), managedObjectContext: context, sectionNameKeyPath: "tipoconta.nome", cacheName: nil)
-
-    return frc
-}
-
-// Uncomment the following line to preserve selection between presentations
-// self.clearsSelectionOnViewWillAppear = false
-
-// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-// self.navigationItem.rightBarButtonItem = self.editButtonItem()
-
-else if editingStyle == .Insert {
-// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-}
-==========================================================================================*/

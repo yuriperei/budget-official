@@ -65,23 +65,8 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if let sections = frc.sections {
-            
             let currentSection = sections[section]
-            sections[section]
-            
-            let string = currentSection.name.substringWithRange(Range<String.Index>(start: currentSection.name.startIndex, end: currentSection.name.startIndex.advancedBy(10)))
-            
-            let dateFormat = NSDateFormatter()
-            dateFormat.dateFormat = "yyyy-MM-dd"
-            let ddd = dateFormat.dateFromString(string)
-            
-            dateFormat.dateStyle = NSDateFormatterStyle.LongStyle
-            dateFormat.timeStyle = NSDateFormatterStyle.NoStyle
-            dateFormat.locale = NSLocale(localeIdentifier: "pt-BR")
-            
-            let dateString = dateFormat.stringFromDate(ddd!)
-            
-            return dateString
+            return Data.sectionFormatarData(currentSection.name)
         }
         
         return nil
@@ -161,9 +146,6 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
             let despesa: Despesa = frc.objectAtIndexPath(indexPath!) as! Despesa
             contaController.despesa = despesa
         }
-        
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
     
     // MARK: - Delegate methods
@@ -178,19 +160,5 @@ class DespesasTableViewController: UITableViewController, NSFetchedResultsContro
         tableView.reloadData()
     }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 }
 

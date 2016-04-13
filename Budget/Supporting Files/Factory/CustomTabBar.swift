@@ -21,10 +21,3 @@ class CustomTabBar: UIViewController {
         }
     }
 }
-
-/*Comentários temporários
-//    var tabBar: UITabBar?
-//        tabBar = self.tabBarController!.tabBar
-//        tabBar.selectionIndicatorImage = UIImage().makeImageWithColorAndSize(UIColor.blueColor(), size: CGSizeMake(tabBar.frame.width/CGFloat(tabBar.items!.count), tabBar.frame.height))
-
-*/

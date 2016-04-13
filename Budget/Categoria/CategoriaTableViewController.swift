@@ -22,10 +22,9 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
         
         frc.delegate = self
         
+        // Caso seja acessado diretamente, exibir o botão, se não o botão não é inserido. Isso deve acontecer porque há o botão voltar.
         if tela == false {
-            
             let btnSidebar = UIBarButtonItem(image: UIImage(named: "interface.png"), style: .Done, target: self, action: nil)
-            
             self.navigationItem.setLeftBarButtonItem(btnSidebar, animated: false)
             SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
         }
@@ -75,8 +74,7 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
+
         if (indexPath.row % 2 == 0){
             cell.backgroundColor = Color.uicolorFromHex(0xf9f9f9)
         }else{
@@ -99,17 +97,19 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
                 }
             }
             
-            // Verifica se tem alguma despesa ou receita associada, se não tiver permite deletar
+            // Verifica se tem alguma despesa associada
             if (categoria.despesa?.count > 0) {
                 
                 let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais despesas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
             
+            // Verifica se tem alguma receita associada
             } else if (categoria.receita?.count > 0) {
                 
                 let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais receitas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
             
+            // Se não tiver permite deletar
             } else {
                 
                 let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
@@ -130,39 +130,5 @@ class CategoriaTableViewController: UITableViewController, NSFetchedResultsContr
     private func atualizarTableView(){
         tableView.reloadData()
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

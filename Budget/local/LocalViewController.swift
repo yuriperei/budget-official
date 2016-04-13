@@ -56,6 +56,8 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        // Caso esteja cadastrando um novo local não exibir o botão visualizar no mapa, se for alteração, exibir.
         if self.local == nil{
             return 2
         }else{
@@ -240,80 +242,4 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         
         dissmissViewController()
     }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 }
-
-/*
-Comentários temporários
-
-private func calculateLabelWidth(label: UILabel) -> CGFloat {
-let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-
-return labelSize.width
-}
-
-private func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-return labels.map(calculateLabelWidth).reduce(0, combine: max)
-}
-
-private func updateWidthsForLabels(labels: [UILabel]) {
-let maxLabelWidth = calculateMaxLabelWidth(labels)
-for label in labels {
-let constraint = NSLayoutConstraint(item: label,
-attribute: .Width,
-relatedBy: .Equal,
-toItem: nil,
-attribute: .NotAnAttribute,
-multiplier: 1,
-constant: maxLabelWidth)
-label.addConstraint(constraint)
-}
-}
-//switchEnderecoAtual.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
-//            let throughfare = (containsPlacemark.thoroughfare != nil) ? containsPlacemark.thoroughfare : ""
-//            let country = (containsPlacemark.country != nil) ? containsPlacemark.country : ""
-*/

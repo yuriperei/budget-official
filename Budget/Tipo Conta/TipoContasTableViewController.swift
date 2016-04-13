@@ -101,11 +101,13 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
                 }
             }
             
-            // Verifica se tem alguma conta associada, se não tiver permite deletar
+            // Verifica se tem alguma conta associada
             if (tipoConta.conta?.count > 0) {
                 
                 let alerta = Notification.mostrarErro("Desculpe", mensagem: "Você não pode deletar porque há uma ou mais contas associadas.")
                 presentViewController(alerta, animated: true, completion: nil)
+                
+            // Se não tiver permite deletar
             } else {
                 
                 let detalhes = Notification.solicitarConfirmacao("Deletar", mensagem: "Tem certeza que deseja deletar?", completion:removerSelecionado)
@@ -127,26 +129,4 @@ class TipoContasTableViewController: UITableViewController, NSFetchedResultsCont
         tableView.reloadData()
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 }

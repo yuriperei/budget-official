@@ -51,9 +51,9 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
         
         let markerPosition = chartView.getMarkerPosition(entry: entry,  highlight: highlight)
         
-        graphReader.valueLabel.text = "\(entry.value.roundDecimal(2))"
+        graphReader.valueLabel.text = "\(entry.value.roundDecimal(2).convertToCurrency("pt_BR"))"
         graphReader.dateLabel.text = "\(chartView.getXValue(entry.xIndex))"
-        graphReader.center = CGPointMake(markerPosition.x + 30, lineChartBalanco.frame.origin.y + 200)
+        graphReader.center = CGPointMake(markerPosition.x + 30, lineChartBalanco.frame.origin.y + 180)
         
         graphReader.hidden = false
     }
@@ -179,15 +179,5 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
             
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
