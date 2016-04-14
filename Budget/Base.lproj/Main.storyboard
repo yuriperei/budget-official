@@ -5053,15 +5053,15 @@
         <image name="tipoConta" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KpW-af-Hgy"/>
-        <segue reference="6DM-AZ-CQb"/>
         <segue reference="RnH-uC-IaA"/>
         <segue reference="wxT-DJ-QcZ"/>
-        <segue reference="vGy-4W-C1M"/>
+        <segue reference="6DM-AZ-CQb"/>
+        <segue reference="KpW-af-Hgy"/>
         <segue reference="DDu-W3-och"/>
+        <segue reference="vGy-4W-C1M"/>
         <segue reference="fYU-Lj-GrT"/>
         <segue reference="S4g-Dy-h4z"/>
+        <segue reference="yQz-Og-ars"/>
         <segue reference="L5x-b0-aYr"/>
-        <segue reference="1hX-OM-g5s"/>
     </inferredMetricsTieBreakers>
 </document>

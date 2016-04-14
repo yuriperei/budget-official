@@ -77,6 +77,8 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
         let (receitas, valorReceitas) = dashboard.getReceitasPorCategoria()
         
         setLineBalanco(months, receitas: receitasMensal, despesas: despesasMensal)
+        pieChartReceitas.descriptionText = "Receitas do mês"
+        pieChartDespesas.descriptionText = "Despesas do mês"
         
         if(valorDespesas.count > 0) {
             pieChartDespesas.hidden = false
@@ -155,7 +157,7 @@ class DashboardViewController: UIViewController, ChartViewDelegate {
         
         data.setValueFont(UIFont(name: "Futura", size: 10.0))
         
-        pieChart.descriptionText = ""
+//        pieChart.descriptionText = ""
         pieChart.legend.enabled = false
         pieChart.data = data
     }

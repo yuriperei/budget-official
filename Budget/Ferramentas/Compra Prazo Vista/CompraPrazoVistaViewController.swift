@@ -35,7 +35,6 @@ class CompraPrazoVistaViewController: UITableViewController {
     }
     
     
-    
     @IBAction func maskTextField(sender: UITextField) {
         FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
