@@ -314,6 +314,8 @@
                         <outletCollection property="labels" destination="5UW-Xw-FfM" collectionClass="NSMutableArray" id="kvC-RT-uk8"/>
                         <outletCollection property="labels" destination="sX2-XZ-jaa" collectionClass="NSMutableArray" id="ty2-OK-pgc"/>
                         <outletCollection property="labels" destination="cX3-jd-YTq" collectionClass="NSMutableArray" id="247-QQ-ZqX"/>
+                        <outletCollection property="textViews" destination="wK7-8Q-1iv" collectionClass="NSMutableArray" id="ze7-Nj-crX"/>
+                        <outletCollection property="textViews" destination="D3m-81-ccy" collectionClass="NSMutableArray" id="K0u-HR-vIW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOz-VS-bI4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2045,6 +2047,8 @@
                         <outlet property="txtSegundoValor" destination="SDa-6Y-rf1" id="R1u-l9-kKc"/>
                         <outletCollection property="labels" destination="5uS-JQ-fG0" collectionClass="NSMutableArray" id="lxh-60-nEf"/>
                         <outletCollection property="labels" destination="rui-NJ-C2D" collectionClass="NSMutableArray" id="hW7-jE-Sv9"/>
+                        <outletCollection property="textViews" destination="zVa-wu-72z" collectionClass="NSMutableArray" id="L7L-HR-oBO"/>
+                        <outletCollection property="textViews" destination="SDa-6Y-rf1" collectionClass="NSMutableArray" id="anM-jm-FDg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rC5-eu-arj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2258,6 +2262,8 @@
                         <outlet property="txtSegundoValor" destination="17z-w7-cju" id="fbh-Sd-M17"/>
                         <outletCollection property="labels" destination="LfM-La-EJq" collectionClass="NSMutableArray" id="2Qe-bF-0nK"/>
                         <outletCollection property="labels" destination="8LQ-21-fu9" collectionClass="NSMutableArray" id="bcE-eA-pDB"/>
+                        <outletCollection property="textViews" destination="17z-w7-cju" collectionClass="NSMutableArray" id="3Kl-z9-nQ5"/>
+                        <outletCollection property="textViews" destination="Jas-G5-Ajj" collectionClass="NSMutableArray" id="IT6-Gd-E7q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q9z-RQ-laP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2512,6 +2518,8 @@
                         <outlet property="txtSegundoValor" destination="Ygl-4s-hLl" id="EC1-6I-wVt"/>
                         <outletCollection property="labels" destination="38c-BR-1yY" collectionClass="NSMutableArray" id="dua-1m-lWr"/>
                         <outletCollection property="labels" destination="GDJ-5b-haO" collectionClass="NSMutableArray" id="QEb-kc-1i4"/>
+                        <outletCollection property="textViews" destination="ags-NB-SMI" collectionClass="NSMutableArray" id="C47-Af-4WA"/>
+                        <outletCollection property="textViews" destination="Ygl-4s-hLl" collectionClass="NSMutableArray" id="1PO-nu-IJd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tq0-r5-RMC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2724,6 +2732,8 @@
                         <outlet property="txtSegundoValor" destination="la5-ug-8tp" id="Hyb-mW-fm8"/>
                         <outletCollection property="labels" destination="hm9-tk-fXq" collectionClass="NSMutableArray" id="J75-5B-N3t"/>
                         <outletCollection property="labels" destination="zby-NI-0ye" collectionClass="NSMutableArray" id="vJT-Cu-4nE"/>
+                        <outletCollection property="textViews" destination="Q1Z-Lp-Zz9" collectionClass="NSMutableArray" id="7V3-sh-5zb"/>
+                        <outletCollection property="textViews" destination="la5-ug-8tp" collectionClass="NSMutableArray" id="YJH-fh-qyE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFa-07-2SJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3113,6 +3123,7 @@
                     <connections>
                         <outlet property="txtNome" destination="4r2-E0-824" id="QF4-h9-ccl"/>
                         <outletCollection property="labels" destination="11h-A1-3Dc" collectionClass="NSMutableArray" id="20G-Ft-ftE"/>
+                        <outletCollection property="textViews" destination="4r2-E0-824" collectionClass="NSMutableArray" id="Vh8-8P-4gw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5De-WV-lzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3478,6 +3489,10 @@
                         <outletCollection property="labels" destination="HWR-LX-dv4" collectionClass="NSMutableArray" id="QN4-Ru-sAt"/>
                         <outletCollection property="labels" destination="ZrQ-g7-krZ" collectionClass="NSMutableArray" id="pIe-qJ-WaW"/>
                         <outletCollection property="labels" destination="sor-1P-znN" collectionClass="NSMutableArray" id="jqO-YH-84g"/>
+                        <outletCollection property="textViews" destination="hHz-gA-THM" collectionClass="NSMutableArray" id="eFa-Bd-3Xn"/>
+                        <outletCollection property="textViews" destination="LRP-Ui-CTg" collectionClass="NSMutableArray" id="gL5-pn-V42"/>
+                        <outletCollection property="textViews" destination="Y2e-R2-SO1" collectionClass="NSMutableArray" id="5cs-UJ-1ki"/>
+                        <outletCollection property="textViews" destination="DGL-fK-DvV" collectionClass="NSMutableArray" id="VBq-0n-zwz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="947-f4-Szj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3876,6 +3891,11 @@
                         <outletCollection property="labels" destination="Z6H-Cv-Ydl" collectionClass="NSMutableArray" id="5co-rY-e5f"/>
                         <outletCollection property="labels" destination="0ae-ZS-z3c" collectionClass="NSMutableArray" id="xye-O0-zzd"/>
                         <outletCollection property="labels" destination="oEG-cG-Rfr" collectionClass="NSMutableArray" id="1IR-SD-etk"/>
+                        <outletCollection property="textViews" destination="2Dp-ii-92f" collectionClass="NSMutableArray" id="Afh-eq-2DI"/>
+                        <outletCollection property="textViews" destination="I4l-Ot-JaE" collectionClass="NSMutableArray" id="OWv-UW-WiX"/>
+                        <outletCollection property="textViews" destination="vRM-wB-nme" collectionClass="NSMutableArray" id="9Hg-Yc-dFU"/>
+                        <outletCollection property="textViews" destination="yrd-o3-UbF" collectionClass="NSMutableArray" id="Pdz-BD-YMR"/>
+                        <outletCollection property="textViews" destination="si8-LA-g17" collectionClass="NSMutableArray" id="hXf-PS-Prz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8H-lI-gVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3960,6 +3980,7 @@
                     <connections>
                         <outlet property="txtNome" destination="GmW-sj-ypI" id="yo3-7O-pVZ"/>
                         <outletCollection property="labels" destination="wJu-SE-prd" collectionClass="NSMutableArray" id="tcP-Bs-f4P"/>
+                        <outletCollection property="textViews" destination="GmW-sj-ypI" collectionClass="NSMutableArray" id="K6k-Hc-MMl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bcz-As-P52" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4290,6 +4311,10 @@
                         <outletCollection property="labels" destination="mnL-E2-Jgk" collectionClass="NSMutableArray" id="oio-6D-BSX"/>
                         <outletCollection property="labels" destination="EAY-1x-o9q" collectionClass="NSMutableArray" id="M7T-f7-qps"/>
                         <outletCollection property="labels" destination="zBe-bK-h97" collectionClass="NSMutableArray" id="2JB-dU-XEE"/>
+                        <outletCollection property="textViews" destination="3kf-tW-f6I" collectionClass="NSMutableArray" id="chN-75-ZMV"/>
+                        <outletCollection property="textViews" destination="UHS-ss-chE" collectionClass="NSMutableArray" id="zjE-Rb-gvC"/>
+                        <outletCollection property="textViews" destination="ELJ-Wk-QqC" collectionClass="NSMutableArray" id="nKv-Sh-IJf"/>
+                        <outletCollection property="textViews" destination="VkB-3L-R77" collectionClass="NSMutableArray" id="GSv-MU-DLg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7v-YU-nHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4707,6 +4732,9 @@
                         <outletCollection property="labels" destination="Gkc-6T-AKQ" collectionClass="NSMutableArray" id="9SR-0o-KiR"/>
                         <outletCollection property="labels" destination="coc-9c-DsH" collectionClass="NSMutableArray" id="r75-of-bzU"/>
                         <outletCollection property="labels" destination="AlP-0G-dEH" collectionClass="NSMutableArray" id="4tP-n5-Ftt"/>
+                        <outletCollection property="textViews" destination="cIT-gO-9AW" collectionClass="NSMutableArray" id="ggV-wf-0wB"/>
+                        <outletCollection property="textViews" destination="TLK-zv-4Wv" collectionClass="NSMutableArray" id="8U4-WO-dfg"/>
+                        <outletCollection property="textViews" destination="QWq-93-A3f" collectionClass="NSMutableArray" id="I5o-ta-m7f"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cac-xk-XzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5057,15 +5085,15 @@
         <image name="tipoConta" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KpW-af-Hgy"/>
-        <segue reference="6DM-AZ-CQb"/>
         <segue reference="RnH-uC-IaA"/>
-        <segue reference="wxT-DJ-QcZ"/>
+        <segue reference="WOo-i0-EjA"/>
+        <segue reference="6DM-AZ-CQb"/>
         <segue reference="vGy-4W-C1M"/>
+        <segue reference="KpW-af-Hgy"/>
         <segue reference="DDu-W3-och"/>
         <segue reference="fYU-Lj-GrT"/>
+        <segue reference="yhw-hR-QBz"/>
         <segue reference="S4g-Dy-h4z"/>
-        <segue reference="L5x-b0-aYr"/>
-        <segue reference="1hX-OM-g5s"/>
+        <segue reference="wxT-DJ-QcZ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate  {
+class ReceitasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate, UIGestureRecognizerDelegate  {
 
     let receitaDAO:ReceitaDAO = ReceitaDAO()
     
@@ -28,6 +28,22 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     @IBOutlet weak var txtConta: UITextField!
     @IBOutlet weak var txtCategoria: UITextField!
     @IBOutlet weak var txtData: UITextField!
+    
+    @IBOutlet var textViews:[UITextField]!
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
+        FormCustomization.dismissInputView(textViews)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +78,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
         txtData.inputView = pickerView
         
         FormCustomization.alignLabelsWidths(labels)
+        addDismissInputView()
     }
     
     override func didReceiveMemoryWarning() {

@@ -10,6 +10,10 @@ import UIKit
 
 class JurosDescontosController: PorcentagemController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

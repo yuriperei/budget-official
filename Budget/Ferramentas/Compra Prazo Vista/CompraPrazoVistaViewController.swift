@@ -9,7 +9,7 @@
 import UIKit
 import JavaScriptCore
 
-class CompraPrazoVistaViewController: UITableViewController {
+class CompraPrazoVistaViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet var textViews:[UITextField]!
     @IBOutlet weak var txtParcelas: UITextField!
@@ -27,8 +27,10 @@ class CompraPrazoVistaViewController: UITableViewController {
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
         
         FormCustomization.alignLabelsWidths(labels)
+        
+        addDismissInputView()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -53,17 +55,7 @@ class CompraPrazoVistaViewController: UITableViewController {
     
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        FormCustomization.dismissInputView(textViews)
-    }
-    
     // MARK: - IBAction functions
-
-    @IBAction func touchButton(sender: UIButton) {
-        FormCustomization.dismissInputView(textViews)
-    }
-    
     @IBAction func maskTextField(sender: UITextField) {
         FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
@@ -76,6 +68,19 @@ class CompraPrazoVistaViewController: UITableViewController {
                 lblResultadoJuros.text = String.init(format: "%.2f", finance.calculateCompoundInterest(valorFinanciado.currencyToDouble(), parcelas.intValue, valorParcela.currencyToDouble()))+"%"
             }
         }
+    }
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
         FormCustomization.dismissInputView(textViews)
     }
 }

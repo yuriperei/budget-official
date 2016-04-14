@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CategoriasViewController: UITableViewController {
+class CategoriasViewController: UITableViewController, UIGestureRecognizerDelegate {
 
     let categoriaDAO:CategoriaDAO = CategoriaDAO()
     
@@ -19,13 +19,29 @@ class CategoriasViewController: UITableViewController {
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
     
+    @IBOutlet var textViews:[UITextField]!
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
+        FormCustomization.dismissInputView(textViews)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let categoria = categoria{
             txtNome.text = categoria.nome!
         }
-        
+        addDismissInputView()
     }
     
     override func didReceiveMemoryWarning() {

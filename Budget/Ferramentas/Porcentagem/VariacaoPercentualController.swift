@@ -10,6 +10,10 @@ import UIKit
 
 class VariacaoPercentualController: PorcentagemController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

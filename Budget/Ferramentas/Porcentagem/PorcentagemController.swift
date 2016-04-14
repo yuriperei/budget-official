@@ -8,17 +8,17 @@
 
 import UIKit
 
-class PorcentagemController: UITableViewController, UIPopoverPresentationControllerDelegate {
+class PorcentagemController: UITableViewController, UIPopoverPresentationControllerDelegate, UIGestureRecognizerDelegate {
 
     var calculadora: Calculadora?
     
+    @IBOutlet var textViews:[UITextField]!
+    @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var lblSegundoValor: UILabel!
     @IBOutlet weak var lblPrimeiroValor: UILabel!
-    
     @IBOutlet weak var txtPrimeiroValor: UITextField!
     @IBOutlet weak var txtSegundoValor: UITextField!
     @IBOutlet weak var lblResultado: UILabel!
-    @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var sgmTipo: UISegmentedControl!
     @IBOutlet weak var btnSideBar: UIBarButtonItem!
     
@@ -27,11 +27,18 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
         SidebarMenu.configMenu(self, sideBarMenu: btnSideBar)
         calculadora = Porcentagem()
         FormCustomization.alignLabelsWidths(labels)
+        addDismissInputView()
+        print("teste")
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        print("teste")
+        FormCustomization.dismissInputView(textViews)
     }
     
     /*
@@ -43,6 +50,20 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
             popView.popoverPresentationController!.delegate = self
             popView.txtLabel = "Cálculo simples de porcentagem.\n- Escolha a opção valor (padrão) para calcular o valor da porcentagem aplicada sobre um valor total;\n- Escolha a opção porcentagem para calcular a parte de um valor total em porcentagem;"
         }
+    }
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
+        FormCustomization.dismissInputView(textViews)
     }
     
     // MARK: - IBActions functions

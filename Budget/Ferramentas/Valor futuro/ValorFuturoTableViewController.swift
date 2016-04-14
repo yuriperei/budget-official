@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ValorFuturoTableViewController: UITableViewController {
+class ValorFuturoTableViewController: UITableViewController, UIGestureRecognizerDelegate {
     
     var finance:Finance = Finance()
     
+    @IBOutlet var textViews:[UITextField]!
     @IBOutlet var btnSidebar: UIBarButtonItem!
     @IBOutlet var txtValorDepositado: UITextField!
     @IBOutlet var txtNumeroMeses: UITextField!
@@ -24,6 +25,7 @@ class ValorFuturoTableViewController: UITableViewController {
         
         SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
         FormCustomization.alignLabelsWidths(labels)
+        addDismissInputView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -43,5 +45,19 @@ class ValorFuturoTableViewController: UITableViewController {
         let numeroParcelas = (txtNumeroMeses.text?.intValue)!
         
         lblResultado.text = finance.calculateFutureValue(taxaJuros, valorDepositado: valorDepositado, numeroDeParcelas: numeroParcelas).convertToCurrency("pt_BR")
+    }
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
+        FormCustomization.dismissInputView(textViews)
     }
 }

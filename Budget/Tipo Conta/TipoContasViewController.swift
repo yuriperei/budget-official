@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TipoContasViewController: UITableViewController {
+class TipoContasViewController: UITableViewController, UIGestureRecognizerDelegate {
     
     var tipoConta: TipoConta?
     var tipoContaDAO: TipoContaDAO = TipoContaDAO()
@@ -18,6 +18,22 @@ class TipoContasViewController: UITableViewController {
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
 
+    @IBOutlet var textViews:[UITextField]!
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
+        FormCustomization.dismissInputView(textViews)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +42,7 @@ class TipoContasViewController: UITableViewController {
         }
         
         FormCustomization.alignLabelsWidths(labels)
+        addDismissInputView()
     }
 
     override func didReceiveMemoryWarning() {

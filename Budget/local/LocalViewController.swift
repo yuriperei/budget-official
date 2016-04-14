@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import CoreLocation
 
-class LocalViewController: UITableViewController, CLLocationManagerDelegate {
+class LocalViewController: UITableViewController, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
 
     let localDAO:LocalDAO = LocalDAO()
     let locationManager = CLLocationManager()
@@ -29,6 +29,22 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
     @IBOutlet weak var txtRua: UITextField!
     @IBOutlet weak var switchEnderecoAtual: UISwitch!
     
+    @IBOutlet var textViews:[UITextField]!
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
+        FormCustomization.dismissInputView(textViews)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +62,7 @@ class LocalViewController: UITableViewController, CLLocationManagerDelegate {
         }
         
         FormCustomization.alignLabelsWidths(labels)
+        addDismissInputView()
     }
     
     override func didReceiveMemoryWarning() {
