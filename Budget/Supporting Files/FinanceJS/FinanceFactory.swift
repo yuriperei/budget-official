@@ -42,18 +42,18 @@ class Finance {
             
             let x = taxaDeJurosNova.roundDecimal(6)
             let y = taxaDeJuros.roundDecimal(6)
-            print(x)
+            
             if(x == y){
                 qtdTaxasIguais++
             } else {
                 qtdTaxasIguais = 0
             }
+            
             i++
             taxaDeJuros = taxaDeJurosNova
         }
         
         taxaDeJuros *= 100
-        print(taxaDeJuros.roundDecimal(2))
         
         return taxaDeJuros.roundDecimal(2)
     }

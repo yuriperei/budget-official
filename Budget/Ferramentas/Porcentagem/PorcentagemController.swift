@@ -34,6 +34,19 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
         // Dispose of any resources that can be recreated.
     }
     
+    /*
+    // MARK: - Navigation
+    */
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "myPopover") {
+            let popView = segue.destinationViewController as! AjudaPopoverController
+            popView.popoverPresentationController!.delegate = self
+            popView.txtLabel = "Cálculo simples de porcentagem.\n- Escolha a opção valor (padrão) para calcular o valor da porcentagem aplicada sobre um valor total;\n- Escolha a opção porcentagem para calcular a parte de um valor total em porcentagem;"
+        }
+    }
+    
+    // MARK: - IBActions functions
+    
     @IBAction func maskTextField(sender: UITextField) {
         FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
@@ -51,16 +64,6 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
         }
     }
     
-    private func calcularPercentualValor(sender: UIButton) {
-        //Valor porcentagem
-        calculadora?.numeroAtual = txtPrimeiroValor.text!.currencyToDouble()
-        calculadora?.numeroFinal = txtSegundoValor.text!.currencyToDouble()
-        
-        if let calculadora = calculadora as? Porcentagem {
-            lblResultado.text = String(format: "%.4g", calculadora.calcularValorPorcentagem()) + "%"
-        }
-    }
-    
     @IBAction func changeLabelPorcentagem(sender: UISegmentedControl) {
         if (sgmTipo.selectedSegmentIndex == 0) {
             lblPrimeiroValor.text = "Porcentagem:"
@@ -73,20 +76,22 @@ class PorcentagemController: UITableViewController, UIPopoverPresentationControl
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-    */
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "myPopover") {
-            let popView = segue.destinationViewController as! AjudaPopoverController
-            popView.popoverPresentationController!.delegate = self
-            popView.txtLabel = "Cálculo simples de porcentagem.\n- Escolha a opção valor (padrão) para calcular o valor da porcentagem aplicada sobre um valor total;\n- Escolha a opção porcentagem para calcular a parte de um valor total em porcentagem;"
-        }
-    }
+    // MARK: - Delegate methods
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.None
+    }
+    
+    // MARK: - Private functions
+    
+    private func calcularPercentualValor(sender: UIButton) {
+        //Valor porcentagem
+        calculadora?.numeroAtual = txtPrimeiroValor.text!.currencyToDouble()
+        calculadora?.numeroFinal = txtSegundoValor.text!.currencyToDouble()
+        
+        if let calculadora = calculadora as? Porcentagem {
+            lblResultado.text = String(format: "%.4g", calculadora.calcularValorPorcentagem()) + "%"
+        }
     }
     
     private func getLabel() -> UILabel {

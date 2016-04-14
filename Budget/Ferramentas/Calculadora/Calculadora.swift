@@ -37,6 +37,7 @@ class Calculadora {
                 break;
         }
         
+        opcao = 0
         return numeroFinal
     }
     

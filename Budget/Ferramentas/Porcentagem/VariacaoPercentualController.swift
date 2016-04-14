@@ -9,6 +9,19 @@
 import UIKit
 
 class VariacaoPercentualController: PorcentagemController {
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        if (segue.identifier == "myPopover") {
+            let popView = segue.destinationViewController as! AjudaPopoverController
+            popView.txtLabel = "Cálculo para encontrar a diferença, em porcentagem, entre dois valores\n- Primeiro: Insira o valor original, ou seja, o valor antes de qualquer modificação;\n- Segundo: Insira o valor que sofreu alguma modificação;"
+        }
+    }
+    
+    // MARK: - IBActions functions
+    
     @IBAction func changePlaceholderVariacao(sender: UISegmentedControl) {
         if (sgmTipo.selectedSegmentIndex == 0) {
             txtSegundoValor.placeholder = "Valor aumentado"
@@ -30,15 +43,6 @@ class VariacaoPercentualController: PorcentagemController {
             }
         }
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
-        if (segue.identifier == "myPopover") {
-            let popView = segue.destinationViewController as! AjudaPopoverController
-            popView.txtLabel = "Cálculo para encontrar a diferença, em porcentagem, entre dois valores\n- Primeiro: Insira o valor original, ou seja, o valor antes de qualquer modificação;\n- Segundo: Insira o valor que sofreu alguma modificação;"
-        }
-    }
-
 }
 
 /*

@@ -23,3 +23,7 @@ protocol TipoContasViewControllerDelegate: class {
 protocol ContasViewControllerDelegate: class {
     func contasViewControllerResponse(conta: Conta)
 }
+
+protocol ToggleSideMenuDelegate: class {
+    func ToggleSideMenu()
+}

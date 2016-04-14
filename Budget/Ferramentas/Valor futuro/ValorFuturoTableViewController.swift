@@ -10,16 +10,18 @@ import UIKit
 
 class ValorFuturoTableViewController: UITableViewController {
     
+    var finance:Finance = Finance()
+    
     @IBOutlet var btnSidebar: UIBarButtonItem!
     @IBOutlet var txtValorDepositado: UITextField!
     @IBOutlet var txtNumeroMeses: UITextField!
     @IBOutlet var txtJuros: UITextField!
     @IBOutlet var lblResultado: UILabel!
     @IBOutlet var labels:[UILabel]!
-    var finance:Finance = Finance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         SidebarMenu.configMenu(self, sideBarMenu: btnSidebar)
         FormCustomization.alignLabelsWidths(labels)
     }
@@ -28,6 +30,8 @@ class ValorFuturoTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - IBAction functions
     
     @IBAction func maskTextfield(sender: UITextField) {
         FormCustomization.aplicarMascaraMoeda(&sender.text!)
