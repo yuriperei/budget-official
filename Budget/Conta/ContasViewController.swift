@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ContasViewController: UITableViewController, TipoContasViewControllerDelegate, UITextFieldDelegate {
+class ContasViewController: UITableViewController, TipoContasViewControllerDelegate, UITextFieldDelegate, UIGestureRecognizerDelegate {
     
     let contaDAO:ContaDAO = ContaDAO()
     
@@ -18,6 +18,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     var conta: Conta?
     var tipoConta: TipoConta?
     
+    @IBOutlet var textViews:[UITextField]!
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
     @IBOutlet weak var txtSaldo: UITextField!
@@ -43,7 +44,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         txtTipo.text = tipoConta?.nome
         
         FormCustomization.alignLabelsWidths(labels)
-        
+        addDismissInputView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,6 +113,20 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
         }
         
         
+    }
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
+        FormCustomization.dismissInputView(textViews)
     }
     
     // MARK: Private functions

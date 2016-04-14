@@ -21,7 +21,12 @@ extension Double {
     }
     
     func removeLastNumber() -> Double {
-        return Double(Int(self/10))
+        var test = String(self)
+        //test = test.removeLastChar()
+//        print("\(test)")
+        test.removeLastChar()
+//        print(test)
+        return Double(test)!//test.removeLastChar())
     }
     
     func roundDecimal(numberOfDecimals:Double) -> Double {

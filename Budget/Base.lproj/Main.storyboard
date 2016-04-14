@@ -314,6 +314,8 @@
                         <outletCollection property="labels" destination="5UW-Xw-FfM" collectionClass="NSMutableArray" id="kvC-RT-uk8"/>
                         <outletCollection property="labels" destination="sX2-XZ-jaa" collectionClass="NSMutableArray" id="ty2-OK-pgc"/>
                         <outletCollection property="labels" destination="cX3-jd-YTq" collectionClass="NSMutableArray" id="247-QQ-ZqX"/>
+                        <outletCollection property="textViews" destination="wK7-8Q-1iv" collectionClass="NSMutableArray" id="ze7-Nj-crX"/>
+                        <outletCollection property="textViews" destination="D3m-81-ccy" collectionClass="NSMutableArray" id="K0u-HR-vIW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOz-VS-bI4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -837,21 +839,18 @@
                                                         <constraint firstAttribute="width" constant="1" id="mfu-cM-pvc"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="R$0,00" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YZJ-JN-8Fm">
-                                                    <rect key="frame" x="135" y="2" width="177" height="41"/>
-                                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                    <connections>
-                                                        <action selector="maskTextField:" destination="7w7-JC-iGT" eventType="editingChanged" id="dCE-eK-93K"/>
-                                                    </connections>
-                                                </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor da parcela:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0R-hE-2jq">
                                                     <rect key="frame" x="16" y="0.0" width="102" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.17254901959999999" green="0.30588235289999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="R$0,00" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YZJ-JN-8Fm">
+                                                    <rect key="frame" x="135" y="2" width="177" height="41"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="K0R-hE-2jq" firstAttribute="top" secondItem="SLs-CT-Q05" secondAttribute="top" id="CQt-yO-Gz3"/>
@@ -1044,11 +1043,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Avaliar compra" id="5Pe-v8-hKc">
-                        <barButtonItem key="leftBarButtonItem" image="interface" id="jqI-QV-d1k"/>
+                        <barButtonItem key="leftBarButtonItem" image="interface" id="kFD-e7-xQq"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnSideBar" destination="jqI-QV-d1k" id="6xS-TE-lix"/>
+                        <outlet property="btnSideBar" destination="kFD-e7-xQq" id="dG1-Hr-bbY"/>
                         <outlet property="lblResultadoJuros" destination="7PJ-1P-aOg" id="KG0-tK-LLd"/>
                         <outlet property="txtParcelas" destination="nbE-EB-yFC" id="w7Y-JG-MtF"/>
                         <outlet property="txtValorFinanciado" destination="dg2-si-SCb" id="vVE-zn-57i"/>
@@ -1056,6 +1055,9 @@
                         <outletCollection property="labels" destination="K0R-hE-2jq" collectionClass="NSMutableArray" id="jf4-A7-BHO"/>
                         <outletCollection property="labels" destination="dta-i5-Fsg" collectionClass="NSMutableArray" id="APZ-dh-EfE"/>
                         <outletCollection property="labels" destination="J8a-z4-nxx" collectionClass="NSMutableArray" id="hBN-uG-rlx"/>
+                        <outletCollection property="textViews" destination="YZJ-JN-8Fm" collectionClass="NSMutableArray" id="VO4-bx-cRH"/>
+                        <outletCollection property="textViews" destination="nbE-EB-yFC" collectionClass="NSMutableArray" id="iC0-l2-ACU"/>
+                        <outletCollection property="textViews" destination="dg2-si-SCb" collectionClass="NSMutableArray" id="BmN-Dd-5D2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKH-To-Wzv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1459,7 +1461,11 @@
                                                 <rect key="frame" x="0.0" y="8" width="320" height="44"/>
                                                 <items>
                                                     <navigationItem title="Avaliar compra" id="Du0-6R-xdk">
-                                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="021-UZ-UDC"/>
+                                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="021-UZ-UDC">
+                                                            <connections>
+                                                                <action selector="dissmissView:" destination="fIS-l7-Ixz" id="kj1-W1-dA7"/>
+                                                            </connections>
+                                                        </barButtonItem>
                                                     </navigationItem>
                                                 </items>
                                             </navigationBar>
@@ -1546,7 +1552,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NuK-HR-unH">
                                 <rect key="frame" x="16" y="72" width="288" height="78"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBz-EL-J9J">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBz-EL-J9J">
                                         <rect key="frame" x="0.0" y="0.0" width="288" height="37"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="mkD-vW-PEZ"/>
@@ -1555,7 +1561,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4P-Rd-z8o">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M4P-Rd-z8o">
                                         <rect key="frame" x="0.0" y="37" width="288" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="41" id="O7g-8Q-G2U"/>
@@ -2041,6 +2047,8 @@
                         <outlet property="txtSegundoValor" destination="SDa-6Y-rf1" id="R1u-l9-kKc"/>
                         <outletCollection property="labels" destination="5uS-JQ-fG0" collectionClass="NSMutableArray" id="lxh-60-nEf"/>
                         <outletCollection property="labels" destination="rui-NJ-C2D" collectionClass="NSMutableArray" id="hW7-jE-Sv9"/>
+                        <outletCollection property="textViews" destination="zVa-wu-72z" collectionClass="NSMutableArray" id="L7L-HR-oBO"/>
+                        <outletCollection property="textViews" destination="SDa-6Y-rf1" collectionClass="NSMutableArray" id="anM-jm-FDg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rC5-eu-arj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2254,6 +2262,8 @@
                         <outlet property="txtSegundoValor" destination="17z-w7-cju" id="fbh-Sd-M17"/>
                         <outletCollection property="labels" destination="LfM-La-EJq" collectionClass="NSMutableArray" id="2Qe-bF-0nK"/>
                         <outletCollection property="labels" destination="8LQ-21-fu9" collectionClass="NSMutableArray" id="bcE-eA-pDB"/>
+                        <outletCollection property="textViews" destination="17z-w7-cju" collectionClass="NSMutableArray" id="3Kl-z9-nQ5"/>
+                        <outletCollection property="textViews" destination="Jas-G5-Ajj" collectionClass="NSMutableArray" id="IT6-Gd-E7q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q9z-RQ-laP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2508,6 +2518,8 @@
                         <outlet property="txtSegundoValor" destination="Ygl-4s-hLl" id="EC1-6I-wVt"/>
                         <outletCollection property="labels" destination="38c-BR-1yY" collectionClass="NSMutableArray" id="dua-1m-lWr"/>
                         <outletCollection property="labels" destination="GDJ-5b-haO" collectionClass="NSMutableArray" id="QEb-kc-1i4"/>
+                        <outletCollection property="textViews" destination="ags-NB-SMI" collectionClass="NSMutableArray" id="C47-Af-4WA"/>
+                        <outletCollection property="textViews" destination="Ygl-4s-hLl" collectionClass="NSMutableArray" id="1PO-nu-IJd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tq0-r5-RMC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2720,6 +2732,8 @@
                         <outlet property="txtSegundoValor" destination="la5-ug-8tp" id="Hyb-mW-fm8"/>
                         <outletCollection property="labels" destination="hm9-tk-fXq" collectionClass="NSMutableArray" id="J75-5B-N3t"/>
                         <outletCollection property="labels" destination="zby-NI-0ye" collectionClass="NSMutableArray" id="vJT-Cu-4nE"/>
+                        <outletCollection property="textViews" destination="Q1Z-Lp-Zz9" collectionClass="NSMutableArray" id="7V3-sh-5zb"/>
+                        <outletCollection property="textViews" destination="la5-ug-8tp" collectionClass="NSMutableArray" id="YJH-fh-qyE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFa-07-2SJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3109,6 +3123,7 @@
                     <connections>
                         <outlet property="txtNome" destination="4r2-E0-824" id="QF4-h9-ccl"/>
                         <outletCollection property="labels" destination="11h-A1-3Dc" collectionClass="NSMutableArray" id="20G-Ft-ftE"/>
+                        <outletCollection property="textViews" destination="4r2-E0-824" collectionClass="NSMutableArray" id="Vh8-8P-4gw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5De-WV-lzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3474,6 +3489,10 @@
                         <outletCollection property="labels" destination="HWR-LX-dv4" collectionClass="NSMutableArray" id="QN4-Ru-sAt"/>
                         <outletCollection property="labels" destination="ZrQ-g7-krZ" collectionClass="NSMutableArray" id="pIe-qJ-WaW"/>
                         <outletCollection property="labels" destination="sor-1P-znN" collectionClass="NSMutableArray" id="jqO-YH-84g"/>
+                        <outletCollection property="textViews" destination="hHz-gA-THM" collectionClass="NSMutableArray" id="eFa-Bd-3Xn"/>
+                        <outletCollection property="textViews" destination="LRP-Ui-CTg" collectionClass="NSMutableArray" id="gL5-pn-V42"/>
+                        <outletCollection property="textViews" destination="Y2e-R2-SO1" collectionClass="NSMutableArray" id="5cs-UJ-1ki"/>
+                        <outletCollection property="textViews" destination="DGL-fK-DvV" collectionClass="NSMutableArray" id="VBq-0n-zwz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="947-f4-Szj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3872,6 +3891,11 @@
                         <outletCollection property="labels" destination="Z6H-Cv-Ydl" collectionClass="NSMutableArray" id="5co-rY-e5f"/>
                         <outletCollection property="labels" destination="0ae-ZS-z3c" collectionClass="NSMutableArray" id="xye-O0-zzd"/>
                         <outletCollection property="labels" destination="oEG-cG-Rfr" collectionClass="NSMutableArray" id="1IR-SD-etk"/>
+                        <outletCollection property="textViews" destination="2Dp-ii-92f" collectionClass="NSMutableArray" id="Afh-eq-2DI"/>
+                        <outletCollection property="textViews" destination="I4l-Ot-JaE" collectionClass="NSMutableArray" id="OWv-UW-WiX"/>
+                        <outletCollection property="textViews" destination="vRM-wB-nme" collectionClass="NSMutableArray" id="9Hg-Yc-dFU"/>
+                        <outletCollection property="textViews" destination="yrd-o3-UbF" collectionClass="NSMutableArray" id="Pdz-BD-YMR"/>
+                        <outletCollection property="textViews" destination="si8-LA-g17" collectionClass="NSMutableArray" id="hXf-PS-Prz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8H-lI-gVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3956,6 +3980,7 @@
                     <connections>
                         <outlet property="txtNome" destination="GmW-sj-ypI" id="yo3-7O-pVZ"/>
                         <outletCollection property="labels" destination="wJu-SE-prd" collectionClass="NSMutableArray" id="tcP-Bs-f4P"/>
+                        <outletCollection property="textViews" destination="GmW-sj-ypI" collectionClass="NSMutableArray" id="K6k-Hc-MMl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bcz-As-P52" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4286,6 +4311,10 @@
                         <outletCollection property="labels" destination="mnL-E2-Jgk" collectionClass="NSMutableArray" id="oio-6D-BSX"/>
                         <outletCollection property="labels" destination="EAY-1x-o9q" collectionClass="NSMutableArray" id="M7T-f7-qps"/>
                         <outletCollection property="labels" destination="zBe-bK-h97" collectionClass="NSMutableArray" id="2JB-dU-XEE"/>
+                        <outletCollection property="textViews" destination="3kf-tW-f6I" collectionClass="NSMutableArray" id="chN-75-ZMV"/>
+                        <outletCollection property="textViews" destination="UHS-ss-chE" collectionClass="NSMutableArray" id="zjE-Rb-gvC"/>
+                        <outletCollection property="textViews" destination="ELJ-Wk-QqC" collectionClass="NSMutableArray" id="nKv-Sh-IJf"/>
+                        <outletCollection property="textViews" destination="VkB-3L-R77" collectionClass="NSMutableArray" id="GSv-MU-DLg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7v-YU-nHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4703,6 +4732,9 @@
                         <outletCollection property="labels" destination="Gkc-6T-AKQ" collectionClass="NSMutableArray" id="9SR-0o-KiR"/>
                         <outletCollection property="labels" destination="coc-9c-DsH" collectionClass="NSMutableArray" id="r75-of-bzU"/>
                         <outletCollection property="labels" destination="AlP-0G-dEH" collectionClass="NSMutableArray" id="4tP-n5-Ftt"/>
+                        <outletCollection property="textViews" destination="cIT-gO-9AW" collectionClass="NSMutableArray" id="ggV-wf-0wB"/>
+                        <outletCollection property="textViews" destination="TLK-zv-4Wv" collectionClass="NSMutableArray" id="8U4-WO-dfg"/>
+                        <outletCollection property="textViews" destination="QWq-93-A3f" collectionClass="NSMutableArray" id="I5o-ta-m7f"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cac-xk-XzL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5060,6 +5092,7 @@
         <segue reference="DDu-W3-och"/>
         <segue reference="vGy-4W-C1M"/>
         <segue reference="fYU-Lj-GrT"/>
+        <segue reference="yhw-hR-QBz"/>
         <segue reference="S4g-Dy-h4z"/>
         <segue reference="yQz-Og-ars"/>
         <segue reference="L5x-b0-aYr"/>

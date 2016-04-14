@@ -16,7 +16,6 @@ class ManualFinanceiroController: UIViewController {
     }
     
     @IBAction func dissmissView(sender: UIBarButtonItem) {
-        print("teste")
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

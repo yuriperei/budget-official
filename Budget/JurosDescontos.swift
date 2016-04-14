@@ -10,6 +10,25 @@ import UIKit
 
 class JurosDescontosController: PorcentagemController {
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        super.prepareForSegue(segue, sender: sender)
+        
+        if (segue.identifier == "myPopover") {
+            let popView = segue.destinationViewController as! AjudaPopoverController
+            popView.txtLabel = "Cálculo para encontrar o novo valor obtido de um juros ou desconto aplicado\n- Primeiro: Insira o valor que será aplicado o juros ou desconto;\n- Segundo: Insira a porcentagem a ser aplicada sobre o primeiro valor;\n- Terceiro: Escolha o tipo da porcentagem aplicada, se será um juros ou desconto;"
+            popView.preferredContentSize = CGSize(width: 300, height: 300)
+        }
+    }
+    
+    // MARK: IBAction functions
+    
     @IBAction func calcularJurosDescontos(sender: UIButton) {
         
         calculadora?.numeroAtual = txtSegundoValor.text!.currencyToDouble()
@@ -22,17 +41,6 @@ class JurosDescontosController: PorcentagemController {
             } else {
                 lblResultado.text = calculadora.calcularValorComDesconto().convertToCurrency("pt_BR")
             }
-        }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        super.prepareForSegue(segue, sender: sender)
-        
-        if (segue.identifier == "myPopover") {
-            let popView = segue.destinationViewController as! AjudaPopoverController
-            popView.txtLabel = "Cálculo para encontrar o novo valor obtido de um juros ou desconto aplicado\n- Primeiro: Insira o valor que será aplicado o juros ou desconto;\n- Segundo: Insira a porcentagem a ser aplicada sobre o primeiro valor;\n- Terceiro: Escolha o tipo da porcentagem aplicada, se será um juros ou desconto;"
-            popView.preferredContentSize = CGSize(width: 300, height: 300)
         }
     }
 }
