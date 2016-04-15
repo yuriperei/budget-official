@@ -19,6 +19,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     var receita: Receita?
     var local: Local?
     var pickerView: UIDatePicker!
+    var tap: UITapGestureRecognizer!
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
@@ -34,7 +35,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     // MARK: - Private Functions
     
     private func addDismissInputView() {
-        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
     }
@@ -43,6 +44,7 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     
     func dismiss(sender: UITapGestureRecognizer? = nil) {
         FormCustomization.dismissInputView(textViews)
+        self.view.removeGestureRecognizer(tap)
     }
     
     override func viewDidLoad() {
@@ -166,6 +168,22 @@ class ReceitasViewController: UITableViewController, ContasViewControllerDelegat
     }
     
     // MARK: - IBActions functions
+    
+    @IBAction func addInputView(sender:AnyObject){
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @IBAction func removeInputViewLocal(sender: AnyObject) {
+        performSegueWithIdentifier("alterarLocalReceita", sender: sender)
+    }
+    
+    @IBAction func removeInputViewConta(sender: AnyObject) {
+        performSegueWithIdentifier("alterarConta", sender: sender)
+    }
+    
+    @IBAction func removeInputViewCategoria(sender: AnyObject) {
+        performSegueWithIdentifier("alterarCategoriaReceita", sender: sender)
+    }
     
     @IBAction func btnCancel(sender: AnyObject) {
         dissmissViewController()

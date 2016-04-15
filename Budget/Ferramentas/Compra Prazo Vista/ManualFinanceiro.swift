@@ -10,9 +10,11 @@ import UIKit
 
 class ManualFinanceiroController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: 3000)
     }
     
     @IBAction func dissmissView(sender: UIBarButtonItem) {

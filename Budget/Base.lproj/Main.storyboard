@@ -171,6 +171,9 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="addInputView:" destination="HA3-PR-S5m" eventType="editingDidBegin" id="IUh-6W-fIg"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w8q-c8-gxc">
                                                     <rect key="frame" x="60" y="0.0" width="1" height="43"/>
@@ -220,6 +223,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
+                                                        <action selector="addInputView:" destination="HA3-PR-S5m" eventType="editingDidBegin" id="A6p-Hi-Fom"/>
                                                         <action selector="maskTextField:" destination="HA3-PR-S5m" eventType="editingChanged" id="Rse-A0-8XF"/>
                                                     </connections>
                                                 </textField>
@@ -257,9 +261,13 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8N7-Oo-q5I">
                                                     <rect key="frame" x="69" y="2" width="243" height="41"/>
+                                                    <gestureRecognizers/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="tc4-Y2-iPH" appends="YES" id="9j4-hb-sNI"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iAs-fg-nMr">
                                                     <rect key="frame" x="60" y="0.0" width="1" height="43"/>
@@ -319,6 +327,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOz-VS-bI4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer delaysTouchesEnded="NO" id="tc4-Y2-iPH">
+                    <connections>
+                        <action selector="removeInputView:" destination="HA3-PR-S5m" id="fsM-XL-3Ig"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2793.5" y="-393.5"/>
         </scene>
@@ -850,6 +863,9 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <connections>
+                                                        <action selector="maskTextField:" destination="7w7-JC-iGT" eventType="editingDidEnd" id="dKD-dp-MfV"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -927,7 +943,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
-                                                        <action selector="maskTextField:" destination="7w7-JC-iGT" eventType="editingChanged" id="Lz6-J7-kCj"/>
+                                                        <action selector="maskTextField:" destination="7w7-JC-iGT" eventType="editingDidEnd" id="QaK-pi-bfb"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valor à vista:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8a-z4-nxx">
@@ -995,7 +1011,7 @@
                                                         <color key="titleColor" red="0.17254901959999999" green="0.30588235289999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="calcularJuros:" destination="7w7-JC-iGT" eventType="touchUpInside" id="iRv-M0-rvk"/>
+                                                        <action selector="calcularJuros:" destination="7w7-JC-iGT" eventType="touchUpInside" id="IP6-nY-9hs"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1522,7 +1538,7 @@
                             <constraint firstItem="cZ6-1F-KmU" firstAttribute="centerX" secondItem="XJd-5P-3Wp" secondAttribute="centerX" id="0a7-0b-PlT"/>
                             <constraint firstItem="cZ6-1F-KmU" firstAttribute="leading" secondItem="XJd-5P-3Wp" secondAttribute="leading" id="HoS-F8-Uoq"/>
                             <constraint firstItem="YxV-vd-2VZ" firstAttribute="top" secondItem="cZ6-1F-KmU" secondAttribute="bottom" id="ZUW-FM-qF1"/>
-                            <constraint firstItem="cZ6-1F-KmU" firstAttribute="height" secondItem="XJd-5P-3Wp" secondAttribute="height" priority="250" id="h3U-PK-wgF"/>
+                            <constraint firstItem="cZ6-1F-KmU" firstAttribute="height" secondItem="XJd-5P-3Wp" secondAttribute="height" id="h3U-PK-wgF"/>
                             <constraint firstItem="cZ6-1F-KmU" firstAttribute="top" secondItem="XJd-5P-3Wp" secondAttribute="top" id="m0m-9y-MBK"/>
                             <constraint firstItem="cZ6-1F-KmU" firstAttribute="width" secondItem="XJd-5P-3Wp" secondAttribute="width" priority="250" id="mqq-Es-vB8"/>
                             <constraint firstAttribute="trailing" secondItem="cZ6-1F-KmU" secondAttribute="trailing" id="qPo-qK-OVr"/>
@@ -1532,6 +1548,9 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="700"/>
+                    <connections>
+                        <outlet property="scrollView" destination="cZ6-1F-KmU" id="OeG-vi-zzQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oat-wj-Bx4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3168,6 +3187,9 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="addInputView:" destination="sdN-cM-l7G" eventType="editingDidBegin" id="xkp-RG-uJr"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -3210,6 +3232,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
+                                                        <action selector="addInputView:" destination="sdN-cM-l7G" eventType="editingDidBegin" id="vyv-Nm-wzm"/>
                                                         <action selector="maskTextField:" destination="sdN-cM-l7G" eventType="editingChanged" id="IS9-nU-oO6"/>
                                                     </connections>
                                                 </textField>
@@ -3243,9 +3266,13 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Zk-4w-ajE">
                                                     <rect key="frame" x="66" y="2" width="246" height="41"/>
+                                                    <gestureRecognizers/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="FXg-Du-uH8" appends="YES" id="wnT-9b-qTQ"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PZe-8D-LST">
                                                     <rect key="frame" x="57" y="0.0" width="1" height="43"/>
@@ -3290,6 +3317,9 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="addInputView:" destination="sdN-cM-l7G" eventType="editingDidBegin" id="hRg-KI-B2Z"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNh-ZL-xy2">
                                                     <rect key="frame" x="85" y="0.0" width="1" height="43"/>
@@ -3332,6 +3362,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <action selector="addInputView:" destination="sdN-cM-l7G" eventType="editingDidBegin" id="1ei-HD-4mo"/>
                                                         <action selector="maskTextData:" destination="sdN-cM-l7G" eventType="editingChanged" id="J3k-a9-LRI"/>
                                                     </connections>
                                                 </textField>
@@ -3376,9 +3407,13 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wol-fj-V3Y">
                                                     <rect key="frame" x="69" y="2" width="243" height="41"/>
+                                                    <gestureRecognizers/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="yW2-h6-b2V" appends="YES" id="TlA-tC-mSg"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXL-Yd-evQ">
                                                     <rect key="frame" x="60" y="0.0" width="1" height="43"/>
@@ -3424,9 +3459,13 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0x4-ep-EZW">
                                                     <rect key="frame" x="69" y="2" width="243" height="41"/>
+                                                    <gestureRecognizers/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="0ND-aV-ey9" appends="YES" id="hAz-rU-k4i"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rkr-Ud-Lcz">
                                                     <rect key="frame" x="60" y="0.0" width="1" height="43"/>
@@ -3489,13 +3528,28 @@
                         <outletCollection property="labels" destination="HWR-LX-dv4" collectionClass="NSMutableArray" id="QN4-Ru-sAt"/>
                         <outletCollection property="labels" destination="ZrQ-g7-krZ" collectionClass="NSMutableArray" id="pIe-qJ-WaW"/>
                         <outletCollection property="labels" destination="sor-1P-znN" collectionClass="NSMutableArray" id="jqO-YH-84g"/>
-                        <outletCollection property="textViews" destination="hHz-gA-THM" collectionClass="NSMutableArray" id="eFa-Bd-3Xn"/>
-                        <outletCollection property="textViews" destination="LRP-Ui-CTg" collectionClass="NSMutableArray" id="gL5-pn-V42"/>
-                        <outletCollection property="textViews" destination="Y2e-R2-SO1" collectionClass="NSMutableArray" id="5cs-UJ-1ki"/>
-                        <outletCollection property="textViews" destination="DGL-fK-DvV" collectionClass="NSMutableArray" id="VBq-0n-zwz"/>
+                        <outletCollection property="textViews" destination="hHz-gA-THM" collectionClass="NSMutableArray" id="5oY-bK-etC"/>
+                        <outletCollection property="textViews" destination="LRP-Ui-CTg" collectionClass="NSMutableArray" id="kWE-aN-tF8"/>
+                        <outletCollection property="textViews" destination="Y2e-R2-SO1" collectionClass="NSMutableArray" id="0zi-HM-gx7"/>
+                        <outletCollection property="textViews" destination="DGL-fK-DvV" collectionClass="NSMutableArray" id="U5h-Gn-NUm"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="947-f4-Szj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="FXg-Du-uH8">
+                    <connections>
+                        <action selector="removeInputViewLocal:" destination="sdN-cM-l7G" id="jJf-dk-xql"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="yW2-h6-b2V">
+                    <connections>
+                        <action selector="removeInputViewConta:" destination="sdN-cM-l7G" id="s6h-nl-8bx"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="0ND-aV-ey9">
+                    <connections>
+                        <action selector="removeInputViewCategoria:" destination="sdN-cM-l7G" id="NhD-N9-i5u"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2148" y="-1097"/>
         </scene>
@@ -3537,6 +3591,9 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="addInputView:" destination="wDd-Yv-xqI" eventType="editingDidBegin" id="Wnc-Hn-t16"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -3579,6 +3636,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
+                                                        <action selector="addInputView:" destination="wDd-Yv-xqI" eventType="editingDidBegin" id="GIx-tp-adR"/>
                                                         <action selector="maskTextField:" destination="wDd-Yv-xqI" eventType="editingChanged" id="g7D-Q3-iWX"/>
                                                     </connections>
                                                 </textField>
@@ -3612,9 +3670,13 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vRM-wB-nme">
                                                     <rect key="frame" x="66" y="2" width="246" height="41"/>
+                                                    <gestureRecognizers/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="SSQ-Fy-WkT" appends="YES" id="JzD-AT-zU9"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LsP-f4-Hl6">
                                                     <rect key="frame" x="57" y="0.0" width="1" height="43"/>
@@ -3659,6 +3721,9 @@
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="addInputView:" destination="wDd-Yv-xqI" eventType="editingDidBegin" id="vxI-cX-sZm"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPI-GW-QCG">
                                                     <rect key="frame" x="85" y="0.0" width="1" height="43"/>
@@ -3695,6 +3760,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
+                                                        <action selector="addInputView:" destination="wDd-Yv-xqI" eventType="editingDidBegin" id="ou4-dQ-o6u"/>
                                                         <action selector="maskTextData:" destination="wDd-Yv-xqI" eventType="editingChanged" id="Jzh-qx-PgH"/>
                                                     </connections>
                                                 </textField>
@@ -3777,9 +3843,13 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Zq-0A-VR7">
                                                     <rect key="frame" x="69" y="2" width="243" height="41"/>
+                                                    <gestureRecognizers/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="kGS-U8-C8n" appends="YES" id="rVv-Yu-PT8"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7fz-UF-RF7">
                                                     <rect key="frame" x="60" y="0.0" width="1" height="43"/>
@@ -3825,9 +3895,13 @@
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xqx-Bf-Zlj">
                                                     <rect key="frame" x="69" y="2" width="243" height="41"/>
+                                                    <gestureRecognizers/>
                                                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="tYX-kp-DeK" appends="YES" id="ZZS-sA-6qo"/>
+                                                    </connections>
                                                 </textField>
                                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pez-3T-DcX">
                                                     <rect key="frame" x="60" y="0.0" width="1" height="43"/>
@@ -3899,6 +3973,21 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8H-lI-gVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="SSQ-Fy-WkT">
+                    <connections>
+                        <action selector="removeInputViewLocal:" destination="wDd-Yv-xqI" id="dSd-3c-Boe"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="kGS-U8-C8n">
+                    <connections>
+                        <action selector="removeInputViewConta:" destination="wDd-Yv-xqI" id="o9V-73-0a0"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="tYX-kp-DeK">
+                    <connections>
+                        <action selector="removeInputViewCategoria:" destination="wDd-Yv-xqI" id="uHf-fR-KJh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1765" y="-1827"/>
         </scene>
@@ -5086,15 +5175,14 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="RnH-uC-IaA"/>
+        <segue reference="1hX-OM-g5s"/>
         <segue reference="wxT-DJ-QcZ"/>
-        <segue reference="6DM-AZ-CQb"/>
-        <segue reference="KpW-af-Hgy"/>
-        <segue reference="DDu-W3-och"/>
-        <segue reference="vGy-4W-C1M"/>
+        <segue reference="hmd-AN-Xbd"/>
+        <segue reference="KF9-Rj-9X1"/>
+        <segue reference="7uR-rT-rJ6"/>
         <segue reference="fYU-Lj-GrT"/>
         <segue reference="yhw-hR-QBz"/>
         <segue reference="S4g-Dy-h4z"/>
-        <segue reference="yQz-Og-ars"/>
-        <segue reference="L5x-b0-aYr"/>
+        <segue reference="6DM-AZ-CQb"/>
     </inferredMetricsTieBreakers>
 </document>

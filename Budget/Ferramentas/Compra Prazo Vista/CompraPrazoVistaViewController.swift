@@ -36,19 +36,15 @@ class CompraPrazoVistaViewController: UITableViewController, UIGestureRecognizer
         // Dispose of any resources that can be recreated.
     }
     
-    
-    @IBAction func maskTextField(sender: UITextField) {
-        FormCustomization.aplicarMascaraMoeda(&sender.text!)
-    }
 
-    @IBAction func calcularJuros(sender: AnyObject) {
-        let parcelas: Int = Int(txtParcelas.text!)!
-        let valorParcela: Double = txtValorParcela.text!.currencyToDouble()
-        let valorFinanciado: Double = txtValorFinanciado.text!.currencyToDouble()
-        
-        lblResultadoJuros.text = String.init(format: "%.2f", finance.calculateCompoundInterest(valorFinanciado, parcelas, valorParcela))+"%"
-//        print(finance.cagr(704.28, 30000, 3))
-    }
+//    @IBAction func calcularJuros(sender: AnyObject) {
+//        let parcelas: Int = Int(txtParcelas.text!)!
+//        let valorParcela: Double = txtValorParcela.text!.currencyToDouble()
+//        let valorFinanciado: Double = txtValorFinanciado.text!.currencyToDouble()
+//        
+//        lblResultadoJuros.text = String.init(format: "%.2f", finance.calculateCompoundInterest(valorFinanciado, parcelas, valorParcela))+"%"
+////        print(finance.cagr(704.28, 30000, 3))
+//    }
     
     // MARK: - Table view data source
     
@@ -73,6 +69,8 @@ class CompraPrazoVistaViewController: UITableViewController, UIGestureRecognizer
     @IBAction func maskTextField(sender: UITextField) {
         FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
+    
+    
     
     @IBAction func calcularJuros(sender: AnyObject) {
         if let parcelas = txtParcelas.text, let valorParcela = txtValorParcela.text, let valorFinanciado = txtValorFinanciado.text {

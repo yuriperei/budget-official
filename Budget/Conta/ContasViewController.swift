@@ -17,6 +17,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     var erros: String = ""
     var conta: Conta?
     var tipoConta: TipoConta?
+    var tap: UITapGestureRecognizer!
     
     @IBOutlet var textViews:[UITextField]!
     @IBOutlet var labels: [UILabel]!
@@ -94,6 +95,14 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     // MARK: - IBAction functions
     
+    @IBAction func addInputView(sender:AnyObject){
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @IBAction func removeInputView(sender: AnyObject) {
+        performSegueWithIdentifier("alterarTipoConta", sender: sender)
+    }
+    
     @IBAction func maskTextField(sender: UITextField) {
         FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
@@ -118,7 +127,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     // MARK: - Private Functions
     
     private func addDismissInputView() {
-        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
     }
@@ -127,6 +136,7 @@ class ContasViewController: UITableViewController, TipoContasViewControllerDeleg
     
     func dismiss(sender: UITapGestureRecognizer? = nil) {
         FormCustomization.dismissInputView(textViews)
+        self.view.removeGestureRecognizer(tap)
     }
     
     // MARK: Private functions

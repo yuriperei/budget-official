@@ -17,6 +17,10 @@ class MenuTableViewController: UITableViewController {
 
         self.tableView.backgroundColor = Color.uicolorFromHex(0xffffff)
         
+       
+    }
+    override func viewWillAppear(animated: Bool) {
+         self.view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {

@@ -10,19 +10,20 @@ import UIKit
 import CoreData
 
 class DespesasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate, UIGestureRecognizerDelegate  {
+
+    var despesaDAO: DespesaDAO = DespesaDAO()
     
     var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var despesa: Despesa?
     var local: Local? = nil
-    var despesaDAO: DespesaDAO = DespesaDAO()
     var pickerView: UIDatePicker!
+    var tap: UITapGestureRecognizer!
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
     @IBOutlet weak var txtDescricao: UITextField!
-    @IBOutlet weak var navegacao: UINavigationItem!
     @IBOutlet weak var txtValor: UITextField!
     @IBOutlet weak var txtEndereco: UITextField!
     @IBOutlet weak var txtConta: UITextField!
@@ -35,7 +36,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     // MARK: - Private Functions
     
     private func addDismissInputView() {
-        let tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
         tap.delegate = self
         self.view.addGestureRecognizer(tap)
     }
@@ -44,6 +45,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     
     func dismiss(sender: UITapGestureRecognizer? = nil) {
         FormCustomization.dismissInputView(textViews)
+        self.view.removeGestureRecognizer(tap)
     }
     
     override func viewDidLoad() {
@@ -145,6 +147,22 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     }
     
     // MARK: - IBAction functions
+    
+    @IBAction func addInputView(sender:AnyObject){
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @IBAction func removeInputViewLocal(sender: AnyObject) {
+        performSegueWithIdentifier("alterarLocalDespesa", sender: sender)
+    }
+    
+    @IBAction func removeInputViewConta(sender: AnyObject) {
+        performSegueWithIdentifier("alterarConta", sender: sender)
+    }
+    
+    @IBAction func removeInputViewCategoria(sender: AnyObject) {
+        performSegueWithIdentifier("alterarCategoriaDespesa", sender: sender)
+    }
     
     @IBAction func btnCancel(sender: AnyObject) {
         dissmissViewController()
