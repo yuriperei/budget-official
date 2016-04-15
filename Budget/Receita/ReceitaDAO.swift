@@ -15,14 +15,13 @@ class ReceitaDAO {
     }
     
     func remover(receita:Receita) throws {
-        // Pega o valor da receita e o saldo da conta.
-        let valorReceita = receita.valueForKey("valor")
-        let valorConta = receita.conta!.valueForKey("saldo")
         
-        // Subtrai o saldo da conta pelo valor da receita
+        let valorReceita = receita.valor
+        let valorConta = receita.conta!.saldo
+        
         let saldoAtualConta = valorConta!.floatValue - valorReceita!.floatValue
         
-        receita.conta?.setValue(saldoAtualConta, forKey: "saldo")
+        receita.conta?.saldo = saldoAtualConta
         
         ContextFactory.getContext().deleteObject(receita)
         try ContextFactory.getContext().save()

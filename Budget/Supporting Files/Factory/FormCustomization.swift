@@ -10,18 +10,7 @@ import Foundation
 
 class FormCustomization {
     
-    private static func calculateLabelWidth(label: UILabel) -> CGFloat {
-        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
-        
-        return labelSize.width
-    }
-    
-    private static func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
-        //        return reduce(map(labels, calculateLabelWidth), 0, max)
-        return labels.map(calculateLabelWidth).reduce(0, combine: max)
-    }
-    
-    static func updateWidthsForLabels(labels: [UILabel]) {
+    static func alignLabelsWidths(labels: [UILabel]) {
         let maxLabelWidth = calculateMaxLabelWidth(labels)
         for label in labels {
             let constraint = NSLayoutConstraint(item: label,
@@ -35,13 +24,7 @@ class FormCustomization {
         }
     }
     
-    static func dismissInputView(fields:[UITextField]) {
-        for field in fields {
-            field.resignFirstResponder()
-        }
-    }
-    
-    static func aplicarMascara(inout text: String) {
+    static func aplicarMascaraMoeda(inout text: String) {
         formatText(&text)
         
         switch text.lastChar {
@@ -58,16 +41,34 @@ class FormCustomization {
         text = formatCurrency(text)
     }
     
+    static func aplicarMascaraData(inout text:String, data:String){
+        text = data
+    }
     
+    static func dismissInputView(fields:[UITextField]) {
+        for field in fields {
+            field.resignFirstResponder()
+        }
+    }
+    
+    private static func calculateLabelWidth(label: UILabel) -> CGFloat {
+        let labelSize = label.sizeThatFits(CGSize(width: CGFloat.max, height: label.frame.height))
+        
+        return labelSize.width
+    }
+    
+    private static func calculateMaxLabelWidth(labels: [UILabel]) -> CGFloat {
+        return labels.map(calculateLabelWidth).reduce(0, combine: max)
+    }
+    
+    private static func formatCurrency(string: String) -> String{
+        let numberFromField = string.floatConverter/100
+        return numberFromField.convertToCurrency("pt_BR")
+    }
     
     private static func formatText(inout priceS: String) {
         priceS = priceS.stringByReplacingOccurrencesOfString("R$",withString:"")
         priceS = priceS.stringByReplacingOccurrencesOfString(".",withString:"")
         priceS = priceS.stringByReplacingOccurrencesOfString(",",withString:"")
-    }
-    
-    private static func formatCurrency(string: String) -> String{
-        let numberFromField = string.floatConverter/100
-        return numberFromField.convertToMoedaBr()
     }
 }

@@ -9,26 +9,44 @@
 import UIKit
 import CoreData
 
-class DespesasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate  {
+class DespesasViewController: UITableViewController, ContasViewControllerDelegate, CategoriaViewControllerDelegate, LocalViewControllerDelegate, UIGestureRecognizerDelegate  {
+
+    var despesaDAO: DespesaDAO = DespesaDAO()
     
     var erros: String = ""
     var conta: Conta? = nil
     var categoria: Categoria? = nil
     var despesa: Despesa?
     var local: Local? = nil
-    var despesaDAO: DespesaDAO = DespesaDAO()
     var pickerView: UIDatePicker!
+    var tap: UITapGestureRecognizer!
     
     @IBOutlet var labels: [UILabel]!
     @IBOutlet weak var txtNome: UITextField!
     @IBOutlet weak var txtDescricao: UITextField!
-    @IBOutlet weak var navegacao: UINavigationItem!
     @IBOutlet weak var txtValor: UITextField!
     @IBOutlet weak var txtEndereco: UITextField!
     @IBOutlet weak var txtConta: UITextField!
     @IBOutlet weak var txtCategoria: UITextField!
     @IBOutlet weak var sgFglTipo: UISegmentedControl!
     @IBOutlet weak var txtData: UITextField!
+    
+    @IBOutlet var textViews:[UITextField]!
+    
+    // MARK: - Private Functions
+    
+    private func addDismissInputView() {
+        tap = UITapGestureRecognizer(target: self, action: Selector("dismiss:"))
+        tap.delegate = self
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    // MARK: - Selector Functions
+    
+    func dismiss(sender: UITapGestureRecognizer? = nil) {
+        FormCustomization.dismissInputView(textViews)
+        self.view.removeGestureRecognizer(tap)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +57,7 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         
         if let despesa = despesa {
             txtNome.text = despesa.nome!
-            txtValor.text = String(despesa.valor!)
+            txtValor.text = despesa.valor!.convertToCurrency("pt_BR")
             txtDescricao.text = despesa.descricao!
             conta = despesa.conta
             txtData.text = Data.formatDateToString(despesa.data!)
@@ -60,24 +78,90 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         txtEndereco.text = self.local?.nome
         txtData.inputView = pickerView
         
-        // Alinhar as labels
-        FormCustomization.updateWidthsForLabels(labels)
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    func updateTextField(sende:UIDatePicker){
-        
-        txtData.text = Data.formatDateToString(sende.date)
-    }
-    
-    func dissmissViewController(){
-        navigationController?.popViewControllerAnimated(true)
+        FormCustomization.alignLabelsWidths(labels)
+        addDismissInputView()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 4
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch(section) {
+        case 0: return 5    // section 0 has 2 rows
+        case 1: return 1    // section 1 has 1 row
+        case 2: return 1    // section 2 has 1 row
+        case 3: return 1    // section 3 has 1 row
+        default: fatalError("Unknown number of sections")
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        FormCustomization.dismissInputView([txtNome, txtValor, txtDescricao, txtData])
+        
+        if segue.identifier == "alterarConta" {
+            
+            let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
+            contasController.delegate = self
+            contasController.tela = true
+            
+        } else if segue.identifier == "alterarCategoriaDespesa" {
+            
+            let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
+            categoriasController.delegate = self
+            categoriasController.tela = true
+            
+        } else if segue.identifier == "alterarLocalDespesa" {
+            
+            let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController
+            locaisController.delegate = self
+            locaisController.tela = true
+        }
+    }
+    
+    // Bloqueia determinados campos caso esteja sendo feita alguma alteração
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        
+        if despesa == nil {
+            return true
+        }
+        
+        if identifier == "alterarCategoriaDespesa"{
+            return true
+        }
+        
+        if identifier == "alterarLocalDespesa"{
+            return true
+        }
+        
+        return false
+    }
+    
+    // MARK: - IBAction functions
+    
+    @IBAction func addInputView(sender:AnyObject){
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @IBAction func removeInputViewLocal(sender: AnyObject) {
+        performSegueWithIdentifier("alterarLocalDespesa", sender: sender)
+    }
+    
+    @IBAction func removeInputViewConta(sender: AnyObject) {
+        performSegueWithIdentifier("alterarConta", sender: sender)
+    }
+    
+    @IBAction func removeInputViewCategoria(sender: AnyObject) {
+        performSegueWithIdentifier("alterarCategoriaDespesa", sender: sender)
     }
     
     @IBAction func btnCancel(sender: AnyObject) {
@@ -109,16 +193,48 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
     }
     
     @IBAction func maskTextField(sender: UITextField) {
-        FormCustomization.aplicarMascara(&sender.text!)
+        FormCustomization.aplicarMascaraMoeda(&sender.text!)
     }
     
-    func validarCampos(){
+    @IBAction func maskTextData(sender: UITextField) {
+        FormCustomization.aplicarMascaraData(&sender.text!, data: Data.formatDateToString(self.pickerView.date))
+    }
+    
+    // MARK: - Delegate methods
+    
+    func updateTextField(sende:UIDatePicker){
+        
+        txtData.text = Data.formatDateToString(sende.date)
+    }
+    
+    func contasViewControllerResponse(conta: Conta) {
+        self.conta = conta
+        txtConta.text = conta.nome
+    }
+    
+    func categoriaViewControllerResponse(categoria:Categoria){
+        self.categoria = categoria
+        txtCategoria.text = categoria.nome
+    }
+    
+    func localViewControllerResponse(local:Local){
+        self.local = local
+        txtEndereco.text = local.nome
+    }
+    
+    // MARK: - Private functions
+    
+    private func dissmissViewController(){
+        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    private func validarCampos(){
         if Validador.vazio(txtNome.text!){
             erros.appendContentsOf("\nPreencha o campo nome!")
         }
         
-        if Validador.vazio(txtValor.text!){
-            erros.appendContentsOf("\nPreencha o campo Valor!")
+        if Validador.vazio(txtValor.text!.currencyToFloat()){
+            erros.appendContentsOf("\nAdicione um valor!")
         }
         
         if Validador.vazio(txtEndereco.text!){
@@ -134,59 +250,83 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         }
     }
     
-    func addConta(){
+    private func addConta(){
         
         validarCampos()
         
         if(erros.isEmpty){
-            despesa = Despesa.getDespesa()
-            despesa?.nome = txtNome.text
-            despesa?.descricao = txtDescricao.text
-            despesa?.valor = txtValor.text!.floatConverterMoeda()
-            despesa?.conta = conta
-            despesa?.categoria = categoria
-            despesa?.local = local
-            despesa?.data = Data.removerTime(txtData.text!)
-            indexChanged(sgFglTipo)
             
-            // Atualizar o saldo da conta referente
-            conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
+            func dados(){
+                despesa = Despesa.getDespesa()
+                despesa?.nome = txtNome.text
+                despesa?.descricao = txtDescricao.text
+                despesa?.valor = txtValor.text!.currencyToFloat()
+                despesa?.conta = conta
+                despesa?.categoria = categoria
+                despesa?.local = local
+                despesa?.data = Data.removerTime(txtData.text!)
+                indexChanged(sgFglTipo)
+                
+                conta?.saldo = Float((conta?.saldo)!) - Float((despesa?.valor)!)
+                
+                salvarConta()
+            }
             
-            salvarConta()
+            let novoSaldo = Float((conta?.saldo)!) - (txtValor.text?.currencyToFloat())!
             
-        }else{
+            if (Float((conta?.saldo)!) <= 0){
+                
+                let alert = Notification.solicitarConfirmacaoDespesa("Cuidado!", mensagem: "A conta \(conta!.nome!) já está negativa, tem certeza?", completion: {
+                    (action:UIAlertAction) in
+                    dados()
+                })
+                presentViewController(alert, animated: true, completion: nil)
+            }
+            if (novoSaldo < 0){
+                
+                let alert = Notification.solicitarConfirmacaoDespesa("Cuidado!", mensagem: "A conta \(conta!.nome!) ficará negativa ao salvar, tem certeza?", completion: {
+                    (action:UIAlertAction) in
+                    dados()
+                })
+                presentViewController(alert, animated: true, completion: nil)
+            } else {
+                
+                dados()
+            }
+            
+        } else {
+            
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
             self.erros = ""
         }
     }
     
-    func updateConta(){
+    private func updateConta(){
         
         validarCampos()
         
-        if(erros.isEmpty){
+        if (erros.isEmpty) {
+            
             despesa?.nome = txtNome.text
             despesa?.descricao = txtDescricao.text
             indexChanged(sgFglTipo)
             
-            if let categoria = categoria{
+            if let categoria = categoria {
                 despesa?.categoria = categoria
             }
             
-            if let local = local{
+            if let local = local {
                 despesa?.local = local
             }
             
             salvarConta()
+        } else {
             
-        }else{
             let alert = Notification.mostrarErro("Campos vazio", mensagem: "\(erros)")
             presentViewController(alert, animated: true, completion: nil)
             self.erros = ""
         }
-        
-
     }
     
     private func salvarConta(){
@@ -201,132 +341,4 @@ class DespesasViewController: UITableViewController, ContasViewControllerDelegat
         dissmissViewController()
         
     }
-    
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if despesa == nil{
-            return true
-        }
-        
-        if identifier == "alterarCategoriaDespesa"{
-            return true
-        }
-        
-        if identifier == "alterarLocalDespesa"{
-            return true
-        }
-        
-        return false
-    }
-    
-    // Define Delegate Method
-    func contasViewControllerResponse(conta: Conta) {
-        self.conta = conta
-        txtConta.text = conta.nome
-    }
-    
-    func categoriaViewControllerResponse(categoria:Categoria){
-        self.categoria = categoria
-        txtCategoria.text = categoria.nome
-    }
-    
-    func localViewControllerResponse(local:Local){
-        self.local = local
-        txtEndereco.text = local.nome
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 4
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        switch(section) {
-        case 0: return 5    // section 0 has 2 rows
-        case 1: return 1    // section 1 has 1 row
-        case 2: return 1    // section 2 has 1 row
-        case 3: return 1    // section 3 has 1 row
-        default: fatalError("Unknown number of sections")
-        }
-    }
-
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-//        txtNome.resignFirstResponder()
-//        txtValor.resignFirstResponder()
-//        txtDescricao.resignFirstResponder()
-//        txtData.resignFirstResponder()
-        
-        FormCustomization.dismissInputView([txtNome, txtValor, txtDescricao, txtData])
-        
-        if segue.identifier == "alterarConta"{
-            let contasController : ContasTableViewController = segue.destinationViewController as! ContasTableViewController
-            contasController.delegate = self
-            contasController.tela = true
-        }else if segue.identifier == "alterarCategoriaDespesa"{
-            let categoriasController : CategoriaTableViewController = segue.destinationViewController as! CategoriaTableViewController
-            categoriasController.delegate = self
-            categoriasController.tela = true
-            
-        }else if segue.identifier == "alterarLocalDespesa"{
-            let locaisController : LocalTableViewController = segue.destinationViewController as! LocalTableViewController
-            locaisController.delegate = self
-            locaisController.tela = true
-        }
-        
-    }
-    
-
 }

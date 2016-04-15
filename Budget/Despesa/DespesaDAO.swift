@@ -15,26 +15,26 @@ import CoreData
 class DespesaDAO {
     
     func salvar(depesa:Despesa) throws {
+        
         try ContextFactory.getContext().save()
     }
     
     func remover(despesa:Despesa) throws {
         
-        // Pega o valor da despesa e o saldo da conta.
-        let valorDespesa = despesa.valueForKey("valor")
-        let valorConta = despesa.conta!.valueForKey("saldo")
+        let valorDespesa = despesa.valor
+        let valorConta = despesa.conta!.saldo
         
-        // Soma o saldo da conta pelo valor da despesa
         let saldoAtualConta = valorConta!.floatValue + valorDespesa!.floatValue
         
-        // Atualiza o saldo da conta somando o valor da despesa que estava cadastrada
-        despesa.conta?.setValue(saldoAtualConta, forKey: "saldo")
+        despesa.conta?.saldo = saldoAtualConta
         
         ContextFactory.getContext().deleteObject(despesa)
+        
         try ContextFactory.getContext().save()
     }
     
-    func getListaDespesas() -> [Despesa]{
+    func getListaDespesas() -> [Despesa] {
+        
         let fetchRequest = NSFetchRequest(entityName: "Despesa")
         do {
             let results = try ContextFactory.getContext().executeFetchRequest(fetchRequest)
@@ -42,10 +42,12 @@ class DespesaDAO {
         } catch {
             print(error)
         }
+        
         return []
     }
     
     func getDespesasFromMonth(month:Int, year:Int) -> [Despesa] {
+        
         let components = NSDateComponents()
         components.month = month
         components.year = year

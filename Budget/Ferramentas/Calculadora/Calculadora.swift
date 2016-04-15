@@ -14,8 +14,8 @@ protocol tiposPermitidos {
 }
 
 class Calculadora {
+    
     var numeroAtual:Double = 0
-//    var segundoValor:Float = 0
     var numeroFinal:Double = 0
     var opcao:Int = 0
     
@@ -37,6 +37,7 @@ class Calculadora {
                 break;
         }
         
+        opcao = 0
         return numeroFinal
     }
     

@@ -49,12 +49,12 @@ class Porcentagem : Calculadora {
     }
     
     func calcularValorInicialAumentado() -> Double {
-        //numeroFinal = 1200
-        //porcentagem = 20
+        
         self.porcentagem += 100
         self.numeroFinal /= self.porcentagem
-        self.numeroFinal.toFixed(2)
+        self.numeroFinal.roundDecimal(2)
         self.numeroAtual = 100
+        
         return self.calcularOperacao()
     }
     
